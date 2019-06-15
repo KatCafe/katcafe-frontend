@@ -22,7 +22,7 @@
 <script>
 
 import Layout from "client/components/layout/layout"
-import AddChannelForm from "client/components/forms/add-channel.form"
+import AddChannelForm from "client/components/modules/channel/add-channel.form"
 
 export default {
 

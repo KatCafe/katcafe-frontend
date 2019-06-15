@@ -13,12 +13,9 @@ export default {
 
     },
 
-    CHANNEL_LIST_GET: async  ({ commit, dispatch, state }, { country, index, count }) => {
+    CHANNEL_LIST_GET: async  ({ commit, dispatch, state }, { country, index = 1, count = 20 }) => {
 
         try{
-
-            if (!index) index = 1;
-            if (!count) count = 20;
 
             const out = await NetworkHelper.get(`/channels/top/${country}/${index}/${count}`);
 

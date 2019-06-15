@@ -4,25 +4,27 @@
 
         <div slot="content"  >
 
-            <div v-if="channel">
+            <div v-if="topic">
 
-                <hero :title="channel.slug" :icon="channel.icon" :cover="channel.cover" />
+                <hero :title="topic.channel.slug" :icon="topic.channel.icon" :cover="topic.channel.cover" />
 
             </div>
 
             <div class="content">
                 <div class="container">
 
-                    <div v-if="channel">
-                        <topics :topics="topics" />
+                    <div v-if="topic">
+                        <topic :topic="topic" />
                     </div>
 
-                    <div v-if="!channel">
-                        <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
+
+                    <div v-if="!topic">
+                        <span>Topic <strong>{{ this.slug }}</strong> was not found</span>
                     </div>
 
                 </div>
             </div>
+
 
         </div>
 
@@ -34,13 +36,13 @@
 
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
-import Topics from "client/components/modules/topics/view/topics"
+import Topic from "client/components/modules/topics/view/topic"
 
 export default {
 
-    components: { Layout,  Hero, Topics },
+    components: { Layout,  Hero, Topic },
 
-    async asyncData ({ store,  route }){
+    async asyncData ( { store,  route } ){
 
         if (route.params.slug) {
             await store.dispatch('CHANNEL_GET', {slug: route.path,});
@@ -51,12 +53,8 @@ export default {
 
     computed: {
 
-        channel(){
-            return this.$store.state.channels.channel;
-        },
-
-        topics(){
-            return this.$store.state.topics.list||[];
+        topic(){
+            return this.$store.state.topics.topic;
         },
 
         stickyButtons(){

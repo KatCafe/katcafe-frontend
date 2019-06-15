@@ -11,59 +11,33 @@ class BrowserHelpers{
         }
     }
 
-    static formatMoneyNumber(n, decimals=0) {
+    static timeDiff(previous) {
 
-        n = parseInt(n);
+        const current = new Date().getTime();
 
-        let number = parseInt(n / 10000 );
-        let decimalNumber = BrowserHelpers._getNumberRest(n);
+        if (current < previous) return 'now';
 
-        if(number<100) decimals=4;
-        if(number>99999) decimals=0;
+        const msPerMinute = 60 * 1000;
+        const msPerHour = msPerMinute * 60;
+        const msPerDay = msPerHour * 24;
+        const msPerMonth = msPerDay * 30;
+        const msPerYear = msPerDay * 365;
 
-        if(decimals===0) return BrowserHelpers._formatIntNumber(number);
-        return BrowserHelpers._formatIntNumber(number)+'.'+BrowserHelpers._getFirstDigits(decimalNumber, decimals);
-    }
+        var elapsed = current - previous;
 
-    static _formatIntNumber(number){
+        if (elapsed < msPerMinute)
+            return Math.round(elapsed/1000 ) + 's';
+        if (elapsed < msPerHour)
+            return Math.round(elapsed/msPerMinute ) + 'm';
+        if (elapsed < msPerDay )
+            return Math.round(elapsed/msPerHour ) + 'h';
+        if (elapsed < msPerMonth)
+            return Math.round(elapsed/msPerDay ) + 'd';
 
-        return number.toString().replace(/./g, function(c, i, a) {
-            return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
-        });
+        if (elapsed < msPerYear)
+            return Math.round(elapsed/msPerMonth ) + 'mo';
 
-    }
-
-    static _getNumberRest(number){
-
-        return number % 10000;
-
-    }
-
-    static _getFirstDigits(number,decimals){
-
-        let decimalsVerifier = Math.pow(10,decimals);
-        let newNumber = '';
-
-        if(number<10){
-
-            newNumber='000'+number.toString();
-
-        }else if(number<100){
-
-            newNumber='00'+number.toString();
-
-        }else if(number<1000){
-
-            newNumber='0'+number.toString();
-
-        }else if(number<10000){
-
-            newNumber=''+number.toString();
-
-        }
-
-        return newNumber.substring(0,decimals);
-
+        return Math.round(elapsed/msPerYear  + 'y');
     }
 
 

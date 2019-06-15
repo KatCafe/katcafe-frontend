@@ -28,7 +28,7 @@
 import HeaderLayout from "./header/header-layout"
 import FooterLayout from "./footer/footer-layout"
 import StickyButtons from "./footer/sticky/sticky-buttons"
-import AddTopicModal from "client/components/modals/add-topic.modal"
+import AddTopicModal from "client/components/modules/topics/add-topic.modal"
 
 export default{
 

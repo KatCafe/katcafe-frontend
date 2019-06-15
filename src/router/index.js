@@ -8,6 +8,7 @@ Vue.use(Router)
 
 const HomePage = () => import('client/pages/home.page');
 const ChannelPage = () => import('client/pages/channel.page');
+const TopicPage = () => import('client/pages/topic.page');
 const AddChannelPage = () => import('client/pages/add-channel.page');
 const TypographyPage = () => import('client/pages/typography.page');
 
@@ -39,9 +40,11 @@ export function createRouter (store){
     }
 
     const flags = getFlags();
-    const nationalRoutes = flags.map( it => { return {
-        path: `/${it.value}/:slug`, component: ChannelPage,
-    }});
+
+    const nationalChannelSlugsRoutes = flags.map( it => { return { path: `/${it.value}/:slug`, component: ChannelPage, }});
+    const nationalChannelRoutes = flags.map( it => { return { path: `/${it.value}`, component: HomePage, }});
+
+    const nationalTopicSlugsRoutes = flags.map( it => { return { path: `/${it.value}/:channel/:slug`, component: TopicPage, }});
 
     return new Router({
         mode: 'history',
@@ -66,7 +69,9 @@ export function createRouter (store){
             { path: '/'+ConstsSecret.secret+'/add-channel', component: AddChannelPage, },
 
             { path: '/:slug', component: ChannelPage, },
-            ...nationalRoutes,
+            ...nationalChannelRoutes,
+            ...nationalChannelSlugsRoutes,
+            ...nationalTopicSlugsRoutes,
 
 
         ]

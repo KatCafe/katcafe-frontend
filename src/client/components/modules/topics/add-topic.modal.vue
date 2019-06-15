@@ -10,7 +10,7 @@
 
 <script>
 
-import AddTopicForm from "client/components/forms/add-topic.form"
+import AddTopicForm from "client/components/modules/topics/add-topic.form"
 import Modal from "client/components/UI/modal/modal"
 
 export default {
