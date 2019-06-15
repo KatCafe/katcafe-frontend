@@ -6,7 +6,7 @@
 
             <div v-if="topic">
 
-                <hero :title="topic.channel.slug" :icon="topic.channel.icon" :cover="topic.channel.cover" />
+                <hero :title="channel.slug" :icon="channel.icon" :cover="channel.cover" />
 
             </div>
 
@@ -45,13 +45,22 @@ export default {
     async asyncData ( { store,  route } ){
 
         if (route.params.slug) {
-            await store.dispatch('CHANNEL_GET', {slug: route.path,});
-            await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: route.path });
+
+            await store.dispatch('TOPIC_GET', {slug: route.path,});
+
+            if (store.state.topics.topic)
+                await store.dispatch('CHANNEL_GET', {slug: route.path.substr(0, route.path.lastIndexOf('/')) });
+
+            //await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: route.path });
         }
 
     },
 
     computed: {
+
+        channel(){
+            return this.$store.state.channels.channel;
+        },
 
         topic(){
             return this.$store.state.topics.topic;

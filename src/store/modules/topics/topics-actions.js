@@ -28,16 +28,16 @@ export default {
 
         try{
 
-            const out = await NetworkHelper.get(`/channels/get/${slug}`);
+            const out = await NetworkHelper.get(`/topics/get/${slug}`);
 
             if (out && out.result)
-                return commit('SET_CHANNEL', out.channel);
+                return commit('SET_TOPIC', out.topic);
 
         }catch(err){
             //console.error(err);
         }
 
-        return commit('SET_CHANNEL', undefined);
+        return commit('SET_TOPIC', undefined);
 
     },
 

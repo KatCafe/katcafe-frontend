@@ -1,8 +1,8 @@
 export default {
 
 
-    SET_TOPIC:  (state, channel ) => {
-        state.channel = channel;
+    SET_TOPIC:  (state, topic ) => {
+        state.topic = topic;
     },
 
     SET_TOPICS:  (state, list ) => {
