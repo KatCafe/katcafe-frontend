@@ -1,0 +1,454 @@
+/* -----------------------
+Base styles
+------------------------*/
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #eee;
+    font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 .5em;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: 2.25em;
+}
+
+/* 36px */
+h2 {
+    font-size: 1.75em;
+}
+
+/* 28px */
+h3 {
+    font-size: 1.375em;
+}
+
+/* 22px */
+h4 {
+    font-size: 1.125em;
+}
+
+/* 18px */
+h5 {
+    font-size: 1em;
+}
+
+/* 16px */
+h6 {
+    font-size: .875em;
+}
+
+/* 14px */
+
+p {
+    margin: 0 0 1.5em;
+    line-height: 1.5;
+}
+
+blockquote {
+    padding: 1em 2em;
+    margin: 0 0 2em;
+    border-left: 5px solid #eee;
+}
+
+hr {
+    height: 0;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+table {
+    background-color: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 1px solid #ddd;
+}
+
+th, td {
+    padding: .5em 1em;
+    vertical-align: top;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+a:link {
+    color: royalblue;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:focus {
+    color: black;
+}
+
+a:hover {
+    color: green;
+}
+
+a:active {
+    color: red;
+}
+
+/* -----------------------
+Layout styles
+------------------------*/
+
+.container {
+    max-width: 50em;
+    margin: 0 auto;
+}
+
+.header {
+    color: #0d052f;
+    background: white;
+    padding: 2px 20px 0;
+}
+
+.header-heading {
+    margin: 0;
+}
+
+/**
+    logo
+ */
+.header .logo {
+    height: 40px;
+    display:inline-block;
+    padding-right: 10px;
+}
+
+.header .logoText{
+    display:inline-block;
+    font-size: 28px;
+    position: relative;
+    top: -10px;
+}
+
+.nav-bar {
+    background: #cfb7ff26;
+    padding: 0 10px 2px;
+    font-size: 12px;
+}
+
+.content {
+    padding: 1em 1.25em;
+    background-color: #fff;
+}
+
+.footer {
+    color: #fff;
+    background: #000;
+    padding: 1em 1.25em;
+}
+
+/* -----------------------
+Nav
+------------------------*/
+
+.nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav li {
+    display: inline;
+    margin: 0;
+}
+
+.nav a {
+    display: block;
+    padding: .7em 1.25em;
+    text-decoration: none;
+    border-bottom: 1px solid gray;
+}
+
+.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky + .layoutContent {
+    padding-top: 66px;
+}
+
+
+/* -----------------------
+Single styles
+------------------------*/
+
+.img-responsive {
+    max-width: 100%;
+}
+
+.btn {
+    color: #fff !important;
+    background-color: royalblue;
+    border-color: #222;
+    display: inline-block;
+    padding: .5em 1em;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: .2em;
+    text-decoration: none;
+}
+
+.btn:hover {
+    color: #fff !important;
+    background-color: green;
+}
+
+.btn:focus {
+    color: #fff !important;
+    background-color: black;
+}
+
+.btn:active {
+    color: #fff !important;
+    background-color: red;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+
+.list-inline > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+/* -----------------------
+Wide styles
+------------------------*/
+
+@media (min-width: 42em) {
+    .header {
+
+    }
+
+    .nav-bar {
+    }
+
+    .content {
+        padding: 2em 3em;
+    }
+
+    .footer {
+        padding: 2em 3em;
+    }
+
+    .nav li {
+        display: inline;
+        margin: 0 1em 0 0;
+    }
+
+    .nav a {
+        display: inline;
+        padding: 0;
+        border-bottom: 0;
+    }
+}
+
+
+/**
+    HERO
+ */
+
+.hero {
+    display: block;
+    flex-direction: row;
+    height: 192px;
+    min-width: 260px;
+    background: url( https://styles.redditmedia.com/t5_2cneq/styles/bannerBackgroundImage_6yzzdjhguh521.jpeg?format=pjpg&s=8c0a444089bdc858bd2764f5376352e7c5d27f5a) center top / cover no-repeat rgb(0, 112, 193);
+    background-position: center top;
+    margin: 0px auto;
+    padding: 0;
+}
+
+.heroBox{
+    margin-left: 50px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+}
+
+.hero .logo{
+    top: -50%;
+    position: absolute;
+
+    float: left;
+    margin-right: 8px;
+    box-sizing: border-box;
+    height: 56px;
+    width: 56px;
+    background: url( …) center center / 100% no-repeat rgb(32, 84, 147);
+    border-radius: 32px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.hero .title{
+    padding-left: 70px;
+    color: white;
+}
+
+
+/** Forms
+ */
+textarea,
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit],
+input[type=button] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover,
+input[type=button]:hover {
+    background-color: #45a049;
+}
+
+
+
+form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+
+/**
+
+    STICKY BUTTONS
+
+ */
+
+.btn-floating-container {
+    right: 50px;
+    bottom: 50px;
+    position: fixed;
+}
+
+.btn-floating {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(245, 245, 245, 0.075);
+    text-align: center;
+    padding: 0px;
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+
+/*
+    MODALS
+ */
+
+.modalBackground{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 26, 26, 0.9);
+}
+
+.modal {
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff5f5;
+    border: solid 1px #000000;
+    padding: 10px;
+    border-radius: 10px;
+    padding-bottom: 0;
+    width: 600px;
+
+}
+
+.close-button {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: #fff5f5;
+    border: solid 1px #000000;
+    color: black;
+}
+
+.close-button:hover {
+    background-color: #4c4c4c;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+

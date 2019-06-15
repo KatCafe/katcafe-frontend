@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+
+    <title>{{ SEOMixinTitle.title }}</title>
+
+    <meta name="description" content="{{ SEOMixinDescription.description }}">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="keywords" content="{{ SEOMixinKeywords.toString() }}">
+    <meta http-equiv="content-language" content="{{ SEOMixinLanguage }}" />
+    <meta name="language" content="{{ SEOMixinLanguage }}" />
+    <meta name="copyright" content="{{ SEOMixinCopyright }}">
+
+    <meta property="og:type"   content="{{ pageType }}" />
+
+    <meta property="og:title"  content="{{ SEOMixinTitle.facebook }}" />
+    <meta property="og:description"  content="{{ SEOMixinDescription.facebook }}" />
+
+    {{{ SEOMixinImages }}}
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ SEOMixinTitle.twitter }}" />
+    <meta name="twitter:description" content="{{ SEOMixinDescription.twitter }}" />
+
+    <meta charset="utf-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" sizes="120x120" href="/public/assets/ico/apple-icon-180x180.png">
+    <link rel="shortcut icon" sizes="48x48" href="/public/assets/ico/favicon.ico">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="6iS7Zzeq9FI1cneuWsA6XNT_APAdQAcDqM5Qg3pWLBM" />
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Custom Theme Style -->
+    <link href="/public/assets/theme/style.css" rel="stylesheet">
+
+    <link href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css" rel="stylesheet">
+    <link href="/public/assets/components/flags.css" rel="stylesheet">
+
+
+  </head>
+
+  <body >
+
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div id="loader"></div>
+    </div>
+    <!--end preloader-->
+
+    <!--vue-ssr-outlet-->
+
+
+
+  </body>
+
+
+</html>
