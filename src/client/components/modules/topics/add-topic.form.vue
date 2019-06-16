@@ -3,8 +3,15 @@
 
         Start a thread in <strong>{{channel}}</strong> <br/><br/>
 
-        <label for="flink">Link</label>
-        <input type="text" id="flink" name="link" placeholder="Link" v-model="topicLink">
+        <label for="flink">Share a Link or Upload a file</label> <br/>
+        <span class="formLink" >
+            <input style="width: 70%" type="text" id="flink" name="link" placeholder="Link" v-model="topicLink" @change="linkChanged" >
+            <input type="file" style="width: 30%; " value="or Select File" v-on:change="fileChanged" accept="image/*" >
+        </span> <br/>
+
+        <div>
+            <img class="topicImage" v-if="topicPreview" :src="topicPreview.img">
+        </div>
 
         <label for="ftitle">Title</label>
         <input type="text" id="ftitle" name="title" placeholder="Title" v-model="topicTitle">
@@ -16,7 +23,7 @@
 
         <input type="button" value="Create" @click="createTopic">
 
-        {{error}}
+        <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
     </form>
 </template>
@@ -30,12 +37,17 @@ export default {
 
     data(){
         return {
-            topicTitle: '',
+
             topicLink: '',
+            topicFile: '',
+            topicPreview: '',
+
+            topicTitle: '',
             topicBody: '',
             topicChannel: '',
 
             error : '',
+
         }
     },
 

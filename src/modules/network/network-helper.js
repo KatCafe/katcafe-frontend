@@ -3,29 +3,29 @@ const consts = require('consts/consts');
 
 class NetworkHelper {
 
-    async post(address, body, prefix = consts.serverApi, json = true, timeout ){
+    async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' } ){
 
         return rp({
             uri: prefix + address,
-            headers: { 'User-Agent': 'Request-Promise' },
-            json: json,
-            timeout: timeout,
+            headers,
+            json,
+            timeout,
             method: "POST",
-            body: body
+            body,
         });
 
     }
 
-    async get(address, body, prefix = consts.serverApi, json = true, timeout){
+    async get(address, body, prefix = consts.serverApi, json = true, timeout , headers = { 'User-Agent': 'Request-Promise' } ){
 
         console.log(prefix+address);
 
         return rp({
             uri: prefix + address,
-            headers: { 'User-Agent': 'Request-Promise' },
-            json: json,
-            timeout: timeout,
-            body: body,
+            headers,
+            json,
+            timeout,
+            body,
         });
 
     }

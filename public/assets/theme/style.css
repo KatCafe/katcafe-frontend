@@ -349,7 +349,7 @@ Wide styles
 textarea,
 input[type=text], select {
     width: 100%;
-    padding: 12px 20px;
+    padding: 6px 10px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -357,12 +357,13 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
+button,
 input[type=submit],
 input[type=button] {
     width: 100%;
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
+    padding: 6px 10px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
@@ -374,14 +375,24 @@ input[type=button]:hover {
     background-color: #45a049;
 }
 
+button{
+    background-color: #5cbcf6;
+}
 
+button:hover{
+    background-color: #0e83cd;
+}
 
 form {
     border-radius: 5px;
-    background-color: #fbfbfb;
-    padding: 20px;
+    background-color: #ffffff;
+    padding: 10px;
 }
 
+.formLink{
+    display: inline;
+    white-space: nowrap;
+}
 
 /**
 
@@ -487,9 +498,12 @@ form {
 }
 
 .topicBox{
-
     display: grid;
-    grid-template-columns: 30px 1fr 150px ;
+    grid-template-columns: 25px 1fr 150px ;
+}
+
+.commentBox{
+    grid-template-columns: 25px 1fr;
 }
 
 .topic h2{
@@ -505,10 +519,6 @@ form {
     padding-right: 10px;
     color: #d5cccc;
     font-size: 12px;
-}
-
-.topicImageDiv{
-
 }
 
 .topicImage{
@@ -536,23 +546,27 @@ form {
     padding-right: 10px;
 }
 
+/***
+        VOTING
+ */
 .votingBox{
-    padding-left: 5px;
-    padding-top: 5px;
+    padding-left: 0px;
+    padding-top: 10px;
 }
+
 
 .upvote {
     width: 0; height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-bottom: 8px solid #878a8c;
+    border-bottom: 8px solid #d7d9db;
     margin-bottom: 10px;
 }
 
 .upvote:after {
       width: 5px;
       height: 6px;
-      background-color: #878a8c;
+      background-color: #d7d9db;
       content: '';
       position:absolute;
       margin-top: 8px;
@@ -560,20 +574,25 @@ form {
 
   }
 
+.votingBox span{
+    padding-left: 3px;
+    color: #d7d9db;
+}
+
 .downvote {
     margin-top:10px;
     width: 0;
     height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 8px solid #878a8c;
+    border-top: 8px solid #d7d9db;
     margin-left: -1px;
 }
 
 .downvote:after {
   width: 5px;
   height: 6px;
-  background-color: #878a8c;
+  background-color: #d7d9db;
   content: '';
   position:absolute;
   margin-left: -2px;
@@ -588,6 +607,40 @@ form {
     border-radius: 4px;
     border-width: 1px;
     border-style: solid;
-    border-color: rgb(204, 204, 204);
+    border-color: rgb(246, 239, 239);
     width: 100%;
+}
+
+/**
+    Alert
+ */
+
+.alert-box {
+    color:#555;
+    border-radius:10px;
+    font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+    padding:10px 10px 10px 10px;
+    margin:10px;
+}
+
+.alert-box span {
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.error {
+    background:#ffecec url('images/error.png') no-repeat 10px 50%;
+    border:1px solid #f5aca6;
+}
+.success {
+    background:#e9ffd9 url('images/success.png') no-repeat 10px 50%;
+    border:1px solid #a6ca8a;
+}
+.warning {
+    background:#fff8c4 url('images/warning.png') no-repeat 10px 50%;
+    border:1px solid #f2c779;
+}
+.notice {
+    background:#e3f7fc url('images/notice.png') no-repeat 10px 50%;
+    border:1px solid #8ed9f6;
 }

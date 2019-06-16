@@ -7,5 +7,11 @@ export default {
 
     },
 
+    ADD_COMMENT: (state, comment)=>{
+
+        state.list.push(comment);
+
+    }
+
 
 }

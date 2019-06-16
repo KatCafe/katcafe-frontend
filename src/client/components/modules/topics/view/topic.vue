@@ -4,13 +4,9 @@
 
         <div class="topicBox">
 
-            <div class="votingBox">
-                <div class="upvote"></div>
-                <span>{{vote}} </span>
-                <div class="downvote"></div>
-            </div>
+            <vote :vote="vote"/>
 
-            <router-link :to="to">
+            <router-link :to="isPage ? '' : to">
                 <div class="topicContent">
 
                     <div class="author">
@@ -46,10 +42,15 @@
 
 <script>
 import BrowserHelper from "modules/helpers/browser.helpers"
+import Vote from "client/components/modules/vote/vote"
+
 export default {
+
+    components: {Vote},
 
     props: {
         topic: null,
+        isPage: false,
     },
 
     computed: {

@@ -2,33 +2,27 @@
 
     <div class="topic">
 
-        <div class="topicBox">
+        <div class="topicBox commentBox">
 
-            <div class="votingBox">
-                <div class="upvote"></div>
-                <span>{{vote}} </span>
-                <div class="downvote"></div>
-            </div>
+            <vote :vote="vote"/>
 
-            <router-link :to="to">
-                <div class="topicContent">
+            <div class="topicContent">
 
-                    <div class="author">
-                        <span>{{author}}</span>
-                        <span>{{date}}</span>
-                    </div>
-
-                    <h2 class="title">{{title}}</h2>
-
-                    <span>{{link}}</span>
-
-                    <div>
-                        <img class="topicImage topicImageWrap" :src="image">
-                        <p class="topicBody">{{body}}</p>
-                    </div>
-
+                <div class="author">
+                    <span>{{author}}</span>
+                    <span>{{date}}</span>
                 </div>
-            </router-link>
+
+                <h2 class="title">{{title}}</h2>
+
+                <span>{{link}}</span>
+
+                <div>
+                    <img class="topicImage topicImageWrap" :src="preview">
+                    <p class="topicBody">{{body}}</p>
+                </div>
+
+            </div>
 
         </div>
 
@@ -43,43 +37,52 @@
 
 <script>
 import BrowserHelper from "modules/helpers/browser.helpers"
+import Vote from "client/components/modules/vote/vote"
+import consts from "consts/consts"
+
 export default {
 
+    components: { Vote },
+
     props: {
-        topic: null,
+        comment: null,
     },
 
     computed: {
         title(){
-            return this.topic.title;
+            return this.comment.title;
         },
 
         author(){
-            return this.topic.author || 'Anonymous'
+            return this.comment.author || 'Anonymous'
         },
 
         date(){
-            return BrowserHelper.timeDiff(this.topic.date);
+            return BrowserHelper.timeDiff(this.comment.date);
         },
 
         body(){
-            return this.topic.body;
+            return this.comment.body;
         },
 
-        image(){
-            return this.topic.image||'https://cdn.publish0x.com/prod/fs/images/ca315de99837fa6ad66d02c3d843d7b0be48cd20768c708c595d276f63e14443.png';
+        preview(){
+
+            if (!this.comment.preview) return '';
+
+            return this.comment.preview.img[0] === '/' ? consts.serverApi + this.comment.preview.img : this.comment.preview.img;
         },
 
         link(){
-            return this.topic.link.length < 30 ? this.topic.link : this.topic.link.substr(0, 30) + '...';
+            const link = this.comment.link.replace('https://','').replace('http://').replace('www.','');
+            return link.length < 30 ? link : link.substr(0, 30) + '...';
         },
 
         to(){
-            return '/'+this.topic.slug;
+            return '/'+this.comment.slug;
         },
 
         vote(){
-            return this.topic.vote || 0;
+            return this.comment.vote || 0;
         },
 
 

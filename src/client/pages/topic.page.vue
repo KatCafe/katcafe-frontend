@@ -10,11 +10,12 @@
                 <div class="column left">
 
                     <div v-if="topic">
-                        <topic :topic="topic" />
 
-                        <comment v-for="(topic, index) in topics"
+                        <topic :topic="topic" :isPage="true" />
+
+                        <comment v-for="(comment, index) in comments"
                                :key="index"
-                               :topic="topic"
+                               :comment="comment"
                         >
 
                         </comment>
@@ -94,7 +95,7 @@ export default {
             return this.$store.state.topics.topic;
         },
 
-        topics(){
+        comments(){
             const topic = this.topic;
             return this.$store.state.comments.list;
             return this.$store.state.comments.list.filter( it => it.topic === topic.slug );

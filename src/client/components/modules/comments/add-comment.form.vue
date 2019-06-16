@@ -3,8 +3,7 @@
 
         Reply in <strong>{{topic.slug}}</strong> <br/><br/>
 
-        <label for="flink">Link</label>
-        <input type="text" id="flink" name="link" placeholder="Link" v-model="commentLink">
+        <link-or-upload ref="linkOrUpload" />
 
         <label for="ltext">Text</label>
 
@@ -14,7 +13,8 @@
 
         <input type="button" value="Create" @click="createComment">
 
-        {{error}}
+        <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
+        <div v-if="success" class="alert-box success"><span>success <br/><br/> </span> {{success}}</div>
 
     </form>
 </template>
@@ -22,10 +22,11 @@
 <script>
 
 import NetworkHelper from "modules/network/network-helper"
+import LinkOrUpload from "client/components/UI/elements/link/link-or-upload"
 
 export default {
 
-    components: {  },
+    components: { LinkOrUpload },
 
     props: {
 
@@ -36,11 +37,13 @@ export default {
 
     data(){
         return {
-            commentLink: '',
+
             commentBody: '',
             commentTopic: '',
 
             error : '',
+            success: '',
+
         }
     },
 
@@ -55,22 +58,37 @@ export default {
 
     methods: {
 
+
         async createComment(e){
 
             try{
 
                 this.error = '';
+                this.success = '';
+
+                console.log({
+                    name: this.$refs['linkOrUpload'].file.name,
+                    base64: this.$refs['linkOrUpload'].preview.img,
+                });
 
                 const out = await NetworkHelper.post('/comments/create', {
                     topic: this.topic.slug,
-                    link: this.topicLink,
+                    link: this.$refs['linkOrUpload'].link,
+                    file: this.$refs['linkOrUpload'].file ? {
+                            name: this.$refs['linkOrUpload'].file.name,
+                            base64: this.$refs['linkOrUpload'].preview.img,
+                        } : undefined,
                     body: this.commentBody,
                     author: this.author,
                 });
 
-                if (out && out.result){
+                if (out && out.result) {
+                    this.$store.commit('ADD_COMMENT', out.comment);
+                    this.success = 'Success!';
 
-                    alert('success');
+                    this.$refs['linkOrUpload'].reset();
+
+                    this.commentBody = '';
 
                 }
 
