@@ -68,10 +68,10 @@ export function createRouter (store){
             { path: '/typography', component: TypographyPage },
             { path: '/'+ConstsSecret.secret+'/add-channel', component: AddChannelPage, },
 
-            { path: '/:slug', component: ChannelPage, },
             ...nationalChannelRoutes,
             ...nationalChannelSlugsRoutes,
             ...nationalTopicSlugsRoutes,
+            { path: '/:slug', component: ChannelPage, },
 
 
         ]

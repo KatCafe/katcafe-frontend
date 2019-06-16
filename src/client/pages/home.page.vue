@@ -4,18 +4,16 @@
 
         <div slot="content"  >
 
-            <div class="content">
-                <div class="container">
+            <div class="row">
 
-                    <div v-if="topics.length">
-                        <topics :topics="topics" />
-                    </div>
-
-                    <div v-if="!topics.length">
-                        <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
-                    </div>
-
+                <div v-if="topics.length">
+                    <topics :topics="topics" />
                 </div>
+
+                <div v-if="!topics.length">
+                    <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
+                </div>
+
             </div>
 
         </div>

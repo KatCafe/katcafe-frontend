@@ -27,6 +27,8 @@ export default {
             link: '',
             file: '',
             preview: null,
+
+            scraped: null,
         }
     },
 
@@ -40,8 +42,11 @@ export default {
 
                 const out = await NetworkHelper.get('/scraper/'+this.link);
 
-                if (out && out.result && out.scrape.image)
+                if (out && out.result && out.scrape.image) {
                     this.preview = out.scrape.image;
+                    this.scraped = out.scrape;
+                    this.$emit('scraped', out.scrape)
+                }
 
 
                 this.file = undefined;
@@ -66,7 +71,9 @@ export default {
             reader.readAsDataURL(files[0]);
 
             this.file = files[0];
+
             this.link = '';
+            this.scraped = null;
 
         },
 

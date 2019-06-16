@@ -9,6 +9,10 @@ body {
     font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 }
 
+a{
+    text-decoration: none !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 .5em;
     font-weight: 500;
@@ -492,14 +496,14 @@ form {
     border-style: solid;
     border-color: rgb(245, 243, 243);
     width: 100%;
-    padding: 10px 10px 10px 10px;
-    margin-bottom: 20px;
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 15px;
 
 }
 
 .topicBox{
     display: grid;
-    grid-template-columns: 25px 1fr 150px ;
+    grid-template-columns: 25px 1fr;
 }
 
 .commentBox{
@@ -523,7 +527,7 @@ form {
 
 .topicImage{
     max-width: 150px;
-    max-height:200px;
+    max-height: 200px;
 }
 
 .topicImageWrap{
@@ -535,6 +539,7 @@ form {
 .topicBody{
     white-space: pre-wrap;
     line-height: 1;
+    margin-bottom: 0;
 }
 
 .topicButtons{

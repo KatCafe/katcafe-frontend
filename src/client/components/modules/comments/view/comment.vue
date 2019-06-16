@@ -6,21 +6,22 @@
 
             <vote :vote="vote"/>
 
-            <div class="topicContent">
+            <div ref="topicContent" class="topicContent">
 
                 <div class="author">
                     <span>{{author}}</span>
                     <span>{{date}}</span>
                 </div>
 
+                <div class="topicImageWrap">
+                    <img class="topicImage"  :src="toggledImage ? previewFull || preview : preview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
+                </div>
+
                 <h2 class="title">{{title}}</h2>
 
                 <span>{{link}}</span>
 
-                <div>
-                    <img class="topicImage topicImageWrap" :src="preview">
-                    <p class="topicBody">{{body}}</p>
-                </div>
+                <p class="topicBody">{{body}}</p>
 
             </div>
 
@@ -44,6 +45,14 @@ export default {
 
     components: { Vote },
 
+    data(){
+        return {
+            toggledImage: false,
+            maxHeight: 200,
+            maxWidth: 150,
+        }
+    },
+
     props: {
         comment: null,
     },
@@ -66,15 +75,17 @@ export default {
         },
 
         preview(){
-
             if (!this.comment.preview) return '';
+            return BrowserHelper.processRelativeLink(this.comment.preview.img);
+        },
 
-            return this.comment.preview.img[0] === '/' ? consts.serverApi + this.comment.preview.img : this.comment.preview.img;
+        previewFull(){
+            if (!this.comment.preview) return '';
+            return BrowserHelper.processRelativeLink(this.comment.preview.full);
         },
 
         link(){
-            const link = this.comment.link.replace('https://','').replace('http://').replace('www.','');
-            return link.length < 30 ? link : link.substr(0, 30) + '...';
+            return BrowserHelper.processLink(this.comment.link || '');
         },
 
         to(){
@@ -85,6 +96,31 @@ export default {
             return this.comment.vote || 0;
         },
 
+
+    },
+
+    methods: {
+
+        toggleImage(e){
+
+            e.preventDefault();
+
+            this.toggledImage = !this.toggledImage;
+
+            if (this.toggledImage){
+
+
+                this.maxHeight = 600;
+                this.maxWidth = this.$refs['topicContent'].clientWidth;
+
+            } else {
+
+                this.maxHeight = 200;
+                this.maxWidth = 150;
+
+            }
+
+        }
 
     }
 

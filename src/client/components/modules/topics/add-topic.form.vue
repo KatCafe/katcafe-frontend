@@ -3,15 +3,7 @@
 
         Start a thread in <strong>{{channel}}</strong> <br/><br/>
 
-        <label for="flink">Share a Link or Upload a file</label> <br/>
-        <span class="formLink" >
-            <input style="width: 70%" type="text" id="flink" name="link" placeholder="Link" v-model="topicLink" @change="linkChanged" >
-            <input type="file" style="width: 30%; " value="or Select File" v-on:change="fileChanged" accept="image/*" >
-        </span> <br/>
-
-        <div>
-            <img class="topicImage" v-if="topicPreview" :src="topicPreview.img">
-        </div>
+        <link-or-upload ref="linkOrUpload" />
 
         <label for="ftitle">Title</label>
         <input type="text" id="ftitle" name="title" placeholder="Title" v-model="topicTitle">
@@ -30,17 +22,14 @@
 
 <script>
 import NetworkHelper from "modules/network/network-helper"
+import LinkOrUpload from "client/components/UI/elements/link/link-or-upload"
 
 export default {
 
-    components: {  },
+    components: { LinkOrUpload },
 
     data(){
         return {
-
-            topicLink: '',
-            topicFile: '',
-            topicPreview: '',
 
             topicTitle: '',
             topicBody: '',
@@ -71,15 +60,19 @@ export default {
 
                 this.error = '';
 
+                const linkOrUpload = this.$refs['linkOrUpload'];
+
                 const out = await NetworkHelper.post('/topics/create', {
                     channel: this.channel,
-                    title: this.topicTitle,
-                    link: this.topicLink,
-                    body: this.topicBody,
+                    title: this.topicTitle || ( linkOrUpload.scraped ? linkOrUpload.scraped.title : ''  ),
+                    body: this.topicBody   || ( linkOrUpload.scraped ? linkOrUpload.scraped.description : ''  ),
+                    link: linkOrUpload.link,
+                    file: linkOrUpload.file ? {
+                        name: linkOrUpload.file.name,
+                        base64: linkOrUpload.preview.img,
+                    } : undefined,
                     author: this.author,
                 });
-
-                console.log(out);
 
                 this.$router.push({path: '/'+out.topic.slug });
 

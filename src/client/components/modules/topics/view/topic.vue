@@ -2,32 +2,37 @@
 
     <div class="topic">
 
-        <div class="topicBox">
+        <div class="topicBox" >
 
             <vote :vote="vote"/>
 
-            <router-link :to="isPage ? '' : to">
-                <div class="topicContent">
+
+                <div class="topicContent" ref="topicContent">
 
                     <div class="author">
                         <span>{{author}}</span>
                         <span>{{date}}</span>
+                        <router-link v-if="link" :to="link">
+                            <span>{{link}}</span>
+                        </router-link>
                     </div>
 
-                    <h2 class="title">{{title}}</h2>
+                    <router-link :to="isPage ? '' : to">
 
-                    <span>{{link}}</span>
+                        <div class="topicImageWrap">
+                            <img class="topicImage"  :src="toggledImage ? previewFull || preview : preview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
+                        </div>
 
-                    <p class="topicBody">{{body}}</p>
+                        <div>
+                            <h2 class="title">{{title}}</h2>
+
+                            <p class="topicBody">{{body}}</p>
+                        </div>
+                    </router-link>
+
 
                 </div>
-            </router-link>
 
-            <router-link :to="link">
-                <div class="topicImageDiv">
-                    <img class="topicImage" :src="image">
-                </div>
-            </router-link>
 
         </div>
 
@@ -43,10 +48,19 @@
 <script>
 import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
+import consts from "consts/consts"
 
 export default {
 
     components: {Vote},
+
+    data(){
+        return {
+            toggledImage: false,
+            maxHeight: 200,
+            maxWidth: 150,
+        }
+    },
 
     props: {
         topic: null,
@@ -70,12 +84,18 @@ export default {
             return this.topic.body;
         },
 
-        image(){
-            return this.topic.image||'https://cdn.publish0x.com/prod/fs/images/ca315de99837fa6ad66d02c3d843d7b0be48cd20768c708c595d276f63e14443.png';
+        preview(){
+            if (!this.topic.preview) return '';
+            return BrowserHelper.processRelativeLink(this.topic.preview.img);
+        },
+
+        previewFull(){
+            if (!this.topic.preview) return '';
+            return BrowserHelper.processRelativeLink(this.topic.preview.full);
         },
 
         link(){
-            return this.topic.link.length < 30 ? this.topic.link : this.topic.link.substr(0, 30) + '...';
+            return BrowserHelper.processLink(this.topic.link || '');
         },
 
         to(){
@@ -85,6 +105,31 @@ export default {
         vote(){
             return this.topic.vote || 0;
         },
+
+    },
+
+    methods: {
+
+        toggleImage(e){
+
+            e.preventDefault();
+
+            this.toggledImage = !this.toggledImage;
+
+            if (this.toggledImage){
+
+
+                this.maxHeight = 600;
+                this.maxWidth = this.$refs['topicContent'].clientWidth;
+
+            } else {
+
+                this.maxHeight = 200;
+                this.maxWidth = 150;
+
+            }
+
+        }
 
     }
 
