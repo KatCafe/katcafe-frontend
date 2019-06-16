@@ -1,17 +1,12 @@
 <template>
     <form action="/action_page.php" >
 
-        <div>
-            Reply in <strong>{{channel}}</strong> <br/><br/>
+        Reply in <strong>{{topic.slug}}</strong> <br/><br/>
 
-            <label for="flink">Link</label>
-            <input type="text" id="flink" name="link" placeholder="Link" v-model="commentLink">
+        <label for="flink">Link</label>
+        <input type="text" id="flink" name="link" placeholder="Link" v-model="commentLink">
 
-            <label for="ftitle">Title</label>
-            <input type="text" id="ftitle" name="title" placeholder="Title" v-model="commentTitle">
-
-            <label for="ltext">Text</label>
-        </div>
+        <label for="ltext">Text</label>
 
         <textarea class="commentTextArea" type="text" id="ltext" name="text" cols="40" rows="5" placeholder="Text" v-model="commentBody" > </textarea>
 
@@ -32,9 +27,15 @@ export default {
 
     components: {  },
 
+    props: {
+
+        topic: null,
+        channel: null,
+
+    },
+
     data(){
         return {
-            commentTitle: '',
             commentLink: '',
             commentBody: '',
             commentTopic: '',
@@ -44,10 +45,6 @@ export default {
     },
 
     computed:{
-
-        channel(){
-            return this.topicChannel ? this.topicChannel : this.$store.state.channels.channel.slug;
-        },
 
         author(){
             return '';
@@ -64,15 +61,19 @@ export default {
 
                 this.error = '';
 
-                const out = await NetworkHelper.post('/topics/create', {
-                    channel: this.channel,
-                    title: this.topicTitle,
+                const out = await NetworkHelper.post('/comments/create', {
+                    topic: this.topic.slug,
                     link: this.topicLink,
-                    body: this.topicBody,
+                    body: this.commentBody,
                     author: this.author,
                 });
 
-                this.$router.push({path: '/'+out.topic.slug });
+                if (out && out.result){
+
+                    alert('success');
+
+                }
+
 
             }catch(err){
 

@@ -2,7 +2,7 @@ import NetworkHelper from "modules/network/network-helper"
 
 export default {
 
-    TOPICS_GET: async  ({ commit, dispatch, state }, { searchQuery = 'country', search, index = 1, count = 20 }) => {
+    TOPICS_GET: async  ({ commit, dispatch, state }, { searchAlgorithm = 'hot', searchQuery = 'country', search, index = 1, count = 20 }) => {
 
         try{
 
@@ -17,7 +17,6 @@ export default {
                 return commit('SET_TOPICS', out.topics);
 
         }catch(err){
-            //console.error(err);
         }
 
         return commit('SET_TOPICS', [] );
@@ -34,7 +33,6 @@ export default {
                 return commit('SET_TOPIC', out.topic);
 
         }catch(err){
-            //console.error(err);
         }
 
         return commit('SET_TOPIC', undefined);

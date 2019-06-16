@@ -11,6 +11,14 @@
 
                     <div v-if="topic">
                         <topic :topic="topic" />
+
+                        <comment v-for="(topic, index) in topics"
+                               :key="index"
+                               :topic="topic"
+                        >
+
+                        </comment>
+
                     </div>
 
 
@@ -24,7 +32,7 @@
 
                     <div class="rightSidebar stickySidebar">
 
-                        <add-comment-form />
+                        <add-comment-form :topic="topic" :channel="channel" />
 
 
                     </div>
@@ -47,11 +55,12 @@ const Sticky = require('sticky-js');
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
 import Topic from "client/components/modules/topics/view/topic"
+import Comment from "client/components/modules/comments/view/comment"
 import AddCommentForm from "client/components/modules/comments/add-comment.form"
 
 export default {
 
-    components: { Layout,  Hero, Topic, AddCommentForm },
+    components: { Layout,  Hero, Topic, Comment, AddCommentForm },
 
     async asyncData ( { store,  route } ){
 
@@ -62,7 +71,7 @@ export default {
             if (store.state.topics.topic)
                 await store.dispatch('CHANNEL_GET', {slug: route.path.substr(0, route.path.lastIndexOf('/')) });
 
-            //await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: route.path });
+            await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: route.path, index: 1 });
         }
 
     },
@@ -71,7 +80,7 @@ export default {
 
         if (typeof window === "undefined") return;
 
-        var sticky = new Sticky('.stickySidebar');
+        const sticky = new Sticky('.stickySidebar');
 
     },
 
@@ -85,13 +94,19 @@ export default {
             return this.$store.state.topics.topic;
         },
 
+        topics(){
+            const topic = this.topic;
+            return this.$store.state.comments.list;
+            return this.$store.state.comments.list.filter( it => it.topic === topic.slug );
+        },
+
         stickyButtons(){
             return [
-                {
-                    title: "Write topic",
-                    img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
-                    click: () => this.$refs['layout'].showAddTopicModal( )
-                }
+                // {
+                //     title: "Write topic",
+                //     img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
+                //     click: () => this.$refs['layout'].showAddTopicModal( )
+                // }
             ]
         },
 

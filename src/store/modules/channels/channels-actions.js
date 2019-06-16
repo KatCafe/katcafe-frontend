@@ -13,17 +13,16 @@ export default {
 
     },
 
-    CHANNEL_LIST_GET: async  ({ commit, dispatch, state }, { country, index = 1, count = 20 }) => {
+    CHANNEL_LIST_GET: async  ({ commit, dispatch, state }, { algorithm ='hot', country, index = 1, count = 20 }) => {
 
         try{
 
-            const out = await NetworkHelper.get(`/channels/top/${country}/${index}/${count}`);
+            const out = await NetworkHelper.get(`/channels/${algorithm}/${country}/${index}/${count}`);
 
             if (out && out.result)
                 return out.channels;
 
         }catch(err){
-            //console.error(err);
         }
 
     },

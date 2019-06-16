@@ -22,14 +22,11 @@
 
                     <span>{{link}}</span>
 
-                    <p class="topicBody">{{body}}</p>
+                    <div>
+                        <img class="topicImage topicImageWrap" :src="image">
+                        <p class="topicBody">{{body}}</p>
+                    </div>
 
-                </div>
-            </router-link>
-
-            <router-link :to="link">
-                <div class="topicImageDiv">
-                    <img class="topicImage" :src="image">
                 </div>
             </router-link>
 
@@ -84,6 +81,7 @@ export default {
         vote(){
             return this.topic.vote || 0;
         },
+
 
     }
 

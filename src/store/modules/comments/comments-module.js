@@ -1,12 +1,11 @@
 import Vuex from 'vuex'
 
-import actions from './topics-actions'
-import mutations from './topics-mutations'
+import actions from './comments-actions'
+import mutations from './comments-mutations'
 
 export default {
     state:  {
 
-        topic: null,
         list: [],
 
     },
