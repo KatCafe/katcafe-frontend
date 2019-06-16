@@ -2,7 +2,7 @@
 
     <layout :stickyButtons="stickyButtons" ref="layout">
 
-        <div slot="content"  >
+        <div slot="content" >
 
             <div v-if="channel">
 
@@ -10,19 +10,18 @@
 
             </div>
 
-            <div class="content">
-                <div class="container">
+            <div class="row">
 
-                    <div v-if="channel">
-                        <topics :topics="topics" />
-                    </div>
-
-                    <div v-if="!channel">
-                        <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
-                    </div>
-
+                <div v-if="channel">
+                    <topics :topics="topics" />
                 </div>
+
+                <div v-if="!channel">
+                    <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
+                </div>
+
             </div>
+
 
         </div>
 
@@ -63,7 +62,7 @@ export default {
             return [
                 {
                     title: "Write topic",
-                    img: 'https://cdn4.iconfinder.com/data/icons/momenticons-basic/32x32/edit2.png',
+                    img: 'https://cdn4.iconfinder.com/data/icons/cologne/32x32/plus.png',
                     click: () => this.$refs['layout'].showAddTopicModal( )
                 }
             ]

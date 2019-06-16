@@ -6,7 +6,6 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
-    background-color: #eee;
     font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 }
 
@@ -104,15 +103,40 @@ a:active {
 Layout styles
 ------------------------*/
 
-.container {
-    max-width: 50em;
-    margin: 0 auto;
-}
-
 .header {
     color: #0d052f;
     background: white;
     padding: 2px 20px 0;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    float: left;
+}
+
+.left {
+    display: inline-block;
+    width: 65%;
+    padding-right: 30px;
+}
+
+.right {
+    display: inline-block;
+    width: 35%;
+}
+
+.row{
+    padding-top: 20px;
+    margin: auto;
+    max-width: 900px;
+    display: flow-root;
+}
+
+/* Clear floats after the columns */
+.row:after {
 }
 
 .header-heading {
@@ -136,19 +160,15 @@ Layout styles
 }
 
 .nav-bar {
-    background: #cfb7ff26;
+    background: #fdfcff;
     padding: 0 10px 2px;
     font-size: 12px;
 }
 
-.content {
-    padding: 1em 1.25em;
-    background-color: #fff;
-}
 
 .footer {
-    color: #fff;
-    background: #000;
+    color: black;
+    background: #ffeded;
     padding: 1em 1.25em;
 }
 
@@ -294,7 +314,6 @@ Wide styles
     background: url( https://styles.redditmedia.com/t5_2cneq/styles/bannerBackgroundImage_6yzzdjhguh521.jpeg?format=pjpg&s=8c0a444089bdc858bd2764f5376352e7c5d27f5a) center top / cover no-repeat rgb(0, 112, 193);
     background-position: center top;
     margin: 0px auto;
-    padding: 0;
 }
 
 .heroBox{
@@ -302,7 +321,6 @@ Wide styles
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 40;
 }
 
 .hero .logo{
@@ -360,7 +378,7 @@ input[type=button]:hover {
 
 form {
     border-radius: 5px;
-    background-color: #f2f2f2;
+    background-color: #fbfbfb;
     padding: 20px;
 }
 
@@ -542,11 +560,23 @@ form {
 }
 
 .downvote:after {
-      width: 5px;
-      height: 6px;
-      background-color: #878a8c;
-      content: '';
-      position:absolute;
-      margin-left: -2px;
-      margin-top: -14px;
-  }
+  width: 5px;
+  height: 6px;
+  background-color: #878a8c;
+  content: '';
+  position:absolute;
+  margin-left: -2px;
+  margin-top: -14px;
+}
+
+/**
+    Right Sidebar
+ */
+
+.rightSidebar{
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    width: 100%;
+}

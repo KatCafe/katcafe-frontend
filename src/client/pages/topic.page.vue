@@ -4,14 +4,10 @@
 
         <div slot="content"  >
 
-            <div v-if="topic">
+            <div class="row">
 
-                <hero :title="channel.slug" :icon="channel.icon" :cover="channel.cover" />
 
-            </div>
-
-            <div class="content">
-                <div class="container">
+                <div class="column left">
 
                     <div v-if="topic">
                         <topic :topic="topic" />
@@ -23,6 +19,18 @@
                     </div>
 
                 </div>
+
+                <div class="column right">
+
+                    <div class="rightSidebar stickySidebar">
+
+                        <add-comment-form />
+
+
+                    </div>
+
+                </div>
+
             </div>
 
 
@@ -34,13 +42,16 @@
 
 <script>
 
+const Sticky = require('sticky-js');
+
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
 import Topic from "client/components/modules/topics/view/topic"
+import AddCommentForm from "client/components/modules/comments/add-comment.form"
 
 export default {
 
-    components: { Layout,  Hero, Topic },
+    components: { Layout,  Hero, Topic, AddCommentForm },
 
     async asyncData ( { store,  route } ){
 
@@ -53,6 +64,14 @@ export default {
 
             //await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: route.path });
         }
+
+    },
+
+    mounted(){
+
+        if (typeof window === "undefined") return;
+
+        var sticky = new Sticky('.stickySidebar');
 
     },
 
@@ -70,7 +89,7 @@ export default {
             return [
                 {
                     title: "Write topic",
-                    img: 'https://cdn4.iconfinder.com/data/icons/momenticons-basic/32x32/edit2.png',
+                    img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
                     click: () => this.$refs['layout'].showAddTopicModal( )
                 }
             ]

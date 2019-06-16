@@ -4,7 +4,7 @@
 
         <header-layout />
 
-        <div class="layoutContent">
+        <div class="layoutContent" :style="{minHeight: minHeight+'px'}">
 
             <slot  name="content">
             </slot>
@@ -45,14 +45,20 @@ export default{
 
     computed:{
 
+    },
 
+    data(){
+        return {
+            minHeight: 0,
+        }
     },
 
     mounted(){
 
         if (typeof window === "undefined") return;
 
-        document.body.className = "nav-md";
+        console.log(screen.height);
+        this.minHeight = 2 * screen.height;
 
 
     },

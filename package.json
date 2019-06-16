@@ -47,6 +47,7 @@
     "sanitize-html": "^1.14.1",
     "serve-favicon": "^2.4.1",
     "socket.io-client": "^2.2.0",
+    "sticky-js": "^1.2.0",
     "transform-runtime": "0.0.0",
     "tweetnacl": "^1.0.1",
     "uuid": "^3.3.2",
