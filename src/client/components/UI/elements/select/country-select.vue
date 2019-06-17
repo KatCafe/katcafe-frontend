@@ -39,6 +39,7 @@ export default {
 
     props: {
         defaultCountryCode : {default: ''},
+        countryAllowed: { default () { return [ ]}},
     },
     //@onSelect
     computed:{

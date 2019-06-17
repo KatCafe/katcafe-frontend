@@ -1,6 +1,6 @@
 <template>
 
-    <div class="topic">
+    <div class="topic comment">
 
         <div class="topicBox commentBox">
 
@@ -11,15 +11,21 @@
                 <div class="author">
                     <span>{{author}}</span>
                     <span>{{date}}</span>
+
+                    <a class="link" :href="this.comment.link" target="_blank" v-if="link">{{link}}</a>
+
+                    <div class="topicButtons">
+                        <span>Comments</span>
+                        <span v-if="!isPreview">Share</span>
+                    </div>
+
                 </div>
 
-                <div class="topicImageWrap">
-                    <img class="topicImage"  :src="toggledImage ? previewFull || preview : preview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
+                <div v-if="getPeview" class="topicImageWrap">
+                    <img class="topicImage"  :src="getPeview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
                 </div>
 
-                <h2 class="title">{{title}}</h2>
-
-                <span>{{link}}</span>
+                <h3 v-if="title" class="title">{{title}}</h3>
 
                 <p class="topicBody">{{body}}</p>
 
@@ -27,10 +33,6 @@
 
         </div>
 
-        <div class="topicButtons">
-            <span>Comments</span>
-            <span>Share</span>
-        </div>
 
     </div>
 
@@ -54,6 +56,7 @@ export default {
     },
 
     props: {
+        isPreview: false,
         comment: null,
     },
 
@@ -72,6 +75,10 @@ export default {
 
         body(){
             return this.comment.body;
+        },
+
+        getPeview(){
+            return this.toggledImage ? this.previewFull || this.preview : this.preview
         },
 
         preview(){

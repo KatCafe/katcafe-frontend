@@ -6,7 +6,8 @@
                :key="index"
                :topic="topic"
                :comments="comments.filter( it => it.topic === topic.slug )"
-               style="padding-bottom: 20px"
+               :isPreview = "true"
+               class="topicSeparator"
         />
 
     </div>
@@ -24,17 +25,8 @@ export default {
 
     props: {
 
-        topics: {
-            default(){
-                return [];
-            }
-        },
-
-        comments: {
-            default(){
-                return [];
-            }
-        },
+        topics: {default(){return [];}},
+        comments: {default(){return [];} },
     }
 
 }

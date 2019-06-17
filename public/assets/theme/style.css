@@ -163,6 +163,12 @@ Layout styles
     top: -10px;
 }
 
+.header .country-select{
+    float:right;
+    display: inline-block;
+    min-width: 300px;
+}
+
 .nav-bar {
     background: #fdfcff;
     padding: 0 10px 2px;
@@ -497,17 +503,30 @@ form {
     border-color: rgb(245, 243, 243);
     width: 100%;
     padding: 2px 5px 2px 5px;
-    margin-bottom: 15px;
+    background-color: #f1faff;
+    margin-bottom: 5px;
 
+}
+
+.topicSeparator{
+    margin-bottom: 25px;
+}
+
+.comment{
+    background-color: white;
 }
 
 .topicBox{
     display: grid;
-    grid-template-columns: 25px 1fr;
+    /*grid-template-columns: 25px 1fr;*/
 }
 
 .commentBox{
-    grid-template-columns: 25px 1fr;
+}
+
+.topicComments{
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .topic h2{
@@ -518,11 +537,15 @@ form {
     padding-bottom: 5px;
 }
 
-.topicBox .topicContent .author span{
+.topicBox .topicContent .author a,
+.topicBox .topicContent .author span {
     display: inline-block;
     padding-right: 10px;
-    color: #d5cccc;
     font-size: 12px;
+}
+
+.topicBox .topicContent .author span{
+    color: #d5cccc;
 }
 
 .topicImage{
@@ -536,6 +559,10 @@ form {
     padding-bottom: 10px;
 }
 
+.topicTextWrap{
+    padding-top: 10px;
+}
+
 .topicBody{
     white-space: pre-wrap;
     line-height: 1;
@@ -543,6 +570,8 @@ form {
 }
 
 .topicButtons{
+    display: inline-block;
+    float:right;
     margin-left: 30px;
     color: #d5cccc;
 }

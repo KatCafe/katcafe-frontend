@@ -4,6 +4,7 @@
         <comment v-for="(comment, index) in comments"
                  :key="index"
                  :comment="comment"
+                 :isPreview="isPreview"
         >
 
         </comment>
@@ -18,11 +19,9 @@ export default {
     components: {Comment },
 
     props: {
-        comments:{
-            default(){
-                return [];
-            }
-        }
+
+        isPreview: false,
+        comments:{ default(){ return []; }}
     }
 }
 </script>

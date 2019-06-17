@@ -5,12 +5,16 @@
 
         <header-menu />
 
-        <router-link to="/">
-            <div class="header">
+        <div class="header">
+
+            <router-link to="/">
                 <img src="/public/assets/catcafe-logo.png" class="logo">
                 <span class="header-heading logoText">catcafé</span>
-            </div>
-        </router-link>
+            </router-link>
+
+            <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countryAllowed" />
+
+        </div>
 
 
     </div>
@@ -21,16 +25,27 @@
 <script>
 
 import HeaderMenu from "./header-menu"
+import CountrySelect from "../../UI/elements/select/country-select";
 
 export default {
 
-
     components: {
+        CountrySelect,
         HeaderMenu,
     },
 
     data() {
-        return {}
+        return {
+            countryAllowed: [ 'ro', 'usa', 'md', ]
+        }
+    },
+
+    computed: {
+
+        defaultCountry(){
+            return this.$store.state.localization.countryCode;
+        }
+
     },
 
     methods: {

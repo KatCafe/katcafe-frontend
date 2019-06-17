@@ -7,7 +7,7 @@
             <div class="row">
 
                 <div v-if="topics.length">
-                    <topics :topics="topics" />
+                    <topics :topics="topics" :comments="comments"  />
                 </div>
 
                 <div v-if="!topics.length">
@@ -44,6 +44,10 @@ export default {
 
         topics(){
             return this.$store.state.topics.list||[];
+        },
+
+        comments(){
+            return this.$store.state.comments.list||[];
         },
 
     }
