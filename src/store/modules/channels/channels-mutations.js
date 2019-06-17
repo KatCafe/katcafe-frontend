@@ -5,11 +5,16 @@ export default {
         state.channel = channel;
     },
 
-    SET_CHANNEL_LIST:  (state, list ) => {
+    SET_CHANNEL_NAV_BAR_LIST:  (state,  navBarList    ) => {
 
-        state.list = list;
+        state.navBarList = navBarList;
 
     },
 
+    SET_CHANNEL_NAV_BAR_LIST_COUNTRY: (state, navBarListCountry) => {
+
+        state.navBarListCountry = navBarListCountry;
+
+    },
 
 }

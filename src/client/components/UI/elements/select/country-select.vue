@@ -58,8 +58,6 @@ export default {
             const countriesAllowed = {};
             this.countryAllowed.map( it => countriesAllowed[it] = true)
 
-            console.log(countriesAllowed);
-
             return this.options.filter ( it => countriesAllowed[it.value] );
         }
 
@@ -94,6 +92,7 @@ export default {
 
     .multiselect{
         width: 100% !important;
+        z-index: 10 !important;;
     }
 
     .multiselect input{
@@ -105,6 +104,12 @@ export default {
 
     .multiselect .multiselect__single{
         left: 15px;
+        z-index: 3 !important;
+    }
+
+
+    .multiselect__content-wrapper {
+        z-index: 3 !important;
     }
 
 </style>

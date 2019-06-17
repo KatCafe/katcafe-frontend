@@ -12,7 +12,12 @@
                 <span class="header-heading logoText">catcafé</span>
             </router-link>
 
-            <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countryAllowed" @onSelect="countryChanged" />
+            <div class="headerRight">
+                <router-link to="/add-channel">
+                    <span>Create channel</span>
+                </router-link>
+                <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countryAllowed" @onSelect="countryChanged" />
+            </div>
 
         </div>
 

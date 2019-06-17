@@ -14,12 +14,13 @@
                         <div class="author">
                             <span>{{author}}</span>
                             <span>{{date}}</span>
-
-                            <a class="link" :href="this.topic.link" target="_blank" v-if="link"> {{link}} </a>
+                            <router-link :to="'/'+this.topic.channel">
+                                <span>{{this.topic.channel}}</span>
+                            </router-link>
 
                             <div class="topicButtons">
-                                <span>Comments</span>
-                                <span>Share</span>
+                                <a class="link" :href="this.topic.link" target="_blank" v-if="link"> {{link}} </a>
+                                <span @click="showStickyRightSidebarComment">Reply 0</span>
                             </div>
 
                         </div>
@@ -150,6 +151,12 @@ export default {
                 this.maxWidth = 150;
 
             }
+
+        },
+
+        showStickyRightSidebarComment(){
+
+            this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
 
         }
 

@@ -6,7 +6,7 @@
 
             <div class="row">
 
-                <h1>Create a Channel</h1>
+                <h1>Create a Channel</h1> <br/>
                 <add-channel-form/>
 
             </div>

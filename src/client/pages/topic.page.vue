@@ -22,14 +22,9 @@
 
                 </div>
 
-                <div class="column right">
+                <div v-if="showStickyRightSidebarComment" class="column right">
 
-                    <div class="rightSidebar stickySidebar">
-
-                        <add-comment-form :topic="topic" :channel="channel" />
-
-
-                    </div>
+                    <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
 
                 </div>
 
@@ -44,16 +39,14 @@
 
 <script>
 
-const Sticky = require('sticky-js');
-
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
 import Topic from "client/components/modules/topics/view/topic"
-import AddCommentForm from "client/components/modules/comments/add-comment.form"
+import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 
 export default {
 
-    components: { Layout,  Hero, Topic, AddCommentForm },
+    components: { Layout,  Hero, Topic, StickyRightSidebarComment },
 
     async asyncData ( { store,  route } ){
 
@@ -69,11 +62,14 @@ export default {
 
     },
 
+    data(){
+        return {
+        }
+    },
+
     mounted(){
 
         if (typeof window === "undefined") return;
-
-        const sticky = new Sticky('.stickySidebar');
 
     },
 
@@ -101,6 +97,10 @@ export default {
                 // }
             ]
         },
+
+        showStickyRightSidebarComment(){
+            return this.$store.state.global.showStickyRightSidebarComment;
+        }
 
     },
 

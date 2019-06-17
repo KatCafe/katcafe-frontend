@@ -7,7 +7,9 @@ export default {
     state:  {
 
         channel: null,
-        list: [''],
+
+        navBarList: [''],
+        navBarListCountry: '',
 
     },
     actions,

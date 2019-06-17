@@ -22,14 +22,23 @@ export default {
 
         if (typeof window === "undefined") return;
 
-        this.$store.dispatch('CHANNEL_LIST_NAV_BAR_GET', {country: this.$store.state.localization.countryCode });
+        this.$store.dispatch('CHANNEL_LIST_NAV_BAR_GET', {country: this.$store.state.localization.selectedCountryCode });
 
+    },
+
+    watch: {
+        '$route': {
+            deep: true,
+            handler: async function (refreshPage) {
+                this.$store.dispatch('CHANNEL_LIST_NAV_BAR_GET', {country: this.$store.state.localization.selectedCountryCode });
+            }
+        }
     },
 
     computed: {
 
         channels(){
-            return this.$store.state.channels.list;
+            return this.$store.state.channels.navBarList;
         },
 
     }

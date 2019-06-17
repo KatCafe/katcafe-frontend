@@ -119,6 +119,7 @@ Layout styles
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
     float: left;
+    margin: 0 auto;
 }
 
 .left {
@@ -163,8 +164,17 @@ Layout styles
     top: -10px;
 }
 
+.header .headerRight {
+    display: inline-block;
+    float: right;
+}
+
+
+.headerRight a{
+    padding-right: 10px;
+}
+
 .header .country-select{
-    float:right;
     display: inline-block;
     min-width: 300px;
 }
@@ -205,13 +215,13 @@ Nav
 }
 
 .sticky{
-    position: fixed;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
     top: 0;
-    width: 100%;
+    z-index: 1000;
 }
 
 .sticky + .layoutContent {
-    padding-top: 66px;
 }
 
 
@@ -404,6 +414,10 @@ form {
     white-space: nowrap;
 }
 
+.commentSlug{
+    font-size: 12px;
+}
+
 /**
 
     STICKY BUTTONS
@@ -573,12 +587,13 @@ form {
     display: inline-block;
     float:right;
     margin-left: 30px;
-    color: #d5cccc;
 }
 
 .topicButtons span{
-    padding-right: 10px;
+    color: #6c6a6a !important;
+    cursor: pointer;
 }
+
 
 /***
         VOTING
@@ -638,11 +653,10 @@ form {
  */
 
 .rightSidebar{
-    border-radius: 4px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(246, 239, 239);
     width: 100%;
+}
+
+.stickySidebar{
 }
 
 /**
@@ -678,3 +692,4 @@ form {
     background:#e3f7fc url('images/notice.png') no-repeat 10px 50%;
     border:1px solid #8ed9f6;
 }
+

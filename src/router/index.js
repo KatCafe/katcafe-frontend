@@ -66,12 +66,13 @@ export function createRouter (store){
 
             { path: '/', component: HomePage },
             { path: '/typography', component: TypographyPage },
-            { path: '/'+ConstsSecret.secret+'/add-channel', component: AddChannelPage, },
+            { path: '/add-channel', component: AddChannelPage, },
 
             ...nationalChannelRoutes,
             ...nationalChannelSlugsRoutes,
             ...nationalTopicSlugsRoutes,
             { path: '/:slug', component: ChannelPage, },
+            { path: '/:channel/:slug', component: TopicPage, },
 
 
         ]

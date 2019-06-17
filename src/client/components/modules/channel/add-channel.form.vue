@@ -55,7 +55,7 @@ export default {
     computed: {
 
         defaultCountry(){
-            return this.$store.state.localization.countryCode;
+            return this.$store.state.localization.selectedCountryCode;
         }
 
     },

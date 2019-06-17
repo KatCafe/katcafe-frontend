@@ -4,12 +4,15 @@ export default {
 
     CHANNEL_LIST_NAV_BAR_GET: async  ({ commit, dispatch, state }, { country }) => {
 
+        if (state.navBarListCountry === country) return;
+        commit('SET_CHANNEL_NAV_BAR_LIST_COUNTRY', country );
+
         const out = await dispatch('CHANNEL_LIST_GET', {country});
 
         if (out)
-            return commit('SET_CHANNEL_LIST', out );
+            return commit('SET_CHANNEL_NAV_BAR_LIST', out );
 
-        commit('SET_CHANNEL_LIST', [] );
+        commit('SET_CHANNEL_NAV_BAR_LIST', [] );
 
     },
 

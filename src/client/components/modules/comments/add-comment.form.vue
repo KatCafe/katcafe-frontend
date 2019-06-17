@@ -1,7 +1,7 @@
 <template>
-    <form action="/action_page.php" >
+    <div >
 
-        <strong>Reply</strong><br/><br/>
+        <span class="commentSlug">Reply {{title}}</span><br/><br/>
 
         <link-or-upload ref="linkOrUpload" />
 
@@ -16,7 +16,7 @@
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
         <div v-if="success" class="alert-box success"><span>success <br/><br/> </span> {{success}}</div>
 
-    </form>
+    </div>
 </template>
 
 <script>
@@ -24,6 +24,7 @@
 import NetworkHelper from "modules/network/network-helper"
 import LinkOrUpload from "client/components/UI/elements/link/link-or-upload"
 import Captcha from "client/components/modules/captcha/captcha"
+import BrowserHelper from "modules/helpers/browser.helpers"
 
 export default {
 
@@ -55,6 +56,10 @@ export default {
             return '';
         },
 
+        title(){
+            return BrowserHelper.processLink(this.topic||this.channel, 30)
+        }
+
     },
 
     methods: {
@@ -70,7 +75,7 @@ export default {
                 this.success = '';
 
                 const out = await NetworkHelper.post('/comments/create', {
-                    topic: this.topic.slug,
+                    topic: this.topic,
                     link: linkOrUpload.link,
                     file: linkOrUpload.file ? {
                             name: linkOrUpload.file.name,

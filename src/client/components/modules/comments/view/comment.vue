@@ -12,11 +12,9 @@
                     <span>{{author}}</span>
                     <span>{{date}}</span>
 
-                    <a class="link" :href="this.comment.link" target="_blank" v-if="link">{{link}}</a>
-
                     <div class="topicButtons">
-                        <span>Comments</span>
-                        <span v-if="!isPreview">Share</span>
+                        <a class="link" :href="this.comment.link" target="_blank" v-if="link">{{link}}</a>
+                        <span @click="showStickyRightSidebarComment">Reply 0</span>
                     </div>
 
                 </div>
@@ -126,6 +124,12 @@ export default {
                 this.maxWidth = 150;
 
             }
+
+        },
+
+        showStickyRightSidebarComment(){
+
+            this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.comment.topic, channel: this.comment.channel })
 
         }
 

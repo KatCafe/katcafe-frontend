@@ -3,7 +3,7 @@
 
 
         <div class="container">
-            No Copyright
+            No Copyright. Made with <3 for you.
         </div>
     </div>
 </template>

@@ -6,7 +6,9 @@ import mutations from './global-mutations'
 export default {
     state:  {
 
-
+        showStickyRightSidebarComment: false,
+        topicStickyRightSidebarComment: '',
+        channelStickyRightSidebarComment: '',
 
     },
     actions,

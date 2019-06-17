@@ -43,10 +43,10 @@ class BrowserHelpers{
         return link[0] === '/' ? consts.serverApi + link : link;
     }
 
-    static processLink(link){
+    static processLink(link, count = 40){
 
         link = link.replace('https://','').replace('http://').replace('www.','');
-        return link.length < 40 ? link : link.substr(0, 40) + '...';
+        return link.length < count ? link : link.substr(0, count) + '...';
 
     }
 

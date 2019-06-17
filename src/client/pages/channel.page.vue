@@ -12,8 +12,20 @@
 
             <div class="row">
 
+
                 <div v-if="channel">
-                    <topics :topics="topics" :comments="comments" />
+
+                    <div class="column left">
+                        <topics :topics="topics" :comments="comments" />
+                    </div>
+
+                    <div v-if="showStickyRightSidebarComment" class="column right">
+
+                        <sticky-right-sidebar-comment :channel="channel" />
+
+                    </div>
+
+
                 </div>
 
                 <div v-if="!channel">
@@ -34,10 +46,11 @@
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
 import Topics from "client/components/modules/topics/view/topics"
+import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 
 export default {
 
-    components: { Layout,  Hero, Topics },
+    components: { Layout,  Hero, Topics, StickyRightSidebarComment },
 
     async asyncData ({ store,  route }){
 
@@ -71,6 +84,10 @@ export default {
                 }
             ]
         },
+
+        showStickyRightSidebarComment(){
+            return this.$store.state.global.showStickyRightSidebarComment;
+        }
 
     },
 

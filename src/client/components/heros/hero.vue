@@ -1,6 +1,6 @@
 <template>
 
-    <div class="hero" :style="`background: url('${cover}') center top / cover no-repeat rgb(0, 112, 193); `">
+    <div id="hero" class="hero" :style="`background: url('${cover}') center top / cover no-repeat rgb(0, 112, 193); `">
 
         <div class="heroBox">
             <div v-if="icon">

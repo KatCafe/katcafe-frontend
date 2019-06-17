@@ -6,12 +6,22 @@
 
             <div class="row">
 
-                <div v-if="topics.length">
-                    <topics :topics="topics" :comments="comments"  />
+                <div class="column left">
+
+                    <div v-if="topics.length">
+                        <topics :topics="topics" :comments="comments"  />
+                    </div>
+
+                    <div v-if="!topics.length">
+                        <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
+                    </div>
+
                 </div>
 
-                <div v-if="!topics.length">
-                    <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
+                <div v-if="showStickyRightSidebarComment" class="column right">
+
+                    <sticky-right-sidebar-comment  />
+
                 </div>
 
             </div>
@@ -26,10 +36,11 @@
 
 import Layout from "client/components/layout/layout"
 import Topics from "client/components/modules/topics/view/topics"
+import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 
 export default {
 
-    components: { Layout, Topics },
+    components: { Layout, Topics, StickyRightSidebarComment },
 
     async asyncData ({ store,  route }){
 
@@ -56,11 +67,16 @@ export default {
             return this.$store.state.comments.list||[];
         },
 
+        showStickyRightSidebarComment(){
+            return this.$store.state.global.showStickyRightSidebarComment;
+        }
+
     },
 
     created() {
         this.slug = this.$route.params.slug;
     },
+
 
 
 }
