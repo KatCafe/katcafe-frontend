@@ -33,11 +33,17 @@ export default {
 
     async asyncData ({ store,  route }){
 
-        console.log( store.state.localization.countryCode );
+        await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: route.path !== '/' ? route.path : store.state.localization.selectedCountryCode });
 
-        await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: route.path !== '/' ? route.path : store.state.localization.countryCode });
+    },
 
-
+    watch: {
+        '$route': {
+            deep: true,
+            handler: async function (refreshPage) {
+                await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: this.$route.path !== '/' ? this.$route.path : this.$store.state.localization.selectedCountryCode });
+            }
+        }
     },
 
     computed: {
@@ -50,7 +56,11 @@ export default {
             return this.$store.state.comments.list||[];
         },
 
-    }
+    },
+
+    created() {
+        this.slug = this.$route.params.slug;
+    },
 
 
 }

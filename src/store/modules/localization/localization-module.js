@@ -5,6 +5,10 @@ import mutations from './localization-mutations'
 
 export default {
     state:  {
+
+        selectedCountryCode: '',
+        selectedCountry: '',
+
         country: '',
         countryCode: '',
         city: '',
@@ -20,6 +24,7 @@ export default {
             done: false,
             error: false,
         }
+
     },
     actions,
     mutations,

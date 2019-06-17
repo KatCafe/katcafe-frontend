@@ -14,18 +14,27 @@ export default context => {
     const { app, router, store } = createApp()
 
     await store.dispatch('LOCALIZATION_NEW_IP', context.ip ); //Dispatching the Context IP
-    await store.dispatch('LOCALIZATION_FETCH', ); //Dispatching the Context IP
 
     // const session = context.cookies.session;
     // if (session) {
-    //
     //     await store.commit('SET_AUTH_SESSION', session);
     //     await store.dispatch('AUTHENTICATE_USER_SESSION', session);
-    //
     // }
 
-    const { url } = context
-    const fullPath = router.resolve(url).route.fullPath
+    const {selectedCountry, selectedCountryCode} = context.cookies;
+    if (selectedCountry && selectedCountryCode){
+
+        store.commit('SET_LOCALIZATION_SELECTED_COUNTRY', { selectedCountry, selectedCountryCode} );
+
+    }else {
+
+        await store.dispatch('LOCALIZATION_FETCH',);
+
+    }
+
+
+    const { url } = context;
+    const fullPath = router.resolve(url).route.fullPath;
 
     if (fullPath !== url)
         reject({ url: fullPath })

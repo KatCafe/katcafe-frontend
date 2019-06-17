@@ -55,8 +55,9 @@ export default{
 
         if (typeof window === "undefined") return;
 
-        console.log(screen.height);
-        this.minHeight = 2 * screen.height;
+        this.minHeight =  screen.height;
+
+        this.$store.dispatch('LOCALIZATION_FETCH',);
 
 
     },

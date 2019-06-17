@@ -12,7 +12,7 @@
                 <span class="header-heading logoText">catcafé</span>
             </router-link>
 
-            <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countryAllowed" />
+            <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countryAllowed" @onSelect="countryChanged" />
 
         </div>
 
@@ -34,21 +34,29 @@ export default {
         HeaderMenu,
     },
 
+
     data() {
         return {
-            countryAllowed: [ 'ro', 'usa', 'md', ]
+            countryAllowed: [ 'ro', 'us', 'md', ]
         }
     },
 
     computed: {
 
         defaultCountry(){
-            return this.$store.state.localization.countryCode;
+            return this.$store.state.localization.selectedCountryCode;
         }
 
     },
 
     methods: {
+
+        countryChanged(selectedCountry, selectedCountryCode ){
+
+            this.$store.dispatch('LOCALIZATION_STORE_SELECTED', { selectedCountryCode, selectedCountry});
+            this.$router.push({path: '/' +selectedCountryCode });
+
+        }
 
     },
 

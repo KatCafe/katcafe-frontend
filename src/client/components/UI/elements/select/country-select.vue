@@ -6,7 +6,7 @@
             <img :class="`${ (getSelectValue.css||'flag').toLowerCase() } flagImg `">
         </span>
 
-        <multiselect @input="onChangeSelect" v-model="getSelectValue" label="label" track-by="label" :options="options" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
+        <multiselect @input="onChangeSelect" v-model="getSelectValue" label="label" track-by="label" :options="optionsFiltered" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
 
             <template slot="option" scope="props">
                 <img :class="props.option.css" style="display: inline-block; position: relative; verticalAlign: middle; padding-top:11px !important;" />
@@ -30,6 +30,7 @@ const FLAGS_SIZE = 18;
 export default {
 
     components: { Multiselect, },
+
     data () {
         return {
             value: {},
@@ -48,7 +49,20 @@ export default {
                 return {value: this.defaultCountryCode, css: 'flag '+this.defaultCountryCode, label: getLabelByCode(this.defaultCountryCode||'')  }
             else
                 return this.value;
+        },
+
+        optionsFiltered(){
+
+            if (this.countryAllowed.length === 0) return this.options;
+
+            const countriesAllowed = {};
+            this.countryAllowed.map( it => countriesAllowed[it] = true)
+
+            console.log(countriesAllowed);
+
+            return this.options.filter ( it => countriesAllowed[it.value] );
         }
+
     },
     methods: {
 
@@ -89,7 +103,7 @@ export default {
         left: 20px;
     }
 
-    .multiselect span{
+    .multiselect .multiselect__single{
         left: 15px;
     }
 

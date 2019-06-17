@@ -1,7 +1,17 @@
-const axios = require ('axios');
+import NetworkHelper from "modules/network/network-helper"
+import CookiesService from "src/services/cookies/cookies.service"
 
 export default {
     // ensure data for rendering given list type
+
+    LOCALIZATION_STORE_SELECTED: ({ commit, dispatch, state }, {selectedCountry, selectedCountryCode} ) => {
+
+        commit('SET_LOCALIZATION_SELECTED_COUNTRY', {selectedCountry, selectedCountryCode});
+
+        CookiesService.setCookie('selectedCountry', selectedCountry);
+        CookiesService.setCookie('selectedCountryCode', selectedCountryCode);
+
+    },
 
     LOCALIZATION_NEW_IP: ({ commit, dispatch, state }, ip ) => {
 
@@ -21,9 +31,7 @@ export default {
 
         try {
 
-            let res = await axios.get("https://geoip-db.com/json/" + ip);
-
-            res = res.data;
+            let res = await NetworkHelper.get("https://geoip-db.com/json/" + ip, undefined, '');
 
             const payload = {
                 country: res.country_name || '',

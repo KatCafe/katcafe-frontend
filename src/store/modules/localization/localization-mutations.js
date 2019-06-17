@@ -18,6 +18,10 @@ export default {
         state.timeZone = payload.timeZone;
         state.request = payload.request;
         state.clientIP = payload.clientIP;
+
+        if (!state.selectedCountryCode) state.selectedCountryCode = payload.countryCode;
+        if (!state.selectedCountry) state.selectedCountry = payload.country;
+
     },
 
     SET_LOCALIZATION_REQUEST_ERROR: (state, {}) => {
@@ -26,6 +30,13 @@ export default {
             done: false,
             error: true,
         };
+    },
+
+    SET_LOCALIZATION_SELECTED_COUNTRY: (state, {  selectedCountryCode, selectedCountry}) => {
+
+        state.selectedCountryCode = selectedCountryCode;
+        state.selectedCountry = selectedCountry;
+
     },
 
 }
