@@ -4,13 +4,11 @@
 
         <div slot="content"  >
 
-            <div class="content">
-                <div class="container">
+            <div class="row">
 
-                    <h1>Create a Channel</h1>
-                    <add-channel-form/>
+                <h1>Create a Channel</h1>
+                <add-channel-form/>
 
-                </div>
             </div>
 
         </div>

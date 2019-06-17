@@ -9,7 +9,7 @@
 
         <textarea class="commentTextArea" type="text" id="ltext" name="text" cols="40" rows="5" placeholder="Text" v-model="commentBody" @scraped="scraped" > </textarea>
 
-        <label for="ltext">Captcha</label>
+        <captcha ref="captcha"/>
 
         <input type="button" value="Submit reply" @click="createComment">
 
@@ -23,10 +23,12 @@
 
 import NetworkHelper from "modules/network/network-helper"
 import LinkOrUpload from "client/components/UI/elements/link/link-or-upload"
+import Captcha from "client/components/modules/captcha/captcha"
 
 export default {
 
-    components: { LinkOrUpload },
+
+    components: { LinkOrUpload, Captcha },
 
     props: {
 
@@ -51,22 +53,21 @@ export default {
 
         author(){
             return '';
-        }
+        },
 
     },
 
-
     methods: {
 
-
         async createComment(e){
+
+            const linkOrUpload = this.$refs['linkOrUpload'];
+            const captcha = this.$refs['captcha'];
 
             try{
 
                 this.error = '';
                 this.success = '';
-
-                const linkOrUpload = this.$refs['linkOrUpload'];
 
                 const out = await NetworkHelper.post('/comments/create', {
                     topic: this.topic.slug,
@@ -77,6 +78,10 @@ export default {
                         } : undefined,
                     body: this.commentBody || ( linkOrUpload.scraped ? linkOrUpload.scraped.title || linkOrUpload.scraped.content : ''  ),
                     author: this.author,
+                    captcha: {
+                        solution: captcha.captchaInput,
+                        encryption: captcha.captcha.encryption,
+                    }
                 });
 
                 if (out && out.result) {
@@ -89,10 +94,13 @@ export default {
 
                 }
 
+                captcha.reset();
 
             }catch(err){
 
                 this.error = err.message;
+                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
+                    captcha.reset();
 
             }
 

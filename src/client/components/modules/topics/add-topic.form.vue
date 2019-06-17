@@ -11,7 +11,7 @@
         <label for="ltext">Text</label>
         <textarea type="text" id="ltext" name="text" cols="40" rows="5" placeholder="Text" v-model="topicBody"> </textarea>
 
-        <label for="ltext">Captcha</label>
+        <captcha ref="captcha"/>
 
         <input type="button" value="Create" @click="createTopic">
 
@@ -23,10 +23,11 @@
 <script>
 import NetworkHelper from "modules/network/network-helper"
 import LinkOrUpload from "client/components/UI/elements/link/link-or-upload"
+import Captcha from "client/components/modules/captcha/captcha"
 
 export default {
 
-    components: { LinkOrUpload },
+    components: { LinkOrUpload, Captcha },
 
     data(){
         return {
@@ -56,11 +57,13 @@ export default {
 
         async createTopic(e){
 
+            const linkOrUpload = this.$refs['linkOrUpload'];
+            const captcha = this.$refs['captcha'];
+
             try{
 
                 this.error = '';
 
-                const linkOrUpload = this.$refs['linkOrUpload'];
 
                 const out = await NetworkHelper.post('/topics/create', {
                     channel: this.channel,
@@ -72,13 +75,23 @@ export default {
                         base64: linkOrUpload.preview.img,
                     } : undefined,
                     author: this.author,
+                    captcha: {
+                        solution: captcha.captchaInput,
+                        encryption: captcha.captcha.encryption,
+                    }
                 });
 
+                captcha.reset();
+
                 this.$router.push({path: '/'+out.topic.slug });
+
 
             }catch(err){
 
                 this.error = err.message;
+
+                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
+                    captcha.reset();
 
             }
 

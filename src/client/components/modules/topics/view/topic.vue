@@ -12,9 +12,9 @@
                     <div class="author">
                         <span>{{author}}</span>
                         <span>{{date}}</span>
-                        <router-link v-if="link" :to="link">
+                        <a :href="this.topic.link" target="_blank" v-if="link">
                             <span>{{link}}</span>
-                        </router-link>
+                        </a>
                     </div>
 
                     <router-link :to="isPage ? '' : to">

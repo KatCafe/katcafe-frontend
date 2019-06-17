@@ -10,6 +10,7 @@ import ChannelsModule from './modules/channels/channels-module'
 import TopicsModule from './modules/topics/topics-module'
 import CommentsModule from './modules/comments/comments-module'
 import LocalizationModule from './modules/localization/localization-module'
+import CaptchaModule from "./modules/captcha/captcha-module"
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export function createStore () {
             topics: TopicsModule,
             comments: CommentsModule,
             localization: LocalizationModule,
+            captcha: CaptchaModule,
 
         }
     });

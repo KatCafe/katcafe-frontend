@@ -19,6 +19,8 @@
             <country-select @onSelect="channelCountrySelected" :defaultCountryCode="defaultCountry" />
         </no-ssr>
 
+        <captcha ref="captcha"/>
+
         <input type="button" value="Create" @click="createChannel">
 
         {{error}}
@@ -32,10 +34,11 @@
 import CountrySelect from "client/components/UI/elements/select/country-select"
 import NoSsr from "vue-no-ssr";
 import NetworkHelper from "modules/network/network-helper"
+import Captcha from "client/components/modules/captcha/captcha"
 
 export default {
 
-    components: { NoSsr,  CountrySelect, },
+    components: { NoSsr,  CountrySelect, Captcha },
 
     data(){
         return {
@@ -65,6 +68,8 @@ export default {
 
         async createChannel(e){
 
+            const captcha = this.$refs['captcha'];
+
             try{
 
                 this.error = '';
@@ -75,15 +80,24 @@ export default {
                     icon: this.channelIcon,
                     cover: this.channelCover,
                     country: this.channelCountry || this.defaultCountry,
+                    captcha: {
+                        solution: captcha.captchaInput,
+                        encryption: captcha.captcha.encryption,
+                    }
                 });
 
                 if (!out || !out.result) throw "An error was encountered";
+
+                captcha.reset();
 
                 this.$router.push({path: '/'+out.channel.slug });
 
             }catch(err){
 
                 this.error = err.message;
+
+                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
+                    captcha.reset();
 
             }
 
