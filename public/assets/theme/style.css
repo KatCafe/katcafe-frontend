@@ -570,7 +570,7 @@ form {
 .topicImageWrap{
     float: left;
     padding-right: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 3px;
 }
 
 .topicTextWrap{

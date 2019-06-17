@@ -19,7 +19,7 @@
                         <topics :topics="topics" :comments="comments" />
                     </div>
 
-                    <div v-if="showStickyRightSidebarComment" class="column right">
+                    <div v-if="visibleStickyRightSidebarComment" class="column right">
 
                         <sticky-right-sidebar-comment :channel="channel" />
 
@@ -85,7 +85,7 @@ export default {
             ]
         },
 
-        showStickyRightSidebarComment(){
+        visibleStickyRightSidebarComment(){
             return this.$store.state.global.showStickyRightSidebarComment;
         }
 

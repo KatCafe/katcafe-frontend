@@ -2,7 +2,7 @@
 
     <div class="btn-floating-container">
         <button class="btn-floating btn btn-primary btn-medium"
-                v-for=" (btn, index) in stickyButtons"
+                v-for=" (btn, index) in stickyButtonsFiltered"
                 :key="index"
                 @click="btn.click"
         >
@@ -19,6 +19,15 @@ export default {
             type: Array,
             default(){ return []},
         },
+    },
+
+    computed:{
+
+        stickyButtonsFiltered(){
+            return this.stickyButtons.filter ( it => it );
+        }
+
     }
+
 }
 </script>

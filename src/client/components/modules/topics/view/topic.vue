@@ -14,13 +14,16 @@
                         <div class="author">
                             <span>{{author}}</span>
                             <span>{{date}}</span>
-                            <router-link :to="'/'+this.topic.channel">
+
+                            <router-link :to="'/'+topic.channel">
                                 <span>{{this.topic.channel}}</span>
                             </router-link>
 
+                            <span>{{topic.comments}} </span>
+
                             <div class="topicButtons">
-                                <a class="link" :href="this.topic.link" target="_blank" v-if="link"> {{link}} </a>
-                                <span @click="showStickyRightSidebarComment">Reply 0</span>
+                                <a class="link" :href="topic.link" target="_blank" v-if="link"> {{link}} </a>
+                                <span @click="showStickyRightSidebarComment">Reply </span>
                             </div>
 
                         </div>
@@ -35,6 +38,7 @@
                                 <h2 v-if="title" class="title">{{title}}</h2>
 
                                 <p class="topicBody">{{body}}</p>
+
                             </div>
 
                         </router-link>
@@ -155,9 +159,7 @@ export default {
         },
 
         showStickyRightSidebarComment(){
-
             this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
-
         }
 
     }

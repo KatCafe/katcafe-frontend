@@ -18,7 +18,7 @@
 
                 </div>
 
-                <div v-if="showStickyRightSidebarComment" class="column right">
+                <div v-if="visibleStickyRightSidebarComment" class="column right">
 
                     <sticky-right-sidebar-comment  />
 
@@ -67,7 +67,18 @@ export default {
             return this.$store.state.comments.list||[];
         },
 
-        showStickyRightSidebarComment(){
+        stickyButtons(){
+            return [
+                // {
+                //     title: "Write topic",
+                //     img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
+                //     click: () => this.$refs['layout'].showAddTopicModal( )
+                // }
+            ]
+        },
+
+
+        visibleStickyRightSidebarComment(){
             return this.$store.state.global.showStickyRightSidebarComment;
         }
 

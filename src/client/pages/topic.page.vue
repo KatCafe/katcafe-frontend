@@ -22,7 +22,7 @@
 
                 </div>
 
-                <div v-if="showStickyRightSidebarComment" class="column right">
+                <div v-if="visibleStickyRightSidebarComment" class="column right">
 
                     <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
 
@@ -90,16 +90,20 @@ export default {
 
         stickyButtons(){
             return [
-                // {
-                //     title: "Write topic",
-                //     img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
-                //     click: () => this.$refs['layout'].showAddTopicModal( )
-                // }
+                this.$store.state.global.showStickyRightSidebarComment ? undefined : {
+                    title: "Reply",
+                    img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
+                    click: () => this.showStickyRightSidebarComment()
+                },
             ]
         },
 
-        showStickyRightSidebarComment(){
+        visibleStickyRightSidebarComment(){
             return this.$store.state.global.showStickyRightSidebarComment;
+        },
+
+        showStickyRightSidebarComment(){
+            this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
         }
 
     },
