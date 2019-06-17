@@ -40,7 +40,9 @@ export default {
 
                 if (!this.link) return;
 
-                const out = await NetworkHelper.get('/scraper/'+this.link);
+                const out = await NetworkHelper.post('/scraper/get',{
+                    uri: encodeURI(this.link),
+                });
 
                 if (out && out.result && out.scrape.image) {
                     this.preview = out.scrape.image;

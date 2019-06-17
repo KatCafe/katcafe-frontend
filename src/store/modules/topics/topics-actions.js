@@ -13,13 +13,17 @@ export default {
                 count,
             });
 
-            if (out && out.result)
-                return commit('SET_TOPICS', out.topics);
+            if (out && out.result) {
+                commit('SET_TOPICS', out.topics);
+                commit('SET_COMMENTS', out.comments);
+                return out;
+            }
 
         }catch(err){
         }
 
-        return commit('SET_TOPICS', [] );
+        commit('SET_TOPICS', [] );
+        commit('SET_COMMENTS', [] );
 
     },
 

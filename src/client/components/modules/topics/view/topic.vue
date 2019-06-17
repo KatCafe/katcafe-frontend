@@ -1,58 +1,69 @@
 <template>
 
-    <div class="topic">
+    <div>
 
-        <div class="topicBox" >
+        <div class="topic">
 
-            <vote :vote="vote"/>
+            <div class="topicBox" >
+
+                <vote :vote="vote"/>
 
 
-                <div class="topicContent" ref="topicContent">
+                    <div class="topicContent" ref="topicContent">
 
-                    <div class="author">
-                        <span>{{author}}</span>
-                        <span>{{date}}</span>
-                        <a :href="this.topic.link" target="_blank" v-if="link">
-                            <span>{{link}}</span>
-                        </a>
+                        <div class="author">
+                            <span>{{author}}</span>
+                            <span>{{date}}</span>
+                            <a :href="this.topic.link" target="_blank" v-if="link">
+                                <span>{{link}}</span>
+                            </a>
+                        </div>
+
+                        <router-link :to="isPage ? '' : to">
+
+                            <div class="topicImageWrap">
+                                <img class="topicImage"  :src="toggledImage ? previewFull || preview : preview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
+                            </div>
+
+                            <div>
+                                <h2 class="title">{{title}}</h2>
+
+                                <p class="topicBody">{{body}}</p>
+                            </div>
+                        </router-link>
+
+
                     </div>
 
-                    <router-link :to="isPage ? '' : to">
 
-                        <div class="topicImageWrap">
-                            <img class="topicImage"  :src="toggledImage ? previewFull || preview : preview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
-                        </div>
+            </div>
 
-                        <div>
-                            <h2 class="title">{{title}}</h2>
-
-                            <p class="topicBody">{{body}}</p>
-                        </div>
-                    </router-link>
-
-
-                </div>
-
+            <div class="topicButtons">
+                <span>Comments</span>
+                <span>Share</span>
+            </div>
 
         </div>
 
-        <div class="topicButtons">
-            <span>Comments</span>
-            <span>Share</span>
+        <div style="padding-left: 20px">
+            <comments :comments="comments" />
         </div>
 
     </div>
+
 
 </template>
 
 <script>
 import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
+import Comments from "client/components/modules/comments/view/comments"
+
 import consts from "consts/consts"
 
 export default {
 
-    components: {Vote},
+    components: { Vote, Comments },
 
     data(){
         return {
@@ -65,6 +76,11 @@ export default {
     props: {
         topic: null,
         isPage: false,
+        comments: {
+            default(){
+                return []
+            }
+        }
     },
 
     computed: {

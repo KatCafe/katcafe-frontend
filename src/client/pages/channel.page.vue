@@ -13,7 +13,7 @@
             <div class="row">
 
                 <div v-if="channel">
-                    <topics :topics="topics" />
+                    <topics :topics="topics" :comments="comments" />
                 </div>
 
                 <div v-if="!channel">
@@ -56,6 +56,10 @@ export default {
 
         topics(){
             return this.$store.state.topics.list||[];
+        },
+
+        comments(){
+            return this.$store.state.comments.list||[];
         },
 
         stickyButtons(){

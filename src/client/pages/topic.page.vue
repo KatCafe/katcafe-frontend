@@ -11,14 +11,7 @@
 
                     <div v-if="topic">
 
-                        <topic :topic="topic" :isPage="true" />
-
-                        <comment v-for="(comment, index) in comments"
-                               :key="index"
-                               :comment="comment"
-                        >
-
-                        </comment>
+                        <topic :topic="topic" :comments="comments" :isPage="true" />
 
                     </div>
 
@@ -43,7 +36,7 @@
             </div>
 
 
-        </div>ro/chan1
+        </div>
 
     </layout>
 
@@ -56,12 +49,11 @@ const Sticky = require('sticky-js');
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
 import Topic from "client/components/modules/topics/view/topic"
-import Comment from "client/components/modules/comments/view/comment"
 import AddCommentForm from "client/components/modules/comments/add-comment.form"
 
 export default {
 
-    components: { Layout,  Hero, Topic, Comment, AddCommentForm },
+    components: { Layout,  Hero, Topic, AddCommentForm },
 
     async asyncData ( { store,  route } ){
 
@@ -97,7 +89,6 @@ export default {
 
         comments(){
             const topic = this.topic;
-            return this.$store.state.comments.list;
             return this.$store.state.comments.list.filter( it => it.topic === topic.slug );
         },
 
