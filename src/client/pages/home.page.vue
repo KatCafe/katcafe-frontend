@@ -1,6 +1,6 @@
 <template>
 
-    <layout >
+    <layout :stickyButtons="stickyButtons" ref="layout" >
 
         <div slot="content"  >
 
@@ -37,6 +37,7 @@
 import Layout from "client/components/layout/layout"
 import Topics from "client/components/modules/topics/view/topics"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
+import BrowserHelper from "modules/helpers/browser.helpers"
 
 export default {
 
@@ -44,7 +45,8 @@ export default {
 
     async asyncData ({ store,  route }){
 
-        await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: route.path !== '/' ? route.path : store.state.localization.selectedCountryCode });
+        const path = route.path, country = store.state.localization.selectedCountryCode;
+        await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country });
 
     },
 
@@ -52,7 +54,8 @@ export default {
         '$route': {
             deep: true,
             handler: async function (refreshPage) {
-                await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: this.$route.path !== '/' ? this.$route.path : this.$store.state.localization.selectedCountryCode });
+                const path = this.$route.path, country = this.$store.state.localization.selectedCountryCode;
+                await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country });
             }
         }
     },
@@ -68,12 +71,16 @@ export default {
         },
 
         stickyButtons(){
+
+            const path = this.$route.path, country = this.$store.state.localization.selectedCountryCode;
+            const search = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
+
             return [
-                // {
-                //     title: "Write topic",
-                //     img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
-                //     click: () => this.$refs['layout'].showAddTopicModal( )
-                // }
+                {
+                    title: "Write topic",
+                    img: 'https://cdn4.iconfinder.com/data/icons/cologne/32x32/plus.png',
+                    click: () => this.$refs['layout'].showAddTopicModal( search+ '/b' )
+                }
             ]
         },
 
@@ -85,7 +92,7 @@ export default {
     },
 
     created() {
-        this.slug = this.$route.params.slug;
+        this.slug = this.$route.path;
     },
 
 

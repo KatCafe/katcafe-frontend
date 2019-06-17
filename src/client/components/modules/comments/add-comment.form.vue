@@ -1,7 +1,9 @@
 <template>
     <div >
 
-        <span class="commentSlug">Reply {{title}}</span><br/><br/>
+        <span class="commentSlug">Reply
+            <router-link :to="'/'+this.topic">{{title}}</router-link>
+        </span><br/><br/>
 
         <link-or-upload ref="linkOrUpload" />
 

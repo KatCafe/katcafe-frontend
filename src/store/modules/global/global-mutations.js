@@ -5,8 +5,9 @@ export default {
     SET_GLOBAL_STICKY_RIGHT_SIDEBAR_COMMENT: (state,  {show, topic, channel} ) => {
 
         state.showStickyRightSidebarComment = show;
-        state.topicStickyRightSidebarComment = topic;
-        state.channelStickyRightSidebarComment = channel;
+
+        if (topic) state.topicStickyRightSidebarComment = topic;
+        if (channel) state.channelStickyRightSidebarComment = channel;
 
     },
 

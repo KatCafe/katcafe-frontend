@@ -659,6 +659,11 @@ form {
 .stickySidebar{
 }
 
+.rightSidebarClose{
+    float: right;
+    cursor: pointer;
+}
+
 /**
     Alert
  */

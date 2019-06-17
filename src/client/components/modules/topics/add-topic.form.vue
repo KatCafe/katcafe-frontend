@@ -29,12 +29,15 @@ export default {
 
     components: { LinkOrUpload, Captcha },
 
+    props: {
+        topicChannel: '',
+    },
+
     data(){
         return {
 
             topicTitle: '',
             topicBody: '',
-            topicChannel: '',
 
             error : '',
 

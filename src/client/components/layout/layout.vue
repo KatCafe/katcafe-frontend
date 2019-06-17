@@ -64,8 +64,8 @@ export default{
 
     methods:{
 
-        showAddTopicModal(){
-            this.$refs['addTopicModal'].showModal();
+        showAddTopicModal(channel){
+            this.$refs['addTopicModal'].showModal(channel);
         },
 
     }

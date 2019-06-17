@@ -89,11 +89,14 @@ export default {
         },
 
         stickyButtons(){
+
+            const openStickyRightSidebarComment = this.openStickyRightSidebarComment;
+
             return [
-                this.$store.state.global.showStickyRightSidebarComment ? undefined : {
+                this.visibleStickyRightSidebarComment ? undefined : {
                     title: "Reply",
                     img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
-                    click: () => this.showStickyRightSidebarComment()
+                    click: () => openStickyRightSidebarComment(),
                 },
             ]
         },
@@ -102,15 +105,20 @@ export default {
             return this.$store.state.global.showStickyRightSidebarComment;
         },
 
-        showStickyRightSidebarComment(){
-            this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
-        }
 
     },
 
     created() {
         this.slug = this.$route.params.slug;
     },
+
+    methods:{
+
+        openStickyRightSidebarComment(){
+            this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
+        }
+
+    }
 
 }
 </script>

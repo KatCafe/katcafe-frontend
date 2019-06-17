@@ -14,7 +14,7 @@
 
                     <div class="topicButtons">
                         <a class="link" :href="this.comment.link" target="_blank" v-if="link">{{link}}</a>
-                        <span @click="showStickyRightSidebarComment">Reply 0</span>
+                        <span @click="openStickyRightSidebarComment">Reply 0</span>
                     </div>
 
                 </div>
@@ -127,7 +127,7 @@ export default {
 
         },
 
-        showStickyRightSidebarComment(){
+        openStickyRightSidebarComment(){
 
             this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.comment.topic, channel: this.comment.channel })
 

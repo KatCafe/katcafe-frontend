@@ -2,7 +2,7 @@
 
     <modal ref="modal">
         <div slot="content"  >
-            <add-topic-form  />
+            <add-topic-form ref="addTopicForm"  :topicChannel="topicChannel" />
         </div>
     </modal>
 
@@ -14,12 +14,23 @@ import AddTopicForm from "client/components/modules/topics/add-topic.form"
 import Modal from "client/components/UI/modal/modal"
 
 export default {
+
     components: {AddTopicForm, Modal},
+
+    data(){
+        return {
+            topicChannel: '',
+        }
+    },
 
     methods: {
 
-        showModal(){
+        showModal(channel){
+
+            this.topicChannel = channel;
+
             this.$refs['modal'].showModal();
+
         },
 
         closeModal(){

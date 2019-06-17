@@ -2,6 +2,7 @@
 
     <div class="rightSidebar stickySidebar" >
 
+
         <add-comment-form  ref="addCommentForm" :topic="topic" :channel="channel"  />
 
     </div>
@@ -55,6 +56,15 @@ export default {
 
         channel(){
             return this.$store.state.global.channelStickyRightSidebarComment;
+        }
+
+    },
+
+    methods:{
+
+        hideBar(){
+            console.log('closed');
+            this.$store.dispatch('GLOBAL_HIDE_STICKY_RIGHT_SIDEBAR_COMMENT')
         }
 
     }

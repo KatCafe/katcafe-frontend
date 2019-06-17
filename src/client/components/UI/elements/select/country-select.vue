@@ -45,7 +45,7 @@ export default {
     //@onSelect
     computed:{
         getSelectValue(){
-            if (( !this.value.value ))
+            if (( !this.value || !this.value.value ))
                 return {value: this.defaultCountryCode, css: 'flag '+this.defaultCountryCode, label: getLabelByCode(this.defaultCountryCode||'')  }
             else
                 return this.value;
@@ -69,6 +69,9 @@ export default {
         },
 
         onChangeSelect(value, id){
+
+            if (!value) return;
+
             this.value = value;
             this.$emit('onSelect',value.label, this.value.value, this.value.css);
             return value;
