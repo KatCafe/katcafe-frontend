@@ -17,8 +17,6 @@
 
         </multiselect>
 
-
-
     </div>
 
 </template>
@@ -113,6 +111,35 @@ export default {
 
     .multiselect__content-wrapper {
         z-index: 3 !important;
+    }
+
+    .multiselect__tags {
+        border-radius: 0;
+        border: none;
+        background-color: #323232;
+        padding: 0 40px 0 10px;
+        min-height: 35px;
+    }
+
+    .multiselect__input, .multiselect__single{
+        background: #323232;
+        color: #a3a2a2;
+    }
+
+    .multiselect__input, .multiselect__single{
+        width: 95%;
+    }
+
+    /*.multiselect__single{*/
+        /*display: none;*/
+    /*}*/
+
+    /*.multiselect__tags:hover .multiselect__single{*/
+        /*display: block;*/
+    /*}*/
+
+    .multiselect__select{
+        height: 36px;
     }
 
 </style>

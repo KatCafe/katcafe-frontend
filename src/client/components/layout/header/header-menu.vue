@@ -1,22 +1,33 @@
 <template>
 
     <div class="nav-bar">
-            <ul class="nav">
-                <li v-for=" (it, index) in channels "
-                    :key="index">
 
-                    <router-link :to="`/${it}`" >
-                        {{it}}
-                    </router-link>
+        <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-                </li>
-            </ul>
+        <ul class="nav">
+            <li v-for=" (it, index) in channels "
+                :key="index">
+
+                <router-link :to="`/${it}`" >
+                    {{it}}
+                </router-link>
+
+            </li>
+        </ul>
+
     </div>
 
 </template>
 
 <script>
+
+import CountrySelect from "../../UI/elements/select/country-select";
+
 export default {
+
+    components: {
+        CountrySelect,
+    },
 
     mounted(){
 
@@ -40,6 +51,25 @@ export default {
         channels(){
             return this.$store.state.channels.navBarList;
         },
+
+        defaultCountry(){
+            return this.$store.state.localization.selectedCountryCode;
+        },
+
+        countriesAllowed(){
+            return this.$store.state.localization.countriesAllowed;
+        },
+
+    },
+
+    methods:{
+
+        countryChanged(selectedCountry, selectedCountryCode ){
+
+            this.$store.dispatch('LOCALIZATION_STORE_SELECTED', { selectedCountryCode, selectedCountry});
+            this.$router.push({path: '/' +selectedCountryCode });
+
+        }
 
     }
 

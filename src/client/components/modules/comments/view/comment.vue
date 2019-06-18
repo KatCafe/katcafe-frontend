@@ -1,6 +1,6 @@
 <template>
 
-    <div class="topic comment">
+    <div class="comment">
 
         <div class="topicBox commentBox">
 

@@ -8,27 +8,28 @@
 
                 <vote :vote="vote"/>
 
+                <div class="topicContent" ref="topicContent">
 
-                    <div class="topicContent" ref="topicContent">
+                    <div class="author">
+                        <span>{{author}}</span>
+                        <span>{{date}}</span>
 
-                        <div class="author">
-                            <span>{{author}}</span>
-                            <span>{{date}}</span>
+                        <router-link :to="'/'+topic.channel">
+                            <span>{{topic.channel}}</span>
+                        </router-link>
 
-                            <router-link :to="'/'+topic.channel">
-                                <span>{{topic.channel}}</span>
-                            </router-link>
+                        <span>{{topic.comments}} </span>
 
-                            <span>{{topic.comments}} </span>
-
-                            <div class="topicButtons">
-                                <a class="link" :href="topic.link" target="_blank" v-if="link"> {{link}} </a>
-                                <span @click="openStickyRightSidebarComment">Reply {{ isPreview ? topic.uuid : 0}}</span>
-                            </div>
-
+                        <div class="topicButtons">
+                            <a class="link" :href="topic.link" target="_blank" v-if="link"> {{link}} </a>
+                            <span @click="openStickyRightSidebarComment">Reply {{ isPreview ? topic.uuid : 0}}</span>
                         </div>
 
-                        <router-link :to="isPage ? '' : to">
+                    </div>
+
+                    <router-link :to="isPage ? '' : to">
+
+                        <div class="topicBoxContent hasImage">
 
                             <div v-if="getPeview" class="topicImageWrap">
                                 <img class="topicImage"  :src="getPeview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
@@ -41,21 +42,17 @@
 
                             </div>
 
-                        </router-link>
+                        </div>
 
+                    </router-link>
 
-                    </div>
-
+                </div>
 
             </div>
 
-        </div>
-
-        <div class="topicComments" >
-            <comments :comments="comments" :isPreview = "isPreview" />
-        </div>
-
-        <div class="topicSeparator">
+            <div class="topicComments" v-if="comments.length > 0" >
+                <comments :comments="comments" :isPreview = "isPreview" />
+            </div>
 
         </div>
 
