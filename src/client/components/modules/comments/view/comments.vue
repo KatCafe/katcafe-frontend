@@ -9,14 +9,18 @@
 
         </comment>
 
+
+
     </div>
 </template>
 
 <script>
 import Comment from "./comment"
+
+
 export default {
 
-    components: {Comment },
+    components: { Comment, },
 
     props: {
 

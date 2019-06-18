@@ -92,7 +92,7 @@ export default {
                 });
 
                 if (out && out.result) {
-                    this.$store.commit('ADD_COMMENT', out.comment);
+                    this.$store.commit('ADD_COMMENTS', [out.comment] );
                     this.success = 'Your comment was published!!';
 
                     this.$refs['linkOrUpload'].reset();

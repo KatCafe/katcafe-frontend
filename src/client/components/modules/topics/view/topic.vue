@@ -16,14 +16,14 @@
                             <span>{{date}}</span>
 
                             <router-link :to="'/'+topic.channel">
-                                <span>{{this.topic.channel}}</span>
+                                <span>{{topic.channel}}</span>
                             </router-link>
 
                             <span>{{topic.comments}} </span>
 
                             <div class="topicButtons">
                                 <a class="link" :href="topic.link" target="_blank" v-if="link"> {{link}} </a>
-                                <span @click="openStickyRightSidebarComment">Reply </span>
+                                <span @click="openStickyRightSidebarComment">Reply {{ isPreview ? topic.uuid : 0}}</span>
                             </div>
 
                         </div>

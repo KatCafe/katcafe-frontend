@@ -698,3 +698,14 @@ form {
     border:1px solid #8ed9f6;
 }
 
+
+/**
+    infinite scroll
+ */
+.infiniteScroll{
+    text-align: center;
+}
+
+.pagination{
+    display: none;
+}

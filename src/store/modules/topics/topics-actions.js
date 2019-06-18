@@ -2,7 +2,12 @@ import NetworkHelper from "modules/network/network-helper"
 
 export default {
 
-    TOPICS_GET: async  ({ commit, dispatch, state }, { searchAlgorithm = 'hot', searchQuery = 'country', search, index = 1, count = 20 }) => {
+    TOPICS_GET: async  ({ commit, dispatch, state }, { searchAlgorithm = 'hot', searchQuery = 'country', search, index = 0, count = 20 }) => {
+
+        if (state.pageLoading) return;
+        commit('SET_TOPICS_PAGE_LOADING', true);
+
+        index++;
 
         try{
 
@@ -14,16 +19,18 @@ export default {
             });
 
             if (out && out.result) {
-                commit('SET_TOPICS', out.topics);
+                commit('ADD_TOPICS', out.topics);
                 commit('SET_COMMENTS', out.comments);
+                commit('SET_TOPICS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
+                commit('SET_TOPICS_PAGE_LOADING', false);
                 return out;
             }
 
         }catch(err){
         }
 
-        commit('SET_TOPICS', [] );
-        commit('SET_COMMENTS', [] );
+        commit('SET_TOPICS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: false });
+        commit('SET_TOPICS_PAGE_LOADING', false);
 
     },
 

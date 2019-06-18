@@ -13,8 +13,8 @@
                     <span>{{date}}</span>
 
                     <div class="topicButtons">
-                        <a class="link" :href="this.comment.link" target="_blank" v-if="link">{{link}}</a>
-                        <span @click="openStickyRightSidebarComment">Reply 0</span>
+                        <a class="link" :href="comment.link" target="_blank" v-if="link">{{link}}</a>
+                        <span @click="openStickyRightSidebarComment">Reply {{comment.uuid}}</span>
                     </div>
 
                 </div>

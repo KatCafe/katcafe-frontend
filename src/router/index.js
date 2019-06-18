@@ -41,10 +41,14 @@ export function createRouter (store){
 
     const flags = getFlags();
 
-    const nationalChannelSlugsRoutes = flags.map( it => { return { path: `/${it.value}/:slug`, component: ChannelPage, }});
     const nationalChannelRoutes = flags.map( it => { return { path: `/${it.value}`, component: HomePage, }});
+    const nationalChannelRoutesPageIndex = flags.map( it => { return { path: `/${it.value}/pageIndex/:pageIndex`, component: HomePage, }});
+
+    const nationalChannelSlugsRoutes = flags.map( it => { return { path: `/${it.value}/:slug`, component: ChannelPage, }});
+    const nationalChannelSlugsRoutesPageIndex = flags.map( it => { return { path: `/${it.value}/:slug/pageIndex/:pageIndex`, component: ChannelPage, }});
 
     const nationalTopicSlugsRoutes = flags.map( it => { return { path: `/${it.value}/:channel/:slug`, component: TopicPage, }});
+    const nationalTopicSlugsRoutesPageIndex = flags.map( it => { return { path: `/${it.value}/:channel/:slug/pageIndex/:pageIndex`, component: TopicPage, }});
 
     return new Router({
         mode: 'history',
@@ -69,10 +73,19 @@ export function createRouter (store){
             { path: '/add-channel', component: AddChannelPage, },
 
             ...nationalChannelRoutes,
+            ...nationalChannelRoutesPageIndex,
+
             ...nationalChannelSlugsRoutes,
+            ...nationalChannelSlugsRoutesPageIndex,
+
             ...nationalTopicSlugsRoutes,
+            ...nationalTopicSlugsRoutesPageIndex,
+
             { path: '/:slug', component: ChannelPage, },
+            { path: '/:slug/pageIndex/:pageIndex', component: ChannelPage, },
+
             { path: '/:channel/:slug', component: TopicPage, },
+            { path: '/:channel/:slug/pageIndex/:pageIndex', component: TopicPage, },
 
 
         ]
