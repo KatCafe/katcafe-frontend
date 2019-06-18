@@ -137,7 +137,7 @@ Layout styles
     padding-top: 20px;
     margin: auto;
     max-width: 900px;
-    display: flow-root;
+    display: flex;
 }
 
 /* Clear floats after the columns */

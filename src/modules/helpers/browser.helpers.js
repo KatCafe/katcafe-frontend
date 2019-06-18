@@ -53,6 +53,7 @@ class BrowserHelpers{
     static trimSlash(link){
 
         if (link && link[link.length-1 ] === '/') link = link.substr(0, link.length-1);
+        if (link && link[ 0 ] === '/') link = link.substr(1);
 
         return link;
 

@@ -4,6 +4,8 @@
 
         <div slot="content"  >
 
+            <hero :title="'/'+this.getChannel" :cover="getChannelCover" :titleStyle="getChannelTitleColor" />
+
             <div class="row">
 
                 <div class="column left">
@@ -38,10 +40,11 @@ import Layout from "client/components/layout/layout"
 import Topics from "client/components/modules/topics/view/topics"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 import BrowserHelper from "modules/helpers/browser.helpers"
+import Hero from "client/components/heros/hero"
 
 export default {
 
-    components: { Layout, Topics, StickyRightSidebarComment },
+    components: { Layout, Topics, StickyRightSidebarComment, Hero },
 
     async asyncData ({ store,  route }){
 
@@ -54,13 +57,37 @@ export default {
         '$route': {
             deep: true,
             handler: async function (refreshPage) {
-                const path = this.$route.path, country = this.$store.state.localization.selectedCountryCode;
-                await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country });
+                await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: this.getChannel });
             }
         }
     },
 
     computed: {
+
+        getChannel(){
+            const path = this.$route.path, country = this.$store.state.localization.selectedCountryCode;
+            return BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country
+        },
+
+        getChannelCover(){
+
+            const channel = this.getChannel;
+
+            if (channel === 'ro') return 'https://www.tetratech.com/en/images/rg18-201-water-solutions-for-asia-2000.jpg?blobheader=image/jpeg';
+            if (channel === 'us') return 'http://mindfluencerevolution.com/wp-content/uploads/2017/08/woman-breakthrough.jpg';
+            if (channel === 'md') return 'http://tour.tt.org.ua/data/uploads/cycle/tt1-min.jpg';
+
+            return '';
+        },
+
+        getChannelTitleColor(){
+
+            const channel = this.getChannel;
+
+            if (channel === 'us') return 'color: black;';
+
+            return '';
+        },
 
         topics(){
             return this.$store.state.topics.list||[];
@@ -72,14 +99,12 @@ export default {
 
         stickyButtons(){
 
-            const path = this.$route.path, country = this.$store.state.localization.selectedCountryCode;
-            const search = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
 
             return [
                 {
                     title: "Write topic",
                     img: 'https://cdn4.iconfinder.com/data/icons/cologne/32x32/plus.png',
-                    click: () => this.$refs['layout'].showAddTopicModal( search+ '/b' )
+                    click: () => this.$refs['layout'].showAddTopicModal( this.getChannel + '/b' )
                 }
             ]
         },
@@ -95,6 +120,9 @@ export default {
         this.slug = this.$route.path;
     },
 
+    methods:{
+
+    },
 
 
 }
