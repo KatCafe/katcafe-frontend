@@ -31,9 +31,7 @@
 
                         <div class="topicBoxContent hasImage">
 
-                            <div v-if="getPeview" class="topicImageWrap">
-                                <img class="topicImage"  :src="getPeview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
-                            </div>
+                            <preview-image :data="this.topic.preview" />
 
                             <div class="topicTextWrap">
                                 <h2 v-if="title" class="title">{{title}}</h2>
@@ -65,18 +63,17 @@
 import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
 import Comments from "client/components/modules/comments/view/comments"
+import PreviewImage from "client/components/UI/elements/preview-image"
 
 import consts from "consts/consts"
 
 export default {
 
-    components: { Vote, Comments },
+    components: { Vote, Comments, PreviewImage },
 
     data(){
         return {
-            toggledImage: false,
-            maxHeight: 200,
-            maxWidth: 150,
+
         }
     },
 
@@ -104,19 +101,6 @@ export default {
             return this.topic.body;
         },
 
-        getPeview(){
-            return this.toggledImage ? this.previewFull || this.preview : this.preview
-        },
-
-        preview(){
-            if (!this.topic.preview) return '';
-            return BrowserHelper.processRelativeLink(this.topic.preview.thumbnail || this.topic.preview.img);
-        },
-
-        previewFull(){
-            if (!this.topic.preview) return '';
-            return BrowserHelper.processRelativeLink(this.topic.preview.full);
-        },
 
         link(){
             return BrowserHelper.processLink(this.topic.link || '');
@@ -134,26 +118,6 @@ export default {
 
     methods: {
 
-        toggleImage(e){
-
-            e.preventDefault();
-
-            this.toggledImage = !this.toggledImage;
-
-            if (this.toggledImage){
-
-
-                this.maxHeight = 600;
-                this.maxWidth = this.$refs['topicContent'].clientWidth;
-
-            } else {
-
-                this.maxHeight = 200;
-                this.maxWidth = 150;
-
-            }
-
-        },
 
         openStickyRightSidebarComment(){
             this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })

@@ -9,7 +9,7 @@
         </span> <br/>
 
         <div>
-            <img class="topicImage" v-if="getPreview" :src="getPreview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail">
+            <preview-image :data="this.scraped ? this.scraped.image : undefined" />
         </div>
 
     </div>
@@ -17,11 +17,12 @@
 
 <script>
 
-import BrowserHelper from "modules/helpers/browser.helpers"
 import NetworkHelper from "modules/network/network-helper"
+import PreviewImage from "client/components/UI/elements/preview-image"
 
 export default {
 
+    components: {PreviewImage},
 
     data() {
         return {
@@ -30,28 +31,12 @@ export default {
 
             file: '',
 
-            thumbnailVisible: false,
 
             scraped: null,
         }
     },
 
     computed:{
-
-        getPreview(){
-
-            if (!this.scraped || !this.scraped.image) return '';
-
-            let img;
-            if ( this.scraped.image.thumbnail ){
-
-                if (this.thumbnailVisible) img =  this.scraped.image.thumbnail;
-                else img = this.scraped.image.img;
-
-            } else img = this.scraped.image;
-
-            return BrowserHelper.processRelativeLink( img );
-        },
 
     },
 
@@ -119,15 +104,7 @@ export default {
             this.scraped = null;
         },
 
-        showThumbnail(){
-            if (this.scraped.image.thumbnail)
-                this.thumbnailVisible = true;
-        },
 
-        hideThumbnail(){
-            if (this.scraped.image.thumbnail)
-                this.thumbnailVisible = false;
-        }
 
     }
 

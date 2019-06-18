@@ -19,9 +19,7 @@
 
                 </div>
 
-                <div v-if="getPeview" class="topicImageWrap">
-                    <img class="topicImage"  :src="getPeview" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @click="toggleImage">
-                </div>
+                <preview-image :data="this.comment.preview" />
 
                 <h3 v-if="title" class="title">{{title}}</h3>
 
@@ -39,11 +37,12 @@
 <script>
 import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
+import PreviewImage from "client/components/UI/elements/preview-image"
 import consts from "consts/consts"
 
 export default {
 
-    components: { Vote },
+    components: { Vote, PreviewImage },
 
     data(){
         return {
@@ -75,19 +74,6 @@ export default {
             return this.comment.body;
         },
 
-        getPeview(){
-            return this.toggledImage ? this.previewFull || this.preview : this.preview
-        },
-
-        preview(){
-            if (!this.comment.preview) return '';
-            return BrowserHelper.processRelativeLink(this.comment.preview.thumbnail || this.comment.preview.img);
-        },
-
-        previewFull(){
-            if (!this.comment.preview) return '';
-            return BrowserHelper.processRelativeLink(this.comment.preview.full);
-        },
 
         link(){
             return BrowserHelper.processLink(this.comment.link || '');
@@ -105,27 +91,6 @@ export default {
     },
 
     methods: {
-
-        toggleImage(e){
-
-            e.preventDefault();
-
-            this.toggledImage = !this.toggledImage;
-
-            if (this.toggledImage){
-
-
-                this.maxHeight = 600;
-                this.maxWidth = this.$refs['topicContent'].clientWidth;
-
-            } else {
-
-                this.maxHeight = 200;
-                this.maxWidth = 150;
-
-            }
-
-        },
 
         openStickyRightSidebarComment(){
 
