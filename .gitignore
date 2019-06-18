@@ -7,8 +7,6 @@ yarn-error.log
 *.iml
 accounts.txt
 
-consts/consts-secret.js
-
 public/hidden
 package-lock\.json
 
