@@ -10,6 +10,7 @@ export default {
     },
 
     SET_LOCALIZATION_DATA: (state,  payload ) => {
+
         state.country = payload.country;
         state.countryCode = payload.countryCode;
         state.city = payload.city;
@@ -18,9 +19,6 @@ export default {
         state.timeZone = payload.timeZone;
         state.request = payload.request;
         state.clientIP = payload.clientIP;
-
-        if (!state.selectedCountryCode) state.selectedCountryCode = payload.countryCode;
-        if (!state.selectedCountry) state.selectedCountry = payload.country;
 
     },
 
@@ -33,6 +31,16 @@ export default {
     },
 
     SET_LOCALIZATION_SELECTED_COUNTRY: (state, {  selectedCountryCode, selectedCountry}) => {
+
+        selectedCountryCode = selectedCountryCode.toLowerCase();
+
+        const countriesAllowed = {};
+        state.countriesAllowed.map( it => countriesAllowed[it] = true);
+
+        if ( !countriesAllowed[selectedCountryCode] ){
+            selectedCountryCode = 'us';
+            selectedCountry = 'United States';
+        }
 
         state.selectedCountryCode = selectedCountryCode;
         state.selectedCountry = selectedCountry;

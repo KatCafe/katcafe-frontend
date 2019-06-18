@@ -23,7 +23,9 @@ export default {
             sent: false,
             done: false,
             error: false,
-        }
+        },
+
+        countriesAllowed: ['ro', 'us', 'md'],
 
     },
     actions,

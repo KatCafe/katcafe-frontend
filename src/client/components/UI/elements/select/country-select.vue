@@ -56,7 +56,7 @@ export default {
             if (this.countryAllowed.length === 0) return this.options;
 
             const countriesAllowed = {};
-            this.countryAllowed.map( it => countriesAllowed[it] = true)
+            this.countryAllowed.map( it => countriesAllowed[it] = true);
 
             return this.options.filter ( it => countriesAllowed[it.value] );
         }

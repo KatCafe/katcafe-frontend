@@ -48,14 +48,22 @@ export default {
                 },
             };
 
-            return commit('SET_LOCALIZATION_DATA', payload );
+            commit('SET_LOCALIZATION_DATA', payload );
+
+            if (!state.selectedCountryCode)
+                commit('SET_LOCALIZATION_SELECTED_COUNTRY', { selectedCountryCode: payload.countryCode, selectedCountry:payload.country } );
+
         }
         catch(Exception){
 
             console.log("Geo IP rejected ",Exception.toString());
 
-            return commit('SET_LOCALIZATION_REQUEST_ERROR',{});
-        };
+            commit('SET_LOCALIZATION_REQUEST_ERROR',{});
+
+            if (!state.selectedCountryCode)
+                commit('SET_LOCALIZATION_SELECTED_COUNTRY', { selectedCountryCode: 'us', selectedCountry: 'United States' } );
+
+        }
 
     },
 

@@ -16,7 +16,7 @@
                 <router-link to="/add-channel">
                     <span>Create channel</span>
                 </router-link>
-                <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countryAllowed" @onSelect="countryChanged" />
+                <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
             </div>
 
         </div>
@@ -40,17 +40,16 @@ export default {
     },
 
 
-    data() {
-        return {
-            countryAllowed: [ 'ro', 'us', 'md', ]
-        }
-    },
 
     computed: {
 
         defaultCountry(){
             return this.$store.state.localization.selectedCountryCode;
-        }
+        },
+
+        countriesAllowed(){
+            return this.$store.state.localization.countriesAllowed;
+        },
 
     },
 
