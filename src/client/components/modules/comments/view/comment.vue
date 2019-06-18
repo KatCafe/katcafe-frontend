@@ -81,7 +81,7 @@ export default {
 
         preview(){
             if (!this.comment.preview) return '';
-            return BrowserHelper.processRelativeLink(this.comment.preview.img);
+            return BrowserHelper.processRelativeLink(this.comment.preview.thumbnail || this.comment.preview.img);
         },
 
         previewFull(){

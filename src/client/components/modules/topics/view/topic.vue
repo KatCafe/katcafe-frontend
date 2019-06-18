@@ -110,7 +110,7 @@ export default {
 
         preview(){
             if (!this.topic.preview) return '';
-            return BrowserHelper.processRelativeLink(this.topic.preview.img);
+            return BrowserHelper.processRelativeLink(this.topic.preview.thumbnail || this.topic.preview.img);
         },
 
         previewFull(){

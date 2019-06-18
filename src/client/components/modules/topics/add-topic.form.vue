@@ -67,7 +67,6 @@ export default {
 
                 this.error = '';
 
-
                 const out = await NetworkHelper.post('/topics/create', {
                     channel: this.channel,
                     title: this.topicTitle || ( linkOrUpload.scraped ? linkOrUpload.scraped.title : ''  ),

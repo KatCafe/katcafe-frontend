@@ -9,7 +9,7 @@
         </span> <br/>
 
         <div>
-            <img class="topicImage" v-if="preview" :src="preview.img">
+            <img class="topicImage" v-if="getPreview" :src="getPreview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail">
         </div>
 
     </div>
@@ -17,6 +17,7 @@
 
 <script>
 
+import BrowserHelper from "modules/helpers/browser.helpers"
 import NetworkHelper from "modules/network/network-helper"
 
 export default {
@@ -25,11 +26,33 @@ export default {
     data() {
         return {
             link: '',
+            prevLink: '',
+
             file: '',
-            preview: null,
+
+            thumbnailVisible: false,
 
             scraped: null,
         }
+    },
+
+    computed:{
+
+        getPreview(){
+
+            if (!this.scraped || !this.scraped.image) return '';
+
+            let img;
+            if ( this.scraped.image.thumbnail ){
+
+                if (this.thumbnailVisible) img =  this.scraped.image.thumbnail;
+                else img = this.scraped.image.img;
+
+            } else img = this.scraped.image;
+
+            return BrowserHelper.processRelativeLink( img );
+        },
+
     },
 
     methods: {
@@ -39,13 +62,21 @@ export default {
             try{
 
                 if (!this.link) return;
+                if (this.link === this.prevLink) return;
+
+                this.prevLink = this.link;
 
                 const out = await NetworkHelper.post('/scraper/get',{
                     uri: this.link,
                 });
 
                 if (out && out.result && out.scrape.image) {
-                    this.preview = out.scrape.image;
+
+                    if (out.scrape.uri) {
+                        this.prevLink = out.scrape.uri;
+                        this.link = out.scrape.uri;
+                    }
+
                     this.scraped = out.scrape;
                     this.$emit('scraped', out.scrape)
                 }
@@ -54,7 +85,8 @@ export default {
                 this.file = undefined;
 
             }catch(err){
-                this.preview = '';
+                console.error(err);
+                this.scraped = null;
             }
 
         },
@@ -66,8 +98,10 @@ export default {
 
             var reader = new FileReader();
             reader.onloadend = async (e) =>
-                this.preview = {
-                    img: reader.result
+                this.scraped = {
+                    img: {
+                        img: reader.result
+                    }
                 };
 
             reader.readAsDataURL(files[0]);
@@ -82,7 +116,17 @@ export default {
         reset(){
             this.link = '';
             this.file = '';
-            this.preview = null;
+            this.scraped = null;
+        },
+
+        showThumbnail(){
+            if (this.scraped.image.thumbnail)
+                this.thumbnailVisible = true;
+        },
+
+        hideThumbnail(){
+            if (this.scraped.image.thumbnail)
+                this.thumbnailVisible = false;
         }
 
     }
