@@ -20,7 +20,7 @@ export default {
 
             if (out && out.result) {
                 commit('ADD_TOPICS', out.topics);
-                commit('SET_COMMENTS', out.comments);
+                commit('ADD_COMMENTS', out.comments);
                 commit('SET_TOPICS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
                 commit('SET_TOPICS_PAGE_LOADING', false);
                 return out;
