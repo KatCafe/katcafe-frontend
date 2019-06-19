@@ -59,6 +59,7 @@ export default {
         path = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
 
         store.commit('SET_TOPICS', [] );
+        store.commit('SET_COMMENTS', [] );
 
         await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0, count: 5 });
 

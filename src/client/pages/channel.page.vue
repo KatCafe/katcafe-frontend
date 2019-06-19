@@ -59,6 +59,7 @@ export default {
         if (route.params.slug) {
 
             store.commit('SET_TOPICS', [] );
+            store.commit('SET_COMMENTS', [] );
 
             await store.dispatch('CHANNEL_GET', {slug: path,});
             await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0 });
