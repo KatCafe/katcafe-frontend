@@ -40,7 +40,7 @@ export default {
                 else
                     img =  `https://i.ytimg.com/vi/${this.data.youtubeId}/sd${this.index}.jpg`;
 
-            } else img = this.data.img;
+            } else img = typeof this.data.img === "string" ? this.data.img : this.data.img.img ;
 
             return {
                 img: BrowserHelper.processRelativeLink(img),
@@ -77,10 +77,9 @@ export default {
             if (this.thumbnailVisible){
 
                 if (this.data.youtubeId)
-                    this._timeoutThumbnail = setTimeout( ()=>{
+                    this._timeoutThumbnail = setTimeout( ( )=> {
                         this.index = ( this.index + 1 ) % 4;
                     }, 1000 );
-
 
             }
 
