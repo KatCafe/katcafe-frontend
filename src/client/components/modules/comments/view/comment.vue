@@ -9,21 +9,29 @@
             <div ref="topicContent" class="topicContent">
 
                 <div class="author">
-                    <span>{{author}}</span>
-                    <span>{{date}}</span>
+                    <span class="details authorName">{{author}}</span>
+                    <span class="details"> | </span>
+                    <span class="details">{{date}} ago</span>
 
                     <div class="topicButtons">
-                        <a class="link" :href="comment.link" target="_blank" v-if="link">{{link}}</a>
-                        <span @click="openStickyRightSidebarComment">Reply {{comment.uuid}}</span>
+                        <span class="actionButton postId" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
                     </div>
 
                 </div>
 
-                <preview-image :data="this.comment.preview" />
+                <div class="topicBoxContent" :class="this.comment.preview ? 'hasImage' : ''">
 
-                <h3 v-if="title" class="title">{{title}}</h3>
+                    <preview-image :data="this.comment.preview" />
 
-                <p class="topicBody">{{body}}</p>
+                    <div class="topicTextWrap">
+
+                        <h3 v-if="title" class="title">{{title}}</h3>
+
+                        <p class="topicBody">{{body}}</p>
+
+                    </div>
+
+                </div>
 
             </div>
 

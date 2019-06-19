@@ -11,25 +11,27 @@
                 <div class="topicContent" ref="topicContent">
 
                     <div class="author">
-                        <span>{{author}}</span>
-                        <span>{{date}}</span>
+                        <span class="details authorName">{{author}}</span>
+
+                        <span class="details">>></span>
 
                         <router-link :to="'/'+topic.channel">
-                            <span>{{topic.channel}}</span>
+                            <span class="actionButton">{{topic.channel}}</span>
                         </router-link>
 
-                        <span>{{topic.comments}} </span>
+                        <span class="details"> | </span>
+
+                        <span class="details">{{date}} ago</span>
 
                         <div class="topicButtons">
-                            <a class="link" :href="topic.link" target="_blank" v-if="link"> {{link}} </a>
-                            <span @click="openStickyRightSidebarComment">Reply {{ isPreview ? topic.uuid : 0}}</span>
+                            <span class="postId">#{{ isPreview ? topic.uuid : 0}}</span>
                         </div>
 
                     </div>
 
                     <router-link :to="isPage ? '' : to">
 
-                        <div class="topicBoxContent hasImage">
+                        <div class="topicBoxContent" :class="this.topic.preview ? 'hasImage' : ''">
 
                             <preview-image :data="this.topic.preview" />
 
@@ -44,12 +46,36 @@
 
                     </router-link>
 
+                    <div class="actionBox">
+
+                        <span class="actionButton replayButton" @click="openStickyRightSidebarComment">Replay</span>
+
+                        <span class="actionButton">Report</span>
+
+                        <span class="actionButton">Share</span>
+
+                        <a class="actionButton link" :href="topic.link" target="_blank" v-if="link">
+                            <span class="actionButton">External Link</span>
+                        </a>
+
+                    </div>
+
+                    <div class="replyBox">
+
+                        <img src="/public/assets/anonymus.png">
+
+                        <textarea type="text" placeholder="Add your reply..."/>
+
+                    </div>
+
+                    <div class="topicComments" v-if="this.comments" >
+                        <comments :comments="comments" :isPreview = "isPreview" />
+                    </div>
+
+                    <span @click="showPostComments" v-if="topic.comments" class="actionButton viewMoreComments" >Load more {{topic.comments - this.CommentsAlreadyDisplayed}} {{topic.comments - this.CommentsAlreadyDisplayed > 1 ? 'comments' : 'comment'}}</span>
+
                 </div>
 
-            </div>
-
-            <div class="topicComments" v-if="comments.length > 0" >
-                <comments :comments="comments" :isPreview = "isPreview" />
             </div>
 
         </div>
@@ -73,7 +99,7 @@ export default {
 
     data(){
         return {
-
+            CommentsAlreadyDisplayed: 0
         }
     },
 
@@ -121,9 +147,23 @@ export default {
 
         openStickyRightSidebarComment(){
             this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
+        },
+
+        showPostComments(){
+
+            this.showComments = !this.showComments;
+
         }
 
     }
 
 }
 </script>
+
+<style>
+
+    .author a{
+        padding-right: 0!important;
+    }
+
+</style>

@@ -2,6 +2,45 @@
 Base styles
 ------------------------*/
 
+
+/* Turn on custom 8px wide scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* 1px wider than Lion. */
+    /* This is more usable for users trying to click it. */
+    background-color: rgba(0,0,0,0);
+    -webkit-border-radius: 100px;
+}
+/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+::-webkit-scrollbar:hover {
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+/* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+::-webkit-scrollbar-thumb:vertical {
+    /* This is the EXACT color of Mac OS scrollbars.
+       Yes, I pulled out digital color meter */
+    background: rgba(0,0,0,0.5);
+    -webkit-border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:vertical:active {
+    background: rgba(0,0,0,0.61); /* Some darker color when you click it */
+    -webkit-border-radius: 100px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #9b9b9b;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #9b9b9b;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #9b9b9b;
+}
+
+
 body {
     margin: 0;
     padding: 0;
@@ -125,7 +164,7 @@ Layout styles
 
 .left {
     display: inline-block;
-    width: 65%;
+    width: 900px;
     padding-right: 30px;
 }
 
@@ -493,52 +532,70 @@ form {
     border-width: 1px;
     border-style: solid;
     width: 100%;
-    padding: 10px;
     background-color: #3c3c3c;
     margin-bottom: 20px;
     border-color: rgb(68, 68, 68);
+    padding: 10px 10px 10px 0;
 }
 
 .topic:hover{
-    background-color: #484848;
-    border-color: rgb(86, 86, 86);
+    /*background-color: #484848;*/
+    /*border-color: rgb(86, 86, 86);*/
     transition: all 0.2s ease
 }
 
 .comment {
-    background-color: #5d5d5d;
-    border-color: #787878;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
+    /*background-color: #5d5d5d;*/
+    /*border: solid 1px #686868;*/
+    /*border-radius: 10px;*/
+    border-bottom: solid 1px #5c5c5c;
+    padding: 0 0 10px 0;
+    /*margin-bottom: 10px;*/
 }
 
 .comment:hover{
-    background-color: #777;
-    transition: all 0.5s ease;
+    background-color: #373737;
+    /*border: solid 1px #878787;*/
+    transition: all 0.2s ease
 }
 
 .comment:nth-last-child(1){
     margin-bottom: 0;
+    border-bottom: none;
 }
 
 .comment .topicBox .topicContent .author{
-    background-color: #474747;
+    /*background-color: #474747;*/
 }
 
 
 .topicBox{
     display: grid;
-    /*grid-template-columns: 25px 1fr;*/
+    grid-template-columns: 50px 1fr;
+}
+
+.topicContent .topicBox{
+    grid-template-columns: 40px 1fr;
+    grid-column-gap: 10px;
+    margin-top: 10px;
 }
 
 .commentBox{
 }
 
 .topicComments{
-    border-top: solid 2px #747474;
-    margin-top: 20px;
-    padding-top: 10px;
+    /*margin-top: 20px;*/
+    /*padding-top: 10px;*/
+}
+
+.actionBox{
+    padding: 10px;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    border-color: #494949;
+    background-color: #474747;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .topic h2{
@@ -552,13 +609,13 @@ form {
 }
 
 .topicBox .topicContent .author a,
-.topicBox .topicContent .author span {
+.topicBox .topicContent .author .details {
     display: inline-block;
     padding-right: 10px;
     font-size: 12px;
 }
 
-.topicBox .topicContent .author span{
+.topicBox .topicContent .author .details{
     color: #d5cccc;
 }
 
@@ -571,16 +628,29 @@ form {
     float: left;
     padding-right: 10px;
     padding-bottom: 3px;
+    background-color: #2b2b2b;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .topicTextWrap{
 
 }
 
+.topicTextWrap .title{
+    color: #fff;
+}
+
+.topicTextWrap .topicBody{
+    color: #a3a2a2;
+}
+
 .topicBody{
     white-space: pre-wrap;
-    line-height: 1;
     margin-bottom: 0;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 20px;
 }
 
 .topicButtons{
@@ -590,8 +660,10 @@ form {
 }
 
 .topicButtons span{
-    color: #6c6a6a !important;
+    color: #787878;
     cursor: pointer;
+    font-size: 12px;
+    margin-left: 20px;
 }
 
 
@@ -601,6 +673,7 @@ form {
 .votingBox{
     padding-left: 0px;
     padding-top: 10px;
+    text-align: center;
 }
 
 
@@ -608,14 +681,15 @@ form {
     width: 0; height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-bottom: 8px solid #d7d9db;
+    border-bottom: 8px solid #9b9b9b;
+    margin: 0 auto;
     margin-bottom: 10px;
 }
 
 .upvote:after {
       width: 5px;
       height: 6px;
-      background-color: #d7d9db;
+      background-color: #9b9b9b;
       content: '';
       position:absolute;
       margin-top: 8px;
@@ -624,24 +698,24 @@ form {
   }
 
 .votingBox span{
-    padding-left: 3px;
+    padding-left: 0;
     color: #d7d9db;
 }
 
 .downvote {
+    margin: 0 auto;
     margin-top:10px;
     width: 0;
     height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 8px solid #d7d9db;
-    margin-left: -1px;
+    border-top: 8px solid #9b9b9b;
 }
 
 .downvote:after {
   width: 5px;
   height: 6px;
-  background-color: #d7d9db;
+  background-color: #9b9b9b;
   content: '';
   position:absolute;
   margin-left: -2px;
@@ -718,4 +792,80 @@ form {
     display: grid;
     grid-template-columns: 150px 1fr;
     grid-column-gap: 15px;
+}
+
+.authorName{
+    font-weight: bold;
+}
+
+.viewMoreComments{
+    display: inline-block;
+    padding: 0 20px 0 0;
+    color: #b8b8b8;
+    float:right;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.actionButton{
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 20px 0 0;
+    color: #b8b8b8;
+    font-size: 12px;
+}
+
+.author .actionButton{
+    padding: 0 10px 0 0;
+}
+
+.actionButton:hover{
+    text-decoration: underline!important;
+    color: #fff;
+}
+
+.replayButton{
+    color: #9ed963;
+}
+
+.postId{
+    margin-left: 10px;
+}
+
+.externalLink{
+    display: block;
+    font-size: 12px;
+    text-align: justify;
+    color: #fff;
+}
+
+.replyBox{
+    display: grid;
+    grid-template-columns: 40px 1fr 50px;
+    grid-column-gap: 10px;
+    /*padding: 10px 0;*/
+}
+
+.replyBox img{
+    width: 40px;
+    border-radius: 50%;
+}
+
+.replyBox textarea{
+    display: block;
+    width: 100%;
+    background: #1b1b1b;
+    border: solid 1px #585858;
+    color: #dcdcdc;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+    margin: 0;
+    min-height: 38px;
+    height: 38px;
+    max-height: 200px;
 }

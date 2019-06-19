@@ -1,6 +1,6 @@
 <template>
     <div v-if="preview" class="topicImageWrap">
-        <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+        <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px', width: maxWidth+'px',  maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
     </div>
 </template>
 
@@ -95,7 +95,7 @@ export default {
 
 
                 this.maxHeight = 600;
-                this.maxWidth = 500;
+                this.maxWidth = 820;
 
             } else {
 
