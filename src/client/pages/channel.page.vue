@@ -106,6 +106,8 @@ export default {
 
 
         getPageUri(){
+
+            if (!this.channel) return '';
             return '/'+ this.channel.slug +'/pageIndex/';
         },
 

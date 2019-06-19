@@ -1,6 +1,6 @@
 <template>
     <div v-if="preview" class="topicImageWrap">
-        <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage">
+        <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px', maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
     </div>
 </template>
 
@@ -21,6 +21,8 @@ export default {
             maxWidth: 150,
 
             thumbnailVisible: false,
+
+            index: 0,
         }
     },
 
@@ -31,14 +33,18 @@ export default {
             if (!this.data ) return '';
 
             let img;
-            if ( this.data.thumbnail ){
+            if ( this.data.youtubeId ){
 
-                if (this.thumbnailVisible) img =  this.data.thumbnail;
-                else img = this.data.img;
+                if (this.index === 0)
+                    img =  `https://i.ytimg.com/vi/${this.data.youtubeId}/0.jpg`;
+                else
+                    img =  `https://i.ytimg.com/vi/${this.data.youtubeId}/sd${this.index}.jpg`;
 
-            } else img = this.data;
+            } else img = this.data.img;
 
-            return BrowserHelper.processRelativeLink( img );
+            return {
+                img: BrowserHelper.processRelativeLink(img),
+            };
         },
 
 
@@ -49,15 +55,36 @@ export default {
     methods:{
 
         showThumbnail(){
-            if (this.data.thumbnail)
+            if (this.data.youtubeId) {
+
+                this.index = 1;
                 this.thumbnailVisible = true;
+
+            }
         },
 
         hideThumbnail(){
-            if (this.data.thumbnail)
+            if (this.data.youtubeId) {
+
+                this.index = 0;
                 this.thumbnailVisible = false;
+                clearTimeout(this._timeoutThumbnail);
+            }
         },
 
+        imageLoaded(){
+
+            if (this.thumbnailVisible){
+
+                if (this.data.youtubeId)
+                    this._timeoutThumbnail = setTimeout( ()=>{
+                        this.index = ( this.index + 1 ) % 4;
+                    }, 1000 );
+
+
+            }
+
+        },
 
         toggleImage(e){
 
