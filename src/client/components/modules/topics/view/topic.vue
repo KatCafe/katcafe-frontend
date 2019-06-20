@@ -43,11 +43,13 @@
                     </div>
 
 
-                    <div class="topicComments" v-if="this.comments" >
+                    <div class="topicComments" v-if="this.comments" @click.native="window.scrollTo(0,0)" >
                         <comments :comments="comments" :isPreview = "isPreview" />
                     </div>
 
-                    <span v-if="commentsToLoad" class="actionButton viewMoreComments" @click="viewMoreComments" >View more {{commentsToLoad}} {{commentsToLoad  ? 'comments' : 'comment'}}</span>
+                    <router-link :to="isPage ? '' : to" v-if="commentsToLoad">
+                        <span v-if="commentsToLoad" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
+                    </router-link>
 
                     <div class="replyBox">
 
@@ -136,7 +138,7 @@ export default {
         },
 
         viewMoreComments(){
-
+            //this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', {value: true, topic: this.topic.slug, channel: this.topic.channel })
         },
 
     }

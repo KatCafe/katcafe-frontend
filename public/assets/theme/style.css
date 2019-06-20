@@ -164,7 +164,7 @@ Layout styles
 
 .left {
     display: inline-block;
-    width: 900px;
+    width: 800px;
     padding-right: 30px;
 }
 
@@ -635,7 +635,7 @@ form {
 
 .topicPreviewLink{
     white-space: nowrap;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .topicTextWrap{
@@ -656,6 +656,7 @@ form {
     font-size: 14px;
     color: #ffffff;
     line-height: 20px;
+    padding-bottom: 10px;
 }
 
 .topicButtons{

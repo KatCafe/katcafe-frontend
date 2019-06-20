@@ -50,4 +50,22 @@ export default {
 
     },
 
+    TOPIC_GET_MORE_COMMENTS: async  ({ commit, dispatch, state }, { slug }) => {
+
+        try{
+
+            const topic = state.list[slug];
+
+            const out = await NetworkHelper.get(`/topics/get/${slug}`);
+
+            if (out && out.result)
+                return commit('SET_TOPIC', out.topic);
+
+        }catch(err){
+        }
+
+        return commit('SET_TOPIC', undefined);
+
+    },
+
 }
