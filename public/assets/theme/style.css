@@ -571,14 +571,14 @@ form {
 
 .topicBox{
     display: grid;
-    padding-left: 10px;
-    grid-template-columns: 30px 1fr;
+    /*padding-left: 10px;*/
+    grid-template-columns: 40px 1fr;
 }
 
 .topicContent .topicBox{
     grid-template-columns: 30px 1fr;
     grid-column-gap: 10px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .commentBox{

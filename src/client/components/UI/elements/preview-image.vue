@@ -59,7 +59,7 @@ export default {
 
             if (this.toggledImage) return 820;
 
-            return this.smaller ? 100 : 150;
+            return this.smaller ? 110 : 150;
 
         },
 
@@ -67,7 +67,7 @@ export default {
 
             if (this.toggledImage) return 600;
 
-            return this.smaller ? 100 : 200;
+            return this.smaller ? 110 : 200;
 
         }
 
