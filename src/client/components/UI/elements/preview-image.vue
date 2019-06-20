@@ -1,6 +1,10 @@
 <template>
     <div v-if="preview" class="topicImageWrap">
-        <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px', width: maxWidth+'px',  maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+        <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+
+        <a v-if="link" :href="link" target="_blank" class="topicPreviewLink">
+            {{linkPreview}}
+        </a>
     </div>
 </template>
 
@@ -12,21 +16,25 @@ export default {
 
     props: {
         data: undefined,
+        smaller: false,
+        link: '',
+        linkChars: {default: 25 },
     },
 
     data(){
         return {
             toggledImage: false,
-            maxHeight: 200,
-            maxWidth: 150,
-
             thumbnailVisible: false,
-
             index: 0,
         }
     },
 
     computed:{
+
+        linkPreview(){
+            return BrowserHelper.processLink(this.link || '', this.linkChars);
+        },
+
 
         preview(){
 
@@ -47,8 +55,21 @@ export default {
             };
         },
 
+        maxWidth(){
 
+            if (this.toggledImage) return 820;
 
+            return this.smaller ? 100 : 150;
+
+        },
+
+        maxHeight(){
+
+            if (this.toggledImage) return 600;
+
+            return this.smaller ? 100 : 200;
+
+        }
 
     },
 
@@ -90,19 +111,6 @@ export default {
             e.preventDefault();
 
             this.toggledImage = !this.toggledImage;
-
-            if (this.toggledImage){
-
-
-                this.maxHeight = 600;
-                this.maxWidth = 820;
-
-            } else {
-
-                this.maxHeight = 200;
-                this.maxWidth = 150;
-
-            }
 
         },
 

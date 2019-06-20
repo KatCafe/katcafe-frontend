@@ -571,11 +571,12 @@ form {
 
 .topicBox{
     display: grid;
-    grid-template-columns: 50px 1fr;
+    padding-left: 10px;
+    grid-template-columns: 30px 1fr;
 }
 
 .topicContent .topicBox{
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 30px 1fr;
     grid-column-gap: 10px;
     margin-top: 10px;
 }
@@ -584,6 +585,7 @@ form {
 }
 
 .topicComments{
+    border-top: solid 1px #5c5c5c;
     /*margin-top: 20px;*/
     /*padding-top: 10px;*/
 }
@@ -603,9 +605,8 @@ form {
 }
 
 .topicBox .topicContent .author{
-    background: #2b2b2b;
-    padding: 0 10px 5px 10px;
-    margin-bottom: 10px;
+    padding: 0 10px 0px 0px;
+    margin-bottom: 2px;
 }
 
 .topicBox .topicContent .author a,
@@ -616,7 +617,7 @@ form {
 }
 
 .topicBox .topicContent .author .details{
-    color: #d5cccc;
+    color: #a8a8a8;
 }
 
 .topicImage{
@@ -628,9 +629,13 @@ form {
     float: left;
     padding-right: 10px;
     padding-bottom: 3px;
-    background-color: #2b2b2b;
     cursor: pointer;
     z-index: 10;
+}
+
+.topicPreviewLink{
+    white-space: nowrap;
+    font-size: 12px;
 }
 
 .topicTextWrap{
@@ -678,48 +683,50 @@ form {
 
 
 .upvote {
-    width: 0; height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
     border-bottom: 8px solid #9b9b9b;
     margin: 0 auto;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 }
 
 .upvote:after {
-      width: 5px;
-      height: 6px;
-      background-color: #9b9b9b;
-      content: '';
-      position:absolute;
-      margin-top: 8px;
-      margin-left: -3px;
+    width: 4px;
+    height: 6px;
+    background-color: #9b9b9b;
+    content: '';
+    position: absolute;
+    margin-top: 8px;
+    margin-left: -2px;
 
   }
 
 .votingBox span{
     padding-left: 0;
-    color: #d7d9db;
+    color: #9b9b9b;
+    font-size: 14px;
 }
 
 .downvote {
     margin: 0 auto;
-    margin-top:10px;
+    margin-top: 7px;
     width: 0;
     height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
     border-top: 8px solid #9b9b9b;
 }
 
 .downvote:after {
-  width: 5px;
-  height: 6px;
-  background-color: #9b9b9b;
-  content: '';
-  position:absolute;
-  margin-left: -2px;
-  margin-top: -14px;
+    width: 4px;
+    height: 6px;
+    background-color: #9b9b9b;
+    content: '';
+    position: absolute;
+    margin-left: -2px;
+    margin-top: -14px;
 }
 
 /**
@@ -788,10 +795,14 @@ form {
     display: block;
 }
 
-.hasImage{
+.hasImage,
+.hasCommentImage {
     display: grid;
     grid-template-columns: 150px 1fr;
     grid-column-gap: 15px;
+}
+.hasCommentImage{
+    grid-template-columns: 100px 1fr;
 }
 
 .authorName{
@@ -800,11 +811,9 @@ form {
 
 .viewMoreComments{
     display: inline-block;
-    padding: 0 20px 0 0;
+    padding: 0 20px 20px 0;
     color: #b8b8b8;
-    float:right;
     font-size: 12px;
-    margin-top: 10px;
 }
 
 .actionButton{
@@ -843,18 +852,21 @@ form {
     display: grid;
     grid-template-columns: 40px 1fr 50px;
     grid-column-gap: 10px;
-    /*padding: 10px 0;*/
+    padding: 10px 0;
 }
 
 .replyBox img{
     width: 40px;
+}
+
+.profileAvatar{
     border-radius: 50%;
 }
 
 .replyBox textarea{
     display: block;
     width: 100%;
-    background: #1b1b1b;
+    background: #413e3e;
     border: solid 1px #585858;
     color: #dcdcdc;
     border-radius: 10px;
@@ -868,4 +880,5 @@ form {
     min-height: 38px;
     height: 38px;
     max-height: 200px;
+    font-size: 12px;
 }
