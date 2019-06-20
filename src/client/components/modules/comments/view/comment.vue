@@ -8,21 +8,21 @@
 
             <div ref="topicContent" class="topicContent">
 
+                <div class="author">
+                    <span class="details authorName">{{author}}</span>
+                    <span class="details">{{date}} </span>
+
+                    <div class="topicButtons">
+                        <span class="actionButton postId" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
+                    </div>
+
+                </div>
+
                 <div class="topicBoxContent" :class="this.comment.preview ? 'hasCommentImage' : ''">
 
                     <preview-image :data="this.comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
 
                     <div class="topicTextWrap">
-
-                        <div class="author">
-                            <span class="details authorName">{{author}}</span>
-                            <span class="details">{{date}} ago</span>
-
-                            <div class="topicButtons">
-                                <span class="actionButton postId" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
-                            </div>
-
-                        </div>
 
 
                         <h3 v-if="title" class="title">{{title}}</h3>

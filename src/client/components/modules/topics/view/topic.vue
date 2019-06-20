@@ -10,48 +10,44 @@
 
                 <div class="topicContent" ref="topicContent">
 
+                    <div class="author">
+                        <span class="details authorName">{{author}}</span>
 
-                    <router-link :to="isPage ? '' : to">
+                        <span class="details">{{date}} </span>
 
-                        <div class="topicBoxContent" :class="this.topic.preview ? 'hasImage' : ''">
+                        <router-link :to="'/'+(topic.channel||'')">
+                            <span class="actionButton">{{topic.channel||''}}</span>
+                        </router-link>
 
-                            <preview-image :data="this.topic.preview" :link="link" />
+                        <div class="topicButtons">
+                            <span class="postId">Topic #{{ isPreview ? topic.uuid : 0}}</span>
+                        </div>
+
+                    </div>
+
+                    <div class="topicBoxContent" :class="this.topic.preview ? 'hasImage' : ''">
+
+                        <preview-image :data="this.topic.preview" :link="link" />
+
+                        <router-link :to="isPage ? '' : to">
 
                             <div class="topicTextWrap">
-
-                                <div class="author">
-                                    <span class="details authorName">{{author}}</span>
-
-                                    <span class="details">>></span>
-
-                                    <router-link :to="'/'+topic.channel">
-                                        <span class="actionButton">{{topic.channel}}</span>
-                                    </router-link>
-
-                                    <span class="details">{{date}} ago</span>
-
-                                    <div class="topicButtons">
-                                        <span class="postId">Topic #{{ isPreview ? topic.uuid : 0}}</span>
-                                    </div>
-
-                                </div>
-
 
                                 <h2 v-if="title" class="title">{{title}}</h2>
 
                                 <p class="topicBody">{{body}}</p>
 
                             </div>
+                        </router-link>
 
-                        </div>
+                    </div>
 
-                    </router-link>
 
                     <div class="topicComments" v-if="this.comments" >
                         <comments :comments="comments" :isPreview = "isPreview" />
                     </div>
 
-                    <span @click="showPostComments" v-if="commentsToLoad" class="actionButton viewMoreComments" >Load more {{commentsToLoad}} {{commentsToLoad  ? 'comments' : 'comment'}}</span>
+                    <span v-if="commentsToLoad" class="actionButton viewMoreComments" @click="viewMoreComments" >View more {{commentsToLoad}} {{commentsToLoad  ? 'comments' : 'comment'}}</span>
 
                     <div class="replyBox">
 
@@ -139,11 +135,9 @@ export default {
             this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
         },
 
-        showPostComments(){
+        viewMoreComments(){
 
-            this.showComments = !this.showComments;
-
-        }
+        },
 
     }
 
