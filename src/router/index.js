@@ -55,15 +55,16 @@ export function createRouter (store){
         scrollBehavior(to, from, savedPosition) {
             //console.log('router scroll', to, from, to === from);
 
-            if (savedPosition) {
-                return savedPosition
-            } else {
-                if (to.hash) {
-                    return {
-                        selector: to.hash
-                    }
-                }
-            }
+            if (to.hash)
+                return {
+                    selector: to.hash
+                };
+
+            if (savedPosition)
+                return savedPosition;
+            else
+                return {x: 0, y: 0}
+
 
         },
         routes: [
