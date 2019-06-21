@@ -6,7 +6,7 @@
 
             <div class="topicBox" >
 
-                <vote :vote="vote"/>
+                <vote :votes="votes" parentType="topic" slug="slug" />
 
                 <div class="topicContent" ref="topicContent">
 
@@ -120,8 +120,12 @@ export default {
             return '/'+this.topic.slug;
         },
 
-        vote(){
-            return this.topic.vote || 0;
+        slug(){
+            return this.topic.slug;
+        },
+
+        votes(){
+            return (this.topic.votesUp || 0) - ( this.topic.votesDown || 0);
         },
 
         commentsToLoad(){

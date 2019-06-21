@@ -4,7 +4,7 @@
 
         <div class="topicBox commentBox">
 
-            <vote :vote="vote"/>
+            <vote :votes="votes" parentType="comment" slug="slug"  />
 
             <div ref="topicContent" class="topicContent">
 
@@ -64,6 +64,10 @@ export default {
 
     computed: {
 
+        slug(){
+            return this.comment.slug;
+        },
+
         title(){
             return this.comment.title;
         },
@@ -89,8 +93,8 @@ export default {
             return '/'+this.comment.slug;
         },
 
-        vote(){
-            return this.comment.vote || 0;
+        votes(){
+            return (this.comment.votesUp || 0) - (this.comment.votesDown || 0);
         },
 
 
