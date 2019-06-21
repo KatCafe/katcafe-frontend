@@ -730,6 +730,15 @@ form {
     margin-top: -14px;
 }
 
+.voted{
+    border-top-color: red;
+    border-bottom-color: red;
+}
+
+.voted:after{
+    background-color: red;
+}
+
 /**
     Right Sidebar
  */
