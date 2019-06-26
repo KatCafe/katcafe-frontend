@@ -802,6 +802,13 @@ form {
     text-transform:uppercase;
 }
 
+.errorText{
+    color: #f20;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
 .error {
     background:#ffecec url('images/error.png') no-repeat 10px 50%;
     border:1px solid #f5aca6;
@@ -1046,6 +1053,11 @@ textarea:focus, input:focus{
     margin-bottom: 10px;
 }
 
+.addChanelForm input:focus{
+    outline: none;
+    background-color: #ffdb85;
+}
+
 .addChanelForm .multiselect{
     margin-bottom: 10px;
 }
@@ -1063,4 +1075,37 @@ textarea:focus, input:focus{
 
 .addChanelForm .multiselect__single{
     margin-top: 8px;
+}
+
+.popup h1{
+    text-align: center;
+    margin-top: 20px;
+    color: #bbb;
+}
+
+.popup{
+    display: block;
+}
+
+.popup form{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.multiselect__content-wrapper{
+    background: #919191!important;
+    border: 1px solid #7c7c7c!important;
+}
+
+.multiselect__option--highlight{
+    background: #ffdb85!important;
+    color: #000!important;
+}
+
+.multiselect__tags input{
+    min-height: 35px!important;
+    width: 98%;
+    height: 35px!important;
+    background: #323232!important;
+    margin-top: -7px!important;
 }

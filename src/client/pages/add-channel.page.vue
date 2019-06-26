@@ -4,9 +4,9 @@
 
         <div slot="content"  >
 
-            <div class="row">
+            <div class="popup">
 
-                <h1>Create a Channel</h1> <br/>
+                <h1>Create a Channel</h1>
                 <add-channel-form/>
 
             </div>

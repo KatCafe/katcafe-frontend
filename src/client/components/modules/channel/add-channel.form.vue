@@ -23,7 +23,7 @@
 
         <input type="button" value="Create" @click="createChannel">
 
-        {{error}}
+        <span class="errorText">{{error}}</span>
 
     </form>
 
