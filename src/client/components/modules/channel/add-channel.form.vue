@@ -1,20 +1,20 @@
 <template>
 
-    <form action="/action_page.php" >
+    <form class="addChanelForm" action="/action_page.php" >
 
-        <label for="fname">Channel Name</label>
+        <!--<label for="fname">Channel Name</label>-->
         <input type="text" id="fname" name="name" placeholder="Channel Name" v-model="channelName">
 
-        <label for="ftitle">Channel Title</label>
+        <!--<label for="ftitle">Channel Title</label>-->
         <input type="text" id="ftitle" name="title" placeholder="Channel Title" v-model="channelTitle">
 
-        <label for="lname">Icon</label>
-        <input type="text" id="lname" name="icon" placeholder="Icon" v-model="channelIcon">
+        <!--<label for="lname">Icon</label>-->
+        <input type="text" id="lname" name="icon" placeholder="Chanel Logo Link" v-model="channelIcon">
 
-        <label for="lname">Cover</label>
-        <input type="text" id="lname" name="cover" placeholder="Cover" v-model="channelCover">
+        <!--<label for="lname">Cover</label>-->
+        <input type="text" id="lname" name="cover" placeholder="Chanel Cover Image" v-model="channelCover">
 
-        <label>Country</label>
+        <!--<label>Country</label>-->
         <no-ssr>
             <country-select @onSelect="channelCountrySelected" :defaultCountryCode="defaultCountry" />
         </no-ssr>

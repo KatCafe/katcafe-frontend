@@ -164,8 +164,10 @@ Layout styles
 
 .left {
     display: inline-block;
-    width: 800px;
-    padding-right: 30px;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 10px;
+    margin: 0 auto;
 }
 
 .right {
@@ -387,30 +389,47 @@ Wide styles
 textarea,
 input[type=text], select {
     width: 100%;
-    padding: 6px 10px;
-    margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    background: #313131;
+    border: solid 1px #585858;
+    color: #dcdcdc;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+    margin: 0;
+    min-height: 38px;
+    height: 38px;
+    max-height: 200px;
+    font-size: 12px;
 }
 
 button,
 input[type=submit],
 input[type=button] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 6px 10px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
+    background-color: #fec02c;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
     cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    width: 100%;
+    border:none;
 }
 
 input[type=submit]:hover,
 input[type=button]:hover {
-    background-color: #45a049;
+    background-color: #ffd164;
 }
 
 button{
@@ -423,8 +442,9 @@ button:hover{
 
 form {
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: #222222;
     padding: 10px;
+    border: solid 1px #323232;
 }
 
 .formLink{
@@ -536,6 +556,7 @@ form {
     margin-bottom: 20px;
     border-color: rgb(68, 68, 68);
     padding: 10px 10px 10px 0;
+    box-sizing: border-box;
 }
 
 .topic:hover{
@@ -548,7 +569,7 @@ form {
     /*background-color: #5d5d5d;*/
     /*border: solid 1px #686868;*/
     /*border-radius: 10px;*/
-    border-bottom: solid 1px #5c5c5c;
+    /*border-bottom: solid 1px #5c5c5c;*/
     padding: 0 0 10px 0;
     /*margin-bottom: 10px;*/
 }
@@ -565,7 +586,8 @@ form {
 }
 
 .comment .topicBox .topicContent .author{
-    /*background-color: #474747;*/
+    background: #474747;
+    padding: 0 10px;
 }
 
 
@@ -576,8 +598,8 @@ form {
 }
 
 .topicContent .topicBox{
-    grid-template-columns: 30px 1fr;
-    grid-column-gap: 10px;
+    grid-template-columns: 40px 1fr;
+    /*grid-column-gap: 10px;*/
     /*margin-top: 10px;*/
 }
 
@@ -585,8 +607,8 @@ form {
 }
 
 .topicComments{
-    border-top: solid 1px #5c5c5c;
-    /*margin-top: 20px;*/
+    /*border-top: solid 1px #5c5c5c;*/
+    margin-top: 20px;
     /*padding-top: 10px;*/
 }
 
@@ -605,8 +627,8 @@ form {
 }
 
 .topicBox .topicContent .author{
-    padding: 0 10px 0px 0px;
-    margin-bottom: 2px;
+    background: #474747;
+    padding: 0 10px;
 }
 
 .topicBox .topicContent .author a,
@@ -639,7 +661,6 @@ form {
 }
 
 .topicTextWrap{
-
 }
 
 .topicTextWrap .title{
@@ -647,7 +668,11 @@ form {
 }
 
 .topicTextWrap .topicBody{
-    color: #a3a2a2;
+    color: #fff;
+}
+
+.topicComments .topicBody{
+    padding: 5px 10px;
 }
 
 .topicBody{
@@ -691,6 +716,7 @@ form {
     border-bottom: 8px solid #9b9b9b;
     margin: 0 auto;
     margin-bottom: 7px;
+    cursor: pointer;
 }
 
 .upvote:after {
@@ -701,7 +727,7 @@ form {
     position: absolute;
     margin-top: 8px;
     margin-left: -2px;
-
+    cursor: pointer;
   }
 
 .votingBox span{
@@ -718,6 +744,7 @@ form {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 8px solid #9b9b9b;
+    cursor: pointer;
 }
 
 .downvote:after {
@@ -728,15 +755,18 @@ form {
     position: absolute;
     margin-left: -2px;
     margin-top: -14px;
+    cursor: pointer;
 }
 
 .voted{
-    border-top-color: red;
-    border-bottom-color: red;
+    border-top-color: #535353;
+    border-bottom-color: #535353;
+    cursor: default;
 }
 
 .voted:after{
-    background-color: red;
+    background-color: #535353;
+    cursor: default;
 }
 
 /**
@@ -803,6 +833,11 @@ form {
 
 .topicBoxContent{
     display: block;
+    margin-top: 10px;
+}
+
+.topicComments .topicBoxContent{
+    margin-top: 0;
 }
 
 .hasImage,
@@ -835,7 +870,7 @@ form {
 }
 
 .author .actionButton{
-    padding: 0 10px 0 0;
+    /*padding: 0 10px 0 0;*/
 }
 
 .actionButton:hover{
@@ -849,6 +884,7 @@ form {
 
 .postId{
     margin-left: 10px;
+    padding: 0;
 }
 
 .externalLink{
@@ -865,18 +901,33 @@ form {
     padding: 10px 0;
 }
 
-.replyBox img{
-    width: 40px;
+.replyBox .profileAvatar{
+    width: 38px;
+}
+
+.replyBox .uploadPhoto{
+    width: 24px;
+    padding: 5px;
+    margin: 0 auto;
+    box-sizing: content-box;
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+
+.replyBox .uploadPhoto:hover{
+    width: 28px;
+    transition: all 0.5s ease;
 }
 
 .profileAvatar{
     border-radius: 50%;
 }
 
-.replyBox textarea{
+.replyBox textarea, .replyBox input{
     display: block;
     width: 100%;
-    background: #413e3e;
+    background: #313131;
     border: solid 1px #585858;
     color: #dcdcdc;
     border-radius: 10px;
@@ -891,4 +942,125 @@ form {
     height: 38px;
     max-height: 200px;
     font-size: 12px;
+}
+
+textarea:focus, input:focus{
+    border-color: #715e38 !important;
+    background-color: #292929!important;
+}
+
+.messageBox{
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-column-gap: 10px;
+    padding: 10px 0;
+}
+
+.messageBox textarea{
+    display: block;
+    width: 100%;
+    background: #313131;
+    border: solid 1px #585858;
+    color: #dcdcdc;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+    min-height: 38px;
+    height: 38px;
+    max-height: 200px;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.newPostContainer{
+    box-sizing: border-box;
+    background-color: #505050;
+    border: solid 1px #6d6d6d;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+}
+
+.newPostContent .replyBox{
+    padding-bottom: 0;
+    grid-template-columns: 40px 1fr 30px;
+}
+
+.newPostContent .messageBox{
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.postButton{
+    background-color: #fec02c;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.postButton:hover{
+    background-color: #ffd164;
+    transition: all 0.5s ease;
+}
+
+.votingBox span{
+    margin-left: 1px;
+}
+
+.sideReplyBox{
+    background-color: #3c3c3c;
+    padding: 10px;
+    color: #fff;
+}
+
+.topicPage{
+    display: grid;
+    grid-template-columns: 1fr 850px 400px;
+}
+
+.replyRightBox{
+    width: 100%;
+    padding: 0 10px;
+}
+
+.menuButton{
+    line-height: 44px;
+}
+
+.menuButton:hover{
+    color: #fff!important;
+}
+
+.addChanelForm input{
+    margin-bottom: 10px;
+}
+
+.addChanelForm .multiselect{
+    margin-bottom: 10px;
+}
+
+.captchaBox{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-column-gap: 10px;
+}
+
+.captchaBox svg{
+    width: auto;
+    height: 35px;
+}
+
+.addChanelForm .multiselect__single{
+    margin-top: 8px;
 }

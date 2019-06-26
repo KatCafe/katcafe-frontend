@@ -1,9 +1,9 @@
 <template>
 
-    <div v-if="captcha">
-        <label for="lcaptcha">Captcha</label>
-        <div v-html="captcha.data"></div>
+    <div class="captchaBox" v-if="captcha">
+        <!--<label for="lcaptcha">Captcha</label>-->
         <input style="width: 100px" type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput"  >
+        <div v-html="captcha.data"></div>
     </div>
 
 </template>

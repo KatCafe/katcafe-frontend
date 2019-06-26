@@ -1,22 +1,31 @@
 <template>
-    <div >
+    <div class="sideReplyBox">
 
-        <span class="commentSlug">Reply
-            <router-link :to="'/'+this.topic">{{title}}</router-link>
-        </span><br/><br/>
+        <!--<span class="commentSlug">Reply-->
+            <!--<router-link :to="'/'+this.topic">{{title}}</router-link>-->
+        <!--</span><br/><br/>-->
 
-        <link-or-upload ref="linkOrUpload" />
+        <!--<link-or-upload ref="linkOrUpload" />-->
 
-        <label for="ltext">Text</label>
+        <!--<label for="ltext">Text</label>-->
 
-        <textarea class="commentTextArea" type="text" id="ltext" name="text" cols="40" rows="5" placeholder="Text" v-model="commentBody" @scraped="scraped" > </textarea>
+        <!--<textarea class="commentTextArea" type="text" id="ltext" name="text" cols="40" rows="5" placeholder="Text" v-model="commentBody" @scraped="scraped" > </textarea>-->
 
-        <captcha ref="captcha"/>
+        <!--<captcha ref="captcha"/>-->
 
-        <input type="button" value="Submit reply" @click="createComment">
+        <!--<input class="postButton" type="button" value="Submit reply" @click="createComment">-->
 
-        <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
-        <div v-if="success" class="alert-box success"><span>success <br/><br/> </span> {{success}}</div>
+        <!--<div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>-->
+        <!--<div v-if="success" class="alert-box success"><span>success <br/><br/> </span> {{success}}</div>-->
+
+
+        <div class="replyBox">
+
+            <img class="profileAvatar" src="/public/assets/anonymus.png">
+            <textarea type="text" placeholder="Write a reply..."/>
+            <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg">
+
+        </div>
 
     </div>
 </template>

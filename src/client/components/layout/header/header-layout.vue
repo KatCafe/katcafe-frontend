@@ -12,7 +12,7 @@
             </router-link>
 
             <div class="headerRight">
-                <router-link to="/add-channel">
+                <router-link class="menuButton" to="/add-channel">
                     <span>Create channel</span>
                 </router-link>
             </div>

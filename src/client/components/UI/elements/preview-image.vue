@@ -2,7 +2,7 @@
     <div v-if="preview" class="topicImageWrap">
         <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
 
-        <a v-if="link" :href="link" target="_blank" class="topicPreviewLink">
+        <a v-if="link" :href="link" target="_blank" class="topicPreviewLink actionButton">
             {{linkPreview}}
         </a>
     </div>
@@ -57,7 +57,7 @@ export default {
 
         maxWidth(){
 
-            if (this.toggledImage) return 820;
+            if (this.toggledImage) return 728;
 
             return this.smaller ? 110 : 150;
 

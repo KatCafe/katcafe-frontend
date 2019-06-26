@@ -13,7 +13,7 @@
                     <span class="details">{{date}} </span>
 
                     <div class="topicButtons">
-                        <span class="actionButton postId" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
+                        <span class="postId actionButton" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
                     </div>
 
                 </div>
@@ -23,7 +23,6 @@
                     <preview-image :data="this.comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
 
                     <div class="topicTextWrap">
-
 
                         <h3 v-if="title" class="title">{{title}}</h3>
 

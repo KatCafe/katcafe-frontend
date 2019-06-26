@@ -4,10 +4,13 @@
 
         <div slot="content"  >
 
-            <div class="row">
+            <div class="row topicPage">
 
+                <div class="adds">
 
-                <div class="column left">
+                </div>
+
+                <div class="column">
 
                     <div v-if="topic">
 
@@ -17,12 +20,12 @@
 
 
                     <div v-if="!topic">
-                        <span>Topic <strong>{{ this.slug }}</strong> was not found</span>
+                        <span class="actionButton">Topic <strong>{{ this.slug }}</strong> was not found</span>
                     </div>
 
                 </div>
 
-                <div v-if="visibleStickyRightSidebarComment" class="column right">
+                <div v-if="visibleStickyRightSidebarComment" class="column replyRightBox">
 
                     <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
 

@@ -19,9 +19,9 @@
                             <span class="actionButton">{{topic.channel||''}}</span>
                         </router-link>
 
-                        <div class="topicButtons">
-                            <span class="postId">Topic #{{ isPreview ? topic.uuid : 0}}</span>
-                        </div>
+                        <!--<div class="topicButtons">-->
+                            <!--<span class="postId actionButton">Topic #{{ isPreview ? topic.uuid : 0}}</span>-->
+                        <!--</div>-->
 
                     </div>
 
@@ -54,8 +54,8 @@
                     <div class="replyBox">
 
                         <img class="profileAvatar" src="/public/assets/anonymus.png">
-                        <textarea type="text" placeholder="Write a comment..."/>
-                        <img src="https://image.flaticon.com/icons/svg/262/262597.svg">
+                        <textarea type="text" placeholder="Write a reply..."/>
+                        <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg">
 
                     </div>
 
