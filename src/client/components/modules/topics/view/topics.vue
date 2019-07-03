@@ -2,41 +2,7 @@
 
     <div>
 
-        <div class="newPostContainer">
-
-            <div class="newPostContent">
-
-                <div class="replyBox">
-
-                    <img class="profileAvatar" src="/public/assets/anonymus.png">
-                    <input type="text" placeholder="New post title"/>
-                    <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg">
-
-                </div>
-
-                <div class="messageBox">
-
-                    <div></div>
-
-                    <textarea type="text" placeholder="Your comment..."/>
-
-                    <div></div>
-
-                    <div class="postButton">
-                        Post it!
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="preview">
-
-
-
-            </div>
-
-        </div>
+        <add-topic-form />
 
         <topic v-for="(topic, index) in topics"
                :key="index"
@@ -54,10 +20,11 @@
 
 import Topic from "./topic"
 import Comments from "client/components/modules/comments/view/comments"
+import AddTopicForm from "client/components/modules/topics/add-topic.form"
 
 export default {
 
-    components: { Topic, Comments },
+    components: {AddTopicForm, Topic, Comments },
 
     props: {
 

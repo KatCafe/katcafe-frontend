@@ -1,9 +1,8 @@
 <template>
 
     <div class="captchaBox" v-if="captcha">
-        <!--<label for="lcaptcha">Captcha</label>-->
-        <input style="width: 100px" type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput"  >
         <div v-html="captcha.data"></div>
+        <input style="width: 100px" type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput"  >
     </div>
 
 </template>
@@ -26,6 +25,7 @@ export default {
     },
 
     mounted(){
+
         if (typeof window === "undefined") return;
 
         if (!this.captcha)

@@ -12,6 +12,8 @@ export default {
 
             const out = await NetworkHelper.get(`/captcha/get`, { });
 
+            console.log("captcha", out);
+
             if (out && out.result) {
                 commit('SET_CAPTCHA', out.captcha);
                 commit('SET_CAPTCHA_LOADING', false );
