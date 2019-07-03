@@ -21,9 +21,20 @@ class StringHelper{
     }
 
     fixURL(link){
-        const linkLowerCase = link.toLowerCase();
-        if (linkLowerCase.indexOf('http://') < 0) link = "http://"+link;
-        if (linkLowerCase.indexOf('http') < 0) link = "http"+link;
+
+        let linkLowerCase = link.toLowerCase();
+        if (linkLowerCase.indexOf('http://') < 0) {
+            link = "http://"+link;
+            linkLowerCase = link.toLowerCase();
+        }
+
+        if (linkLowerCase.indexOf('http') < 0) {
+            link = "http"+link;
+            linkLowerCase = link.toLowerCase();
+        }
+
+        console.log(link);
+
         return link;
     }
 
