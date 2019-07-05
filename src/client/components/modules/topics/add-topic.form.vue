@@ -10,7 +10,7 @@
                 <img class="profileAvatar" src="/public/assets/anonymus.png">
                 <input type="text" placeholder="New post title" v-model="topicTitle" @change="titleChanged"/>
 
-                <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" >
+                <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
 
                 <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg" @click="openFileUpload">
 
@@ -32,7 +32,9 @@
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
-        <div v-if="showPreview">
+        <loading-spinner v-if="loading" />
+
+        <div v-if="showPreview && !loading" >
             Preview
             <topic :topic="previewTopic" :isSnippetForm="true" />
         </div>
@@ -42,11 +44,10 @@
 
 <script>
 import NetworkHelper from "modules/network/network-helper"
-import LinkOrUpload from "client/components/UI/elements/link/link-or-upload"
 import Captcha from "client/components/modules/captcha/captcha"
 import Topic from "client/components/modules/topics/view/topic"
 import StringHelper from "src/utils/string-helper"
-
+import LoadingSpinner from "client/components/UI/elements/loading-spinner"
 
 
 function initialState (){
@@ -57,11 +58,12 @@ function initialState (){
         link: '',
         _prevLink: '',
 
-        file: '',
+        file: undefined,
 
         scraped: null,
 
         error : '',
+        loading: false,
 
         previewTopic:{
             title: '',
@@ -70,7 +72,7 @@ function initialState (){
             date: new Date().getTime(),
 
             link: '',
-            preview: '',
+            preview: undefined,
         }
 
     }
@@ -78,7 +80,7 @@ function initialState (){
 
 export default {
 
-    components: { LinkOrUpload, Captcha, Topic },
+    components: { Captcha, Topic, LoadingSpinner },
 
     props: {
         topicChannel: '',
@@ -91,7 +93,9 @@ export default {
     computed:{
 
         channel(){
-            return this.topicChannel ? this.topicChannel : this.$store.state.channels.channel.slug;
+            if (this.topicChannel ) return this.topicChannel;
+            if (this.$store.state.channels.channel) return this.$store.state.channels.channel.slug;
+            return '';
         },
 
         author(){
@@ -99,15 +103,15 @@ export default {
         },
 
         title(){
-            return this.topicTitle || ( this.scraped ? this.scraped.title : ''  );
+            return this.topicTitle || ( this.scraped ? this.scraped.title : ''  ) || '';
         },
 
         body(){
-            return this.topicBody   || ( this.scraped ? this.scraped.description : ''  );
+            return this.topicBody   || ( this.scraped ? this.scraped.description : ''  ) || '';
         },
 
         showPreview(){
-            return this.title.length || this.body.length;
+            return this.title.length || this.body.length || this.previewTopic.preview;
         }
 
     },
@@ -138,6 +142,8 @@ export default {
 
         async linkChanged(e){
 
+            this.loading = true;
+
             try{
 
                 if (!this.link) return;
@@ -151,7 +157,7 @@ export default {
 
                 console.log(out);
 
-                if (out && out.result && out.scrape.image) {
+                if (out && out.result && (out.scrape.image || out.scrape.title || out.scrape.description ) ) {
 
                     if (out.scrape.uri) {
                         this._prevLink = out.scrape.uri;
@@ -162,13 +168,12 @@ export default {
                     this.$emit('scraped', out.scrape)
                 }
 
-
-                this.file = undefined;
-
             }catch(err){
                 console.error(err);
                 this.scraped = null;
             }
+
+            this.loading = false;
 
         },
 
@@ -178,23 +183,21 @@ export default {
             if ( !files.length ) return;
 
             var reader = new FileReader();
-            reader.onloadend = async (e) =>
-                this.scraped = {
+            reader.onloadend = async (e) => {
+
+                this.file = {
+                    file: files[0],
                     img: {
                         img: reader.result
                     }
                 };
+            };
 
             reader.readAsDataURL(files[0]);
 
-            this.file = files[0];
-
-            this.link = '';
-            this.scraped = null;
-
         },
 
-        async createTopic(e){
+        async createTopic(e, resolve){
 
             const captcha = this.$refs['captcha'];
 
@@ -208,8 +211,8 @@ export default {
                     body: this.body,
                     link: this.link,
                     file: this.file ? {
-                        name: this.file.name,
-                        base64: this.preview.img,
+                        name: this.file.file.name,
+                        base64: this.file.img.img,
                     } : undefined,
                     author: this.author,
                     captcha: {
@@ -238,6 +241,8 @@ export default {
 
             e.stopPropagation();
 
+            resolve(true);
+
         },
 
         reset(){
@@ -245,6 +250,7 @@ export default {
         },
 
         openFileUpload(){
+            this.$refs['refFileInput'].click();
         },
 
         titleChanged(){
@@ -264,15 +270,15 @@ export default {
 
             this.previewTopic.preview = undefined;
 
-            if (this.scraped)
+            if (this.scraped && this.scraped.image)
                 this.previewTopic.preview = Object.assign( {
                     link: this.link
                 }, this.scraped.image);
 
             if (this.file)
                 this.previewTopic.preview = {
-                    base64: this.preview.img,
-                    link: this.file.name,
+                    base64: this.file.img,
+                    link: this.file.file.name,
                 };
 
             this.previewTopic.author = this.author;
@@ -282,12 +288,21 @@ export default {
     },
 
     watch: {
+        topicChannel: function (newValue, oldValue) {
+            this.updatePreviewTopic();
+        },
         topicTitle: function (newValue, oldValue) {
             this.updatePreviewTopic();
         },
         topicBody: function (newValue, oldValue) {
             this.updatePreviewTopic();
-        }
+        },
+        scraped: function (newValue, oldValue) {
+            this.updatePreviewTopic();
+        },
+        file: function (newValue, oldValue) {
+            this.updatePreviewTopic();
+        },
     },
 
 }

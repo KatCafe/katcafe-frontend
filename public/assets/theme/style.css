@@ -160,6 +160,7 @@ Layout styles
     box-sizing: border-box;         /* Opera/IE 8+ */
     float: left;
     margin: 0 auto;
+    width: 100%;
 }
 
 .left {
@@ -427,6 +428,7 @@ input[type=button] {
     border:none;
 }
 
+button,
 input[type=submit]:hover,
 input[type=button]:hover {
     background-color: #ffd164;
@@ -1033,7 +1035,7 @@ textarea:focus, input:focus{
 
 .topicPage{
     display: grid;
-    grid-template-columns: 1fr 850px 400px;
+    grid-template-columns: 1fr 400px;
 }
 
 .replyRightBox{
@@ -1074,7 +1076,7 @@ textarea:focus, input:focus{
     height: 35px;
 }
 
-.captchaBox input{
+.captchaBox button{
     margin-top: 0;
 }
 
@@ -1113,4 +1115,8 @@ textarea:focus, input:focus{
     height: 35px!important;
     background: #323232!important;
     margin-top: -7px!important;
+}
+
+.loadingSpinner path{
+    fill: #a8a8a8;
 }

@@ -1,0 +1,59 @@
+<template>
+    <button type="button" @click="handleClick">
+
+        <loading-spinner v-if="loading" style='margin-right:10px' />
+
+        {{text}}
+
+    </button>
+</template>
+
+<script>
+import LoadingSpinner from "./loading-spinner";
+
+export default{
+
+    components: {LoadingSpinner},
+
+    data : function (){
+        return {
+            loading:false,
+            disabled:false,
+        }
+    },
+
+    props: {
+        canDisable: {default: true},
+        className: {default: function (){}},
+        text: {default: 'Submit'},
+    },
+
+    methods: {
+
+        handleClick(e){
+
+            if (this.disabled && this.canDisable  === true) return false;
+
+            this.loading = true;
+
+            if ( this.canDisable ) this.disabled=true;
+
+            let resolver;
+            const promise = new Promise( resolve => {
+                resolver = resolve;
+            });
+
+            promise.then( answer => {
+                this.loading = false;
+
+                if (this.canDisable) this.disabled = false;
+            });
+
+
+            this.$emit('onClick', e, resolver );
+
+        },
+
+    }
+}
+</script>

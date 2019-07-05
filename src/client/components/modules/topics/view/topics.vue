@@ -2,7 +2,7 @@
 
     <div>
 
-        <add-topic-form />
+        <add-topic-form :topicChannel="channel" />
 
         <topic v-for="(topic, index) in topics"
                :key="index"
@@ -27,7 +27,7 @@ export default {
     components: {AddTopicForm, Topic, Comments },
 
     props: {
-
+        channel: {default: ''},
         topics: {default(){return [];}},
         comments: {default(){return [];} },
     }

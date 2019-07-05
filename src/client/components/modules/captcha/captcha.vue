@@ -3,13 +3,18 @@
     <div class="captchaBox" v-if="captcha">
         <div v-html="captcha.data"></div>
         <input style="width: 100px" type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput"  >
-        <input type="button" :value="buttonText" @click="submit">
+        <loading-button text="Submit" @onClick="submit" />
     </div>
 
 </template>
 
 <script>
+
+import LoadingButton from 'client/components/UI/elements/loading-button'
+
 export default {
+
+    components: {LoadingButton},
 
     props:{
         buttonText: {
@@ -47,8 +52,9 @@ export default {
             this.captchaInput = '';
         },
 
-        submit(){
-            this.$emit('submit');
+        submit(e, resolve){
+
+            this.$emit('submit', e, resolve);
         },
 
     },

@@ -6,11 +6,7 @@
 
             <div class="row topicPage">
 
-                <div class="adds">
-
-                </div>
-
-                <div class="column">
+                <div class="column left">
 
                     <div v-if="topic">
 
@@ -25,7 +21,7 @@
 
                 </div>
 
-                <div v-if="visibleStickyRightSidebarComment" class="column replyRightBox">
+                <div class="column replyRightBox">
 
                     <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
 
@@ -108,14 +104,7 @@ export default {
 
         stickyButtons(){
 
-            const openStickyRightSidebarComment = this.openStickyRightSidebarComment;
-
             return [
-                this.visibleStickyRightSidebarComment ? undefined : {
-                    title: "Reply",
-                    img: 'https://cdn2.iconfinder.com/data/icons/32pxmania/misc_03.png',
-                    click: () => openStickyRightSidebarComment(),
-                },
             ]
         },
 

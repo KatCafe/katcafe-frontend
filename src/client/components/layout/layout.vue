@@ -16,8 +16,6 @@
 
         <footer-layout/>
 
-        <add-topic-modal ref="addTopicModal" />
-
     </div>
 
 </template>

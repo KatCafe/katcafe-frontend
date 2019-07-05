@@ -41,6 +41,9 @@ export default {
             if (!this.data ) return '';
 
             let img;
+
+            if ( this.data.base64 ) return this.data.base64;
+            else
             if ( this.data.youtubeId ){
 
                 if (this.index === 0)

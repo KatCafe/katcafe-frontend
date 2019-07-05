@@ -13,17 +13,13 @@
                 <div class="column left">
 
                     <div v-if="topics.length">
-                        <topics :topics="topics" :comments="comments"  />
+                        <topics :topics="topics" :comments="comments" :channel="getHomepageChannel" />
                     </div>
 
                     <div v-if="!topics.length">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
                     </div>
 
-                </div>
-
-                <div v-if="visibleStickyRightSidebarComment" class="column right">
-                    <sticky-right-sidebar-comment  />
                 </div>
 
             </div>
@@ -79,6 +75,10 @@ export default {
 
     computed: {
 
+        getHomepageChannel(){
+            return this.getChannel + '/b';
+        },
+
         getChannel(){
             const country = this.$store.state.localization.selectedCountryCode;
             let path = this.$route.path;
@@ -127,11 +127,6 @@ export default {
 
 
             return [
-                {
-                    title: "Write topic",
-                    img: 'https://cdn4.iconfinder.com/data/icons/cologne/32x32/plus.png',
-                    click: () => this.$refs['layout'].showAddTopicModal( this.getChannel + '/b' )
-                }
             ]
         },
 
