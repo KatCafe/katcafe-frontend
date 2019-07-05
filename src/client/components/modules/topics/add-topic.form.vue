@@ -45,6 +45,36 @@ import Captcha from "client/components/modules/captcha/captcha"
 import Topic from "client/components/modules/topics/view/topic"
 import StringHelper from "src/utils/string-helper"
 
+
+
+function initialState (){
+    return {
+        topicTitle: '',
+        topicBody: '',
+
+        link: '',
+        prevLink: '',
+
+        file: '',
+
+
+        scraped: null,
+
+        error : '',
+
+        previewTopic:{
+            title: '',
+            body: '',
+            slug: '',
+            date: new Date().getTime(),
+
+            link: '',
+            preview: '',
+        }
+
+    }
+}
+
 export default {
 
     components: { LinkOrUpload, Captcha, Topic },
@@ -54,32 +84,7 @@ export default {
     },
 
     data(){
-        return {
-
-            topicTitle: '',
-            topicBody: '',
-
-            link: '',
-            prevLink: '',
-
-            file: '',
-
-
-            scraped: null,
-
-            error : '',
-
-            previewTopic:{
-                title: '',
-                body: '',
-                slug: '',
-                date: new Date().getTime(),
-
-                link: '',
-                preview: '',
-            }
-
-        }
+        return initialState();
     },
 
     computed:{
@@ -90,7 +95,15 @@ export default {
 
         author(){
             return '';
-        }
+        },
+
+        title(){
+            return this.topicTitle || ( this.scraped ? this.scraped.title : ''  );
+        },
+
+        body(){
+            return this.topicBody   || ( this.scraped ? this.scraped.description : ''  );
+        },
 
     },
 
@@ -108,7 +121,14 @@ export default {
                 links = links.map( it => StringHelper.fixURL( it ) );
 
                 this.link = links[0];
-                this.linkChanged();
+
+                await this.linkChanged();
+
+                this.topicTitle = this.topicTitle.replace(this.link, '');
+                this.topicBody = this.topicBody.replace(this.link, '');
+
+                this.updatePreviewTopic();
+
             }
 
         },
@@ -173,9 +193,6 @@ export default {
 
         async createTopic(e){
 
-            console.log('createTopic fired');
-
-            const linkOrUpload = this.$refs['linkOrUpload'];
             const captcha = this.$refs['captcha'];
 
             try{
@@ -184,12 +201,12 @@ export default {
 
                 const out = await NetworkHelper.post('/topics/create', {
                     channel: this.channel,
-                    title: this.topicTitle || ( linkOrUpload.scraped ? linkOrUpload.scraped.title : ''  ),
-                    body: this.topicBody   || ( linkOrUpload.scraped ? linkOrUpload.scraped.description : ''  ),
-                    link: linkOrUpload.link,
-                    file: linkOrUpload.file ? {
-                        name: linkOrUpload.file.name,
-                        base64: linkOrUpload.preview.img,
+                    title: this.title,
+                    body: this.body,
+                    link: this.link,
+                    file: this.file ? {
+                        name: this.file.name,
+                        base64: this.preview.img,
                     } : undefined,
                     author: this.author,
                     captcha: {
@@ -221,24 +238,42 @@ export default {
         },
 
         reset(){
-            this.topicTitle = '';
-            this.topicBody = '';
-            this.file = '';
-            this.link ='';
-            this.prevLink = '';
+            Object.assign(this.$data, initialState());
         },
 
         openFileUpload(){
         },
 
         titleChanged(){
-            this.previewTopic.title = this.topicTitle;
             this.extractLink();
         },
 
         bodyChanged(){
-            this.previewTopic.body = this.topicBody;
             this.extractLink();
+        },
+
+        updatePreviewTopic(){
+
+            this.previewTopic.title = this.title;
+            this.previewTopic.body = this.body;
+            this.previewTopic.link = this.link;
+            this.previewTopic.channel = this.channel;
+
+            this.previewTopic.preview = undefined;
+
+            if (this.scraped)
+                this.previewTopic.preview = Object.assign( {
+                    link: this.link
+                }, this.scraped.image);
+
+            if (this.file)
+                this.previewTopic.preview = {
+                    base64: this.preview.img,
+                    link: this.file.name,
+                };
+
+            this.previewTopic.author = this.author;
+
         }
 
     }
