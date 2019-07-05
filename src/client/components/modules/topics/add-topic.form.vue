@@ -28,11 +28,12 @@
 
         </div>
 
-        <captcha ref="captcha"/>
-
-        <input type="button" value="Create" @click="createTopic">
+        <captcha ref="captcha" @submit="createTopic" buttonText="Submit Topic" />
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
+
+        Preview
+        <topic :topic="previewTopic" :isSnippetForm="true" />
 
     </form>
 </template>
@@ -67,6 +68,16 @@ export default {
             scraped: null,
 
             error : '',
+
+            previewTopic:{
+                title: '',
+                body: '',
+                slug: '',
+                date: new Date().getTime(),
+
+                link: '',
+                preview: '',
+            }
 
         }
     },
@@ -114,6 +125,8 @@ export default {
                 const out = await NetworkHelper.post('/scraper/get',{
                     uri: this.link,
                 });
+
+                console.log(out);
 
                 if (out && out.result && out.scrape.image) {
 
@@ -219,10 +232,12 @@ export default {
         },
 
         titleChanged(){
+            this.previewTopic.title = this.topicTitle;
             this.extractLink();
         },
 
         bodyChanged(){
+            this.previewTopic.body = this.topicBody;
             this.extractLink();
         }
 

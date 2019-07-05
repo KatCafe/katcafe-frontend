@@ -19,9 +19,7 @@
             <country-select @onSelect="channelCountrySelected" :defaultCountryCode="defaultCountry" />
         </no-ssr>
 
-        <captcha ref="captcha"/>
-
-        <input type="button" value="Create" @click="createChannel">
+        <captcha ref="captcha" @submit="createChannel"/>
 
         <span class="errorText">{{error}}</span>
 

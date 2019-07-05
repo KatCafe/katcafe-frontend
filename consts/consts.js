@@ -1,6 +1,6 @@
 module.exports = {
 
-    serverApi: "http://86.126.138.61:8085",
+    serverApi: "http://127.0.0.1:8085",
 
     name: "catcafe",
     copyright: "catcafe",

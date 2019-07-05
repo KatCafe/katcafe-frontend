@@ -3,12 +3,19 @@
     <div class="captchaBox" v-if="captcha">
         <div v-html="captcha.data"></div>
         <input style="width: 100px" type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput"  >
+        <input type="button" :value="buttonText" @click="submit">
     </div>
 
 </template>
 
 <script>
 export default {
+
+    props:{
+        buttonText: {
+            default: 'Submit',
+        }
+    },
 
     data(){
         return {
@@ -38,7 +45,12 @@ export default {
         reset(){
             this.$store.dispatch('CAPTCHA_GET', {});
             this.captchaInput = '';
-        }
+        },
+
+        submit(){
+            this.$emit('submit');
+        },
+
     },
 
 }

@@ -51,7 +51,7 @@
                         <span v-if="commentsToLoad" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
                     </router-link>
 
-                    <div class="replyBox">
+                    <div v-if="!isSnippetForm" class="replyBox">
 
                         <img class="profileAvatar" src="/public/assets/anonymus.png">
                         <textarea type="text" placeholder="Write a reply..."/>
@@ -92,6 +92,7 @@ export default {
         isPage: false,
         comments: { default(){ return [] } },
         isPreview: false,
+        isSnippetForm: false,
     },
 
     computed: {

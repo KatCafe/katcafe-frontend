@@ -1063,14 +1063,19 @@ textarea:focus, input:focus{
 }
 
 .captchaBox{
+    margin-top: 10px;
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 100px 100px 1fr;
     grid-column-gap: 10px;
 }
 
 .captchaBox svg{
     width: auto;
     height: 35px;
+}
+
+.captchaBox input{
+    margin-top: 0;
 }
 
 .addChanelForm .multiselect__single{
