@@ -32,8 +32,10 @@
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
-        Preview
-        <topic :topic="previewTopic" :isSnippetForm="true" />
+        <div v-if="showPreview">
+            Preview
+            <topic :topic="previewTopic" :isSnippetForm="true" />
+        </div>
 
     </form>
 </template>
@@ -53,10 +55,9 @@ function initialState (){
         topicBody: '',
 
         link: '',
-        prevLink: '',
+        _prevLink: '',
 
         file: '',
-
 
         scraped: null,
 
@@ -105,6 +106,10 @@ export default {
             return this.topicBody   || ( this.scraped ? this.scraped.description : ''  );
         },
 
+        showPreview(){
+            return this.title.length || this.body.length;
+        }
+
     },
 
     methods: {
@@ -127,8 +132,6 @@ export default {
                 this.topicTitle = this.topicTitle.replace(this.link, '');
                 this.topicBody = this.topicBody.replace(this.link, '');
 
-                this.updatePreviewTopic();
-
             }
 
         },
@@ -138,9 +141,9 @@ export default {
             try{
 
                 if (!this.link) return;
-                if (this.link === this.prevLink) return;
+                if (this.link === this._prevLink) return;
 
-                this.prevLink = this.link;
+                this._prevLink = this.link;
 
                 const out = await NetworkHelper.post('/scraper/get',{
                     uri: this.link,
@@ -151,7 +154,7 @@ export default {
                 if (out && out.result && out.scrape.image) {
 
                     if (out.scrape.uri) {
-                        this.prevLink = out.scrape.uri;
+                        this._prevLink = out.scrape.uri;
                         this.link = out.scrape.uri;
                     }
 
@@ -276,7 +279,16 @@ export default {
 
         }
 
-    }
+    },
+
+    watch: {
+        topicTitle: function (newValue, oldValue) {
+            this.updatePreviewTopic();
+        },
+        topicBody: function (newValue, oldValue) {
+            this.updatePreviewTopic();
+        }
+    },
 
 }
 </script>
