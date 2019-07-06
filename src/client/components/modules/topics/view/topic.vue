@@ -53,7 +53,7 @@
 
                     <div v-if="!isSnippetForm">
 
-                        <add-comment-from />
+                        <add-comment-from :topic="this.topic" />
 
                     </div>
 

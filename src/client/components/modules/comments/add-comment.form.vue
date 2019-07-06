@@ -11,9 +11,8 @@
 
         </div>
 
-        {{showPreview}}
         <div v-if="showPreview">
-            <captcha ref="captcha" @submit="createTopic" buttonText="Submit Topic" />
+            <captcha ref="captcha" @submit="createComment" buttonText="Submit Comment" />
 
             <loading-spinner v-if="loading" />
             <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
@@ -59,7 +58,6 @@ export default {
     props: {
 
         topic: null,
-        channel: null,
 
     },
 
@@ -156,7 +154,7 @@ export default {
             reader.readAsDataURL(files[0]);
         },
 
-        async createComment(e){
+        async createComment(e, resolve){
 
             const captcha = this.$refs['captcha'];
 
@@ -165,7 +163,7 @@ export default {
                 this.error = '';
 
                 const out = await NetworkHelper.post('/comments/create', {
-                    topic: this.topic,
+                    topic: typeof this.topic === "string" ? this.topic : this.topic.slug,
                     link: this.link,
                     file: this.file ? {
                             name: this.file.file.name,
@@ -199,6 +197,8 @@ export default {
             }
 
             e.stopPropagation();
+            
+            resolve(true);
 
         },
 

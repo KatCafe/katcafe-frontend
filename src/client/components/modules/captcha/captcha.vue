@@ -3,7 +3,7 @@
     <div class="captchaBox" v-if="captcha">
         <div v-html="captcha.data"></div>
         <input style="width: 100px" type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput"  >
-        <loading-button text="Submit" @onClick="submit" />
+        <loading-button :text="buttonText" @onClick="submit" />
     </div>
 
 </template>
