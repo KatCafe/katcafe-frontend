@@ -1,29 +1,22 @@
 <template>
     <div class="sideReplyBox">
 
-        <!--<span class="commentSlug">Reply-->
-            <!--<router-link :to="'/'+this.topic">{{title}}</router-link>-->
-        <!--</span><br/><br/>-->
-
-        <!--<link-or-upload ref="linkOrUpload" />-->
-
-        <!--<label for="ltext">Text</label>-->
-
-        <!--<textarea class="commentTextArea" type="text" id="ltext" name="text" cols="40" rows="5" placeholder="Text" v-model="commentBody" @scraped="scraped" > </textarea>-->
-
-        <!--<captcha ref="captcha"/>-->
-
-        <!--<input class="postButton" type="button" value="Submit reply" @click="createComment">-->
-
-        <!--<div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>-->
-        <!--<div v-if="success" class="alert-box success"><span>success <br/><br/> </span> {{success}}</div>-->
-
-
         <div class="replyBox">
 
             <img class="profileAvatar" src="/public/assets/anonymus.png">
-            <textarea type="text" placeholder="Write a reply..."/>
+            <textarea type="text" placeholder="Write a reply..." v-model="commentBody"/>
+
+            <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
             <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg">
+
+        </div>
+
+        {{showPreview}}
+        <div v-if="showPreview">
+            <captcha ref="captcha" @submit="createTopic" buttonText="Submit Topic" />
+
+            <loading-spinner v-if="loading" />
+            <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
         </div>
 
@@ -33,14 +26,35 @@
 <script>
 
 import NetworkHelper from "modules/network/network-helper"
-import LinkOrUpload from "client/components/UI/elements/link/link-or-upload"
 import Captcha from "client/components/modules/captcha/captcha"
 import BrowserHelper from "modules/helpers/browser.helpers"
+import StringHelper from "src/utils/string-helper"
+import LoadingSpinner from "client/components/UI/elements/loading-spinner"
+
+function initialState (){
+    return {
+        commentBody: '',
+        link: '',
+        _prevLink: '',
+
+        file: undefined,
+
+        scraped: null,
+
+        error : '',
+        loading: false,
+
+        previewComment: {
+            body: '',
+        },
+
+    }
+}
 
 export default {
 
 
-    components: { LinkOrUpload, Captcha },
+    components: { LoadingSpinner, Captcha },
 
     props: {
 
@@ -50,15 +64,7 @@ export default {
     },
 
     data(){
-        return {
-
-            commentBody: '',
-            commentTopic: '',
-
-            error : '',
-            success: '',
-
-        }
+        return initialState();
     },
 
     computed:{
@@ -67,32 +73,105 @@ export default {
             return '';
         },
 
-        title(){
-            return BrowserHelper.processLink(this.topic||this.channel, 30)
+        body(){
+            return this.commentBody || ( this.scraped ? this.scraped.title || this.scraped.description : ''  ) || '';
+        },
+
+        showPreview(){
+            return this.body.length || this.previewComment.preview;
         }
 
     },
 
     methods: {
 
+        async extractLink(){
+
+            let links = StringHelper.findLinks(this.commentBody);
+
+            if (!links.length ) return;
+
+            links = links.map( it => StringHelper.fixURL( it ) );
+
+            this.link = links[0];
+
+            await this.linkChanged();
+
+            this.commentBody = this.commentBody.replace(this.link, '');
+
+        },
+
+        async linkChanged(e){
+
+            this.loading = true;
+
+            try{
+
+                if (!this.link) return;
+                if (this.link === this._prevLink) return;
+
+                this._prevLink = this.link;
+
+                const out = await NetworkHelper.post('/scraper/get',{
+                    uri: this.link,
+                });
+
+                console.log(out);
+
+                if (out && out.result && (out.scrape.image || out.scrape.title || out.scrape.description ) ) {
+
+                    if (out.scrape.uri) {
+                        this._prevLink = out.scrape.uri;
+                        this.link = out.scrape.uri;
+                    }
+
+                    this.scraped = out.scrape;
+                    this.$emit('scraped', out.scrape)
+                }
+
+            }catch(err){
+                console.error(err);
+                this.scraped = null;
+            }
+
+            this.loading = false;
+
+        },
+
+        async fileChanged(e){
+            const files = e.target.files || e.dataTransfer.files;
+            if ( !files.length ) return;
+
+            const reader = new FileReader();
+            reader.onloadend = async (e) => {
+
+                this.file = {
+                    file: files[0],
+                    preview: {
+                        img: reader.result
+                    }
+                };
+            };
+
+            reader.readAsDataURL(files[0]);
+        },
+
         async createComment(e){
 
-            const linkOrUpload = this.$refs['linkOrUpload'];
             const captcha = this.$refs['captcha'];
 
             try{
 
                 this.error = '';
-                this.success = '';
 
                 const out = await NetworkHelper.post('/comments/create', {
                     topic: this.topic,
-                    link: linkOrUpload.link,
-                    file: linkOrUpload.file ? {
-                            name: linkOrUpload.file.name,
-                            base64: linkOrUpload.preview.img,
+                    link: this.link,
+                    file: this.file ? {
+                            name: this.file.file.name,
+                            base64: this.file.preview.img,
                         } : undefined,
-                    body: this.commentBody || ( linkOrUpload.scraped ? linkOrUpload.scraped.title || linkOrUpload.scraped.content : ''  ),
+                    body: this.body,
                     author: this.author,
                     captcha: {
                         solution: captcha.captchaInput,
@@ -102,9 +181,8 @@ export default {
 
                 if (out && out.result) {
                     this.$store.commit('ADD_COMMENTS', [out.comment] );
-                    this.success = 'Your comment was published!!';
 
-                    this.$refs['linkOrUpload'].reset();
+                    this.reset();
 
                     this.commentBody = '';
 
@@ -124,8 +202,9 @@ export default {
 
         },
 
-        scraped(){
-        }
+        reset(){
+            Object.assign(this.$data, initialState());
+        },
 
     }
 

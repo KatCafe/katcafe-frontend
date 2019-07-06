@@ -31,7 +31,6 @@
         <captcha ref="captcha" @submit="createTopic" buttonText="Submit Topic" />
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
-
         <loading-spinner v-if="loading" />
 
         <div v-if="showPreview && !loading" >
@@ -125,18 +124,16 @@ export default {
 
             links = links.concat(links2);
 
-            if (links.length ) {
+            if (!links.length ) return;
 
-                links = links.map( it => StringHelper.fixURL( it ) );
+            links = links.map( it => StringHelper.fixURL( it ) );
 
-                this.link = links[0];
+            this.link = links[0];
 
-                await this.linkChanged();
+            await this.linkChanged();
 
-                this.topicTitle = this.topicTitle.replace(this.link, '');
-                this.topicBody = this.topicBody.replace(this.link, '');
-
-            }
+            this.topicTitle = this.topicTitle.replace(this.link, '');
+            this.topicBody = this.topicBody.replace(this.link, '');
 
         },
 
@@ -182,12 +179,12 @@ export default {
             const files = e.target.files || e.dataTransfer.files;
             if ( !files.length ) return;
 
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onloadend = async (e) => {
 
                 this.file = {
                     file: files[0],
-                    img: {
+                    preview: {
                         img: reader.result
                     }
                 };
@@ -212,7 +209,7 @@ export default {
                     link: this.link,
                     file: this.file ? {
                         name: this.file.file.name,
-                        base64: this.file.img.img,
+                        base64: this.file.preview.img,
                     } : undefined,
                     author: this.author,
                     captcha: {
@@ -277,7 +274,7 @@ export default {
 
             if (this.file)
                 this.previewTopic.preview = {
-                    base64: this.file.img,
+                    base64: this.file.preview,
                     link: this.file.file.name,
                 };
 

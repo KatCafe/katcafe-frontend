@@ -51,11 +51,9 @@
                         <span v-if="commentsToLoad" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
                     </router-link>
 
-                    <div v-if="!isSnippetForm" class="replyBox">
+                    <div v-if="!isSnippetForm">
 
-                        <img class="profileAvatar" src="/public/assets/anonymus.png">
-                        <textarea type="text" placeholder="Write a reply..."/>
-                        <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg">
+                        <add-comment-from />
 
                     </div>
 
@@ -75,12 +73,13 @@ import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
 import Comments from "client/components/modules/comments/view/comments"
 import PreviewImage from "client/components/UI/elements/preview-image"
+import AddCommentFrom from "client/components/modules/comments/add-comment.form"
 
 import consts from "consts/consts"
 
 export default {
 
-    components: { Vote, Comments, PreviewImage },
+    components: { Vote, Comments, PreviewImage, AddCommentFrom },
 
     data(){
         return {

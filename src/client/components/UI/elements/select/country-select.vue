@@ -8,7 +8,7 @@
 
         <multiselect @input="onChangeSelect" v-model="getSelectValue" label="label" track-by="label" :options="optionsFiltered" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
 
-            <template slot="option" scope="props">
+            <template slot="option" slot-scope="props">
                 <img :class="props.option.css" style="display: inline-block; position: relative; verticalAlign: middle; padding-top:11px !important;" />
                 <div class="option__desc">
                     <span class="option__title">{{ props.option.label }}</span>
