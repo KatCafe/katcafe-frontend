@@ -4,10 +4,10 @@
         <div class="replyBox">
 
             <img class="profileAvatar" src="/public/assets/anonymus.png">
-            <textarea type="text" placeholder="Write a reply..." v-model="commentBody"/>
+            <textarea type="text" placeholder="Write a reply..." v-model="commentBody" @change="bodyChanged"/>
 
             <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-            <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg">
+            <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg" @click="openFileUpload">
 
         </div>
 
@@ -197,9 +197,17 @@ export default {
             }
 
             e.stopPropagation();
-            
+
             resolve(true);
 
+        },
+
+        bodyChanged(){
+            this.extractLink();
+        },
+
+        openFileUpload(){
+            this.$refs['refFileInput'].click();
         },
 
         reset(){
