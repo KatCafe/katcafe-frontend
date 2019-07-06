@@ -17,7 +17,6 @@ export default {
 
         myVote: 0,
 
-        value: 0,
         slug: '',
         parentType: '',
     },
@@ -55,9 +54,11 @@ export default {
 
         async voteNow(value){
 
+            console.log("Value", value, this.myVote, "myvote", "it will be:",this.myVote ? 0 : value);
+
             const out = await NetworkHelper.post('/votes/vote',{
                 slug: this.slug,
-                value: (this.value || 0) + value,
+                value: this.myVote ? 0 : value,
                 parentType: this.parentType,
             });
 
@@ -72,6 +73,8 @@ export default {
 
                 if (out.vote.value === 1) this.parent.votesUp = (this.parent.votesUp || 0) +1; else
                 if (out.vote.value === -1) this.parent.votesDown = (this.parent.votesDown||0) +1;
+
+                console.log("ups", this.parent.votesUp, "downs", this.parent.votesDown);
 
                 this.parent.myVote = out.vote.value;
 
