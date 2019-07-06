@@ -6,7 +6,7 @@
 
             <div class="topicBox" >
 
-                <vote parentType="topic" :slug="slug" :parent="topic" :myvote="topic.myvote" />
+                <vote parentType="topic" :slug="slug" :parent="topic" :myVote="topic.myVote" />
 
                 <div class="topicContent" ref="topicContent">
 
@@ -80,11 +80,6 @@ import consts from "consts/consts"
 export default {
 
     components: { Vote, Comments, PreviewImage, AddCommentFrom },
-
-    data(){
-        return {
-        }
-    },
 
     props: {
         topic: null,

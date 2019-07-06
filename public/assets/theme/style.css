@@ -761,13 +761,13 @@ form {
 }
 
 .voted{
-    border-top-color: #535353;
-    border-bottom-color: #535353;
+    border-top-color: red;
+    border-bottom-color: red;
     cursor: default;
 }
 
 .voted:after{
-    background-color: #535353;
+    background-color: red;
     cursor: default;
 }
 

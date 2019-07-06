@@ -1,8 +1,8 @@
 <template>
     <div class="votingBox">
-        <div class="upvote" :class="myvote === 1 ? 'voted' : ''" @click="voteUp" ></div>
+        <div class="upvote" :class="myVote === 1 ? 'voted' : ''" @click="voteUp" ></div>
         <span>{{votes}} </span>
-        <div class="downvote" :class="myvote === -1 ? 'voted' : ''" @click="voteDown"></div>
+        <div class="downvote" :class="myVote === -1 ? 'voted' : ''" @click="voteDown"></div>
     </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
     props: {
         parent: null,
 
-        myvote: 0,
+        myVote: 0,
 
         value: 0,
         slug: '',
@@ -73,7 +73,7 @@ export default {
                 if (out.vote.value === 1) this.parent.votesUp = (this.parent.votesUp || 0) +1; else
                 if (out.vote.value === -1) this.parent.votesDown = (this.parent.votesDown||0) +1;
 
-                this.parent.myvote = out.vote.value;
+                this.parent.myVote = out.vote.value;
 
             }
 

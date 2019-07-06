@@ -4,7 +4,7 @@
 
         <div class="topicBox commentBox">
 
-            <vote  parentType="comment" :slug="slug" :parent="comment" :myvote="comment.myvote" />
+            <vote  parentType="comment" :slug="slug" :parent="comment" :myVote="comment.myVote" />
 
             <div ref="topicContent" class="topicContent">
 

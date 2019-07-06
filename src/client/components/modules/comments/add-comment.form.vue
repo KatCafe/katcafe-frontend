@@ -37,6 +37,7 @@ import Comment from "client/components/modules/comments/view/comment"
 
 function initialState (){
     return {
+
         commentBody: '',
         link: '',
         _prevLink: '',
@@ -235,13 +236,11 @@ export default {
                     link: this.link
                 }, this.scraped.image);
 
-            console.log("updating previewComment", this.file);
-
             if (this.file)
                 this.previewComment.preview = {
                     base64: this.file.preview,
                     link: this.file.file.name,
-                }
+                };
 
             this.previewComment.author = this.author;
 
@@ -266,11 +265,5 @@ export default {
 
 <style>
 
-    .commentTextArea{
-
-        resize: vertical;
-
-
-    }
 
 </style>

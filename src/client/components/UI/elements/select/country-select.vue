@@ -3,10 +3,10 @@
     <div >
 
         <span class="input-group-addon">
-            <img :class="`${ (getSelectValue.css||'flag').toLowerCase() } flagImg `">
+            <img :class="`${ (value.css||'flag').toLowerCase() } flagImg `">
         </span>
 
-        <multiselect @input="onChangeSelect" v-model="getSelectValue" label="label" track-by="label" :options="optionsFiltered" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
+        <multiselect @input="onChangeSelect" v-model="value" label="label" track-by="label" :options="optionsFiltered" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
 
             <template slot="option" slot-scope="props">
                 <img :class="props.option.css" style="display: inline-block; position: relative; verticalAlign: middle; padding-top:11px !important;" />
@@ -31,7 +31,11 @@ export default {
 
     data () {
         return {
-            value: {},
+            value: {
+                value: this.defaultCountryCode,
+                css: 'flag ' + this.defaultCountryCode,
+                label: getLabelByCode(this.defaultCountryCode || '')
+            },
             options: getFlags(),
         }
     },
@@ -40,6 +44,7 @@ export default {
         defaultCountryCode : {default: ''},
         countryAllowed: { default () { return [ ]}},
     },
+
     //@onSelect
     computed:{
         getSelectValue(){
