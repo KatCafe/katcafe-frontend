@@ -71,7 +71,7 @@ function initialState (){
             date: new Date().getTime(),
 
             link: '',
-            preview: undefined,
+            preview: null,
         }
 
     }

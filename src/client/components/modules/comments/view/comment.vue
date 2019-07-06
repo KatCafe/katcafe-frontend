@@ -18,9 +18,9 @@
 
                 </div>
 
-                <div class="topicBoxContent" :class="this.comment.preview ? 'hasCommentImage' : ''">
+                <div class="topicBoxContent" :class="comment.preview ? 'hasCommentImage' : ''">
 
-                    <preview-image :data="this.comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
+                    <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
 
                     <div class="topicTextWrap">
 
@@ -58,6 +58,7 @@ export default {
 
     props: {
         isPreview: false,
+        isSnippetForm: false,
         comment: null,
     },
 

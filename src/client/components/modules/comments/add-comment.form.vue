@@ -17,6 +17,11 @@
             <loading-spinner v-if="loading" />
             <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
+            <div v-if="!loading" >
+                Preview
+                <comment :comment="previewComment" :isSnippetForm="true" />
+            </div>
+
         </div>
 
     </div>
@@ -26,9 +31,9 @@
 
 import NetworkHelper from "modules/network/network-helper"
 import Captcha from "client/components/modules/captcha/captcha"
-import BrowserHelper from "modules/helpers/browser.helpers"
 import StringHelper from "src/utils/string-helper"
 import LoadingSpinner from "client/components/UI/elements/loading-spinner"
+import Comment from "client/components/modules/comments/view/comment"
 
 function initialState (){
     return {
@@ -36,7 +41,7 @@ function initialState (){
         link: '',
         _prevLink: '',
 
-        file: undefined,
+        file: null,
 
         scraped: null,
 
@@ -45,6 +50,11 @@ function initialState (){
 
         previewComment: {
             body: '',
+            slug: '',
+            date: new Date().getTime(),
+
+            link: '',
+            preview: null,
         },
 
     }
@@ -53,12 +63,10 @@ function initialState (){
 export default {
 
 
-    components: { LoadingSpinner, Captcha },
+    components: { LoadingSpinner, Captcha, Comment },
 
     props: {
-
         topic: null,
-
     },
 
     data(){
@@ -214,6 +222,43 @@ export default {
             Object.assign(this.$data, initialState());
         },
 
+        updatePreviewComment(){
+
+            this.previewComment.body = this.body;
+            this.previewComment.link = this.link;
+            this.previewComment.topic = this.topic;
+
+            this.previewComment.preview = undefined;
+
+            if (this.scraped && this.scraped.image)
+                this.previewComment.preview = Object.assign( {
+                    link: this.link
+                }, this.scraped.image);
+
+            console.log("updating previewComment", this.file);
+
+            if (this.file)
+                this.previewComment.preview = {
+                    base64: this.file.preview,
+                    link: this.file.file.name,
+                }
+
+            this.previewComment.author = this.author;
+
+        }
+
+    },
+
+    watch:{
+        commentBody: function (newValue, oldValue) {
+            this.updatePreviewComment();
+        },
+        scraped: function (newValue, oldValue) {
+            this.updatePreviewComment();
+        },
+        file: function (newValue, oldValue) {
+            this.updatePreviewComment();
+        },
     }
 
 }
