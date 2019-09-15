@@ -994,6 +994,10 @@ textarea:focus, input:focus{
     margin-bottom: 20px;
 }
 
+.newPostContainer .newPostTitle{
+    color: #a8a8a8;
+}
+
 .newPostContent .replyBox{
     padding-bottom: 0;
     grid-template-columns: 40px 1fr 30px;
@@ -1051,18 +1055,27 @@ textarea:focus, input:focus{
     color: #fff!important;
 }
 
-.addChanelForm input{
+.form label {
+    color: #9c9b9b;
+}
+
+.form input{
     margin-bottom: 10px;
 }
 
-.addChanelForm input:focus{
+.form input:focus{
     outline: none;
     background-color: #ffdb85;
 }
 
-.addChanelForm .multiselect{
+.form .multiselect{
     margin-bottom: 10px;
 }
+
+.form .multiselect__single{
+    margin-top: 8px;
+}
+
 
 .captchaBox{
     margin-top: 10px;
@@ -1080,9 +1093,6 @@ textarea:focus, input:focus{
     margin-top: 0;
 }
 
-.addChanelForm .multiselect__single{
-    margin-top: 8px;
-}
 
 .popup h1{
     text-align: center;

@@ -15,6 +15,7 @@
                 </div>
             </template>
 
+
         </multiselect>
 
     </div>
@@ -24,7 +25,7 @@
 <script>
 import Multiselect from 'vue-multiselect'
 import {getFlags, getLabelByCode} from './flags/flags';
-const FLAGS_SIZE = 18;
+
 export default {
 
     components: { Multiselect, },
@@ -43,6 +44,8 @@ export default {
     props: {
         defaultCountryCode : {default: ''},
         countryAllowed: { default () { return [ ]}},
+        css: '',
+        label :'',
     },
 
     //@onSelect
@@ -106,6 +109,7 @@ export default {
         padding: 0 !important;
         margin: 0 !important;
         left: 20px;
+        color: white;
     }
 
     .multiselect .multiselect__single{

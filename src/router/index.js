@@ -11,6 +11,8 @@ const ChannelPage = () => import('client/pages/channel.page');
 const TopicPage = () => import('client/pages/topic.page');
 const AddChannelPage = () => import('client/pages/add-channel.page');
 const TypographyPage = () => import('client/pages/typography.page');
+const LoginPage = () => import('client/pages/auth/login.page');
+const SignupPage = () => import('client/pages/auth/signup.page');
 
 import {getFlags} from 'client/components/UI/elements/select/flags/flags';
 
@@ -87,6 +89,12 @@ export function createRouter (store){
 
             { path: '/:channel/:slug', component: TopicPage, },
             { path: '/:channel/:slug/pageIndex/:pageIndex', component: TopicPage, },
+
+            { path: '/:login', component: LoginPage},
+            { path: '/:signin', component: LoginPage},
+
+            { path: '/:signup', component: SignupPage },
+            { path: '/:register', component: SignupPage },
 
 
         ]

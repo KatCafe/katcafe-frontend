@@ -1,7 +1,9 @@
 <template>
-    <form action="/action_page.php" class="newPostContainer">
+    <form action="#" class="newPostContainer">
 
-        Start a thread in <strong>{{channel}}</strong> <br/><br/>
+        <div class="newPostTitle">
+            Start a thread in <strong>{{channel}}</strong> <br/><br/>
+        </div>
 
         <div class="newPostContent">
 
@@ -18,11 +20,11 @@
 
             <div class="messageBox">
 
-                <div></div>
+                <br/>
 
                 <textarea type="text" placeholder="Your comment..." v-model="topicBody" @change="bodyChanged"/>
 
-                <div></div>
+                <br/>
 
             </div>
 
