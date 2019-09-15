@@ -2,6 +2,9 @@
 
     <form class="form" action="#" >
 
+        <label for="fusername">Username</label>
+        <input type="text" id="fusername" name="username" v-model="username">
+
         <label for="femail">Email</label>
         <input type="text" id="femail" name="email" v-model="email">
 
@@ -13,7 +16,7 @@
         <span class="errorText">{{error}}</span>
 
         <span>
-            You have an account ? Log in now!
+            You have an account ? <router-link to="/login">Log in now! </router-link>
         </span>
 
     </form>
@@ -31,6 +34,8 @@ export default {
 
     data(){
         return {
+
+            username: '',
             email: '',
             password: '',
 

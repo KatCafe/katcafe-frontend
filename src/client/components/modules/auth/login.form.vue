@@ -13,7 +13,7 @@
         <span class="errorText">{{error}}</span>
 
         <span>
-            You don't have an account ? Sign up now.
+            You don't have an account ? <router-link to="/signup"> Sign up now. </router-link>
         </span>
 
     </form>

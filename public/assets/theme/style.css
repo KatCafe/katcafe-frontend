@@ -51,7 +51,30 @@ body {
 
 a{
     text-decoration: none !important;
+    font-weight:bold;
 }
+
+a:link {
+    color:#d0d0d0;
+}
+
+a:visited {
+    color: #c0c0c0;
+}
+
+a:focus {
+    color: #a3a2a2;
+}
+
+a:hover {
+    color:#ffffff;
+}
+
+a:active {
+    color:#f0f0f0;
+}
+
+
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 .5em;
@@ -127,25 +150,6 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-a:link {
-    color: #a3a2a2;
-}
-
-a:visited {
-    color: #a3a2a2;
-}
-
-a:focus {
-    color: #a3a2a2;
-}
-
-a:hover {
-    /*color: #fff;*/
-}
-
-a:active {
-    color: #a3a2a2;
-}
 
 /* -----------------------
 Layout styles
