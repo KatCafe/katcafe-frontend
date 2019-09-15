@@ -95,6 +95,10 @@ p {
     line-height: 1.5;
 }
 
+span {
+    color: #9c9b9b;
+}
+
 blockquote {
     padding: 1em 2em;
     margin: 0 0 2em;

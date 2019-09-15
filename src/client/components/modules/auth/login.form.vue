@@ -2,15 +2,19 @@
 
     <form class="form" action="#" >
 
-        <label for="femail">Login</label>
+        <label for="femail">Login/Email</label>
         <input type="text" id="femail" name="email" v-model="email">
 
         <label for="fpassword">Password</label>
         <input type="text" id="fpassword" name="password" v-model="password">
 
-        <captcha ref="captcha" @submit="createChannel"/>
+        <captcha ref="captcha" @submit="submit" buttonText="Login"/>
 
         <span class="errorText">{{error}}</span>
+
+        <span>
+            You don't have an account ? Sign up now.
+        </span>
 
     </form>
 
@@ -29,6 +33,7 @@ export default {
         return {
             email: '',
             password: '',
+            error: '',
         }
     },
 

@@ -1,6 +1,6 @@
 <template>
 
-    <layout :stickyButtons="stickyButtons" ref="layout">
+    <layout :stickyButtons="stickyButtons">
 
         <div slot="content" >
 
@@ -9,7 +9,6 @@
             </div>
 
             <div class="row">
-
 
                 <div class="column left">
 
@@ -95,7 +94,7 @@ export default {
                 {
                     title: "Write topic",
                     img: 'https://cdn4.iconfinder.com/data/icons/cologne/32x32/plus.png',
-                    click: () => this.$refs['layout'].showAddTopicModal( )
+                    click: (layout) => layout.showAddTopicModal( )
                 }
             ]
         },

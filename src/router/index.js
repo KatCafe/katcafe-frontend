@@ -84,17 +84,17 @@ export function createRouter (store){
             ...nationalTopicSlugsRoutes,
             ...nationalTopicSlugsRoutesPageIndex,
 
+            { path: '/login', component: LoginPage},
+            { path: '/signin', component: LoginPage},
+
+            { path: '/signup', component: SignupPage },
+            { path: '/register', component: SignupPage },
+
             { path: '/:slug', component: ChannelPage, },
             { path: '/:slug/pageIndex/:pageIndex', component: ChannelPage, },
 
             { path: '/:channel/:slug', component: TopicPage, },
             { path: '/:channel/:slug/pageIndex/:pageIndex', component: TopicPage, },
-
-            { path: '/:login', component: LoginPage},
-            { path: '/:signin', component: LoginPage},
-
-            { path: '/:signup', component: SignupPage },
-            { path: '/:register', component: SignupPage },
 
 
         ]

@@ -4,7 +4,7 @@
         <button class="btn-floating btn btn-primary btn-medium"
                 v-for=" (btn, index) in stickyButtonsFiltered"
                 :key="index"
-                @click="btn.click"
+                @click="() => btn.click($parent.$parent) "
         >
             <img :src="btn.img">
         </button>

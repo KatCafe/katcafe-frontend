@@ -1,6 +1,6 @@
 <template>
 
-    <layout :stickyButtons="stickyButtons" ref="layout" >
+    <layout :stickyButtons="stickyButtons" >
 
         <div slot="content"  >
 

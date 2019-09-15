@@ -12,9 +12,19 @@
             </router-link>
 
             <div class="headerRight">
+
                 <router-link class="menuButton" to="/add-channel">
                     <span>Create channel</span>
                 </router-link>
+
+                <router-link to="/login">
+                    <span>Login</span>
+                </router-link>
+
+                <router-link to="/signup">
+                    <span>Signup</span>
+                </router-link>
+
             </div>
 
         </div>
