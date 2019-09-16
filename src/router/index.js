@@ -23,7 +23,8 @@ export function createRouter (store){
         if (store.state.auth.user) return next();
 
         if (to.path !== '/login') next('/login');
-        else next();
+
+        next();
 
     }
 
@@ -32,7 +33,7 @@ export function createRouter (store){
         if (store.state.auth.user){
 
             if (store.state.auth.user.admin) return next('/admin');
-            else return next('/dashboard');
+            else return next('/');
 
         }
 
@@ -43,14 +44,14 @@ export function createRouter (store){
 
     const flags = Flags.getFlags();
 
-    const nationalChannelRoutes = flags.map( it => { return { path: `/${it.value}`, component: HomePage, }});
-    const nationalChannelRoutesPageIndex = flags.map( it => { return { path: `/${it.value}/pageIndex/:pageIndex`, component: HomePage, }});
+    const nationalChannelRoutes = flags.map( it => ( { path: `/${it.value}`, component: HomePage, }) );
+    const nationalChannelRoutesPageIndex = flags.map( it => ({ path: `/${it.value}/pageIndex/:pageIndex`, component: HomePage, }) );
 
-    const nationalChannelSlugsRoutes = flags.map( it => { return { path: `/${it.value}/:slug`, component: ChannelPage, }});
-    const nationalChannelSlugsRoutesPageIndex = flags.map( it => { return { path: `/${it.value}/:slug/pageIndex/:pageIndex`, component: ChannelPage, }});
+    const nationalChannelSlugsRoutes = flags.map( it => ({ path: `/${it.value}/:slug`, component: ChannelPage, }) );
+    const nationalChannelSlugsRoutesPageIndex = flags.map( it => ({ path: `/${it.value}/:slug/pageIndex/:pageIndex`, component: ChannelPage, }) );
 
-    const nationalTopicSlugsRoutes = flags.map( it => { return { path: `/${it.value}/:channel/:slug`, component: TopicPage, }});
-    const nationalTopicSlugsRoutesPageIndex = flags.map( it => { return { path: `/${it.value}/:channel/:slug/pageIndex/:pageIndex`, component: TopicPage, }});
+    const nationalTopicSlugsRoutes = flags.map( it => ( { path: `/${it.value}/:channel/:slug`, component: TopicPage, } ));
+    const nationalTopicSlugsRoutesPageIndex = flags.map( it => ( { path: `/${it.value}/:channel/:slug/pageIndex/:pageIndex`, component: TopicPage, }) );
 
     return new Router({
         mode: 'history',
@@ -73,7 +74,7 @@ export function createRouter (store){
 
             { path: '/', component: HomePage },
             { path: '/typography', component: TypographyPage },
-            { path: '/add-channel', component: AddChannelPage, },
+            { path: '/add-channel', component: AddChannelPage, beforeEnter: guardAuth },
 
             ...nationalChannelRoutes,
             ...nationalChannelRoutesPageIndex,
@@ -84,11 +85,11 @@ export function createRouter (store){
             ...nationalTopicSlugsRoutes,
             ...nationalTopicSlugsRoutesPageIndex,
 
-            { path: '/login', component: LoginPage},
-            { path: '/signin', component: LoginPage},
+            { path: '/login', component: LoginPage, beforeEnter: guardHomeAuth, },
+            { path: '/signin', component: LoginPage, beforeEnter: guardHomeAuth,},
 
-            { path: '/signup', component: SignupPage },
-            { path: '/register', component: SignupPage },
+            { path: '/signup', component: SignupPage, beforeEnter: guardHomeAuth, },
+            { path: '/register', component: SignupPage, beforeEnter: guardHomeAuth, },
 
             { path: '/:slug', component: ChannelPage, },
             { path: '/:slug/pageIndex/:pageIndex', component: ChannelPage, },
