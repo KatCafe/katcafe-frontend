@@ -5,12 +5,14 @@ export default {
 
     isUserOwner: (state => (object)=>{
 
-        if (!state.user) return false;
+        const user = state.user;
 
-        if (state.user.role === UserRole.SYS_ADMIN) return true;
-        if (state.user.role === UserRole.MODERATOR) return true;
+        if (!user) return false;
 
-        return object.owner === state.user.username;
+        if (user.role === UserRole.SYS_ADMIN) return true;
+        if (user.role === UserRole.MODERATOR) return true;
+
+        return object.owner === user.username;
     }),
 
 }

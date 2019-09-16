@@ -125,7 +125,7 @@ export default {
 
                 console.log(out);
 
-                if (out && out.result && (out.scrape.image || out.scrape.title || out.scrape.description ) ) {
+                if (out  && (out.scrape.image || out.scrape.title || out.scrape.description ) ) {
 
                     if (out.scrape.uri) {
                         this._prevLink = out.scrape.uri;
@@ -183,7 +183,7 @@ export default {
                     captcha: captcha.captchaData(),
                 });
 
-                if (out && out.result) {
+                if (out ) {
                     this.$store.commit('ADD_COMMENTS', [out.comment] );
 
                     this.reset();

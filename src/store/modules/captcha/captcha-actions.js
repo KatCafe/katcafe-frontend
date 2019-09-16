@@ -12,7 +12,7 @@ export default {
 
             const out = await NetworkHelper.get(`/captcha/get`, { });
 
-            if (out && out.result) {
+            if (out ) {
                 commit('SET_CAPTCHA', out.captcha);
                 commit('SET_CAPTCHA_LOADING', false );
                 return;

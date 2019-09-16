@@ -56,7 +56,7 @@ export default {
                     uri: this.link,
                 });
 
-                if (out && out.result && out.scrape.image) {
+                if (out && out.scrape.image) {
 
                     if (out.scrape.uri) {
                         this.prevLink = out.scrape.uri;

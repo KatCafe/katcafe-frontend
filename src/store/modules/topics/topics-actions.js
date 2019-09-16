@@ -18,7 +18,7 @@ export default {
                 count,
             });
 
-            if (out && out.result) {
+            if (out ) {
                 commit('ADD_TOPICS', out.topics);
                 commit('ADD_COMMENTS', out.comments);
                 commit('SET_TOPICS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
@@ -40,7 +40,7 @@ export default {
 
             const out = await NetworkHelper.get(`/topics/get/${slug}`);
 
-            if (out && out.result)
+            if (out )
                 return commit('SET_TOPIC', out.topic);
 
         }catch(err){
@@ -54,11 +54,11 @@ export default {
 
         try{
 
-            const topic = state.list[slug];
+            const topic = state.map[slug];
 
             const out = await NetworkHelper.get(`/topics/get/${slug}`);
 
-            if (out && out.result)
+            if (out )
                 return commit('SET_TOPIC', out.topic);
 
         }catch(err){

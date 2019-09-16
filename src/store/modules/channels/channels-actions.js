@@ -22,7 +22,7 @@ export default {
 
             const out = await NetworkHelper.get(`/channels/${algorithm}/${country}/${index}/${count}`);
 
-            if (out && out.result)
+            if (out)
                 return out.channels;
 
         }catch(err){
@@ -36,7 +36,7 @@ export default {
 
             const out = await NetworkHelper.get(`/channels/get/${slug}`);
 
-            if (out && out.result)
+            if (out )
                 return commit('SET_CHANNEL', out.channel);
 
         }catch(err){

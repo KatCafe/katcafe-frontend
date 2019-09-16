@@ -156,7 +156,7 @@ export default {
 
                 console.log(out);
 
-                if (out && out.result && (out.scrape.image || out.scrape.title || out.scrape.description ) ) {
+                if (out && (out.scrape.image || out.scrape.title || out.scrape.description ) ) {
 
                     if (out.scrape.uri) {
                         this._prevLink = out.scrape.uri;

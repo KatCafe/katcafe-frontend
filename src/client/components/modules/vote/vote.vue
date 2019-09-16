@@ -62,7 +62,7 @@ export default {
                 parentType: this.parentType,
             });
 
-            if (out && out.result && out.vote) {
+            if (out  && out.vote) {
 
                 if (out.prevVote){
                     if (out.prevVote === 1) this.parent.votesUp = (this.parent.votesUp || 0) -1; else

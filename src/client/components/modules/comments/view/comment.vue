@@ -104,13 +104,11 @@ export default {
     methods: {
 
         openStickyRightSidebarComment(){
-
-            this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.comment.topic, channel: this.comment.channel })
-
+            return this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.comment.topic, channel: this.comment.channel })
         },
 
         deleteComment(){
-
+            return this.$store.dispatch('COMMENTS_DELETE', this.comment.slug );
         }
 
 

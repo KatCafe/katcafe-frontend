@@ -81,7 +81,7 @@ export default {
                     captcha: captcha.captchaData()
                 });
 
-                if (!out || !out.result) throw "An error was encountered";
+                if (!out) throw "An error was encountered";
 
                 captcha.reset();
 

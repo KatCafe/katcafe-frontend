@@ -20,9 +20,7 @@ export default {
                 count,
             });
 
-            console.log(out.comments.length, count, out.comments.length >= count)
-
-            if (out && out.result) {
+            if (out ) {
                 commit('ADD_COMMENTS', out.comments);
                 commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
                 commit('SET_COMMENTS_PAGE_LOADING', false );
@@ -38,6 +36,17 @@ export default {
 
         commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: false });
         commit('SET_COMMENTS_PAGE_LOADING', false );
+
+    },
+
+    COMMENTS_DELETE: async ({commit, dispatch, state}, slug ) => {
+
+        const out = await NetworkHelper.post('/comments/delete/', { slug } );
+
+
+        if (out)
+            commit('SET_DELETE_COMMENTS', [slug]);
+
 
     },
 
