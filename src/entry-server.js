@@ -17,13 +17,18 @@ export default context => {
 
     await store.dispatch('LOCALIZATION_NEW_IP', context.ip ); //Dispatching the Context IP
 
+
     let session = context.cookies.session;
+    if (session === '') session = undefined;
     if (typeof session === "string") session = JSON.parse(session);
 
     if (session) {
 
-        await store.commit('SET_AUTH_SESSION', session);
+        store.commit('SET_AUTH_SESSION', session);
         await store.dispatch('AUTH_LOGIN_SESSION', session);
+    } else {
+        store.commit('SET_AUTH_USER', null );
+        store.commit('SET_AUTH_SESSION', '' );
     }
 
     const {selectedCountry, selectedCountryCode} = context.cookies;

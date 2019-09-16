@@ -11,7 +11,11 @@ export default {
     SET_AUTH_SESSION: (state, session ) => {
 
         state.session = session;
-        CookiesService.setCookie('session', JSON.stringify(session) );
+
+        if ( !session  )
+            CookiesService.deleteCookie('session');
+        else
+            CookiesService.setCookie('session', JSON.stringify(session) );
 
     },
 

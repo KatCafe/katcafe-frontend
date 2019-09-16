@@ -23,8 +23,10 @@ export default {
 
         const out = await NetworkHelper.get('/auth/logout',  );
 
-        if ( out )
-            return commit('SET_AUTH_SESSION', undefined );
+        if ( out ) {
+            commit('SET_AUTH_USER', null );
+            commit('SET_AUTH_SESSION', '' );
+        }
 
     },
 

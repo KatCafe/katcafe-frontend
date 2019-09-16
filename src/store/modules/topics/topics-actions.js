@@ -46,7 +46,7 @@ export default {
         }catch(err){
         }
 
-        return commit('SET_TOPIC', undefined);
+        return commit('SET_TOPIC', null);
 
     },
 

@@ -43,7 +43,7 @@ export default {
             //console.error(err);
         }
 
-        return commit('SET_CHANNEL', undefined);
+        return commit('SET_CHANNEL', null);
 
     },
 
