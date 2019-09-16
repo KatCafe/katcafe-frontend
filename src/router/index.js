@@ -37,8 +37,8 @@ export function createRouter (store){
 
         }
 
-        if (to.path !== '/login' && to.path !== '/register') next('/login');
-        else next();
+        if (to.path !== '/login' && to.path !== '/register' && to.path !== '/signup') next('/login');
+         next();
 
     }
 

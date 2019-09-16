@@ -19,9 +19,7 @@
                             <span class="actionButton">{{topic.channel||''}}</span>
                         </router-link>
 
-                        <!--<div class="topicButtons">-->
-                            <!--<span class="postId actionButton">Topic #{{ isPreview ? topic.uuid : 0}}</span>-->
-                        <!--</div>-->
+                        <img v-if="isUserOwner" @click="deleteTopic" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
 
                     </div>
 
@@ -123,6 +121,10 @@ export default {
             return this.topic.comments - this.comments.length
         },
 
+        isUserOwner(){
+            return this.$store.getters.isUserOwner(this.topic);
+        }
+
     },
 
     methods: {
@@ -133,8 +135,12 @@ export default {
         },
 
         viewMoreComments(){
-            //this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', {value: true, topic: this.topic.slug, channel: this.topic.channel })
+            this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', {value: true, topic: this.topic.slug, channel: this.topic.channel })
         },
+
+        deleteTopic(){
+
+        }
 
     }
 

@@ -31,7 +31,7 @@
 
                 <template v-else>
                     <router-link to="/logout" @click.native.prevent.capture="logout">
-                        <span>Logout</span>
+                        <span>Logout {{user.username}}</span>
                     </router-link>
                 </template>
 

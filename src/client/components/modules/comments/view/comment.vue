@@ -16,6 +16,8 @@
                         <span class="postId actionButton" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
                     </div>
 
+                    <img v-if="isUserOwner" @click="deleteComment" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
+
                 </div>
 
                 <div class="topicBoxContent" :class="comment.preview ? 'hasCommentImage' : ''">
@@ -93,6 +95,9 @@ export default {
             return '/'+this.comment.slug;
         },
 
+        isUserOwner(){
+            return this.$store.getters.isUserOwner(this.comment);
+        }
 
     },
 
@@ -102,7 +107,12 @@ export default {
 
             this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.comment.topic, channel: this.comment.channel })
 
+        },
+
+        deleteComment(){
+
         }
+
 
     }
 

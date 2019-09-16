@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 
 import actions from './auth-actions'
 import mutations from './auth-mutations'
+import getters from "./auth-getters"
 
 export default {
     state:  {
@@ -13,4 +14,5 @@ export default {
     },
     actions,
     mutations,
+    getters,
 }
