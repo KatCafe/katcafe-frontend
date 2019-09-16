@@ -65,7 +65,7 @@ export default {
 
             try{
 
-                const out = await NetworkHelper.post('/auth/signup', {
+                const out = await this.$store.dispatch('AUTH_SIGN_UP', {
                     username: this.username,
                     email: this.email,
                     password: this.password,

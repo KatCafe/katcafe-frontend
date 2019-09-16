@@ -25,7 +25,13 @@ export default context => {
     if (session) {
 
         store.commit('SET_AUTH_SESSION', session);
-        await store.dispatch('AUTH_LOGIN_SESSION', session);
+
+        try{
+            await store.dispatch('AUTH_LOGIN_SESSION', session);
+        }catch(err){
+
+        }
+
     } else {
         store.commit('SET_AUTH_USER', null );
         store.commit('SET_AUTH_SESSION', '' );

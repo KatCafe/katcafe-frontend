@@ -15,8 +15,16 @@ export default {
         return out;
     },
 
-    AUTH_SIGN_UP: ({ commit, dispatch, state }, { } ) => {
+    AUTH_SIGN_UP: async ({ commit, dispatch, state }, { username, email, password, confirmPassword, country, captcha } ) => {
 
+        const out = await NetworkHelper.post('/auth/signup', {username, email, password, confirmPassword, country, captcha} );
+
+        if (out ){
+            commit('SET_AUTH_USER', out.user);
+            commit('SET_AUTH_SESSION', out.session);
+        }
+
+        return out;
     },
 
     AUTH_LOGOUT: async ({ commit, dispatch, state },  ) => {

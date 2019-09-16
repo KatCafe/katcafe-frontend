@@ -44,7 +44,7 @@ Base styles
 body {
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #b8b8b8;
     font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
     background: #292929;
 }
@@ -231,8 +231,8 @@ Layout styles
 }
 
 .footer {
-    color: black;
-    background: #ffeded;
+    text-align: center;
+    background: #2f2222;
     padding: 1em 1.25em;
 }
 
