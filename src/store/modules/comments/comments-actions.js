@@ -39,14 +39,12 @@ export default {
 
     },
 
-    COMMENTS_DELETE: async ({commit, dispatch, state}, slug ) => {
+    COMMENT_DELETE: async ({commit, dispatch, state}, slug ) => {
 
         const out = await NetworkHelper.post('/comments/delete/', { slug } );
 
-
         if (out)
-            commit('SET_DELETE_COMMENTS', [slug]);
-
+            commit('SET_COMMENTS_DELETE', [slug]);
 
     },
 

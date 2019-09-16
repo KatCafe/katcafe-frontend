@@ -68,4 +68,14 @@ export default {
 
     },
 
+    TOPIC_DELETE: async ({commit, dispatch, state}, slug ) => {
+
+        const out = await NetworkHelper.post('/topics/delete/', { slug } );
+
+        if (out)
+            commit('SET_TOPICS_DELETE', [slug]);
+
+    },
+
+
 }

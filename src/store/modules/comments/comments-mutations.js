@@ -41,12 +41,10 @@ export default {
 
     },
 
-    SET_DELETE_COMMENTS: ( state, ids ) => {
+    SET_COMMENTS_DELETE: ( state, ids ) => {
 
         ids.map(it => Vue.delete( state.map, it ));
         ids.map(it => Vue.delete( state.list, state.list.findIndex( it2 => it2.slug === it ) ));
-
-
 
     }
 
