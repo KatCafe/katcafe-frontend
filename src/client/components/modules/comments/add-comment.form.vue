@@ -202,7 +202,6 @@ export default {
 
             }
 
-            e.stopPropagation();
             resolve();
 
         },

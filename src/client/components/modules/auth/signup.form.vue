@@ -85,7 +85,6 @@ export default {
                     captcha.reset();
             }
 
-            e.stopPropagation();
             resolver();
         }
 

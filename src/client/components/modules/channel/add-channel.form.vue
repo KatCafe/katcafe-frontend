@@ -96,7 +96,6 @@ export default {
 
             }
 
-            e.stopPropagation();
             resolver();
 
         },

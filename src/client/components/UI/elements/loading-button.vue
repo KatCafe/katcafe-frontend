@@ -50,6 +50,7 @@ export default{
             });
 
 
+            e.stopPropagation();
             this.$emit('onClick', e, resolver );
 
         },
