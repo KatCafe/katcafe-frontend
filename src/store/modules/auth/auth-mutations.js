@@ -1,4 +1,4 @@
-import CookiesService from "../../../services/cookies/cookies.service";
+import CookiesService from "src/services/cookies/cookies.service"
 
 export default {
 
@@ -11,7 +11,7 @@ export default {
     SET_AUTH_SESSION: (state, session ) => {
 
         state.session = session;
-        CookiesService.setCookie('session', session);
+        CookiesService.setCookie('session', JSON.stringify(session) );
 
     },
 

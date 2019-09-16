@@ -1,5 +1,4 @@
 import NetworkHelper from "modules/network/network-helper"
-import CookiesService from "src/services/cookies/cookies.service"
 
 export default {
     // ensure data for rendering given list type
@@ -9,8 +8,8 @@ export default {
         const out = await NetworkHelper.post('/auth/signin', {userEmail, password, country, captcha} );
 
         if (out && out.user) {
-            commit('SET_AUTH_USER', {user: out.user});
-            commit('SET_AUTH_SESSION', {session: out.session});
+            commit('SET_AUTH_USER', out.user);
+            commit('SET_AUTH_SESSION', out.session);
         }
 
         return out;
@@ -20,9 +19,23 @@ export default {
 
     },
 
-    AUTH_LOGOUT: ({ commit, dispatch, state }, { } ) => {
+    AUTH_LOGOUT: async ({ commit, dispatch, state },  ) => {
 
-        return commit('SET_AUTH_SESSION', undefined );
+        const out = await NetworkHelper.get('/auth/logout',  );
+
+        if ( out )
+            return commit('SET_AUTH_SESSION', undefined );
+
+    },
+
+    AUTH_LOGIN_SESSION: async ({ commit, dispatch, state }, session ) => {
+
+        const out = await NetworkHelper.post('/auth/signin-session', {key: session.key || state.session.key} );
+
+        if (out){
+            commit('SET_AUTH_USER', out.user);
+            commit('SET_AUTH_SESSION', out.session);
+        }
 
     },
 

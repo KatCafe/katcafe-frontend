@@ -1,5 +1,5 @@
 import { createApp } from './app'
-
+import NetworkHelper from "modules/network/network-helper"
 
 const isDev = process.env.NODE_ENV !== 'production'
 
@@ -11,15 +11,20 @@ const isDev = process.env.NODE_ENV !== 'production'
 export default context => {
   return new Promise(async (resolve, reject) => {
     const s = isDev && Date.now()
-    const { app, router, store } = createApp()
+    const { app, router, store } = createApp();
+
+    NetworkHelper.setStore(store);
 
     await store.dispatch('LOCALIZATION_NEW_IP', context.ip ); //Dispatching the Context IP
 
-    // const session = context.cookies.session;
-    // if (session) {
-    //     await store.commit('SET_AUTH_SESSION', session);
-    //     await store.dispatch('AUTHENTICATE_USER_SESSION', session);
-    // }
+    let session = context.cookies.session;
+    if (typeof session === "string") session = JSON.parse(session);
+
+    if (session) {
+
+        await store.commit('SET_AUTH_SESSION', session);
+        await store.dispatch('AUTH_LOGIN_SESSION', session);
+    }
 
     const {selectedCountry, selectedCountryCode} = context.cookies;
     if (selectedCountry && selectedCountryCode){

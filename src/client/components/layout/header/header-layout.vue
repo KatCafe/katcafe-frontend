@@ -17,13 +17,23 @@
                     <span>Create channel</span>
                 </router-link>
 
-                <router-link to="/login">
-                    <span>Login</span>
-                </router-link>
+                <template v-if="!user">
 
-                <router-link to="/signup">
-                    <span>Signup</span>
-                </router-link>
+                    <router-link to="/login">
+                        <span>Login</span>
+                    </router-link>
+
+                    <router-link to="/signup">
+                        <span>Signup</span>
+                    </router-link>
+
+                </template>
+
+                <template v-else>
+                    <router-link to="/logout" @click.native.prevent.capture="logout">
+                        <span>Logout</span>
+                    </router-link>
+                </template>
 
             </div>
 
@@ -45,7 +55,23 @@ export default {
         HeaderMenu,
     },
 
-    methods: {}
+    computed: {
+
+        user(){
+            return this.$store.state.auth.user;
+        }
+
+    },
+
+    methods: {
+
+        logout(){
+
+            return this.$store.dispatch('AUTH_LOGOUT');
+
+        }
+
+    },
 
 }
 

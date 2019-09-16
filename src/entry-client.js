@@ -3,6 +3,7 @@ import 'es6-promise/auto'
 import { createApp } from './app'
 
 import ProgressBar from './client/components/UI/elements/progress-bar.vue'
+import NetworkHelper from "modules/network/network-helper"
 
 const bar = Vue.prototype.$bar = new Vue(ProgressBar).$mount()
 document.body.appendChild(bar.$el)
@@ -41,7 +42,9 @@ Vue.directive('popover', function(el, binding){
 });
 
 
-const { app, router, store } = createApp()
+const { app, router, store } = createApp();
+
+NetworkHelper.setStore(store);
 
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.
@@ -49,6 +52,7 @@ if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__)
 }
 
+//not necessary as it was verified on our server
 //store.dispatch('AUTHENTICATE_USER_SESSION', store.state.auth.session );
 
 //send the store and dispatch to the FetchService (SocketClient needs store.socketStatus

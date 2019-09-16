@@ -3,7 +3,13 @@ const consts = require('consts/consts');
 
 class NetworkHelper {
 
+    setStore(store){
+        this._store = store;
+    }
+
     async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' } ){
+
+        headers.session = this._store.state.auth.session ? this._store.state.auth.session.key : undefined;
 
         return rp({
             uri: prefix + address,
@@ -18,7 +24,7 @@ class NetworkHelper {
 
     async get(address, body, prefix = consts.serverApi, json = true, timeout , headers = { 'User-Agent': 'Request-Promise' } ){
 
-        console.log(prefix+address);
+        headers.session = this._store.state.auth.session ? this._store.state.auth.session.key : undefined;
 
         return rp({
             uri: prefix + address,
