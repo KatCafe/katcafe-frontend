@@ -12,6 +12,8 @@ export default {
             commit('SET_AUTH_SESSION', out.session);
         }
 
+        dispatch('CAPTCHA_GET', );
+
         return out;
     },
 
@@ -23,6 +25,8 @@ export default {
             commit('SET_AUTH_USER', out.user);
             commit('SET_AUTH_SESSION', out.session);
         }
+
+        dispatch('CAPTCHA_GET', );
 
         return out;
     },

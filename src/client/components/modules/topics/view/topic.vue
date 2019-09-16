@@ -48,7 +48,7 @@
                     </div>
 
                     <router-link :to="isPage ? '' : to" v-if="commentsToLoad">
-                        <span v-if="commentsToLoad" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
+                        <span v-if="commentsToLoad >= 0" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
                     </router-link>
 
                     <div v-if="!isSnippetForm">

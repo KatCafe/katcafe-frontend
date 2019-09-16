@@ -2,7 +2,7 @@ import NetworkHelper from "modules/network/network-helper";
 
 export default {
 
-    CAPTCHA_GET: async  ({ commit, dispatch, state }, {  }) => {
+    CAPTCHA_GET: async  ({ commit, dispatch, state } ) => {
 
         if (state.captchaLoading) return;
 
