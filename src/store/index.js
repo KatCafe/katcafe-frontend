@@ -11,6 +11,7 @@ import TopicsModule from './modules/topics/topics-module'
 import CommentsModule from './modules/comments/comments-module'
 import LocalizationModule from './modules/localization/localization-module'
 import CaptchaModule from "./modules/captcha/captcha-module"
+import AuthModule from "./modules/auth/auth-module"
 
 Vue.use(Vuex);
 
@@ -24,6 +25,7 @@ export function createStore () {
             comments: CommentsModule,
             localization: LocalizationModule,
             captcha: CaptchaModule,
+            auth: AuthModule,
 
         }
     });

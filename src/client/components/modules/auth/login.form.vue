@@ -55,16 +55,16 @@ export default {
 
             try{
 
-                const out = await NetworkHelper.post('/auth/signin', {
+                const out = await this.$store.dispatch('AUTH_LOGIN', {
                     userEmail: this.userEmail,
                     password: this.password,
                     country: this.defaultCountry,
                     captcha: captcha.captchaData(),
                 });
 
-                if (out && out.user){
+                if (out && out.user)
                     this.$router.push('/');
-                }
+
 
             }catch(err){
                 this.error = err.message;
