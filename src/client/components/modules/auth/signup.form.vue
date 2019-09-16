@@ -9,9 +9,12 @@
         <input type="text" id="femail" name="email" v-model="email">
 
         <label for="fpassword">Password</label>
-        <input type="text" id="fpassword" name="password" v-model="password">
+        <input type="password" id="fpassword" name="password" v-model="password">
 
-        <captcha ref="captcha" @submit="submit" buttonText="Signup"/>
+        <label for="fconfirmpassword">Confirm Password</label>
+        <input type="password" id="fconfirmpassword" name="confirmpassword" v-model="confirmPassword">
+
+        <captcha ref="captcha" @submit="signup" buttonText="Signup"/>
 
         <span class="errorText">{{error}}</span>
 
@@ -38,15 +41,52 @@ export default {
             username: '',
             email: '',
             password: '',
+            confirmPassword: '',
 
             error: '',
         }
     },
 
+    computed: {
+
+        defaultCountry(){
+            return this.$store.state.localization.selectedCountryCode;
+        }
+
+    },
+
     methods: {
 
-        submit(){
+        async signup(e, resolver){
 
+            const captcha = this.$refs['captcha'];
+
+            this.error = '';
+
+            try{
+
+                const out = await NetworkHelper.post('/auth/signup', {
+                    username: this.username,
+                    email: this.email,
+                    password: this.password,
+                    confirmPassword: this.confirmPassword,
+                    country: this.defaultCountry,
+                    captcha: captcha.captchaData()
+                });
+
+                if (out && out.user){
+                    this.$router.push('/');
+                }
+
+            }catch(err){
+                this.error = err.message;
+
+                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
+                    captcha.reset();
+            }
+
+            e.stopPropagation();
+            resolver();
         }
 
     },

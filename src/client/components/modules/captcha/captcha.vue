@@ -57,6 +57,13 @@ export default {
             this.$emit('submit', e, resolve);
         },
 
+        captchaData(){
+            return {
+                solution: this.captchaInput,
+                encryption: this.captcha.encryption,
+            }
+        }
+
     },
 
 }

@@ -3,7 +3,7 @@
     <div >
 
         <span class="input-group-addon">
-            <img :class="`${ (value.css||'flag').toLowerCase() } flagImg `">
+            <img :class="`${ ( (value ? value.css : '') ||'flag').toLowerCase() } flagImg `">
         </span>
 
         <multiselect @input="onChangeSelect" v-model="value" label="label" track-by="label" :options="optionsFiltered" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
@@ -24,7 +24,7 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
-import {getFlags, getLabelByCode} from './flags/flags';
+import Flags from './flags/flags';
 
 export default {
 
@@ -35,9 +35,9 @@ export default {
             value: {
                 value: this.defaultCountryCode,
                 css: 'flag ' + this.defaultCountryCode,
-                label: getLabelByCode(this.defaultCountryCode || '')
+                label: Flags.getLabelByCode(this.defaultCountryCode || '')
             },
-            options: getFlags(),
+            options: Flags.getFlags(),
         }
     },
 
@@ -52,7 +52,7 @@ export default {
     computed:{
         getSelectValue(){
             if (( !this.value || !this.value.value ))
-                return {value: this.defaultCountryCode, css: 'flag '+this.defaultCountryCode, label: getLabelByCode(this.defaultCountryCode||'')  }
+                return {value: this.defaultCountryCode, css: 'flag '+this.defaultCountryCode, label: Flags.getLabelByCode(this.defaultCountryCode||'')  }
             else
                 return this.value;
         },

@@ -14,7 +14,7 @@ const TypographyPage = () => import('client/pages/typography.page');
 const LoginPage = () => import('client/pages/auth/login.page');
 const SignupPage = () => import('client/pages/auth/signup.page');
 
-import {getFlags} from 'client/components/UI/elements/select/flags/flags';
+import Flags from 'client/components/UI/elements/select/flags/flags';
 
 export function createRouter (store){
 
@@ -41,7 +41,7 @@ export function createRouter (store){
 
     }
 
-    const flags = getFlags();
+    const flags = Flags.getFlags();
 
     const nationalChannelRoutes = flags.map( it => { return { path: `/${it.value}`, component: HomePage, }});
     const nationalChannelRoutesPageIndex = flags.map( it => { return { path: `/${it.value}/pageIndex/:pageIndex`, component: HomePage, }});

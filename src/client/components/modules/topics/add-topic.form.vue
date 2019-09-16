@@ -214,10 +214,7 @@ export default {
                         base64: this.file.preview.img,
                     } : undefined,
                     author: this.author,
-                    captcha: {
-                        solution: captcha.captchaInput,
-                        encryption: captcha.captcha.encryption,
-                    }
+                    captcha: captcha.captchaData(),
                 });
 
                 captcha.reset();
@@ -239,8 +236,7 @@ export default {
             }
 
             e.stopPropagation();
-
-            resolve(true);
+            resolve();
 
         },
 

@@ -64,8 +64,6 @@ export default {
 
             if (out && out.result && out.vote) {
 
-                console.log(out);
-
                 if (out.prevVote){
                     if (out.prevVote === 1) this.parent.votesUp = (this.parent.votesUp || 0) -1; else
                     if (out.prevVote === -1) this.parent.votesDown = (this.parent.votesDown || 0) - 1;

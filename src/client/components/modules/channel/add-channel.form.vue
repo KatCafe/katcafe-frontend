@@ -64,7 +64,7 @@ export default {
             this.channelCountry = code;
         },
 
-        async createChannel(e){
+        async createChannel(e, resolver){
 
             const captcha = this.$refs['captcha'];
 
@@ -78,10 +78,7 @@ export default {
                     icon: this.channelIcon,
                     cover: this.channelCover,
                     country: this.channelCountry || this.defaultCountry,
-                    captcha: {
-                        solution: captcha.captchaInput,
-                        encryption: captcha.captcha.encryption,
-                    }
+                    captcha: captcha.captchaData()
                 });
 
                 if (!out || !out.result) throw "An error was encountered";
@@ -100,6 +97,7 @@ export default {
             }
 
             e.stopPropagation();
+            resolver();
 
         },
 

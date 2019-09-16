@@ -180,10 +180,7 @@ export default {
                         } : undefined,
                     body: this.body,
                     author: this.author,
-                    captcha: {
-                        solution: captcha.captchaInput,
-                        encryption: captcha.captcha.encryption,
-                    }
+                    captcha: captcha.captchaData(),
                 });
 
                 if (out && out.result) {
@@ -206,8 +203,7 @@ export default {
             }
 
             e.stopPropagation();
-
-            resolve(true);
+            resolve();
 
         },
 
