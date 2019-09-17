@@ -264,16 +264,17 @@ Nav
     display: inline-block;
 }
 
-.nav li .bold {
-    font-weight: bold;
-}
 
-.nav a {
+.nav li a {
     text-decoration: none;
     color: #a3a2a2;
     padding: 8px;
     display: inline-block;
     height: 14px;
+}
+
+.nav li.selected a {
+    color: white;
 }
 
 .nav-bar a:hover{

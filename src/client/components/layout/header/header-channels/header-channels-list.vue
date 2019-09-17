@@ -2,7 +2,7 @@
     <ul class="nav">
         <li v-for=" (it, index) in channels"
             :key="index"
-            :class="`${it.toLowerCase() === channel.toLowerCase() ? 'bold' : ''}`"
+            :class="`${it.toLowerCase() === channel.toLowerCase() ? 'selected' : ''}`"
         >
 
             <router-link :to="`/${it}`" >
