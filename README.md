@@ -29,7 +29,7 @@ Institutie Front-end Integration
 
 ## Make sure to add a --watch flag 
  
- `example file &&  jest sum.js --watch`
+ `example file &&  jest sum.test.js --watch`
 
 
 
