@@ -1,6 +1,7 @@
 <template>
     <div v-if="preview" class="topicImageWrap">
-        <img class="topicImage" :src="preview.img" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+
+        <img class="topicImage" :src="preview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
 
         <a v-if="link" :href="link" target="_blank" class="topicPreviewLink actionButton">
             {{linkPreview}}

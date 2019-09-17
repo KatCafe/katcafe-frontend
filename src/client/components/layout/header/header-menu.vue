@@ -4,16 +4,18 @@
 
         <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-        <ul class="nav">
-            <li v-for=" (it, index) in channels "
-                :key="index">
+        <template class="hiddenMobile">
+            <ul class="nav">
+                <li v-for=" (it, index) in channels "
+                    :key="index">
 
-                <router-link :to="`/${it}`" >
-                    {{it}}
-                </router-link>
+                    <router-link :to="`/${it}`" >
+                        {{it}}
+                    </router-link>
 
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </template>
 
     </div>
 

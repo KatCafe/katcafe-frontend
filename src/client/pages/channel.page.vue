@@ -4,21 +4,21 @@
 
         <template slot="content" >
 
-            <div v-if="channel">
+            <template v-if="channel">
                 <hero :title="channel.slug" :icon="channel.icon" :cover="channel.cover" />
-            </div>
+            </template>
 
             <div class="row">
 
                 <div class="column left">
 
-                    <div v-if="channel" >
+                    <template v-if="channel" >
                         <topics :topics="topics" :comments="comments" />
-                    </div>
+                    </template>
 
-                    <div v-if="!channel">
+                    <template v-if="!channel">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
-                    </div>
+                    </template>
 
                 </div>
 

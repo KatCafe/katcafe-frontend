@@ -1,59 +1,56 @@
 <template>
 
-    <div>
 
-        <div class="topic">
+    <div class="topic">
 
-            <div class="topicBox" >
+        <div class="topicBox" >
 
-                <vote parentType="topic" :slug="slug" :parent="topic" :myVote="topic.myVote" />
+            <vote parentType="topic" :slug="slug" :parent="topic" :myVote="topic.myVote" />
 
-                <div class="topicContent" ref="topicContent">
+            <div class="topicContent" ref="topicContent">
 
-                    <div class="author">
-                        <span class="details authorName">{{author}}</span>
+                <div class="author">
+                    <span class="details authorName">{{author}}</span>
 
-                        <span class="details">{{date}} </span>
+                    <span class="details">{{date}} </span>
 
-                        <router-link :to="'/'+(topic.channel||'')">
-                            <span class="actionButton">{{topic.channel||''}}</span>
-                        </router-link>
-
-                        <img v-if="isUserOwner" @click="deleteTopic" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
-
-                    </div>
-
-                    <div class="topicBoxContent" :class="this.topic.preview ? 'hasImage' : ''">
-
-                        <preview-image :data="this.topic.preview" :link="link" />
-
-                        <router-link :to="isPage ? '' : to">
-
-                            <div class="topicTextWrap">
-
-                                <h2 v-if="title" class="title">{{title}}</h2>
-
-                                <p class="topicBody">{{body}}</p>
-
-                            </div>
-                        </router-link>
-
-                    </div>
-
-
-                    <div class="topicComments" v-if="this.comments" @click.native="window.scrollTo(0,0)" >
-                        <comments :comments="comments" :isPreview = "isPreview" />
-                    </div>
-
-                    <router-link :to="isPage ? '' : to" v-if="commentsToLoad">
-                        <span v-if="commentsToLoad >= 0" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
+                    <router-link :to="'/'+(topic.channel||'')">
+                        <span class="actionButton">{{topic.channel||''}}</span>
                     </router-link>
 
-                    <div v-if="!isSnippetForm">
+                    <img v-if="isUserOwner" @click="deleteTopic" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
 
-                        <add-comment-from :topic="this.topic" />
+                </div>
 
-                    </div>
+                <div class="topicBoxContent" :class="this.topic.preview ? 'topicHasImage' : ''">
+
+                    <preview-image :data="this.topic.preview" :link="link" />
+
+                    <router-link :to="isPage ? '' : to">
+
+                        <div class="topicTextWrap">
+
+                            <h2 v-if="title" class="title">{{title}}</h2>
+
+                            <p class="topicBody">{{body}}</p>
+
+                        </div>
+                    </router-link>
+
+                </div>
+
+
+                <div class="topicComments" v-if="comments.length" @click.native="window.scrollTo(0,0)" >
+                    <comments :comments="comments" :isPreview = "isPreview" />
+                </div>
+
+                <router-link :to="isPage ? '' : to" v-if="commentsToLoad">
+                    <span v-if="commentsToLoad >= 0" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
+                </router-link>
+
+                <div v-if="!isSnippetForm">
+
+                    <add-comment-from :topic="this.topic" />
 
                 </div>
 

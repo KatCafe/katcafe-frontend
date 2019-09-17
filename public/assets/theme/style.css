@@ -655,7 +655,6 @@ form {
 
 .topicImageWrap{
     float: left;
-    padding-right: 10px;
     padding-bottom: 3px;
     cursor: pointer;
     z-index: 10;
@@ -682,6 +681,7 @@ form {
 }
 
 .topicBody{
+    word-break: break-all;
     white-space: pre-wrap;
     margin-bottom: 0;
     font-size: 14px;
@@ -699,7 +699,6 @@ form {
     color: #787878;
     cursor: pointer;
     font-size: 12px;
-    margin-left: 20px;
 }
 
 
@@ -852,8 +851,8 @@ form {
     margin-top: 0;
 }
 
-.hasImage,
-.hasCommentImage {
+.topicHasImage,
+.commentHasImage {
     display: grid;
     grid-template-columns: 150px 1fr;
     grid-column-gap: 10px;
@@ -1131,10 +1130,35 @@ textarea:focus, input:focus{
     fill: #a8a8a8;
 }
 
-
+.hiddenDesktop{
+    display: none;
+}
 
 
 @media only screen and (max-width: 600px) {
+
+    .nav-bar {
+        grid-template-columns: 150px 1fr;
+    }
+
+    .header{
+        padding-left: 5px;
+        padding-right: 1px;
+    }
+
+    .header .logo{
+        padding-right: 3px;
+    }
+
+    .header .logoText{
+        font-size: 20px;
+        top: -13px;
+    }
+
+    .header .headerRight a{
+        font-size: 14px;
+        padding-right: 5px;
+    }
 
     .topicBox{
         grid-template-columns: 20px 1fr;
@@ -1142,6 +1166,7 @@ textarea:focus, input:focus{
 
     .replyBox{
         grid-column-gap: 0;
+        grid-template-columns: 40px 1fr 30px;
     }
 
     .sideReplyBox{
@@ -1158,7 +1183,7 @@ textarea:focus, input:focus{
 
     .captchaBox{
         grid-template-columns: 90px 1fr;
-        grid-row-gap: 10px;
+        grid-row-gap: 5px;
 
     }
 
@@ -1166,5 +1191,31 @@ textarea:focus, input:focus{
         grid-column: 1 / -1;
     }
 
+
+    .topicHasImage,
+    .commentHasImage {
+        grid-template-columns: 1fr;
+    }
+
+    .topicImage{
+        width: 100%;
+        max-width: 1000px;
+        max-height: 1000px;
+        min-width: 0;
+        min-height: 0;
+        height: auto;
+    }
+
+    .topicButtons{
+        display: none;
+    }
+
+    .hiddenMobile{
+        display: none;
+    }
+
+    .hiddenDesktop{
+        visibility: visible;
+    }
 
 }

@@ -14,24 +14,24 @@
             <div class="headerRight">
 
                 <router-link class="menuButton" to="/add-channel">
-                    <span>Create channel</span>
+                    Add channel
                 </router-link>
 
                 <template v-if="!user">
 
                     <router-link to="/login">
-                        <span>Login</span>
+                        Login
                     </router-link>
 
                     <router-link to="/signup">
-                        <span>Signup</span>
+                        Signup
                     </router-link>
 
                 </template>
 
                 <template v-else>
                     <router-link to="/logout" @click.native.prevent.capture="logout">
-                        <span>Logout {{user.username}}</span>
+                        Logout <span class="hiddenMobile">{{user.username}}</span>
                     </router-link>
                 </template>
 

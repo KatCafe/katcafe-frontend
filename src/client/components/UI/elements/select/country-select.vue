@@ -9,7 +9,7 @@
         <multiselect @input="onChangeSelect" v-model="value" label="label" track-by="label" :options="optionsFiltered" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
 
             <template slot="option" slot-scope="props">
-                <img :class="props.option.css" style="display: inline-block; position: relative; verticalAlign: middle; padding-top:11px !important;" />
+                <img :class="props.option.css + ' option__flag '"  />
                 <div class="option__desc">
                     <span class="option__title">{{ props.option.label }}</span>
                 </div>
@@ -90,8 +90,9 @@ export default {
 
 
 <style>
+
     .flagImg{
-        position: relative;;
+        position: relative;
         top: 15px;
         z-index: 50;
         left: 5px;
@@ -110,11 +111,16 @@ export default {
         margin: 0 !important;
         left: 20px;
         color: white;
+        min-height: 20px !important;
+        height: 20px !important;
+        font-size: 16px;
     }
 
     .multiselect .multiselect__single{
         left: 15px;
         z-index: 3 !important;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
 
@@ -132,23 +138,41 @@ export default {
 
     .multiselect__input, .multiselect__single{
         background: #323232;
-        color: #a3a2a2;
-    }
-
-    .multiselect__input, .multiselect__single{
+        color: #9f9e9e;
         width: 95%;
     }
 
-    /*.multiselect__single{*/
-        /*display: none;*/
-    /*}*/
-
-    /*.multiselect__tags:hover .multiselect__single{*/
-        /*display: block;*/
-    /*}*/
+    .multiselect__input::placeholder{
+        color: #9f9e9e;
+        opacity: 1; /* Firefox */
+    }
 
     .multiselect__select{
         height: 36px;
+    }
+
+    .option__title{
+        color: black;
+    }
+
+    .option__flag{
+        display: inline-block;
+        position: relative;
+        verticalAlign: middle;
+        padding-top:11px !important;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .multiselect .multiselect__single{
+            font-size: 13px;
+        }
+
+        .option__desc{
+            line-height: 13px;
+            font-size: 13px;
+        }
+
     }
 
 </style>

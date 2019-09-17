@@ -12,13 +12,13 @@
 
                 <div class="column left">
 
-                    <div v-if="topics.length">
+                    <template v-if="topics.length">
                         <topics :topics="topics" :comments="comments" :channel="getHomepageChannel" />
-                    </div>
+                    </template>
 
-                    <div v-if="!topics.length">
+                    <template v-if="!topics.length">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
-                    </div>
+                    </template>
 
                 </div>
 

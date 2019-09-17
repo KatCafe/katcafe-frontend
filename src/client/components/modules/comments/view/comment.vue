@@ -12,15 +12,14 @@
                     <span class="details authorName">{{author}}</span>
                     <span class="details">{{date}} </span>
 
-                    <img v-if="isUserOwner" @click="deleteComment" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
-
                     <div class="topicButtons">
+                        <img v-if="isUserOwner" @click="deleteComment" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
                         <span class="postId actionButton" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
                     </div>
 
                 </div>
 
-                <div class="topicBoxContent" :class="comment.preview ? 'hasCommentImage' : ''">
+                <div class="topicBoxContent" :class="comment.preview ? 'commentHasImage' : ''">
 
                     <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
 
