@@ -23,7 +23,7 @@
                         Login
                     </router-link>
 
-                    <router-link to="/signup">
+                    <router-link to="/signup" class="hiddenMobile">
                         Signup
                     </router-link>
 

@@ -93,7 +93,7 @@ export default {
 
     .flagImg{
         position: relative;
-        top: 15px;
+        top: 10px;
         z-index: 50;
         left: 5px;
         height: 12px;
@@ -102,7 +102,9 @@ export default {
 
     .multiselect{
         width: 100% !important;
-        z-index: 10 !important;;
+        z-index: 10 !important;
+        height: 30px;
+        min-height: 30px;
     }
 
     .multiselect input{
@@ -120,7 +122,13 @@ export default {
         left: 15px;
         z-index: 3 !important;
         white-space: nowrap;
-        overflow: hidden;
+        line-height: 10px;
+        background-color: transparent;
+
+        color: #9f9e9e;
+        width: 95%;
+        font-size: 14px;
+        overflow: initial;
     }
 
 
@@ -133,26 +141,33 @@ export default {
         border: none;
         background-color: #323232;
         padding: 0 40px 0 10px;
-        min-height: 35px;
+
+        min-height: 30px;
+        height: 30px;
     }
 
-    .multiselect__input, .multiselect__single{
-        background: #323232;
-        color: #9f9e9e;
-        width: 95%;
+    .multiselect__input{
+        top: -5px;
     }
 
     .multiselect__input::placeholder{
         color: #9f9e9e;
         opacity: 1; /* Firefox */
+        font-size: 14px;
     }
 
     .multiselect__select{
         height: 36px;
+        top: -3px;
     }
 
     .option__title{
         color: black;
+    }
+
+    .option__desc{
+        line-height: 13px;
+        font-size: 14px;
     }
 
     .option__flag{
@@ -164,14 +179,6 @@ export default {
 
     @media only screen and (max-width: 600px) {
 
-        .multiselect .multiselect__single{
-            font-size: 13px;
-        }
-
-        .option__desc{
-            line-height: 13px;
-            font-size: 13px;
-        }
 
     }
 
