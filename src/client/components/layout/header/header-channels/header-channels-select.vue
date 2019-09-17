@@ -6,7 +6,7 @@
             <template slot="option" slot-scope="props">
 
                 <div class="option__desc">
-                    <span class="option__title">{{ props.option }}</span>
+                    <span class="option__title">{{ props.option.substr(0,20) }}</span>
                 </div>
 
             </template>

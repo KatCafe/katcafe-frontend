@@ -2,7 +2,6 @@
 
     <div class="rightSidebar stickySidebar" >
 
-
         <add-comment-form  ref="addCommentForm" :topic="topic" :channel="channel"  />
 
     </div>
@@ -25,26 +24,43 @@ export default {
 
         if (typeof window === "undefined") return;
 
+        let w,h, top, topHero;
+
         const addCommentForm = this.$refs['addCommentForm'].$el;
-        console.log(addCommentForm);
-        addCommentForm.style.position = "relative";
 
-        var top = window.pageYOffset || document.documentElement.scrollTop;
-        var topHero = document.getElementById("hero");
-        if (topHero) topHero = topHero.clientHeight;
-        else topHero = 0;
+        const change = ()=>{
 
-        addCommentForm.style.top = top - topHero + Math.max( -20, topHero - top ) +"px";
+            w = window.innerWidth;
 
-        BrowserHelpers.addEvent(window, 'scroll', (e)=>{
-            topHero = document.getElementById("hero");
-            if (topHero) topHero = topHero.clientHeight;
-            else topHero = 0;
+            top = window.pageYOffset || document.documentElement.scrollTop;
 
-            var top = window.pageYOffset || document.documentElement.scrollTop;
+            if (w <= 800) {
+                addCommentForm.style.position = "absolute";
+                addCommentForm.style.bottom = -top+"px";
+                addCommentForm.style.top = "inherit";
+                addCommentForm.style.width = w+'px';
+            }
+            else {
+                addCommentForm.style.position = "relative";
 
-            addCommentForm.style.top = top - topHero + Math.max( -20, topHero - top ) +"px";
-        })
+                topHero = document.getElementById("hero");
+                if (topHero) topHero = topHero.clientHeight;
+                else topHero = 0;
+
+                addCommentForm.style.top = top - topHero + Math.max( -20, topHero - top ) +"px";
+                addCommentForm.style.width = '100%';
+
+            }
+
+
+            console.log("w", w, "H", h, top );
+
+        };
+
+        change();
+
+        BrowserHelpers.addEvent(window, 'scroll', e => change() );
+        BrowserHelpers.addEvent(window, 'resize', e => change() );
 
     },
 

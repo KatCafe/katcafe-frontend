@@ -175,13 +175,11 @@ Layout styles
     display: inline-block;
     width: 100%;
     max-width: 800px;
-    padding: 0 10px;
+    padding-right: 10px;
     margin: 0 auto;
 }
 
 .right {
-    display: inline-block;
-    width: 35%;
 }
 
 .row{
@@ -792,6 +790,7 @@ form {
 }
 
 .stickySidebar{
+
 }
 
 .rightSidebarClose{
@@ -916,7 +915,7 @@ form {
     display: grid;
     grid-template-columns: 40px 1fr 50px;
     grid-column-gap: 10px;
-    padding: 10px 0;
+    padding: 8px;
 }
 
 .replyBox .profileAvatar{
@@ -1042,8 +1041,10 @@ textarea:focus, input:focus{
 
 .sideReplyBox{
     background-color: #3c3c3c;
-    padding: 10px;
     color: #fff;
+    width: 95%;
+    left: 0;
+    z-index: 10;
 }
 
 .topicPage{
@@ -1075,14 +1076,6 @@ textarea:focus, input:focus{
 .form input:focus{
     outline: none;
     background-color: #ffdb85;
-}
-
-.form .multiselect{
-    margin-bottom: 10px;
-}
-
-.form .multiselect__single{
-    margin-top: 8px;
 }
 
 
@@ -1182,13 +1175,15 @@ textarea:focus, input:focus{
 
     top: 6px;
     z-index: 3 !important;
-    white-space: nowrap;
     background-color: transparent;
 
     color: #9f9e9e;
-    width: 95%;
+    width: 100%;
     font-size: 14px;
-    overflow: initial;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
@@ -1238,8 +1233,11 @@ textarea:focus, input:focus{
     padding-top:11px !important;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
 
+    .topicPage{
+        grid-template-columns: 1fr ;
+    }
 
 }
 
@@ -1250,55 +1248,52 @@ textarea:focus, input:focus{
         grid-template-columns: 150px 1fr;
     }
 
-    .header, .headerRight{
+    .header, .headerRight {
         height: 35px;
     }
 
-    .header{
+    .header {
         padding-left: 5px;
         padding-right: 1px;
     }
 
-    .header .logo{
+    .header .logo {
         max-height: 32px;
         padding-right: 3px;
     }
 
-    .header .logoText{
+    .header .logoText {
         font-size: 20px;
     }
 
 
-
-    .header .headerRight a{
+    .header .headerRight a {
         font-size: 12px;
         padding-right: 5px;
         position: relative;
         top: -5px;
     }
 
-    .topicBox{
+    .topicBox {
         grid-template-columns: 20px 1fr;
     }
 
-    .replyBox{
+    .replyBox {
         grid-column-gap: 0;
         grid-template-columns: 40px 1fr 30px;
+        padding: 5px;
     }
 
-    .sideReplyBox{
-        padding: 0
-    }
 
-    .newPostContainer{
+    .newPostContainer {
         padding: 7px 7px;
     }
 
-    .messageBox{
+    .messageBox {
         grid-column-gap: 0px;
     }
 
-    .captchaBox{
+    .captchaBox {
         grid-template-columns: 90px 1fr;
         grid-row-gap: 5px;
 
@@ -1314,7 +1309,7 @@ textarea:focus, input:focus{
         grid-template-columns: 1fr;
     }
 
-    .topicImage{
+    .topicImage {
         width: 100%;
         max-width: 1000px;
         max-height: 1000px;
@@ -1323,23 +1318,37 @@ textarea:focus, input:focus{
         height: auto;
     }
 
-    .topicButtons{
+    .topicButtons {
         display: none;
     }
 
-    .hiddenMobile{
+    .hiddenMobile {
         display: none;
     }
 
-    .hiddenDesktop{
+    .hiddenDesktop {
         display: initial;
     }
 
 
-    .multiselect__option{
+    .multiselect__option {
         padding: 6px !important;
         min-height: 29px !important;;
         line-height: 14px !important;;
     }
+
+    .left {
+        padding-left: 4px;
+    }
+
+    .right {
+        padding-left: 20px;
+    }
+
+    .topic {
+        padding-right: 5px;
+    }
+
+
 
 }

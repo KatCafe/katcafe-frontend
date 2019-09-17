@@ -4,10 +4,10 @@
 
         <country-select :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannel" />
+        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannel.slug" />
 
         <div class="hiddenDesktop">
-            <header-channels-select :channels="channels" :channel="getChannel" />
+            <header-channels-select :channels="channels" :channel="getChannel.slug" />
         </div>
 
     </div>
@@ -49,11 +49,7 @@ export default {
         },
 
         getChannel(){
-            const country = this.$store.state.localization.selectedCountryCode;
-            let path = this.$route.path;
-            if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
-
-            return BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country
+            return this.$store.state.channels.channel;
         },
 
         defaultCountry(){

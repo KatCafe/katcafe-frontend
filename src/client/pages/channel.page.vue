@@ -22,7 +22,7 @@
 
                 </div>
 
-                <div v-if="visibleStickyRightSidebarComment" class="column right">
+                <div v-if="visibleStickyRightSidebarComment " class="column right">
                     <sticky-right-sidebar-comment :channel="channel" />
                 </div>
 

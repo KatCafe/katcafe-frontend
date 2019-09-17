@@ -57,6 +57,8 @@ export default {
         store.commit('SET_TOPICS', [] );
         store.commit('SET_COMMENTS', [] );
 
+        store.dispatch('CHANNEL_GET', {slug: path });
+
         await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0, count: 5 });
 
     },
@@ -65,6 +67,8 @@ export default {
         '$route': {
             deep: true,
             handler: async function (refreshPage) {
+
+                await this.$store.dispatch('CHANNEL_GET', {slug: this.getChannel,});
 
                 this.$store.commit('SET_TOPICS', [] );
                 await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: this.getChannel });

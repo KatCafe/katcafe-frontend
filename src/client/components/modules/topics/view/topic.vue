@@ -48,11 +48,11 @@
                     <span v-if="commentsToLoad >= 0" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
                 </router-link>
 
-                <div v-if="!isSnippetForm">
+                <template v-if="!isSnippetForm && isPreview ">
 
                     <add-comment-from :topic="this.topic" />
 
-                </div>
+                </template>
 
             </div>
 

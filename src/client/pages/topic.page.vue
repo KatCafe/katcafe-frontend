@@ -21,7 +21,7 @@
 
                 </div>
 
-                <div class="column replyRightBox">
+                <div class="column right replyRightBox">
 
                     <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
 
@@ -54,6 +54,8 @@ export default {
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
+        console.log(route.params.slug);
+
         if (route.params.slug) {
 
             store.commit('SET_COMMENTS', [] );
@@ -61,7 +63,7 @@ export default {
             await store.dispatch('TOPIC_GET', {slug: path,});
 
             if (store.state.topics.topic)
-                await store.dispatch('CHANNEL_GET', {slug: path  });
+                await store.dispatch('CHANNEL_GET', {slug: store.state.topics.topic.channel  });
 
             await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0});
         }
