@@ -1,6 +1,6 @@
 <template>
 
-    <div >
+    <div class="country-select" >
 
         <span class="input-group-addon">
             <img :class="`${ ( (value ? value.css : '') ||'flag').toLowerCase() } flagImg `">
@@ -91,95 +91,14 @@ export default {
 
 <style>
 
-    .flagImg{
-        position: relative;
-        top: 10px;
-        z-index: 50;
-        left: 5px;
-        height: 12px;
-        padding-right: 10px;
+    .country-select > .multiselect .multiselect__single {
+        top: -6px;
+        left: 12px;
     }
 
-    .multiselect{
-        width: 100% !important;
-        z-index: 10 !important;
-        height: 30px;
-        min-height: 30px;
-    }
-
-    .multiselect input{
-        border: none;
-        padding: 0 !important;
-        margin: 0 !important;
-        left: 20px;
-        color: white;
-        min-height: 20px !important;
-        height: 20px !important;
-        font-size: 16px;
-    }
-
-    .multiselect .multiselect__single{
-        left: 15px;
-        z-index: 3 !important;
-        white-space: nowrap;
-        line-height: 10px;
-        background-color: transparent;
-
-        color: #9f9e9e;
-        width: 95%;
-        font-size: 14px;
-        overflow: initial;
-    }
-
-
-    .multiselect__content-wrapper {
-        z-index: 3 !important;
-    }
-
-    .multiselect__tags {
-        border-radius: 0;
-        border: none;
-        background-color: #323232;
-        padding: 0 40px 0 10px;
-
-        min-height: 30px;
-        height: 30px;
-    }
-
-    .multiselect__input{
-        top: -5px;
-    }
-
-    .multiselect__input::placeholder{
-        color: #9f9e9e;
-        opacity: 1; /* Firefox */
-        font-size: 14px;
-    }
-
-    .multiselect__select{
-        height: 36px;
-        top: -3px;
-    }
-
-    .option__title{
-        color: black;
-    }
-
-    .option__desc{
-        line-height: 13px;
-        font-size: 14px;
-    }
-
-    .option__flag{
-        display: inline-block;
-        position: relative;
-        verticalAlign: middle;
-        padding-top:11px !important;
-    }
-
-    @media only screen and (max-width: 600px) {
-
-
+    .country-select > .multiselect .multiselect__input{
+        top: -6px;
+        left: 16px;
     }
 
 </style>

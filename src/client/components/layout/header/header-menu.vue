@@ -2,20 +2,13 @@
 
     <div class="nav-bar">
 
-        <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
+        <country-select :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-        <template class="hiddenMobile">
-            <ul class="nav">
-                <li v-for=" (it, index) in channels "
-                    :key="index">
+        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannel" />
 
-                    <router-link :to="`/${it}`" >
-                        {{it}}
-                    </router-link>
-
-                </li>
-            </ul>
-        </template>
+        <div class="hiddenDesktop">
+            <header-channels-select :channels="channels" :channel="getChannel" />
+        </div>
 
     </div>
 
@@ -24,12 +17,13 @@
 <script>
 
 import CountrySelect from "../../UI/elements/select/country-select";
+import HeaderChannelsList from "./header-channels/header-channels-list"
+import HeaderChannelsSelect from "./header-channels/header-channels-select"
+import BrowserHelper from "modules/helpers/browser.helpers"
 
 export default {
 
-    components: {
-        CountrySelect,
-    },
+    components: { CountrySelect,  HeaderChannelsList, HeaderChannelsSelect },
 
     mounted(){
 
@@ -52,6 +46,14 @@ export default {
 
         channels(){
             return this.$store.state.channels.navBarList;
+        },
+
+        getChannel(){
+            const country = this.$store.state.localization.selectedCountryCode;
+            let path = this.$route.path;
+            if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
+
+            return BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country
         },
 
         defaultCountry(){
