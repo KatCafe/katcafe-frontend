@@ -23,9 +23,6 @@ Institutie Front-end Integration
 
 `yarn test` || `npm run test` 
 
-## Based on your project, Jest will ask you a few questions and will create a basic configuration file with a short description for each option run:
-
-`jest init`
 
 ## Make sure to add a --watch flag 
  
