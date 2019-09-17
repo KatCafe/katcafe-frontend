@@ -1,7 +1,9 @@
 <template>
     <ul class="nav">
-        <li v-for=" (it, index) in channels "
-            :key="index">
+        <li v-for=" (it, index) in channels"
+            :key="index"
+            :class="`${it.toLowerCase() === channel.toLowerCase() ? 'bold' : ''}`"
+        >
 
             <router-link :to="`/${it}`" >
                 {{it}}
@@ -15,7 +17,8 @@
 export default {
 
     props: {
-        channels: undefined,
+        channels: { default () { return [ ]}},
+        channel:  { default: ''},
     }
 
 }

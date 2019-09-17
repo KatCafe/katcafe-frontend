@@ -26,15 +26,14 @@ export default {
 
     props: {
 
-        channels: {
-            default: [],
-        },
+        channels: { default () { return [ ]}},
+        channel:  { default: ''},
 
     },
 
     data () {
         return {
-            value: 'en',
+            value: this.channel,
         }
     },
 
@@ -46,6 +45,8 @@ export default {
 
             this.value = value;
             this.$emit('onSelect',value);
+
+            this.$router.push({path: '/' +value });
 
             return value;
         }

@@ -4,10 +4,10 @@
 
         <country-select :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-        <header-channels-list class=" hiddenMobile" :channels="channels" />
+        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannel" />
 
         <div class="hiddenDesktop">
-            <header-channels-select :channels="channels" />
+            <header-channels-select :channels="channels" :channel="getChannel" />
         </div>
 
     </div>
@@ -19,6 +19,7 @@
 import CountrySelect from "../../UI/elements/select/country-select";
 import HeaderChannelsList from "./header-channels/header-channels-list"
 import HeaderChannelsSelect from "./header-channels/header-channels-select"
+import BrowserHelper from "modules/helpers/browser.helpers"
 
 export default {
 
@@ -45,6 +46,14 @@ export default {
 
         channels(){
             return this.$store.state.channels.navBarList;
+        },
+
+        getChannel(){
+            const country = this.$store.state.localization.selectedCountryCode;
+            let path = this.$route.path;
+            if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
+
+            return BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country
         },
 
         defaultCountry(){

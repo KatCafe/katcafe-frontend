@@ -264,6 +264,10 @@ Nav
     display: inline-block;
 }
 
+.nav li .bold {
+    font-weight: bold;
+}
+
 .nav a {
     text-decoration: none;
     color: #a3a2a2;
