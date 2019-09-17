@@ -17,10 +17,6 @@
             </ul>
         </template>
 
-        <template class="hiddenDesktop">
-
-        </template>
-
     </div>
 
 </template>
