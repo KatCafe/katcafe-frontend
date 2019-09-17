@@ -2,20 +2,13 @@
 
     <div class="nav-bar">
 
-        <country-select class="country-select" :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
+        <country-select :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-        <template class="hiddenMobile">
-            <ul class="nav">
-                <li v-for=" (it, index) in channels "
-                    :key="index">
+        <header-channels-list class=" hiddenMobile" :channels="channels" />
 
-                    <router-link :to="`/${it}`" >
-                        {{it}}
-                    </router-link>
-
-                </li>
-            </ul>
-        </template>
+        <div class="hiddenDesktop">
+            <header-channels-select :channels="channels" />
+        </div>
 
     </div>
 
@@ -24,12 +17,12 @@
 <script>
 
 import CountrySelect from "../../UI/elements/select/country-select";
+import HeaderChannelsList from "./header-channels/header-channels-list"
+import HeaderChannelsSelect from "./header-channels/header-channels-select"
 
 export default {
 
-    components: {
-        CountrySelect,
-    },
+    components: { CountrySelect,  HeaderChannelsList, HeaderChannelsSelect },
 
     mounted(){
 
