@@ -12,11 +12,11 @@
                     <span class="details authorName">{{author}}</span>
                     <span class="details">{{date}} </span>
 
+                    <img v-if="isUserOwner" @click="deleteComment" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
+
                     <div class="topicButtons">
                         <span class="postId actionButton" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
                     </div>
-
-                    <img v-if="isUserOwner" @click="deleteComment" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
 
                 </div>
 

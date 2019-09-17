@@ -2,22 +2,22 @@
 
     <layout :stickyButtons="stickyButtons" >
 
-        <div slot="content"  >
+        <template slot="content"  >
 
             <div class="row topicPage">
 
                 <div class="column left">
 
-                    <div v-if="topic">
+                    <template v-if="topic">
 
                         <topic :topic="topic" :comments="comments" :isPage="true" />
 
-                    </div>
+                    </template>
 
 
-                    <div v-if="!topic">
+                    <template v-if="!topic">
                         <span class="actionButton">Topic <strong>{{ this.slug }}</strong> was not found</span>
-                    </div>
+                    </template>
 
                 </div>
 
@@ -31,7 +31,7 @@
 
             <infinite-scroll ref="refInfiniteScroll" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
 
-        </div>
+        </template>
 
     </layout>
 

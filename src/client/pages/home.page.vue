@@ -4,9 +4,9 @@
 
         <div slot="content"  >
 
-            <div>
+            <template>
                 <hero :title="'/'+this.getChannel" :cover="getChannelCover" :titleStyle="getChannelTitleColor" />
-            </div>
+            </template>
 
             <div class="row">
 

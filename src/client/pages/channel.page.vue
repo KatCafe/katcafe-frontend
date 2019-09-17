@@ -2,7 +2,7 @@
 
     <layout :stickyButtons="stickyButtons">
 
-        <div slot="content" >
+        <template slot="content" >
 
             <div v-if="channel">
                 <hero :title="channel.slug" :icon="channel.icon" :cover="channel.cover" />
@@ -32,7 +32,7 @@
 
             <infinite-scroll ref="refInfiniteScroll" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
 
-        </div>
+        </template>
 
     </layout>
 
