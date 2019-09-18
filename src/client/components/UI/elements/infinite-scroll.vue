@@ -54,11 +54,11 @@ export default{
                 if (!this.hasMore) return;
                 if (this.loading) return;
 
-                let divTop = this.$refs['refInfinite'].offsetTop;
+                const divTop = this.$refs['refInfinite'].offsetTop;
 
-                let windowHeight = window.outerHeight||document.body.offsetHeight;
+                const windowHeight = window.outerHeight||document.body.offsetHeight;
 
-                let diff = divTop - window.scrollY  - windowHeight ;
+                const diff = divTop - window.scrollY  - windowHeight ;
 
                 if (diff <= this.distance ){
 
