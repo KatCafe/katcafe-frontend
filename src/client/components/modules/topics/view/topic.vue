@@ -123,7 +123,7 @@ export default {
         },
 
         isUserOwner(){
-            return this.$store.getters.isUserOwner(this.channel) || this.$store.getters.isUserOwner(this.topic);
+            return this.$store.getters.isUserOwner( [this.channel, this.topic] );
         }
 
     },

@@ -103,7 +103,7 @@ export default {
         },
 
         isUserOwner(){
-            return this.$store.getters.isUserOwner(this.channel) ||this.$store.getters.isUserOwner(this.topic) || this.$store.getters.isUserOwner(this.comment);
+            return this.$store.getters.isUserOwner( [this.channel, this.topic, this.comment] );
         }
 
     },

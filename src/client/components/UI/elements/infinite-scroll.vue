@@ -49,20 +49,26 @@ export default{
 
         scrollEvent(){
 
-            if (!this.hasMore) return;
-            if (this.loading) return;
+            try{
 
-            let divTop = this.$refs['refInfinite'].offsetTop;
+                if (!this.hasMore) return;
+                if (this.loading) return;
 
-            let windowHeight = window.outerHeight||document.body.offsetHeight;
+                let divTop = this.$refs['refInfinite'].offsetTop;
 
-            let diff = divTop - window.scrollY  - windowHeight ;
+                let windowHeight = window.outerHeight||document.body.offsetHeight;
 
-            if (diff <= this.distance ){
+                let diff = divTop - window.scrollY  - windowHeight ;
 
-                this.loading = true;
+                if (diff <= this.distance ){
 
-                this.$emit('onScroll', diff);
+                    this.loading = true;
+
+                    this.$emit('onScroll', diff);
+
+                }
+
+            }catch(err){
 
             }
 
@@ -71,9 +77,7 @@ export default{
         continueScroll(){
 
             //make sure the elements were loaded
-            setTimeout( () => {
-                this.loading = false;
-            }, 1000);
+            setTimeout( () => this.loading = false, 1000);
         }
 
     }
