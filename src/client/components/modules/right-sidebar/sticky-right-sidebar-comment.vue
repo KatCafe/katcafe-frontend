@@ -2,7 +2,7 @@
 
     <div class="rightSidebar stickySidebar" >
 
-        <add-comment-form  ref="addCommentForm" :topic="topic" :channel="channel"  />
+        <add-comment-form  ref="addCommentForm" :topic="stickyTopic||topic" :channel="stickyChannel||channel"  />
 
     </div>
 </template>
@@ -18,6 +18,8 @@ export default {
     components: {AddCommentForm},
 
     props: {
+        topic: {default: null},
+        channel: {default: null},
     },
 
     mounted(){
@@ -63,11 +65,11 @@ export default {
 
     computed:{
 
-        topic(){
+        stickyTopic(){
             return this.$store.state.global.topicStickyRightSidebarComment;
         },
 
-        channel(){
+        stickyChannel(){
             return this.$store.state.global.channelStickyRightSidebarComment;
         }
 

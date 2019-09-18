@@ -28,7 +28,7 @@
 
         </div>
 
-        <captcha v-if="showPreview" ref="captcha" @submit="createTopic" buttonText="Submit Topic"  style="padding-top: 10px"/>
+        <captcha v-if="showPreview" ref="captcha" @submit="createTopic" buttonText="Send Topic"  style="padding-top: 10px"/>
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
         <icon icon="loading-spinner" v-if="loading" />

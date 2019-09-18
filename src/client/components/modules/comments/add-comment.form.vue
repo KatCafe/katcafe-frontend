@@ -12,7 +12,7 @@
         </div>
 
         <div v-if="showPreview">
-            <captcha ref="captcha" @submit="createComment" buttonText="Submit Comment" />
+            <captcha ref="captcha" @submit="createComment" buttonText="Post" />
 
             <icon icon="loading-spinner" v-if="loading" />
 
@@ -67,7 +67,7 @@ export default {
     components: { Icon, Captcha, Comment },
 
     props: {
-        topic: null,
+        topic: {default: null},
     },
 
     data(){
