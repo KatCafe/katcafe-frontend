@@ -7,8 +7,8 @@
         <div class="header">
 
             <router-link to="/">
-                <img src="/public/assets/catcafe-logo.png" class="logo">
-                <span class="header-heading logoText">catcafé</span>
+                <img :src="logo.image" class="logo">
+                <span class="header-heading logoText">{{logo.name}}</span>
             </router-link>
 
             <div class="headerRight">
@@ -48,6 +48,7 @@
 <script>
 
 import HeaderMenu from "./header-menu"
+import consts from "consts/consts"
 
 export default {
 
@@ -59,6 +60,13 @@ export default {
 
         user(){
             return this.$store.state.auth.user;
+        },
+
+        logo(){
+            return {
+                name: consts.name,
+                image: consts.logo,
+            }
         }
 
     },

@@ -1,6 +1,6 @@
 # Frontend
 
-Institutie Front-end Integration
+Front-end Integration
 
 
 ## Instructions to install
@@ -27,13 +27,3 @@ Institutie Front-end Integration
 ## Make sure to add a --watch flag 
  
  `example file &&  jest sum.test.js --watch`
-
-
-
-# Theme
-
-https://colorlib.com/polygon/gentelella/
-
-# SCIM demo
-
-https://your-scim.herokuapp.com
