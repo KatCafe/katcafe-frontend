@@ -86,6 +86,10 @@ export default {
 
     computed: {
 
+        channel(){
+            return this.$store.state.channels.channel;
+        },
+
         link(){
             return this.topic.link;
         },
@@ -119,7 +123,7 @@ export default {
         },
 
         isUserOwner(){
-            return this.$store.getters.isUserOwner(this.topic);
+            return this.$store.getters.isUserOwner(this.channel) || this.$store.getters.isUserOwner(this.topic);
         }
 
     },

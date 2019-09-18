@@ -52,8 +52,6 @@ export default {
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-        console.log(route.params.slug);
-
         if (route.params.slug) {
 
             store.commit('SET_COMMENTS', [] );
