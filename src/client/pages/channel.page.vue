@@ -91,11 +91,6 @@ export default {
 
         stickyButtons(){
             return [
-                {
-                    title: "Write topic",
-                    img: 'https://cdn4.iconfinder.com/data/icons/cologne/32x32/plus.png',
-                    click: (layout) => layout.showAddTopicModal( )
-                }
             ]
         },
 
