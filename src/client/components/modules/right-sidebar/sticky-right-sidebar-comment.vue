@@ -35,10 +35,10 @@ export default {
             top = window.pageYOffset || document.documentElement.scrollTop;
 
             if (w <= 800) {
-                addCommentForm.style.position = "absolute";
-                addCommentForm.style.bottom = -top+"px";
+                addCommentForm.style.position = "fixed";
+                addCommentForm.style.bottom = "0";
                 addCommentForm.style.top = "inherit";
-                addCommentForm.style.width = w+'px';
+                addCommentForm.style.width = '100%';
             }
             else {
                 addCommentForm.style.position = "relative";
@@ -51,9 +51,6 @@ export default {
                 addCommentForm.style.width = '100%';
 
             }
-
-
-            console.log("w", w, "H", h, top );
 
         };
 

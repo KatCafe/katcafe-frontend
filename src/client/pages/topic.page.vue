@@ -22,9 +22,7 @@
                 </div>
 
                 <div class="column right replyRightBox">
-
                     <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
-
                 </div>
 
             </div>

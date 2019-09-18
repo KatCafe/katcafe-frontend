@@ -1,19 +1,23 @@
 <template>
     <button type="button" @click="handleClick">
 
-        <loading-spinner v-if="loading" style='margin-right:10px' />
+        <icon v-if="loading" style='margin-right:10px' icon="loading-spinner" />
 
-        {{text}}
+        <template v-else>
+            <icon  icon="send" />
+            <span class="hiddenMobile">{{text}}</span>
+        </template>
+
 
     </button>
 </template>
 
 <script>
-import LoadingSpinner from "./loading-spinner";
+import icon from "./icons/icon";
 
 export default{
 
-    components: {LoadingSpinner},
+    components: {icon},
 
     data : function (){
         return {

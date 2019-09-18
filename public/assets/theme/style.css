@@ -118,6 +118,7 @@ p {
     line-height: 1.5;
 }
 
+i,
 span {
     color: #9c9b9b;
 }
@@ -452,9 +453,6 @@ input[type=button]:hover {
     background-color: #ffd164;
 }
 
-button{
-    background-color: #5cbcf6;
-}
 
 button:hover{
     background-color: #0e83cd;
@@ -1042,7 +1040,7 @@ textarea:focus, input:focus{
 .sideReplyBox{
     background-color: #3c3c3c;
     color: #fff;
-    width: 95%;
+    width: 100%;
     left: 0;
     z-index: 10;
 }
@@ -1080,16 +1078,16 @@ textarea:focus, input:focus{
 
 
 .captchaBox{
-    margin-top: 10px;
     display: grid;
     grid-template-columns: 100px 100px 1fr;
     grid-column-gap: 10px;
 }
 
-.captchaBox svg{
+.captchaBox svg:first-child{
     width: auto;
     height: 35px;
 }
+
 
 .captchaBox button{
     margin-top: 0;
@@ -1129,8 +1127,8 @@ textarea:focus, input:focus{
     margin-top: -7px!important;
 }
 
-.loadingSpinner path{
-    fill: #a8a8a8;
+.icon path{
+    fill: #000000;
 }
 
 .hiddenDesktop{
@@ -1294,15 +1292,10 @@ textarea:focus, input:focus{
     }
 
     .captchaBox {
-        grid-template-columns: 90px 1fr;
+        grid-template-columns: 90px 1fr 40px;
         grid-row-gap: 5px;
 
     }
-
-    .captchaBox :nth-child(3) {
-        grid-column: 1 / -1;
-    }
-
 
     .topicHasImage,
     .commentHasImage {
@@ -1349,6 +1342,10 @@ textarea:focus, input:focus{
         padding-right: 5px;
     }
 
-
+    .replyRightBox .sideReplyBox{
+        border-style: solid;
+        border-color: #282626;
+        border-width: 1px 0 0 0;
+    }
 
 }
