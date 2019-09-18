@@ -697,7 +697,7 @@ form {
 }
 
 .topicButtons{
-    display: inline-block;
+    display: inline-flex;
     float:right;
 }
 
@@ -863,6 +863,10 @@ form {
     display: grid;
     grid-template-columns: 150px 1fr;
     grid-column-gap: 10px;
+}
+
+.commentHasImage {
+    grid-template-columns: 110px 1fr;
 }
 
 .authorName{
