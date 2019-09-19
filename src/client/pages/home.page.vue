@@ -69,6 +69,26 @@ export default {
 
     },
 
+    watch: {
+        '$route': {
+            deep: true,
+            handler: async function (refreshPage) {
+
+                console.log('home route changed');
+
+                this.$store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+
+                await this.$store.dispatch('CHANNEL_GET', {slug: this.getChannel,});
+
+                this.$store.commit('SET_TOPICS', [] );
+                await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: this.getChannel });
+
+                this.$store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+            }
+        }
+    },
+
+
 
     computed: {
 
