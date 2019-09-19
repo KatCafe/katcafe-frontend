@@ -4,10 +4,10 @@
 
         <country-select :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannel.slug" />
+        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannel ? getChannel.slug : ''" />
 
         <div class="hiddenDesktop">
-            <header-channels-select :channels="channels" :channel="getChannel.slug" />
+            <header-channels-select :channels="channels" :channel="getChannel ? getChannel.slug : ''" />
         </div>
 
     </div>
