@@ -4,10 +4,10 @@
 
         <country-select :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
-        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannel ? getChannel.slug : ''" />
+        <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannelSlug" />
 
         <div class="hiddenDesktop">
-            <header-channels-select :channels="channels" :channel="getChannel ? getChannel.slug : ''" />
+            <header-channels-select :channels="channels" :channel="getChannelSlug" />
         </div>
 
     </div>
@@ -48,8 +48,8 @@ export default {
             return this.$store.state.channels.navBarList;
         },
 
-        getChannel(){
-            return this.$store.state.channels.channel;
+        getChannelSlug(){
+            return this.$store.state.channels.channel ? this.$store.state.channels.channel.slug : '';
         },
 
         defaultCountry(){

@@ -16,7 +16,7 @@
                         <topics :topics="topics" :comments="comments" />
                     </template>
 
-                    <template v-if="!channel">
+                    <template v-if="!channel && !layoutLoading">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
                     </template>
 
@@ -52,21 +52,31 @@ export default {
 
     async asyncData ({ store,  route }){
 
+        console.log('channel async data');
+
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
         if (route.params.slug) {
+
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
 
             store.commit('SET_TOPICS', [] );
             store.commit('SET_COMMENTS', [] );
 
             await store.dispatch('CHANNEL_GET', {slug: path,});
             await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0 });
+
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
         }
 
     },
 
     computed: {
+
+        layoutLoading(){
+            return this.$store.state.global.layoutLoading;
+        },
 
         channel(){
             return this.$store.state.channels.channel;

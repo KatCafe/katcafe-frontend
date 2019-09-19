@@ -16,7 +16,7 @@
                         <topics :topics="topics" :comments="comments" :channel="getHomepageChannel" />
                     </template>
 
-                    <template v-if="!topics.length">
+                    <template v-if="!topics.length && !layoutLoading ">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
                     </template>
 
@@ -47,6 +47,8 @@ export default {
 
     async asyncData ({ store,  route }){
 
+        console.log('home asyncData');
+
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
@@ -54,30 +56,25 @@ export default {
 
         path = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
 
+        store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+
         store.commit('SET_TOPICS', [] );
         store.commit('SET_COMMENTS', [] );
 
-        store.dispatch('CHANNEL_GET', {slug: path });
+        await store.dispatch('CHANNEL_GET', {slug: path });
 
         await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0, count: 5 });
 
+        store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+
     },
 
-    watch: {
-        '$route': {
-            deep: true,
-            handler: async function (refreshPage) {
-
-                await this.$store.dispatch('CHANNEL_GET', {slug: this.getChannel,});
-
-                this.$store.commit('SET_TOPICS', [] );
-                await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: this.getChannel });
-
-            }
-        }
-    },
 
     computed: {
+
+        layoutLoading(){
+            return this.$store.state.global.layoutLoading;
+        },
 
         getHomepageChannel(){
             return this.getChannel + '/b';
