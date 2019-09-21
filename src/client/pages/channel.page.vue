@@ -13,7 +13,7 @@
                 <div class="column left">
 
                     <template v-if="channel" >
-                        <topics :topics="topics" :comments="comments" />
+                        <topics :topics="topics"  />
                     </template>
 
                     <template v-if="!channel && !layoutLoading">
@@ -83,11 +83,7 @@ export default {
         },
 
         topics(){
-            return this.$store.state.topics.list||[];
-        },
-
-        comments(){
-            return this.$store.state.comments.list||[];
+            return this.$store.getters.getTopics();
         },
 
         hasMore(){

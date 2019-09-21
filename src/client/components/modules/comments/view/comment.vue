@@ -29,6 +29,8 @@
 
                         <p class="topicBody">{{body}}</p>
 
+                        {{comment.hot}}
+
                     </div>
 
                 </div>

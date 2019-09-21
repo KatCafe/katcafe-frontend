@@ -9,21 +9,18 @@ export default {
 
     SET_TOPICS:  (state, topics ) => {
 
-        state.list = topics;
         state.map = {};
 
         for (const topic of topics)
-            state.map[topic.slug] = true;
+            Vue.set( state.map, topic.slug, topic);
 
     },
 
     ADD_TOPICS: (state, topics)=>{
 
         for (const topic of topics)
-            if (!state.map[topic.slug]) {
-                state.map[topic.slug] = true;
-                state.list.push(topic);
-            }
+            if ( !state.map[topic.slug] )
+                Vue.set( state.map, topic.slug, topic);
 
     },
 
@@ -45,7 +42,6 @@ export default {
     SET_TOPICS_DELETE: ( state, ids ) => {
 
         ids.map(it => Vue.delete( state.map, it ));
-        ids.map(it => Vue.delete( state.list, state.list.findIndex( it2 => it2.slug === it ) ));
 
     }
 

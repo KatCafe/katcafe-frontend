@@ -10,6 +10,7 @@
             <div class="topicContent" ref="topicContent">
 
                 <div class="author">
+
                     <span class="details authorName">{{author}}</span>
 
                     <span class="details">{{date}} </span>
@@ -44,7 +45,7 @@
                     <comments :comments="comments" :isPreview = "isPreview" />
                 </div>
 
-                <router-link :to="isPage ? '' : to" v-if="commentsToLoad">
+                <router-link :to="isPage ? '' : to" v-if="commentsToLoad && !isPage">
                     <span v-if="commentsToLoad >= 0" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
                 </router-link>
 
@@ -79,7 +80,6 @@ export default {
     props: {
         topic: null,
         isPage: false,
-        comments: { default(){ return [] } },
         isPreview: false,
         isSnippetForm: false,
     },
@@ -120,6 +120,10 @@ export default {
 
         commentsToLoad(){
             return this.topic.comments - this.comments.length
+        },
+
+        comments(){
+            return this.$store.getters.getComments( this.isPage ? 'date' : 'hot', this.isPage ? -1 : 1, it => it.topic === this.topic.slug );
         },
 
         isUserOwner(){

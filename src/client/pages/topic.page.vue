@@ -8,7 +8,7 @@
 
                 <div class="column left">
 
-                    <topic v-if="topic" :topic="topic" :comments="comments" :isPage="true" />
+                    <topic v-if="topic" :topic="topic" :isPage="true" />
 
                     <template v-if="!topic && !layoutLoading">
                         <span class="actionButton">Topic <strong>{{ this.slug }}</strong> was not found</span>
@@ -89,11 +89,6 @@ export default {
 
         topic(){
             return this.$store.state.topics.topic;
-        },
-
-        comments(){
-            const topic = this.topic;
-            return this.$store.state.comments.list.filter( it => it.topic === topic.slug );
         },
 
         hasMore(){

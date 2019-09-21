@@ -2,7 +2,6 @@ import UserRole from "client/components/modules/auth/user-role"
 
 export default {
 
-
     isUserOwner: (state => (objects)=>{
 
         const user = state.user;

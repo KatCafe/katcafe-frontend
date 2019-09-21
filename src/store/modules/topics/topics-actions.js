@@ -2,7 +2,7 @@ import NetworkHelper from "modules/network/network-helper"
 
 export default {
 
-    TOPICS_GET: async  ({ commit, dispatch, state }, { searchAlgorithm = 'hot', searchQuery = 'country', search, index = 0, count = 20 }) => {
+    TOPICS_GET: async  ({ commit, dispatch, state }, { searchAlgorithm = 'hot', searchQuery = 'country', searchRevert = false, search, index = 0, count = 20 }) => {
 
         if (state.pageLoading) return;
         commit('SET_TOPICS_PAGE_LOADING', true);
@@ -12,6 +12,8 @@ export default {
         try{
 
             const out = await NetworkHelper.post(`/topics/top`, {
+                searchAlgorithm,
+                searchRevert,
                 searchQuery,
                 search,
                 index,
@@ -68,7 +70,7 @@ export default {
 
     },
 
-    TOPIC_DELETE: async ({commit, dispatch, state}, slug ) => {
+    TOPIC_DELETE: async ( {commit, dispatch, state}, slug ) => {
 
         const out = await NetworkHelper.post('/topics/delete/', { slug } );
 

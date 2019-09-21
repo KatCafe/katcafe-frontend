@@ -13,7 +13,7 @@
                 <div class="column left">
 
                     <template v-if="topics.length">
-                        <topics :topics="topics" :comments="comments" :channel="getHomepageChannel" />
+                        <topics :topics="topics" :channel="getHomepageChannel" />
                     </template>
 
                     <template v-if="!topics.length && !layoutLoading ">
@@ -129,12 +129,9 @@ export default {
         },
 
         topics(){
-            return this.$store.state.topics.list||[];
+            return this.$store.getters.getTopics();
         },
 
-        comments(){
-            return this.$store.state.comments.list||[];
-        },
 
         hasMore(){
             return this.$store.state.topics.pageMore;

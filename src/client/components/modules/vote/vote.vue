@@ -9,6 +9,7 @@
 <script>
 
 import NetworkHelper from "modules/network/network-helper"
+import Vue from 'vue'
 
 export default {
 
@@ -64,17 +65,17 @@ export default {
 
             if (out  && out.vote) {
 
-                if (out.prevVote){
+                if ( out.prevVote ){
+
                     if (out.prevVote === 1) this.parent.votesUp = (this.parent.votesUp || 0) -1; else
                     if (out.prevVote === -1) this.parent.votesDown = (this.parent.votesDown || 0) - 1;
+
                 }
 
                 if (out.vote.value === 1) this.parent.votesUp = (this.parent.votesUp || 0) +1; else
                 if (out.vote.value === -1) this.parent.votesDown = (this.parent.votesDown||0) +1;
 
-                console.log("ups", this.parent.votesUp, "downs", this.parent.votesDown);
-
-                this.parent.myVote = out.vote.value;
+                Vue.set(this.parent, 'myVote', out.vote.value );
 
             }
 
