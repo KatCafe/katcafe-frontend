@@ -55,7 +55,7 @@ export default {
 
             try{
 
-                const out = await this.$store.dispatch('AUTH_LOGIN', {
+                const out = await NetworkHelper.post( '/admin/scores-update', {
                     userEmail: this.userEmail,
                     password: this.password,
                     country: this.defaultCountry,
@@ -67,10 +67,12 @@ export default {
 
 
             }catch(err){
+
                 this.error = err.message;
 
-                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
+                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 || this.error.indexOf("Password doesn't match") >= 0 )
                     captcha.reset();
+
             }
 
             resolver();

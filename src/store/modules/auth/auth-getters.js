@@ -18,4 +18,13 @@ export default {
         return objects.reduce(  ( val, it) => val || ( it && it.owner === user.username) , false );
     }),
 
+    isUserAdmin: (state => user => {
+
+        if (!user) user = state.user;
+
+        if (user.role === UserRole.SYS_ADMIN) return true;
+
+        return false;
+    }),
+
 }

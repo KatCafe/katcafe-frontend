@@ -224,8 +224,6 @@ export default {
 
             }catch(err){
 
-                console.log(err);
-
                 this.error = err.message;
 
                 if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )

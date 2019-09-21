@@ -33,6 +33,13 @@
                     <router-link to="/logout" @click.native.prevent.capture="logout">
                         Logout <span class="hiddenMobile">{{user.username}}</span>
                     </router-link>
+
+                    <template v-if="isAdmin">
+                        <router-link to="/admin">
+                            Admin
+                        </router-link>
+                    </template>
+
                 </template>
 
             </div>
@@ -60,6 +67,10 @@ export default {
 
         user(){
             return this.$store.state.auth.user;
+        },
+
+        isAdmin(){
+            return this.$store.getters.isUserAdmin();
         },
 
         logo(){
