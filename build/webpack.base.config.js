@@ -1,8 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
-const vueConfig = require('./vue-loader.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -10,11 +10,9 @@ const isProd = process.env.NODE_ENV === 'production'
 const isAnalyze = false;
 
 module.exports = {
-  entry: ['babel-regenerator-runtime'],
-
   devtool: isProd
-    ? false
-    : '#cheap-module-source-map',
+      ? false
+      : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
@@ -41,12 +39,16 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueConfig
+        options: {
+          compilerOptions: {
+            preserveWhitespace: false
+          }
+        }
       },
       {
-        test: /\.(js)$/,
+        test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -59,32 +61,39 @@ module.exports = {
       {
         test: /\.css$/,
         use: isProd
-          ? ExtractTextPlugin.extract({
+            ? ExtractTextPlugin.extract({
               use: 'css-loader?minimize',
               fallback: 'vue-style-loader'
             })
-          : ['vue-style-loader', 'css-loader']
+            : ['vue-style-loader', 'css-loader']
       }
     ]
   },
   performance: {
-    maxEntrypointSize: 300000,
-    hints: isProd ? 'warning' : false
+    hints: false
   },
-  plugins:
-       isProd
-        ? [
-            ...isAnalyze ? [new BundleAnalyzerPlugin()] : [],
+  plugins: isProd
+      ? [
 
-            new webpack.optimize.UglifyJsPlugin({
-              compress: { warnings: false }
-            }),
-            new ExtractTextPlugin({
-              filename: 'common.[chunkhash].css'
-            })
-          ]
-        : [
-            ...isAnalyze ? [new BundleAnalyzerPlugin()] : [],
-            new FriendlyErrorsPlugin()
-          ]
+        ...isAnalyze ? [new BundleAnalyzerPlugin()] : [],
+
+        new webpack.optimize.CommonsChunkPlugin({
+          children: true,
+          async: true,
+          minChunks: 3
+        }),
+
+        new VueLoaderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+          compress: { warnings: false }
+        }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new ExtractTextPlugin({
+          filename: 'common.[chunkhash].css'
+        })
+      ]
+      : [
+        new VueLoaderPlugin(),
+        new FriendlyErrorsPlugin()
+      ]
 }
