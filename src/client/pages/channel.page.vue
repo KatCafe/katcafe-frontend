@@ -26,8 +26,6 @@
                     <sticky-right-sidebar-comment :channel="channel" />
                 </div>
 
-
-
             </div>
 
             <infinite-scroll ref="refInfiniteScroll" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
@@ -152,7 +150,7 @@ export default {
     },
 
     images: function(){
-        return this.channel && this.channel.icon ?
+        return ( this.channel && this.channel.icon ) ?
             [ {
                 url: this.channel.icon
             }]

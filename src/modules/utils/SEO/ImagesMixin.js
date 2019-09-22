@@ -19,7 +19,7 @@ function getImages (vm) {
             ? title.call(vm)
             : title;
 
-        if ( !imagesData || imagesData.length === 0) return '';
+        if ( !imagesData || (imagesData.length === 1 && !imagesData[0]) ) return '';
 
         let mixinImages = '';
         for (let i=0; i<imagesData.length; i++){

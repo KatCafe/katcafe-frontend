@@ -7,7 +7,7 @@
             <textarea type="text" placeholder="Write a reply..." v-model="commentBody" @change="bodyChanged"/>
 
             <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-            <img class="uploadPhoto" src="/public/assets/uploadPhoto.svg" @click="openFileUpload">
+            <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
 
         </div>
 

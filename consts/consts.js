@@ -5,10 +5,10 @@ module.exports = {
 
     name: "katcafé",
     copyright: "katcafé",
-    title: "katcafé - Your café",
-    description: "Discuss your stuff here",
+    title: "katcafé - Your café to discuss anything",
+    description: "Discuss anything from politics to crypto or life",
     keywords: "cafe, 4chan, reddit",
-    image: "/public/assets/",
-    logo: '/public/assets/catcafe-logo.png',
+    image: "/public/assets/katcafe-cover.jpg",
+    logo: '/public/assets/katcafe-logo.png',
 
 }
