@@ -6,8 +6,7 @@
 
         <div class="layoutContent" :style="{minHeight: minHeight+'px'}">
 
-            <slot  name="content">
-            </slot>
+            <slot name="content"/>
 
         </div>
 
@@ -27,19 +26,18 @@ import HeaderLayout from "./header/header-layout"
 import FooterLayout from "./footer/footer-layout"
 import StickyButtons from "./footer/sticky/sticky-buttons"
 import AddTopicModal from "client/components/modules/topics/add-topic.modal"
+import Icon from "client/components/UI/elements/icons/icon"
 
 export default{
 
-    components:{ HeaderLayout, FooterLayout,  StickyButtons, AddTopicModal },
+    components:{ HeaderLayout, FooterLayout,  StickyButtons, AddTopicModal, Icon },
 
     props: {
-        stickyButtons: {
-            type: Array,
-            default(){ return [] },
-        },
+        stickyButtons: { default(){ return [] },},
     },
 
     computed:{
+
 
     },
 
@@ -53,7 +51,7 @@ export default{
 
         if (typeof window === "undefined") return;
 
-        this.minHeight =  screen.height;
+        this.minHeight =  window.innerHeight;
 
         this.$store.dispatch('LOCALIZATION_FETCH',);
 

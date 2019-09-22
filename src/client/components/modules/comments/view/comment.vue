@@ -65,6 +65,14 @@ export default {
 
     computed: {
 
+        channel(){
+            return this.$store.state.channels.channel;
+        },
+
+        topic(){
+            return this.$store.state.topics.topic;
+        },
+
         slug(){
             return this.comment.slug;
         },
@@ -95,7 +103,7 @@ export default {
         },
 
         isUserOwner(){
-            return this.$store.getters.isUserOwner(this.comment);
+            return this.$store.getters.isUserOwner( [this.channel, this.topic, this.comment] );
         }
 
     },

@@ -7,16 +7,29 @@ Vue.use(Router)
 // route-level code splitting
 
 const HomePage = () => import('client/pages/home.page');
+const AdminPage = () => import('client/pages/admin.page');
+
 const ChannelPage = () => import('client/pages/channel.page');
 const TopicPage = () => import('client/pages/topic.page');
 const AddChannelPage = () => import('client/pages/add-channel.page');
 const TypographyPage = () => import('client/pages/typography.page');
 const LoginPage = () => import('client/pages/auth/login.page');
 const SignupPage = () => import('client/pages/auth/signup.page');
+const LogoutPage = () => import('client/pages/auth/logout.page');
 
 import Flags from 'client/components/UI/elements/select/flags/flags';
+import UserRole from "client/components/modules/auth/user-role"
 
 export function createRouter (store){
+
+    function guardAdminAuth(to, from, next){
+
+        if (store.state.auth.user && store.state.auth.user.role === UserRole.SYS_ADMIN) return next();
+
+        if (to.path !== '/login') next('/login');
+
+        next();
+    }
 
     function guardAuth(to, from, next){
 
@@ -25,7 +38,6 @@ export function createRouter (store){
         if (to.path !== '/login') next('/login');
 
         next();
-
     }
 
     function guardHomeAuth(to, from, next){
@@ -73,6 +85,9 @@ export function createRouter (store){
         routes: [
 
             { path: '/', component: HomePage },
+            { path: '/admin', component: AdminPage, beforeEnter: guardAdminAuth },
+
+
             { path: '/typography', component: TypographyPage },
             { path: '/add-channel', component: AddChannelPage, beforeEnter: guardAuth },
 
@@ -90,6 +105,8 @@ export function createRouter (store){
 
             { path: '/signup', component: SignupPage, beforeEnter: guardHomeAuth, },
             { path: '/register', component: SignupPage, beforeEnter: guardHomeAuth, },
+
+            { path: '/logout', component: LogoutPage, beforeEnter: guardHomeAuth, },
 
             { path: '/:slug', component: ChannelPage, },
             { path: '/:slug/pageIndex/:pageIndex', component: ChannelPage, },

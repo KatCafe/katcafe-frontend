@@ -10,6 +10,8 @@ export default {
         topicStickyRightSidebarComment: '',
         channelStickyRightSidebarComment: '',
 
+        layoutLoading: false,
+
     },
     actions,
     mutations,

@@ -1,7 +1,9 @@
 <template>
     <div v-if="preview" class="topicImageWrap">
 
-        <img class="topicImage" :src="preview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+        <img class="topicImage hiddenMobile" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}"  :src="preview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+
+        <img class="topicImage hiddenDesktop"  :src="preview.img">
 
         <a v-if="link" :href="link" target="_blank" class="topicPreviewLink actionButton">
             {{linkPreview}}
@@ -38,25 +40,7 @@ export default {
 
 
         preview(){
-
-            if (!this.data ) return '';
-
-            let img;
-
-            if ( this.data.base64 ) return this.data.base64;
-            else
-            if ( this.data.youtubeId ){
-
-                if (this.index === 0)
-                    img =  `https://i.ytimg.com/vi/${this.data.youtubeId}/0.jpg`;
-                else
-                    img =  `https://i.ytimg.com/vi/${this.data.youtubeId}/sd${this.index}.jpg`;
-
-            } else img = typeof this.data.img === "string" ? this.data.img : this.data.img.img ;
-
-            return {
-                img: BrowserHelper.processRelativeLink(img),
-            };
+            return this.$store.getters.getPreviewImage(this.data)
         },
 
         maxWidth(){

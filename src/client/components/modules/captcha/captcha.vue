@@ -2,7 +2,7 @@
 
     <div class="captchaBox" v-if="captcha">
         <div v-html="captcha.data"></div>
-        <input  type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput"  >
+        <input  type="text" id="lcaptcha" name="captcha" placeholder="Captcha" v-model="captchaInput" maxlength="4" >
         <loading-button :text="buttonText" @onClick="submit" />
     </div>
 
@@ -68,7 +68,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

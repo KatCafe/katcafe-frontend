@@ -8,23 +8,16 @@
 
                 <div class="column left">
 
-                    <template v-if="topic">
+                    <topic v-if="topic" :topic="topic" :isPage="true" />
 
-                        <topic :topic="topic" :comments="comments" :isPage="true" />
-
-                    </template>
-
-
-                    <template v-if="!topic">
+                    <template v-if="!topic && !layoutLoading">
                         <span class="actionButton">Topic <strong>{{ this.slug }}</strong> was not found</span>
                     </template>
 
                 </div>
 
-                <div class="column replyRightBox">
-
+                <div class="column right replyRightBox">
                     <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
-
                 </div>
 
             </div>
@@ -44,26 +37,35 @@ import Hero from "client/components/heros/hero"
 import Topic from "client/components/modules/topics/view/topic"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
+import Icon from "client/components/UI/elements/icons/icon"
 
 export default {
 
-    components: { Layout,  Hero, Topic, StickyRightSidebarComment, InfiniteScroll },
+    components: { Layout,  Hero, Topic, StickyRightSidebarComment, InfiniteScroll, Icon },
 
     async asyncData ( { store,  route } ){
+
+        console.log('topic async data');
 
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
         if (route.params.slug) {
 
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+
+            store.commit('SET_TOPIC', null);
             store.commit('SET_COMMENTS', [] );
 
             await store.dispatch('TOPIC_GET', {slug: path,});
 
-            if (store.state.topics.topic)
-                await store.dispatch('CHANNEL_GET', {slug: path  });
+            if (store.state.topics.topic){
+                await store.dispatch('CHANNEL_GET', {slug: store.state.topics.topic.channel  });
+                await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0});
+            }
 
-            await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0});
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+
         }
 
     },
@@ -73,13 +75,13 @@ export default {
         }
     },
 
-    mounted(){
-
-        if (typeof window === "undefined") return;
-
-    },
 
     computed: {
+
+        layoutLoading(){
+            return this.$store.state.global.layoutLoading;
+        },
+
 
         channel(){
             return this.$store.state.channels.channel;
@@ -87,11 +89,6 @@ export default {
 
         topic(){
             return this.$store.state.topics.topic;
-        },
-
-        comments(){
-            const topic = this.topic;
-            return this.$store.state.comments.list.filter( it => it.topic === topic.slug );
         },
 
         hasMore(){
@@ -145,11 +142,27 @@ export default {
             this.$refs['refInfiniteScroll'].continueScroll();
         },
 
-    }
+    },
+
+    /**
+     * SEO
+     */
+
+    title: function (){
+        return this.topic ? this.topic.title : '';
+    },
+
+    description: function (){
+        return this.topic ? this.topic.body : '';
+    },
+
+    images: function(){
+        return this.topic && this.topic.preview ?
+            [ {
+                url: this.$store.getters.getPreviewImage( this.topic.preview ).img
+            }]
+            : ''
+    },
 
 }
 </script>
-
-<style>
-
-</style>

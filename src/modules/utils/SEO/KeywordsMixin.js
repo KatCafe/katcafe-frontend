@@ -11,7 +11,7 @@ import {addSuffix} from './helpers/MixinHelpers';
 function getKeywords (vm) {
     const { keywords } = vm.$options
     if (keywords) {
-        let keywordsData = typeof keywords === 'function'
+        const keywordsData = typeof keywords === 'function'
             ? keywords.call(vm)
             : keywords || '';
 

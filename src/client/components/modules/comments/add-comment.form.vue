@@ -12,13 +12,13 @@
         </div>
 
         <div v-if="showPreview">
-            <captcha ref="captcha" @submit="createComment" buttonText="Submit Comment" />
+            <captcha ref="captcha" @submit="createComment" buttonText="Post" />
 
-            <loading-spinner v-if="loading" />
+            <icon icon="loading-spinner" v-if="loading" />
+
             <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
             <div v-if="!loading" >
-                Preview
                 <comment :comment="previewComment" :isSnippetForm="true" />
             </div>
 
@@ -32,7 +32,7 @@
 import NetworkHelper from "modules/network/network-helper"
 import Captcha from "client/components/modules/captcha/captcha"
 import StringHelper from "src/utils/string-helper"
-import LoadingSpinner from "client/components/UI/elements/loading-spinner"
+import Icon from "client/components/UI/elements/icons/icon"
 import Comment from "client/components/modules/comments/view/comment"
 
 function initialState (){
@@ -64,10 +64,10 @@ function initialState (){
 export default {
 
 
-    components: { LoadingSpinner, Captcha, Comment },
+    components: { Icon, Captcha, Comment },
 
     props: {
-        topic: null,
+        topic: {default: null},
     },
 
     data(){
@@ -257,8 +257,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-
-</style>

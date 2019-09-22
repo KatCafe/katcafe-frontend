@@ -13,16 +13,16 @@
                 <div class="column left">
 
                     <template v-if="channel" >
-                        <topics :topics="topics" :comments="comments" />
+                        <topics :topics="topics"  />
                     </template>
 
-                    <template v-if="!channel">
+                    <template v-if="!channel && !layoutLoading">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
                     </template>
 
                 </div>
 
-                <div v-if="visibleStickyRightSidebarComment" class="column right">
+                <div v-if="visibleStickyRightSidebarComment " class="column right">
                     <sticky-right-sidebar-comment :channel="channel" />
                 </div>
 
@@ -52,32 +52,38 @@ export default {
 
     async asyncData ({ store,  route }){
 
+        console.log('channel async data');
+
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
         if (route.params.slug) {
+
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
 
             store.commit('SET_TOPICS', [] );
             store.commit('SET_COMMENTS', [] );
 
             await store.dispatch('CHANNEL_GET', {slug: path,});
             await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0 });
+
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
         }
 
     },
 
     computed: {
 
+        layoutLoading(){
+            return this.$store.state.global.layoutLoading;
+        },
+
         channel(){
             return this.$store.state.channels.channel;
         },
 
         topics(){
-            return this.$store.state.topics.list||[];
-        },
-
-        comments(){
-            return this.$store.state.comments.list||[];
+            return this.$store.getters.getTopics();
         },
 
         hasMore(){
@@ -91,11 +97,6 @@ export default {
 
         stickyButtons(){
             return [
-                {
-                    title: "Write topic",
-                    img: 'https://cdn4.iconfinder.com/data/icons/cologne/32x32/plus.png',
-                    click: (layout) => layout.showAddTopicModal( )
-                }
             ]
         },
 
@@ -138,9 +139,26 @@ export default {
 
     },
 
+    /**
+     * SEO
+     */
+
+    title: function (){
+        return this.channel ? this.channel.name : '';
+    },
+
+    description: function (){
+        return this.channel ? this.channel.title : '';
+    },
+
+    images: function(){
+        return this.channel && this.channel.icon ?
+            [ {
+                url: this.channel.icon
+            }]
+            : ''
+    },
+
+
 }
 </script>
-
-<style>
-
-</style>

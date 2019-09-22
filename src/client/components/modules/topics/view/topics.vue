@@ -7,7 +7,6 @@
         <topic v-for="(topic, index) in topics"
                :key="index"
                :topic="topic"
-               :comments="comments.filter( it => it.topic === topic.slug )"
                :isPreview = "true"
                class="topicSeparator"
         />

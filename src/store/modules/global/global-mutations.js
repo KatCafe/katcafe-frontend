@@ -11,4 +11,8 @@ export default {
 
     },
 
+    SET_GLOBAL_LAYOUT_LOADING: (state, value ) => {
+        state.layoutLoading = value;
+    }
+
 }

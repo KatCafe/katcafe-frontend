@@ -13,10 +13,10 @@
                 <div class="column left">
 
                     <template v-if="topics.length">
-                        <topics :topics="topics" :comments="comments" :channel="getHomepageChannel" />
+                        <topics :topics="topics" :channel="getHomepageChannel" />
                     </template>
 
-                    <template v-if="!topics.length">
+                    <template v-if="!topics.length && !layoutLoading ">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
                     </template>
 
@@ -47,6 +47,8 @@ export default {
 
     async asyncData ({ store,  route }){
 
+        console.log('home asyncData');
+
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
@@ -54,10 +56,16 @@ export default {
 
         path = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
 
+        store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+
         store.commit('SET_TOPICS', [] );
         store.commit('SET_COMMENTS', [] );
 
+        await store.dispatch('CHANNEL_GET', {slug: path });
+
         await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0, count: 5 });
+
+        store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
 
     },
 
@@ -66,14 +74,27 @@ export default {
             deep: true,
             handler: async function (refreshPage) {
 
+                console.log('home route changed');
+
+                this.$store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+
+                await this.$store.dispatch('CHANNEL_GET', {slug: this.getChannel,});
+
                 this.$store.commit('SET_TOPICS', [] );
                 await this.$store.dispatch('TOPICS_GET', {searchQuery: 'country', search: this.getChannel });
 
+                this.$store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
             }
         }
     },
 
+
+
     computed: {
+
+        layoutLoading(){
+            return this.$store.state.global.layoutLoading;
+        },
 
         getHomepageChannel(){
             return this.getChannel + '/b';
@@ -108,12 +129,9 @@ export default {
         },
 
         topics(){
-            return this.$store.state.topics.list||[];
+            return this.$store.getters.getTopics();
         },
 
-        comments(){
-            return this.$store.state.comments.list||[];
-        },
 
         hasMore(){
             return this.$store.state.topics.pageMore;
@@ -167,7 +185,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

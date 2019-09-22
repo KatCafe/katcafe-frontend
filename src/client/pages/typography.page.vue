@@ -152,7 +152,3 @@
 
     }
 </script>
-
-<style>
-
-</style>

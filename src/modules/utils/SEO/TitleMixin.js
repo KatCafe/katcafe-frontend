@@ -12,7 +12,7 @@ function getTitle (vm) {
     const { title } = vm.$options
     if (title) {
 
-        let result = typeof title === 'function'
+        const result = typeof title === 'function'
             ? title.call(vm)
             : title || '';
 

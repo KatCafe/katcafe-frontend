@@ -2,18 +2,20 @@ import consts from "consts/consts"
 
 class BrowserHelpers{
 
-    static addEvent (object, type, callback) {
+    addEvent (object, type, callback) {
+
         if (object === null || typeof(object) === 'undefined') return;
-        if (object.addEventListener) {
+
+        if (object.addEventListener)
             object.addEventListener(type, callback, false);
-        } else if (object.attachEvent) {
+        else if (object.attachEvent)
             object.attachEvent("on" + type, callback);
-        } else {
+        else
             object["on"+type] = callback;
-        }
+
     }
 
-    static timeDiff(previous) {
+    timeDiff(previous) {
 
         const current = new Date().getTime();
 
@@ -36,21 +38,21 @@ class BrowserHelpers{
         return Math.round(elapsed/msPerYear  + 'y');
     }
 
-    static processRelativeLink(link){
+    processRelativeLink(link){
 
         if (!link) return '';
 
         return link[0] === '/' ? consts.serverApi + link : link;
     }
 
-    static processLink(link, count = 30){
+    processLink(link, count = 30){
 
-        link = link.replace('https://','').replace('http://').replace('www.','');
+        link = link.replace('https://','').replace('http://','').replace('www.','');
         return link.length < count ? link : link.substr(0, count) + '...';
 
     }
 
-    static trimSlash(link){
+    trimSlash(link){
 
         if (link && link[link.length-1 ] === '/') link = link.substr(0, link.length-1);
         if (link && link[ 0 ] === '/') link = link.substr(1);
@@ -62,4 +64,4 @@ class BrowserHelpers{
 
 }
 
-export default BrowserHelpers;
+export default new BrowserHelpers();

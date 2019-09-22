@@ -6,7 +6,7 @@ function getWebPageType (vm) {
     const { webPageType } = vm.$options
     if (webPageType) {
 
-        let result = typeof webPageType === 'function'
+        const result = typeof webPageType === 'function'
             ? webPageType.call(vm)
             : webPageType || '';
 

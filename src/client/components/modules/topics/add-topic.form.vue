@@ -24,16 +24,14 @@
 
                 <textarea type="text" placeholder="Your comment..." v-model="topicBody" @change="bodyChanged"/>
 
-                <br/>
-
             </div>
 
         </div>
 
-        <captcha ref="captcha" @submit="createTopic" buttonText="Submit Topic" />
+        <captcha v-if="showPreview" ref="captcha" @submit="createTopic" buttonText="Send Topic"  style="padding-top: 10px"/>
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
-        <loading-spinner v-if="loading" />
+        <icon icon="loading-spinner" v-if="loading" />
 
         <div v-if="showPreview && !loading" >
             Preview
@@ -48,7 +46,7 @@ import NetworkHelper from "modules/network/network-helper"
 import Captcha from "client/components/modules/captcha/captcha"
 import Topic from "client/components/modules/topics/view/topic"
 import StringHelper from "src/utils/string-helper"
-import LoadingSpinner from "client/components/UI/elements/loading-spinner"
+import Icon from "client/components/UI/elements/icons/icon"
 
 
 function initialState (){
@@ -81,7 +79,7 @@ function initialState (){
 
 export default {
 
-    components: { Captcha, Topic, LoadingSpinner },
+    components: { Captcha, Topic, Icon },
 
     props: {
         topicChannel: '',
@@ -226,8 +224,6 @@ export default {
 
             }catch(err){
 
-                console.log(err);
-
                 this.error = err.message;
 
                 if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
@@ -301,7 +297,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

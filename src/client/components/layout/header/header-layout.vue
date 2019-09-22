@@ -7,8 +7,8 @@
         <div class="header">
 
             <router-link to="/">
-                <img src="/public/assets/catcafe-logo.png" class="logo">
-                <span class="header-heading logoText">catcafé</span>
+                <img :src="logo.image" class="logo">
+                <span class="header-heading logoText">{{logo.name}}</span>
             </router-link>
 
             <div class="headerRight">
@@ -33,6 +33,13 @@
                     <router-link to="/logout" @click.native.prevent.capture="logout">
                         Logout <span class="hiddenMobile">{{user.username}}</span>
                     </router-link>
+
+                    <template v-if="isAdmin">
+                        <router-link to="/admin">
+                            Admin
+                        </router-link>
+                    </template>
+
                 </template>
 
             </div>
@@ -48,6 +55,7 @@
 <script>
 
 import HeaderMenu from "./header-menu"
+import consts from "consts/consts"
 
 export default {
 
@@ -59,6 +67,17 @@ export default {
 
         user(){
             return this.$store.state.auth.user;
+        },
+
+        isAdmin(){
+            return this.$store.getters.isUserAdmin();
+        },
+
+        logo(){
+            return {
+                name: consts.name,
+                image: consts.logo,
+            }
         }
 
     },
@@ -76,7 +95,3 @@ export default {
 }
 
 </script>
-
-<style>
-
-</style>

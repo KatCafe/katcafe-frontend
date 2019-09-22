@@ -16,7 +16,7 @@
 
         <label>Country</label>
         <no-ssr>
-            <country-select @onSelect="channelCountrySelected" :defaultCountryCode="defaultCountry" />
+            <country-select @onSelect="channelCountrySelected" :defaultCountryCode="defaultCountry" style="padding-bottom: 20px" />
         </no-ssr>
 
         <captcha ref="captcha" @submit="createChannel"/>
@@ -105,7 +105,3 @@ export default {
 }
 </script>
 
-
-<style>
-
-</style>

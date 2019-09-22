@@ -5,11 +5,10 @@ export default {
 
     SET_COMMENTS:  (state, comments ) => {
 
-        state.list = comments;
         state.map = {};
 
         for (const comment of comments)
-            state.map[comment.slug] = true
+            Vue.set( state.map, comment.slug, comment );
 
 
     },
@@ -19,11 +18,7 @@ export default {
         comments = comments.sort( (a,b ) => a.date - b.date );
 
         for (const comment of comments)
-            if (!state.map[comment.slug]) {
-                state.map[comment.slug] = true;
-                state.list.push(comment);
-            }
-
+            Vue.set( state.map, comment.slug, comment );
 
     },
 
@@ -44,7 +39,6 @@ export default {
     SET_COMMENTS_DELETE: ( state, ids ) => {
 
         ids.map(it => Vue.delete( state.map, it ));
-        ids.map(it => Vue.delete( state.list, state.list.findIndex( it2 => it2.slug === it ) ));
 
     }
 

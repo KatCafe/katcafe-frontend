@@ -11,15 +11,15 @@ import {addSuffix} from './helpers/MixinHelpers';
 function getImages (vm) {
     const { images, title } = vm.$options
     if (images) {
-        let imagesData = typeof images === 'function'
+        const imagesData = typeof images === 'function'
             ? images.call(vm)
             : images;
 
-        let titleData = typeof title === 'function'
+        const titleData = typeof title === 'function'
             ? title.call(vm)
             : title;
 
-        if ((typeof imagesData === 'undefined')||(imagesData === null)||(imagesData.length === 0)) return '';
+        if ( !imagesData || imagesData.length === 0) return '';
 
         let mixinImages = '';
         for (let i=0; i<imagesData.length; i++){

@@ -2,21 +2,7 @@
 
     <div ref="refInfinite"  class="infiniteScroll">
 
-        <!-- 2 -->
-        <div v-if="loading" class="loader loader--style2" title="1">
-            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
-                <animateTransform attributeType="xml"
-                                  attributeName="transform"
-                                  type="rotate"
-                                  from="0 25 25"
-                                  to="360 25 25"
-                                  dur="0.6s"
-                                  repeatCount="indefinite"/>
-                </path>
-            </svg>
-        </div>
+        <icon v-if="loading" icon="loading-spinner" class="fa-5x" />
 
         <br/>
 
@@ -31,7 +17,12 @@
 
 
 <script>
+
+import Icon from "client/components/UI/elements/icons/icon"
+
 export default{
+
+    components: { Icon },
 
     mounted(){
 
@@ -58,20 +49,26 @@ export default{
 
         scrollEvent(){
 
-            if (!this.hasMore) return;
-            if (this.loading) return;
+            try{
 
-            let divTop = this.$refs['refInfinite'].offsetTop;
+                if (!this.hasMore) return;
+                if (this.loading) return;
 
-            let windowHeight = window.outerHeight||document.body.offsetHeight;
+                const divTop = this.$refs['refInfinite'].offsetTop;
 
-            let diff = divTop - window.scrollY  - windowHeight ;
+                const windowHeight = window.outerHeight||document.body.offsetHeight;
 
-            if (diff <= this.distance ){
+                const diff = divTop - window.scrollY  - windowHeight ;
 
-                this.loading = true;
+                if (diff <= this.distance ){
 
-                this.$emit('onScroll', diff);
+                    this.loading = true;
+
+                    this.$emit('onScroll', diff);
+
+                }
+
+            }catch(err){
 
             }
 
@@ -80,9 +77,7 @@ export default{
         continueScroll(){
 
             //make sure the elements were loaded
-            setTimeout( () => {
-                this.loading = false;
-            }, 1000);
+            setTimeout( () => this.loading = false, 1000);
         }
 
     }
