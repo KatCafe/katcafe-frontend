@@ -142,11 +142,27 @@ export default {
             this.$refs['refInfiniteScroll'].continueScroll();
         },
 
-    }
+    },
+
+    /**
+     * SEO
+     */
+
+    title: function (){
+        return this.topic ? this.topic.title : '';
+    },
+
+    description: function (){
+        return this.topic ? this.topic.body : '';
+    },
+
+    images: function(){
+        return this.topic && this.topic.preview ?
+            [ {
+                url: this.$store.getters.getPreviewImage( this.topic.preview ).img
+            }]
+            : ''
+    },
 
 }
 </script>
-
-<style>
-
-</style>

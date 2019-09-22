@@ -8,9 +8,9 @@ export function addSuffix(initialString = '', maxLength = 100, suffix = consts.n
 
     if (initialString.length > maxLength) return initialString.substr(0, maxLength-3)+'...';
 
-    if (initialString.length + suffix.length <= maxLength) return initialString +suffix;
+    if (initialString.length + suffix.length <= maxLength) return initialString + ' ' + suffix;
 
-    if (initialString.length +suffix2.length <= maxLength) return initialString+suffix2;
+    if (initialString.length +suffix2.length <= maxLength) return initialString + ' ' + suffix2;
 
     return initialString;
 }

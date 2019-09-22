@@ -40,25 +40,7 @@ export default {
 
 
         preview(){
-
-            if (!this.data ) return '';
-
-            let img;
-
-            if ( this.data.base64 ) return this.data.base64;
-            else
-            if ( this.data.youtubeId ){
-
-                if (this.index === 0)
-                    img =  `https://i.ytimg.com/vi/${this.data.youtubeId}/0.jpg`;
-                else
-                    img =  `https://i.ytimg.com/vi/${this.data.youtubeId}/sd${this.index}.jpg`;
-
-            } else img = typeof this.data.img === "string" ? this.data.img : this.data.img.img ;
-
-            return {
-                img: BrowserHelper.processRelativeLink(img),
-            };
+            return this.$store.getters.getPreviewImage(this.data)
         },
 
         maxWidth(){

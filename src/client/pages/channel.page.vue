@@ -139,9 +139,26 @@ export default {
 
     },
 
+    /**
+     * SEO
+     */
+
+    title: function (){
+        return this.channel ? this.channel.name : '';
+    },
+
+    description: function (){
+        return this.channel ? this.channel.title : '';
+    },
+
+    images: function(){
+        return this.channel && this.channel.icon ?
+            [ {
+                url: this.channel.icon
+            }]
+            : ''
+    },
+
+
 }
 </script>
-
-<style>
-
-</style>
