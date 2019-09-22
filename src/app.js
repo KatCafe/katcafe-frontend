@@ -1,7 +1,4 @@
-import babel from './modules/utils/babel_require.js'
-
 import Vue from 'vue'
-//import VuexSaga from 'vuex-saga';
 import App from './App.vue'
 import { createStore } from './store'
 import { createRouter } from './router'
