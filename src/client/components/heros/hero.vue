@@ -3,12 +3,12 @@
     <div id="hero" class="hero" :style="`background: url('${cover}') center top / cover no-repeat rgb(0, 112, 193); `">
 
         <div class="heroBox">
-            <div v-if="icon">
+            <template v-if="icon">
                 <img class="logo" :src="icon">
-            </div>
-            <div>
-                <h1 class="title" :style="titleStyle" >{{title}}</h1>
-            </div>
+            </template>
+            <template>
+                <h1 v-if="title" class="title" :style="titleStyle" v-html="title" />
+            </template>
         </div>
 
     </div>

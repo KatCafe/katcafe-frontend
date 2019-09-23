@@ -14,7 +14,7 @@ export default {
 
     }),
 
-    getPreviewImage: ( state => (preview, fullImage) => {
+    getPreviewImage: ( state => (preview, fullImage, index = 0) => {
 
         if (!preview ) return '';
 
@@ -24,10 +24,10 @@ export default {
         else
         if ( preview.youtubeId ){
 
-            if (this.index === 0)
+            if (index === 0)
                 img =  `https://i.ytimg.com/vi/${preview.youtubeId}/0.jpg`;
             else
-                img =  `https://i.ytimg.com/vi/${preview.youtubeId}/sd${this.index}.jpg`;
+                img =  `https://i.ytimg.com/vi/${preview.youtubeId}/sd${index}.jpg`;
 
         } else if (preview.full && fullImage) img = preview.full;
         else img = typeof preview.img === "string" ? preview.img : preview.img.img ;

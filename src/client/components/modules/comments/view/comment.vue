@@ -25,9 +25,9 @@
 
                     <div class="topicTextWrap">
 
-                        <h3 v-if="title" class="title">{{title}}</h3>
+                        <h3 v-if="title" class="title" v-html="title"/>
 
-                        <p class="topicBody">{{body}}</p>
+                        <p v-if="body" class="topicBody" v-html="body"/>
 
                     </div>
 

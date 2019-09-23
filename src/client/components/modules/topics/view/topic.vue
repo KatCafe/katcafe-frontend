@@ -32,9 +32,9 @@
 
                         <div class="topicTextWrap">
 
-                            <h2 v-if="title" class="title">{{title}}</h2>
+                            <h2 v-if="title" class="title" v-html="title"/>
 
-                            <p class="topicBody">{{body}}</p>
+                            <p class="topicBody" v-html="body"/>
 
                         </div>
                     </router-link>
