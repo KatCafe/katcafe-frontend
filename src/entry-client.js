@@ -4,6 +4,8 @@ import ReadMore from 'vue-read-more';
 
 import NetworkHelper from "modules/network/network-helper"
 
+Vue.use(ReadMore);
+
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
   beforeRouteUpdate (to, from, next) {
@@ -19,7 +21,6 @@ Vue.mixin({
   }
 });
 
-Vue.use(ReadMore);
 
 // usage of tooltips https://stackoverflow.com/questions/37078423/how-can-add-bootstrap-tooltip-inside-vue-js
 Vue.directive('tooltip', function(el, binding){

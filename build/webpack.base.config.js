@@ -84,9 +84,10 @@ module.exports = {
         }),
 
         new VueLoaderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //   compress: { warnings: false }
+        // }),
+
         new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin({
           filename: 'common.[chunkhash].css'
