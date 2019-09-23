@@ -14,7 +14,7 @@ export default {
 
     }),
 
-    getPreviewImage: ( state => preview => {
+    getPreviewImage: ( state => (preview, fullImage) => {
 
         if (!preview ) return '';
 
@@ -29,12 +29,15 @@ export default {
             else
                 img =  `https://i.ytimg.com/vi/${preview.youtubeId}/sd${this.index}.jpg`;
 
-        } else img = typeof preview.img === "string" ? preview.img : preview.img.img ;
+        } else if (preview.full && fullImage) img = preview.full;
+        else img = typeof preview.img === "string" ? preview.img : preview.img.img ;
 
         return {
             img: BrowserHelper.processRelativeLink(img),
         };
 
     }),
+
+
 
 }

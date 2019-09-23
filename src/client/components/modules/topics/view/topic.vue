@@ -21,6 +21,7 @@
 
                     <img v-if="isUserOwner" @click="deleteTopic" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
 
+
                 </div>
 
                 <div class="topicBoxContent" :class="this.topic.preview ? 'topicHasImage' : ''">

@@ -159,7 +159,7 @@ export default {
     images: function(){
         return this.topic && this.topic.preview ?
             [ {
-                url: this.$store.getters.getPreviewImage( this.topic.preview ).img
+                url: this.$store.getters.getPreviewImage( this.topic.preview, true ).img
             }]
             : ''
     },
