@@ -2,7 +2,7 @@
     <form action="#" class="newPostContainer">
 
         <div class="newPostTitle">
-            Start a thread in <strong>{{channel}}</strong> <br/><br/>
+            Start a thread in <strong>{{channel}}</strong>
         </div>
 
         <div class="newPostContent">

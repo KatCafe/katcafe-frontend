@@ -6,7 +6,7 @@
             <template slot="option" slot-scope="props">
 
                 <div class="option__desc">
-                    <span class="option__title">{{ props.option.substr(0,20) }}</span>
+                    <span class="option__title">{{ props.option.replace(defaultCountry+'/','').substr(0,20) }}</span>
                 </div>
 
             </template>
@@ -35,6 +35,14 @@ export default {
         return {
             value: this.channel,
         }
+    },
+
+    computed: {
+
+        defaultCountry(){
+            return this.$store.state.localization.selectedCountryCode;
+        }
+
     },
 
     methods: {

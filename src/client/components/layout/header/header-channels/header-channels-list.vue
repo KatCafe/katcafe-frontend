@@ -6,7 +6,7 @@
         >
 
             <router-link :to="`/${it}`" >
-                {{it}}
+                {{it.replace(defaultCountry+'/','')}}
             </router-link>
 
         </li>
@@ -19,7 +19,15 @@ export default {
     props: {
         channels: { default () { return [ ]}},
         channel:  { default: ''},
-    }
+    },
+
+    computed: {
+
+        defaultCountry(){
+            return this.$store.state.localization.selectedCountryCode;
+        }
+
+    },
 
 }
 </script>
