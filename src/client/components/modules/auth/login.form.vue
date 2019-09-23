@@ -55,7 +55,7 @@ export default {
 
             try{
 
-                const out = await NetworkHelper.post( '/admin/scores-update', {
+                const out = await this.$store.dispatch('AUTH_LOGIN', {
                     userEmail: this.userEmail,
                     password: this.password,
                     country: this.defaultCountry,
