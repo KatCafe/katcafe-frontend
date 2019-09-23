@@ -21,10 +21,11 @@ export default {
 
     LOCALIZATION_FETCH: async ({ commit, dispatch, state }, ip ) => {
 
+
         if ( state.request.done && !state.request.error )
             return;
 
-        if (!ip) ip = state.ip;
+        if (!ip) ip = state.ip || '';
 
         ip = ip.replace("::ffff:", '');
         ip = ip.replace('127.0.0.1','');

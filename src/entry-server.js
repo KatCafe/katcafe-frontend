@@ -18,7 +18,7 @@ export default context => {
     await store.dispatch('LOCALIZATION_NEW_IP', context.ip ); //Dispatching the Context IP
 
 
-    let session = context.cookies.session;
+    let session = context.cookies ? context.cookies.session : '';
     if (session === '') session = undefined;
     if (typeof session === "string") session = JSON.parse(session);
 
@@ -37,7 +37,7 @@ export default context => {
         store.commit('SET_AUTH_SESSION', '' );
     }
 
-    const {selectedCountry, selectedCountryCode} = context.cookies;
+    const {selectedCountry, selectedCountryCode} = context.cookies || {};
     if (selectedCountry && selectedCountryCode){
 
         store.commit('SET_LOCALIZATION_SELECTED_COUNTRY', { selectedCountry, selectedCountryCode} );

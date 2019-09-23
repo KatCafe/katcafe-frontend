@@ -115,7 +115,7 @@ function render (req, res) {
    let ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
    //const requestIp = require('request-ip');
    //let ip = requestIp.getClientIp(req);
-   console.log('IP::'); console.log(ip);
+   console.log('IP', ip);
 
     const context = {
 
@@ -158,40 +158,11 @@ function render (req, res) {
 }
 
 app.get('*', isProd ? render : (req, res) => {
-  readyPromise.then(() => render(req, res))
-});
+    readyPromise.then(() => render(req, res))
+})
 
-let port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
-if (process.env.NODE_ENV === 'production') port = port || 80;
-else port = port || consts.port;
-
-
-
-let options = { };
-
-try{
-
-    options.key = fs.readFileSync('./certificates/private.key', 'utf8');
-    options.cert = fs.readFileSync('./certificates/certificate.crt', 'utf8');
-    options.ca = fs.readFileSync('./certificates/ca_bundle.crt', 'utf8');
-
-    https.createServer(options, app).listen(port, ()=>{
-        console.log(`https server started at localhost:${port}`)
-    });
-
-
-} catch (exception){
-
-    //cloudflare generates its own SSL certificate
-    app.listen(port, () => {
-        console.log(`http server started at localhost:${port}`)
-    });
-
-}
-
-
-
-
-
-
+app.listen(port, () => {
+    console.log(`server started at localhost:${port}`)
+})
