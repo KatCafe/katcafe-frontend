@@ -21,7 +21,6 @@
     "vue": "^2.5.22",
     "vue-multiselect": "^2.1.6",
     "vue-no-ssr": "^0.1.3",
-    "vue-read-more": "^1.1.1",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.22",
     "vuex": "^3.0.1",

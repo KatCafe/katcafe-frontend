@@ -34,7 +34,7 @@
 
                             <h2 v-if="title" class="title" v-html="title"/>
 
-                            <read-more less-str="read less" :text="body" :max-chars="400" class="topicBody" />
+                            <read-more  :text="body" :max-chars="400" pclass="topicBody" />
 
                         </div>
                     </router-link>
@@ -71,12 +71,13 @@ import Vote from "client/components/modules/vote/vote"
 import Comments from "client/components/modules/comments/view/comments"
 import PreviewImage from "client/components/UI/elements/preview-image"
 import AddCommentFrom from "client/components/modules/comments/add-comment.form"
+import ReadMore from "client/components/UI/elements/read-more"
 
 import consts from "consts/consts"
 
 export default {
 
-    components: { Vote, Comments, PreviewImage, AddCommentFrom },
+    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore },
 
     props: {
         topic: null,

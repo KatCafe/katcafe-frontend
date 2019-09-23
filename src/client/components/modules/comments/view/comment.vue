@@ -27,7 +27,7 @@
 
                         <h3 v-if="title" class="title" v-html="title"/>
 
-                        <read-more less-str="read less" :text="body" :max-chars="400" class="topicBody" />
+                        <read-more :text="body" :max-chars="400" pclass="topicBody" class="topicBody" />
 
                     </div>
 
@@ -47,10 +47,11 @@ import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
 import PreviewImage from "client/components/UI/elements/preview-image"
 import consts from "consts/consts"
+import ReadMore from "client/components/UI/elements/read-more"
 
 export default {
 
-    components: { Vote, PreviewImage},
+    components: { Vote, PreviewImage, ReadMore},
 
     data(){
         return {

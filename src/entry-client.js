@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import { createApp } from './app'
-import ReadMore from 'vue-read-more';
 
 import NetworkHelper from "modules/network/network-helper"
-
-Vue.use(ReadMore);
 
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
