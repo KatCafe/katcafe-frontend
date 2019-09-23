@@ -674,6 +674,15 @@ form {
 .topicTextWrap{
 }
 
+
+.topicTextWrap p {
+    display: inline;
+}
+
+#readmore{
+    padding-left: 10px;
+}
+
 .topicTextWrap .title{
     color: #fff;
 }

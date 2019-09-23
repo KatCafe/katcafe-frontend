@@ -34,7 +34,7 @@
 
                             <h2 v-if="title" class="title" v-html="title"/>
 
-                            <p class="topicBody" v-html="body"/>
+                            <read-more less-str="read less" :text="body" :max-chars="400" class="topicBody" />
 
                         </div>
                     </router-link>

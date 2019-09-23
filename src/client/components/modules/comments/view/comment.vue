@@ -27,7 +27,7 @@
 
                         <h3 v-if="title" class="title" v-html="title"/>
 
-                        <p v-if="body" class="topicBody" v-html="body"/>
+                        <read-more less-str="read less" :text="body" :max-chars="400" class="topicBody" />
 
                     </div>
 
@@ -50,7 +50,7 @@ import consts from "consts/consts"
 
 export default {
 
-    components: { Vote, PreviewImage },
+    components: { Vote, PreviewImage},
 
     data(){
         return {
@@ -92,7 +92,6 @@ export default {
         body(){
             return this.comment.body;
         },
-
 
         link(){
             return this.comment.link;

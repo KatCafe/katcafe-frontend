@@ -109,12 +109,11 @@ function render (req, res) {
             console.error(`error during render : ${req.url}`)
             console.error(err.stack)
         }
-    }
+    };
 
    //EXTRACTING THE IP
-   let ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
-   //const requestIp = require('request-ip');
-   //let ip = requestIp.getClientIp(req);
+   const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+   console.log('-------');
    console.log('IP', ip);
 
     const context = {

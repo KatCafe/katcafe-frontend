@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { createApp } from './app'
+import ReadMore from 'vue-read-more';
 
 import NetworkHelper from "modules/network/network-helper"
 
@@ -17,6 +18,8 @@ Vue.mixin({
     }
   }
 });
+
+Vue.use(ReadMore);
 
 // usage of tooltips https://stackoverflow.com/questions/37078423/how-can-add-bootstrap-tooltip-inside-vue-js
 Vue.directive('tooltip', function(el, binding){
