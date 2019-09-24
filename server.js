@@ -171,6 +171,8 @@ let server;
 
 try {
 
+    const options = {};
+
     if (fs.existsSync('./certificates/ca_bundle.crt')) {
         options.key = fs.readFileSync('./certificates/private.key', 'utf8');
         options.cert = fs.readFileSync('./certificates/certificate.crt', 'utf8');
