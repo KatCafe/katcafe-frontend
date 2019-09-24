@@ -18,6 +18,7 @@ class NetworkHelper {
             timeout,
             method: "POST",
             body,
+            withCredentials: true,
         });
 
     }
@@ -32,6 +33,7 @@ class NetworkHelper {
             json,
             timeout,
             body,
+            withCredentials: true,
         });
 
     }
