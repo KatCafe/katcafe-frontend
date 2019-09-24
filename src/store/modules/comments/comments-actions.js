@@ -25,8 +25,6 @@ export default {
                 commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
                 commit('SET_COMMENTS_PAGE_LOADING', false );
 
-                console.log(state.pageMore);
-
                 return;
             }
 

@@ -50,7 +50,7 @@ export default {
 
     async asyncData ({ store,  route }){
 
-        console.log('channel async data');
+        console.log('channel async data', route.path);
 
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));

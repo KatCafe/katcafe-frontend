@@ -40,7 +40,7 @@ export default {
 
 
         preview(){
-            return this.$store.getters.getPreviewImage(this.data, false, this.index)
+            return this.$store.getters.getPreviewImage(this.data, this.toggledImage, this.index)
         },
 
         maxWidth(){
