@@ -19,7 +19,7 @@
                         <span class="actionButton">{{topic.channel||''}}</span>
                     </router-link>
 
-                    <img v-if="isUserOwner" @click="deleteTopic" src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
+                    <img v-if="isUserOwner" @click="deleteTopic" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
 
 
                 </div>

@@ -113,8 +113,8 @@ export default {
             const channel = this.getChannel;
 
             if (channel === 'ro') return 'https://www.tetratech.com/en/images/rg18-201-water-solutions-for-asia-2000.jpg?blobheader=image/jpeg';
-            if (channel === 'us') return 'http://mindfluencerevolution.com/wp-content/uploads/2017/08/woman-breakthrough.jpg';
-            if (channel === 'md') return 'http://tour.tt.org.ua/data/uploads/cycle/tt1-min.jpg';
+            if (channel === 'us') return 'https://mindfluencerevolution.com/wp-content/uploads/2017/08/woman-breakthrough.jpg';
+            if (channel === 'md') return 'https://tour.tt.org.ua/data/uploads/cycle/tt1-min.jpg';
 
             return '';
         },
