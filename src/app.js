@@ -35,6 +35,13 @@ export function createApp () {
   const store = createStore()
   const router = createRouter(store)
 
+  if (typeof window !== "undefined"){
+    // prime the store with server-initialized state.
+    // the state is determined during SSR and inlined in the page markup.
+    if (window.__INITIAL_STATE__)
+      store.replaceState(window.__INITIAL_STATE__)
+  }
+
   // sync the router with the vuex store.
   // this registers `store.state.route`
   sync(store, router)

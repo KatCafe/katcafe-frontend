@@ -9,7 +9,7 @@ class NetworkHelper {
 
     async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' } ){
 
-        if (this._store.state.auth.session) headers.session = this._store.state.auth.session
+        if (this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
 
         return rp({
             uri: prefix + address,
@@ -24,7 +24,7 @@ class NetworkHelper {
 
     async get(address, body, prefix = consts.serverApi, json = true, timeout , headers = { 'User-Agent': 'Request-Promise' } ){
 
-        if (this._store.state.auth.session) headers.session = this._store.state.auth.session
+        if (this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
 
         return rp({
             uri: prefix + address,

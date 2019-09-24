@@ -33,6 +33,8 @@ export function createRouter (store){
 
     function guardAuth(to, from, next){
 
+        console.log('store.state.auth.user', store.state.auth.user);
+
         if (store.state.auth.user) return next();
 
         if (to.path !== '/login') next('/login');

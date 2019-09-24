@@ -42,15 +42,6 @@ const { app, router, store } = createApp();
 
 NetworkHelper.setStore(store);
 
-// prime the store with server-initialized state.
-// the state is determined during SSR and inlined in the page markup.
-if (window.__INITIAL_STATE__) {
-  store.replaceState(window.__INITIAL_STATE__)
-}
-
-//not necessary as it was verified on our server
-//store.dispatch('AUTHENTICATE_USER_SESSION', store.state.auth.session );
-
 //send the store and dispatch to the FetchService (SocketClient needs store.socketStatus
 
 // wait until router has resolved all async before hooks

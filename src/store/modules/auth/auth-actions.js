@@ -42,7 +42,7 @@ export default {
 
     },
 
-    AUTH_LOGIN_SESSION: async ({ commit, dispatch, state }, session ) => {
+    AUTH_LOGIN_SESSION: async ({ commit, dispatch, state }, session = {} ) => {
 
         const out = await NetworkHelper.post('/auth/signin-session', {key: session.key || state.session.key} );
 
