@@ -9,7 +9,7 @@
 
             <div class="replyBox">
 
-                <img class="profileAvatar" src="/public/assets/anonymus.png">
+                <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
                 <input type="text" placeholder="New post title" v-model="topicTitle" @change="titleChanged"/>
 
                 <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >

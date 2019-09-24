@@ -1243,6 +1243,10 @@ textarea:focus, input:focus{
         grid-template-columns: 1fr ;
     }
 
+    .hiddenTablet {
+        display: none;
+    }
+
 }
 
 

@@ -51,9 +51,11 @@
                 </router-link>
 
                 <template v-if="!isSnippetForm && isPreview ">
-
                     <add-comment-from :topic="this.topic" />
+                </template>
 
+                <template v-if="isPage">
+                    <add-comment-from :topic="this.topic" class="hiddenTablet" />
                 </template>
 
             </div>

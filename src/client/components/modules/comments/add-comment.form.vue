@@ -3,7 +3,7 @@
 
         <div class="replyBox">
 
-            <img class="profileAvatar" src="/public/assets/anonymus.png">
+            <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
             <textarea type="text" placeholder="Write a reply..." v-model="commentBody" @change="bodyChanged"/>
 
             <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
@@ -197,8 +197,11 @@ export default {
             }catch(err){
 
                 this.error = err.message;
+
                 if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
                     captcha.reset();
+
+                setTimeout( () => this.error = '', 4000 );
 
             }
 
