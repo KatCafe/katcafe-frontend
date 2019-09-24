@@ -1,14 +1,15 @@
 module.exports = {
 
-    port: 8089,
+    port: 8080,
     serverApi: "http://registratura.ddns.net:8085",
+    //serverApi: "https://katcafe.org:2095",
 
     name: "katcafé",
     copyright: "katcafé",
     title: "katcafé - Your café to discuss anything",
     description: "Discuss anything from politics to crypto or life",
-    keywords: "cafe, 4chan, reddit",
-    image: "/public/assets/katcafe-cover.jpg",
-    logo: '/public/assets/katcafe-logo.png',
+    keywords: "cafe, 4chan, reddit, discussions, freedom of speech, politics, religions, games, memes",
+    image: "katcafe.org/public/assets/katcafe-cover.jpg",
+    logo: 'katcafe.org/public/assets/katcafe-logo.png',
 
 }
