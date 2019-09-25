@@ -15,8 +15,6 @@ export default {
 
     ADD_COMMENTS: (state, comments)=>{
 
-        comments = comments.sort( (a,b ) => a.date - b.date );
-
         for (const comment of comments)
             Vue.set( state.map, comment.slug, comment );
 

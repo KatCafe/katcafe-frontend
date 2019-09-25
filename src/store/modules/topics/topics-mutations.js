@@ -5,6 +5,7 @@ export default {
 
     SET_TOPIC:  (state, topic ) => {
         state.topic = topic;
+        return topic;
     },
 
     SET_TOPICS:  (state, topics ) => {

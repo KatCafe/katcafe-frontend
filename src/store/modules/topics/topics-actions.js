@@ -22,6 +22,17 @@ export default {
             });
 
             if (out ) {
+
+                out.topics.map( topic => {
+
+                    const comments = out.comments.filter( comment => comment.topic === topic.slug );
+                    topic.commentsPageInfo = {
+                        pageIndex: 1,
+                        count: comments.length,
+                    };
+
+                } );
+
                 commit('ADD_TOPICS', out.topics);
                 commit('ADD_COMMENTS', out.comments);
                 commit('SET_TOPICS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
@@ -62,20 +73,27 @@ export default {
 
     },
 
-    TOPIC_GET_MORE_COMMENTS: async  ({ commit, dispatch, state }, { slug }) => {
+    TOPIC_GET_MORE_COMMENTS: async  ({ commit, dispatch, state }, { slug, searchRevert = false, searchAlgorithm = 'hot', searchQuery = 'topic' }) => {
 
         try{
 
-            alert('not done');
+            slug = StringHelper.trimSlashes(slug);
 
-            const topic = state.map[slug];
+            let topic = state.map[slug];
+            if (!topic) throw "topic was not found"
 
-            const out = await NetworkHelper.get(`/topics/get/${slug}`);
+            console.log(topic);
+
+            const out = await NetworkHelper.post(`/comments/top`, { search: slug, searchRevert, searchAlgorithm, searchQuery, index: topic.commentsPageInfo.pageIndex+1, count: topic.commentsPageInfo.count });
 
             if (out )
-                return commit('SET_TOPIC', out.topic);
+                if (out.comments.length) {
+                    commit('ADD_COMMENTS', out.comments);
+                    topic.commentsPageInfo.pageIndex += 1;
+                }
 
         }catch(err){
+            console.error("Error getting topic", err);
         }
 
         return commit('SET_TOPIC', undefined);

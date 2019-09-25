@@ -49,8 +49,8 @@
                     <comments :comments="comments" :isPreview = "isPreview" />
                 </div>
 
-                <router-link :to="isPage ? '' : to" v-if="commentsToLoad && !isPage">
-                    <span v-if="commentsToLoad >= 0" class="actionButton viewMoreComments" @click="viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
+                <router-link :to="isPage ? '' : to" v-if="commentsToLoad && !isPage" @click.native.prevent.capture="viewMoreComments">
+                    <span class="actionButton viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
                 </router-link>
 
                 <template v-if="!isSnippetForm && isPreview ">
@@ -147,7 +147,7 @@ export default {
         },
 
         viewMoreComments(){
-            //return this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', {value: true, topic: this.topic.slug, channel: this.topic.channel })
+            return this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', { slug: this.topic.slug})
         },
 
         deleteTopic(){
