@@ -147,7 +147,7 @@ export default {
         },
 
         viewMoreComments(){
-            return this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', {value: true, topic: this.topic.slug, channel: this.topic.channel })
+            //return this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', {value: true, topic: this.topic.slug, channel: this.topic.channel })
         },
 
         deleteTopic(){

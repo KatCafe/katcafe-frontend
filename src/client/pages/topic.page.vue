@@ -50,12 +50,9 @@ export default {
         let path = route.path;
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-        if (route.params.slug) {
+        if (path ) {
 
             store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
-
-            store.commit('SET_TOPIC', null);
-            store.commit('SET_COMMENTS', [] );
 
             await store.dispatch('TOPIC_GET', {slug: path,});
 

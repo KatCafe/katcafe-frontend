@@ -36,6 +36,9 @@ class StringHelper{
         return link;
     }
 
+    trimSlashes(string){
+        return string.replace(/^\/|\/$/g, '');
+    }
 
 }
 

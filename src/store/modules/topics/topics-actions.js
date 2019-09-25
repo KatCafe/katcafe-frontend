@@ -1,4 +1,5 @@
 import NetworkHelper from "modules/network/network-helper"
+import StringHelper from "src/utils/string-helper"
 
 export default {
 
@@ -40,12 +41,21 @@ export default {
 
         try{
 
-            const out = await NetworkHelper.get(`/topics/get/${slug}`);
+            slug = StringHelper.trimSlashes(slug);
 
-            if (out )
-                return commit('SET_TOPIC', out.topic);
+            let topic = state.map[slug];
+
+            if (!topic) {
+                const out = await NetworkHelper.get(`/topics/get/${slug}`);
+
+                if (out)
+                    topic = out.topic;
+            }
+
+            return commit('SET_TOPIC', topic);
 
         }catch(err){
+            console.error("Error getting topic", err);
         }
 
         return commit('SET_TOPIC', null);
@@ -55,6 +65,8 @@ export default {
     TOPIC_GET_MORE_COMMENTS: async  ({ commit, dispatch, state }, { slug }) => {
 
         try{
+
+            alert('not done');
 
             const topic = state.map[slug];
 
