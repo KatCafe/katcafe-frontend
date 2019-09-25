@@ -917,8 +917,8 @@ form {
 
 .replyBox{
     display: grid;
-    grid-template-columns: 40px 1fr 50px;
-    grid-column-gap: 10px;
+    grid-template-columns: 40px 1fr 40px;
+    grid-column-gap: 8px;
     padding: 8px;
 }
 
@@ -1237,7 +1237,7 @@ textarea:focus, input:focus{
     padding-top:11px !important;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
 
     .topicPage{
         grid-template-columns: 1fr ;
@@ -1245,6 +1245,9 @@ textarea:focus, input:focus{
 
     .hiddenTablet {
         display: none;
+    }
+
+    .replyBox{
     }
 
 }

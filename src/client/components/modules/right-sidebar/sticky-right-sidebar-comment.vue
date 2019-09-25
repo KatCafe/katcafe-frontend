@@ -36,7 +36,7 @@ export default {
 
             top = window.pageYOffset || document.documentElement.scrollTop;
 
-            if (w <= 800) {
+            if (w <= 900) {
                 addCommentForm.style.position = "fixed";
                 addCommentForm.style.bottom = "0";
                 addCommentForm.style.top = "inherit";

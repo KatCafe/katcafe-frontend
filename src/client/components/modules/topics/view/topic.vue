@@ -41,6 +41,9 @@
 
                 </div>
 
+                <template v-if="isPage && comments.length > 8">
+                    <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" />
+                </template>
 
                 <div class="topicComments" v-if="comments.length" @click.native="window.scrollTo(0,0)" >
                     <comments :comments="comments" :isPreview = "isPreview" />
@@ -55,7 +58,7 @@
                 </template>
 
                 <template v-if="isPage">
-                    <add-comment-from :topic="this.topic" class="hiddenTablet" />
+                    <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" />
                 </template>
 
             </div>
