@@ -620,7 +620,6 @@ form {
 
 .topicComments{
     /*border-top: solid 1px #5c5c5c;*/
-    margin-top: 20px;
     /*padding-top: 10px;*/
 }
 
@@ -854,6 +853,7 @@ form {
 .topicBoxContent{
     display: block;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .topicComments .topicBoxContent{

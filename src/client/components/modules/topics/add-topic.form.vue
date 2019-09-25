@@ -2,7 +2,7 @@
     <form action="#" class="newPostContainer">
 
         <div class="newPostTitle">
-            Start a thread in <strong>{{channel}}</strong>
+            {{ $t('topic.startThread' ) }} <strong>{{channel}}</strong>
         </div>
 
         <div class="newPostContent">
@@ -224,10 +224,8 @@ export default {
 
             }catch(err){
 
-                this.error = err.message;
-
-                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
-                    captcha.reset();
+                this.error = captcha.processError(err.message);
+                this.error = this.error.replace('Too few letters. Minimum 4 letters', this.$i18n.t('topic.errorTooFewLetters'));
 
             }
 

@@ -14,7 +14,7 @@
 
                     <div class="topicButtons">
                         <img v-if="isUserOwner" @click="deleteComment" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
-                        <span class="postId actionButton" @click="openStickyRightSidebarComment">Reply to #{{comment.uuid}}</span>
+                        <span class="postId actionButton" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
                     </div>
 
                 </div>

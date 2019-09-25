@@ -68,10 +68,7 @@ export default {
 
             }catch(err){
 
-                this.error = err.message;
-
-                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 || this.error.indexOf("Password doesn't match") >= 0 )
-                    captcha.reset();
+                this.error = captcha.processError(err.message);
 
             }
 

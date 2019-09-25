@@ -14,29 +14,29 @@
             <div class="headerRight">
 
                 <router-link class="menuButton" to="/add-channel">
-                    Add channel
+                    {{$t('header.addChannel')}}
                 </router-link>
 
                 <template v-if="!user">
 
                     <router-link to="/login">
-                        Login
+                        {{$t('header.login')}}
                     </router-link>
 
                     <router-link to="/signup" class="hiddenMobile">
-                        Signup
+                        {{$t('header.signup')}}
                     </router-link>
 
                 </template>
 
                 <template v-else>
                     <router-link to="/logout" @click.native.prevent.capture="logout">
-                        Logout <span class="hiddenMobile">{{user.username}}</span>
+                        {{$t('header.logout')}} <span class="hiddenMobile">{{user.username}}</span>
                     </router-link>
 
                     <template v-if="isAdmin">
                         <router-link to="/admin">
-                            Admin
+                            {{$t('header.admin')}}
                         </router-link>
                     </template>
 

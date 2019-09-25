@@ -1,10 +1,14 @@
 <template>
     <div class="sideReplyBox">
 
+        <span v-if="isPage">
+            {{$t('comment.yourOpinionMatters')}}
+        </span>
+
         <div class="replyBox">
 
             <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
-            <textarea type="text" placeholder="Write a reply..." v-model="commentBody" @change="bodyChanged"/>
+            <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="commentBody" @change="bodyChanged"/>
 
             <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
             <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
@@ -12,7 +16,7 @@
         </div>
 
         <div v-if="showPreview">
-            <captcha ref="captcha" @submit="createComment" buttonText="Post" />
+            <captcha ref="captcha" @submit="createComment"  />
 
             <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
 
@@ -37,6 +41,7 @@ import Comment from "client/components/modules/comments/view/comment"
 
 function initialState (){
     return {
+
 
         commentBody: '',
         link: '',
@@ -68,6 +73,7 @@ export default {
 
     props: {
         topic: {default: null},
+        isPage: {default: false},
     },
 
     data(){
@@ -196,12 +202,10 @@ export default {
 
             }catch(err){
 
-                this.error = err.message;
+                this.error = captcha.processError(err.message);
+                this.error = this.error.replace('You need to provide either a link/file or write 5 characters', this.$i18n.t('comment.errorNoFileOrText'));
 
-                if (this.error.indexOf("Captcha was already used") >= 0 || this.error.indexOf("Captcha is incorrect") >= 0 )
-                    captcha.reset();
-
-                setTimeout( () => this.error = '', 4000 );
+                setTimeout( () => this.error = '', 8000 );
 
             }
 
