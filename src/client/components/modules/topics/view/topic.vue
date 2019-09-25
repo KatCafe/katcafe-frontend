@@ -49,9 +49,7 @@
                     <comments :comments="comments" :isPreview = "isPreview" />
                 </div>
 
-                <router-link :to="isPage ? '' : to" v-if="commentsToLoad && !isPage" @click.native.prevent.capture="viewMoreComments">
-                    <span class="actionButton viewMoreComments"> View more {{commentsToLoad}} comment{{commentsToLoad > 1  ? 's' : ''}} </span>
-                </router-link>
+                <view-more-comments :topic="topic" :comments="comments" :isPage="isPage" />
 
                 <template v-if="!isSnippetForm && isPreview ">
                     <add-comment-from :topic="this.topic" />
@@ -77,12 +75,13 @@ import Comments from "client/components/modules/comments/view/comments"
 import PreviewImage from "client/components/UI/elements/preview-image"
 import AddCommentFrom from "client/components/modules/comments/add-comment.form"
 import ReadMore from "client/components/UI/elements/read-more"
+import ViewMoreComments from "./view-more-comments"
 
 import consts from "consts/consts"
 
 export default {
 
-    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore },
+    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore, ViewMoreComments },
 
     props: {
         topic: null,
@@ -125,10 +124,6 @@ export default {
             return this.topic.slug;
         },
 
-        commentsToLoad(){
-            return this.topic.comments - this.comments.length
-        },
-
         comments(){
             return this.$store.getters.getComments( this.isPage ? 'date' : 'hot', this.isPage ? -1 : 1, it => it.topic === this.topic.slug );
         },
@@ -146,9 +141,6 @@ export default {
             return this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
         },
 
-        viewMoreComments(){
-            return this.$store.dispatch('TOPIC_GET_MORE_COMMENTS', { slug: this.topic.slug})
-        },
 
         deleteTopic(){
             return this.$store.dispatch('TOPIC_DELETE', this.topic.slug );

@@ -14,7 +14,7 @@
         <div v-if="showPreview">
             <captcha ref="captcha" @submit="createComment" buttonText="Post" />
 
-            <icon icon="loading-spinner" v-if="loading" />
+            <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
 
             <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
