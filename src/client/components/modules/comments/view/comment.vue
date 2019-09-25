@@ -83,7 +83,7 @@ export default {
         },
 
         author(){
-            return this.comment.author || 'Anonymous'
+            return this.comment.author || this.$i18n.t('comment.anonymous')
         },
 
         date(){

@@ -1,5 +1,8 @@
 import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+
 import App from './App.vue'
+import i18n from "modules/i18n/i18n"
 import { createStore } from './store'
 import { createRouter } from './router'
 import { sync } from 'vuex-router-sync'
@@ -14,6 +17,10 @@ import WebPageTypeMixin from './modules/utils/SEO/WebPageTypeMixin';
 
 
 import * as UtilitiesFunctions from './modules/utils/global-utilities/utilities-functions';
+
+Vue.use(VueI18n);
+
+i18n.i18nInit();
 
 // mixin for handling title, description, etc...
 // DOCUMENTATION, it is based on Vue.js Hackernews v2 https://github.com/vuejs/vue-hackernews-2.0/blob/master/src/util/title.js
@@ -40,6 +47,7 @@ export function createApp () {
     // the state is determined during SSR and inlined in the page markup.
     if (window.__INITIAL_STATE__)
       store.replaceState(window.__INITIAL_STATE__)
+      i18n.i18n.locale = store.state.localization.selectedCountryCode;
   }
 
   // sync the router with the vuex store.
@@ -52,6 +60,7 @@ export function createApp () {
   // here we inject the router, store and ssr context to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = new Vue({
+    i18n: i18n.i18n,
     router,
     store,
     render: h => h(App)

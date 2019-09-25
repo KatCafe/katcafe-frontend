@@ -105,7 +105,7 @@ export default {
         },
 
         author(){
-            return this.topic.author || 'Anonymous'
+            return this.topic.author || this.$i18n.t('comment.anonymous')
         },
 
         date(){

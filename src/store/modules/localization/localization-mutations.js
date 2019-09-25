@@ -1,3 +1,5 @@
+import i18n from "modules/i18n/i18n"
+
 export default {
 
     SET_LOCALIZATION_IP: (state, ip ) => {
@@ -35,7 +37,7 @@ export default {
         selectedCountryCode = selectedCountryCode.toLowerCase();
 
         const countriesAllowed = {};
-        state.countriesAllowed.map( it => countriesAllowed[it] = true);
+        state.countriesAllowed.map( it => countriesAllowed[it] = it);
 
         if ( !countriesAllowed[selectedCountryCode] ){
             selectedCountryCode = 'us';
@@ -44,6 +46,8 @@ export default {
 
         state.selectedCountryCode = selectedCountryCode;
         state.selectedCountry = selectedCountry;
+
+        i18n.i18n.locale = selectedCountryCode;
 
     },
 

@@ -40,7 +40,7 @@ export default {
         },
 
         author(){
-            return this.topic.author || 'Anonymous'
+            return this.topic.author || $t('comment.anonymous')
         },
 
         date(){

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { createApp } from './app'
 
 import NetworkHelper from "modules/network/network-helper"
+import i18n from "./modules/i18n/i18n";
 
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
