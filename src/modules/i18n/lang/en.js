@@ -7,6 +7,9 @@ export default {
     topic: {
         startThread: "Start a thread in",
         viewMoreComments: "View more",
+        threadTitle: "New post title",
+        threadComment: "Your comment...",
+        previewThread: "Preview topic",
         errorTooFewLetters: "Too few letters. Minimum 4 letters",
     },
 
@@ -14,6 +17,7 @@ export default {
         anonymous: 'Anonymous',
         yourOpinionMatters: "Your opinion matters",
         writeReply: 'write a reply...',
+        previewComment: "Preview comment",
         errorNoFileOrText: "You need to provide either a link/file or write 5 characters",
     },
 

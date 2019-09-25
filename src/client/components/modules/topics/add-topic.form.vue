@@ -10,7 +10,7 @@
             <div class="replyBox">
 
                 <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
-                <input type="text" placeholder="New post title" v-model="topicTitle" @change="titleChanged"/>
+                <input type="text" :placeholder="$t('topic.threadTitle')" v-model="topicTitle" @change="titleChanged"/>
 
                 <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
 
@@ -22,7 +22,7 @@
 
                 <br/>
 
-                <textarea type="text" placeholder="Your comment..." v-model="topicBody" @change="bodyChanged"/>
+                <textarea type="text" :placeholder="$t('topic.threadComment')" v-model="topicBody" @change="bodyChanged"/>
 
             </div>
 
@@ -34,7 +34,7 @@
         <icon icon="loading-spinner" v-if="loading" />
 
         <div v-if="showPreview && !loading" >
-            Preview
+            <span>{{$t('topic.previewThread')}}</span>
             <topic :topic="previewTopic" :isSnippetForm="true" />
         </div>
 

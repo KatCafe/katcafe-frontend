@@ -598,6 +598,10 @@ form {
     transition: all 0.2s ease
 }
 
+.commentPreview{
+    margin-left: 10px;
+}
+
 .comment:nth-last-child(1){
     margin-bottom: 0;
     border-bottom: none;
@@ -1359,6 +1363,10 @@ textarea:focus, input:focus{
         border-style: solid;
         border-color: #282626;
         border-width: 1px 0 0 0;
+    }
+
+    .rightSidebar .topicBoxContent{
+        margin-bottom: 0;
     }
 
 }

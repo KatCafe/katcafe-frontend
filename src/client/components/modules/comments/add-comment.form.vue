@@ -23,6 +23,7 @@
             <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
 
             <div v-if="!loading" >
+                <span class='commentPreview hiddenMobile'>{{$t('comment.previewComment')}}</span>
                 <comment :comment="previewComment" :isSnippetForm="true" />
             </div>
 

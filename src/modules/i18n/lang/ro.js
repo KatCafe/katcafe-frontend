@@ -7,6 +7,9 @@ export default {
     topic: {
         startThread: "Scrie o postare în",
         viewMoreComments: "Vezi",
+        threadTitle: "Titlu postare",
+        threadComment: "comentariu...",
+        previewThread: "Previzualizare postare",
         errorTooFewLetters: "Prea putine litere. Minim 4 litere",
     },
 
@@ -14,6 +17,7 @@ export default {
         anonymous: 'Anonim',
         yourOpinionMatters: "Opinia ta conteaza",
         writeReply: 'scrie un comentariu...',
+        previewComment: "Previzualizare comentariu",
         errorNoFileOrText: "Trebuie sa scrii 5 litere ori sa incarci o poza/link",
     },
 
