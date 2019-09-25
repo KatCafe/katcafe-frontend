@@ -165,7 +165,7 @@ app.get('*', isProd ? render : (req, res) => {
     readyPromise.then(() => render(req, res))
 });
 
-const port = process.env.PORT || ( process.env.NODE_ENV === 'production' ? 80 : consts.port);
+const port = process.env.PORT || consts.port;
 
 let server;
 
@@ -182,7 +182,7 @@ try {
         options.cert = fs.readFileSync('./certificates/certificate.pem', 'utf8');
     }
 
-    server = https.createServer( options, app).listen(port, ()=>{
+    server = https.createServer( options, app).listen( process.env.NODE_ENV === 'production' ? 443 : port, ()=>{
 
         console.log("HTTPS Express was opened on port "+port);
 
@@ -191,7 +191,7 @@ try {
 } catch (exception){
 
     //cloudflare generates its own SSL certificate
-    server = http.createServer(app).listen(port, ()=>{
+    server = http.createServer(app).listen( process.env.NODE_ENV === 'production' ? 80 : port, ()=>{
 
         console.log(`http express started at localhost:${port}`)
 
