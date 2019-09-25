@@ -107,7 +107,7 @@ export default {
         },
 
         getPageUri(){
-            return '/'+ this.topic ? this.topic.slug : '' +'/pageIndex/';
+            return `/${this.topic ? this.topic.slug : ''}/pageIndex/`;
         },
 
         getPrevUri(){
