@@ -50,23 +50,30 @@ export default {
         console.log('home asyncData', route.path);
 
         let path = route.path;
-        if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-        const country = store.state.localization.selectedCountryCode;
+        try{
 
-        path = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
+            if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-        store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+            const country = store.state.localization.selectedCountryCode;
 
-        store.commit('SET_TOPICS', [] );
-        store.commit('SET_COMMENTS', [] );
+            path = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
 
-        await store.dispatch('CHANNEL_GET', {slug: path });
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
 
-        await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0, count: 5 });
+            store.commit('SET_TOPICS', [] );
+            store.commit('SET_COMMENTS', [] );
 
-        store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+            await store.dispatch('CHANNEL_GET', {slug: path });
 
+            await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0, count: 5 });
+
+            store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+
+
+        }catch(err){
+            console.error('home page raised an error', path);
+        }
     },
 
     watch: {

@@ -48,22 +48,29 @@ export default {
         console.log('topic async data', route.path);
 
         let path = route.path;
-        if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-        if ( path ) {
+        try{
 
-            store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+            if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-            await store.dispatch('TOPIC_GET', {slug: path,});
+            if ( path ) {
 
-            if (store.state.topics.topic){
-                //no need to download the channel
-                await store.dispatch('CHANNEL_GET', {slug: store.state.topics.topic.channel  });
-                await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0});
+                store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+
+                await store.dispatch('TOPIC_GET', {slug: path,});
+
+                if (store.state.topics.topic){
+                    //no need to download the channel
+                    await store.dispatch('CHANNEL_GET', {slug: store.state.topics.topic.channel  });
+                    await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0});
+                }
+
+                store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+
             }
 
-            store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
-
+        }catch(err){
+            console.error('topic page raised an error', path);
         }
 
     },

@@ -66,7 +66,7 @@ export default {
             return commit('SET_TOPIC', topic);
 
         }catch(err){
-            console.error("Error getting topic", err);
+            console.error("Error getting topic", slug);
         }
 
         return commit('SET_TOPIC', null);
@@ -93,7 +93,7 @@ export default {
                 }
 
         }catch(err){
-            console.error("Error getting topic", err);
+            console.error("Error getting more comments for topic ", slug);
         }
 
         return commit('SET_TOPIC', undefined);

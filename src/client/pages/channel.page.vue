@@ -53,19 +53,26 @@ export default {
         console.log('channel async data', route.path);
 
         let path = route.path;
-        if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-        if (route.params.slug) {
+        try{
 
-            store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+            if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-            store.commit('SET_TOPICS', [] );
-            store.commit('SET_COMMENTS', [] );
+            if (route.params.slug) {
 
-            await store.dispatch('CHANNEL_GET', {slug: path,});
-            await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0 });
+                store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
 
-            store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+                store.commit('SET_TOPICS', [] );
+                store.commit('SET_COMMENTS', [] );
+
+                await store.dispatch('CHANNEL_GET', {slug: path,});
+                await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0 });
+
+                store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+            }
+
+        }catch(err){
+            console.error('channel page raised an error', path);
         }
 
     },
