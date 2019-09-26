@@ -64,7 +64,7 @@ export default {
             this.channelCountry = code;
         },
 
-        async createChannel(e, resolver){
+        async createChannel(resolver, captchaData){
 
             const captcha = this.$refs['captcha'];
 
@@ -78,7 +78,7 @@ export default {
                     icon: this.channelIcon,
                     cover: this.channelCover,
                     country: this.channelCountry || this.defaultCountry,
-                    captcha: captcha.captchaData()
+                    captcha: captchaData,
                 });
 
                 if (!out) throw "An error was encountered";

@@ -57,7 +57,7 @@ export default {
 
     methods: {
 
-        async signup(e, resolver){
+        async signup(resolver, captchaData){
 
             const captcha = this.$refs['captcha'];
 
@@ -71,7 +71,7 @@ export default {
                     password: this.password,
                     confirmPassword: this.confirmPassword,
                     country: this.defaultCountry,
-                    captcha: captcha.captchaData()
+                    captcha: captchaData,
                 });
 
                 if (out && out.user){

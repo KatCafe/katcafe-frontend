@@ -47,7 +47,7 @@ export default {
 
     methods: {
 
-        async login(e, resolver){
+        async login( resolver, captchaData){
 
             const captcha = this.$refs['captcha'];
 
@@ -59,7 +59,7 @@ export default {
                     userEmail: this.userEmail,
                     password: this.password,
                     country: this.defaultCountry,
-                    captcha: captcha.captchaData(),
+                    captcha: captchaData,
                 });
 
                 if (out && out.user)
