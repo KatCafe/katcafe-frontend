@@ -465,6 +465,16 @@ form {
     border: solid 1px #323232;
 }
 
+.inputFileUploadGroup{
+    position: relative
+}
+
+.inputFileUploadGroup img{
+    position: absolute;
+    right: 4px;
+    top: 0;
+}
+
 .formLink{
     display: inline;
     white-space: nowrap;
@@ -510,6 +520,7 @@ form {
     width: 100%;
     height: 100%;
     background-color: rgba(26, 26, 26, 0.9);
+    z-index: 10;
 }
 
 .modal {
@@ -520,6 +531,7 @@ form {
     opacity: 0;
     visibility: hidden;
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 11;
 }
 
 .modal-content {
@@ -527,28 +539,22 @@ form {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff5f5;
-    border: solid 1px #000000;
-    padding: 10px;
     border-radius: 10px;
-    padding-bottom: 0;
-    width: 600px;
-
+    padding: 10px 10px 0;
+    background-color: #282121;
+    border: solid 1px #532f2f;
+    width: 100%;
 }
 
 .close-button {
     position: absolute;
-    top: -30px;
+    top: -20px;
     right: 0;
-    width: 1.5rem;
-    line-height: 1.5rem;
     text-align: center;
     cursor: pointer;
-    border-radius: 0.25rem;
-    background-color: #fff5f5;
-    border: solid 1px #000000;
-    color: black;
+    color: white;
 }
+
 
 .close-button:hover {
     background-color: #4c4c4c;
@@ -557,8 +563,9 @@ form {
 .show-modal {
     opacity: 1;
     visibility: visible;
-    transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+    width: 80%;
+    max-width: 600px;
 }
 
 
@@ -921,9 +928,13 @@ form {
 
 .replyBox{
     display: grid;
-    grid-template-columns: 40px 1fr 40px;
+    grid-template-columns: 40px 1fr ;
     grid-column-gap: 8px;
     padding: 8px;
+}
+
+.replyCommentBox{
+    grid-template-columns: 40px 1fr 40px;
 }
 
 .replyBox .profileAvatar{
@@ -937,7 +948,6 @@ form {
     box-sizing: content-box;
     display: block;
     cursor: pointer;
-    position: relative;
 }
 
 .replyBox .uploadPhoto:hover{
@@ -976,7 +986,7 @@ textarea:focus, input:focus{
 
 .messageBox{
     display: grid;
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 1fr 40px;
     grid-column-gap: 10px;
     padding: 10px 0;
 }
@@ -1016,7 +1026,6 @@ textarea:focus, input:focus{
 
 .newPostContent .replyBox{
     padding-bottom: 0;
-    grid-template-columns: 40px 1fr 30px;
 }
 
 .newPostContent .messageBox{
@@ -1295,10 +1304,13 @@ textarea:focus, input:focus{
 
     .replyBox {
         grid-column-gap: 0;
-        grid-template-columns: 40px 1fr 30px;
+        grid-template-columns: 40px 1fr ;
         padding: 5px;
     }
 
+    .replyCommentBox{
+        grid-template-columns: 40px 1fr 40px;
+    }
 
     .newPostContainer {
         padding: 7px 7px;
@@ -1311,7 +1323,6 @@ textarea:focus, input:focus{
     .captchaBox {
         grid-template-columns: 90px 1fr 40px;
         grid-row-gap: 5px;
-
     }
 
     .topicHasImage,

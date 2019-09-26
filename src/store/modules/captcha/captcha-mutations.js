@@ -10,4 +10,7 @@ export default {
         state.captchaLoading = captchaLoading;
     },
 
+    SET_CAPTCHA_USER_INPUT: (state, userInput)=>{
+        state.captchaUserInput = userInput;
+    }
 }

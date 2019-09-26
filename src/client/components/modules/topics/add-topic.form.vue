@@ -10,30 +10,30 @@
             <div class="replyBox">
 
                 <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
-                <input type="text" :placeholder="$t('topic.threadTitle')" v-model="topicTitle" @change="titleChanged"/>
 
-                <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-
-                <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+                <div class="inputFileUploadGroup">
+                    <input type="text" :placeholder="$t('topic.threadTitle')" v-model="topicTitle" @change="titleChanged"/>
+                    <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
+                    <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+                </div>
 
             </div>
 
             <div class="messageBox">
 
-                <br/>
-
                 <textarea type="text" :placeholder="$t('topic.threadComment')" v-model="topicBody" @change="bodyChanged"/>
+
+                <loading-button @onClick="openCaptcha" text="" style="margin: 5px 0"  />
 
             </div>
 
         </div>
 
-        <captcha v-if="showPreview" ref="captcha" @submit="createTopic" buttonText="Send Topic"  style="padding-top: 10px"/>
-
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
         <icon icon="loading-spinner" v-if="loading" />
 
         <div v-if="showPreview && !loading" >
+
             <span>{{$t('topic.previewThread')}}</span>
             <topic :topic="previewTopic" :isSnippetForm="true" />
         </div>
@@ -43,11 +43,10 @@
 
 <script>
 import NetworkHelper from "modules/network/network-helper"
-import Captcha from "client/components/modules/captcha/captcha"
 import Topic from "client/components/modules/topics/view/topic"
 import StringHelper from "src/utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
-
+import LoadingButton from 'client/components/UI/elements/loading-button'
 
 function initialState (){
     return {
@@ -79,7 +78,7 @@ function initialState (){
 
 export default {
 
-    components: { Captcha, Topic, Icon },
+    components: { Topic, Icon, LoadingButton },
 
     props: {
         topicChannel: '',
@@ -194,42 +193,51 @@ export default {
 
         },
 
-        async createTopic(e, resolve){
+        async openCaptcha(e, resolve){
 
-            const captcha = this.$refs['captcha'];
+            resolve(true);
 
-            try{
+            const captchaModal = document.getElementById('captchaModal').__vue__;
+            captchaModal.showModal( async (resolve2, captchaData)=>{
 
-                this.error = '';
+                try{
 
-                const out = await NetworkHelper.post('/topics/create', {
-                    channel: this.channel,
-                    title: this.title,
-                    body: this.body,
-                    link: this.link,
-                    file: this.file ? {
-                        name: this.file.file.name,
-                        base64: this.file.preview.img,
-                    } : undefined,
-                    author: this.author,
-                    captcha: captcha.captchaData(),
-                });
+                    this.error = '';
 
-                captcha.reset();
+                    const out = await NetworkHelper.post('/topics/create', {
+                        channel: this.channel,
+                        title: this.title,
+                        body: this.body,
+                        link: this.link,
+                        file: this.file ? {
+                            name: this.file.file.name,
+                            base64: this.file.preview.img,
+                        } : undefined,
+                        author: this.author,
+                        captcha: captchaData,
+                    });
 
-                this.reset();
+                    captchaModal.reset();
+                    captchaModal.closeModal();
 
-                this.$router.push({path: '/'+out.topic.slug });
+                    this.reset();
+
+                    this.$router.push({path: '/'+out.topic.slug });
 
 
-            }catch(err){
+                }catch(err){
 
-                this.error = captcha.processError(err.message);
-                this.error = this.error.replace('Too few letters. Minimum 4 letters', this.$i18n.t('topic.errorTooFewLetters'));
+                    this.error = captchaModal.processError(err.message);
+                    if (this.error) captchaModal.closeModal();
 
-            }
+                    this.error = this.error.replace('Too few letters. Minimum 4 letters', this.$i18n.t('topic.errorTooFewLetters'));
+                    setTimeout( () => this.error = '', 8000 );
 
-            resolve();
+                }
+
+                resolve2(true);
+
+            });
 
         },
 

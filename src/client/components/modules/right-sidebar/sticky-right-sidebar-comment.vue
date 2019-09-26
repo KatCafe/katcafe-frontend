@@ -2,7 +2,7 @@
 
     <div class="rightSidebar stickySidebar" >
 
-        <add-comment-form  ref="addCommentForm" :topic="stickyTopic||topic" :channel="stickyChannel||channel"  />
+        <add-comment-form  ref="addCommentForm" :topic="stickyTopic||topic" :channel="stickyChannel||channel" :isShowPreview="isShowPreview"  />
 
     </div>
 </template>
@@ -20,6 +20,12 @@ export default {
     props: {
         topic: {default: null},
         channel: {default: null},
+    },
+
+    data(){
+        return {
+            isShowPreview: true,
+        }
     },
 
     mounted(){
@@ -41,6 +47,7 @@ export default {
                 addCommentForm.style.bottom = "0";
                 addCommentForm.style.top = "inherit";
                 addCommentForm.style.width = '100%';
+                this.isShowPreview = false;
             }
             else {
                 addCommentForm.style.position = "relative";
@@ -52,6 +59,7 @@ export default {
                 addCommentForm.style.top = top - topHero + Math.max( -20, topHero - top ) +"px";
                 addCommentForm.style.width = '100%';
 
+                this.isShowPreview = true;
             }
 
         };

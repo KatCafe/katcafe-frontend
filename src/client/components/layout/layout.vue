@@ -10,6 +10,7 @@
 
         </div>
 
+        <captcha-modal id="captchaModal" />
 
         <sticky-buttons :stickyButtons="stickyButtons" />
 
@@ -26,11 +27,13 @@ import HeaderLayout from "./header/header-layout"
 import FooterLayout from "./footer/footer-layout"
 import StickyButtons from "./footer/sticky/sticky-buttons"
 import AddTopicModal from "client/components/modules/topics/add-topic.modal"
+import CaptchaModal from "client/components/modules/captcha/captcha.modal"
+
 import Icon from "client/components/UI/elements/icons/icon"
 
 export default{
 
-    components:{ HeaderLayout, FooterLayout,  StickyButtons, AddTopicModal, Icon },
+    components:{ HeaderLayout, FooterLayout,  StickyButtons, AddTopicModal, Icon, CaptchaModal },
 
     props: {
         stickyButtons: { default(){ return [] },},
@@ -55,14 +58,10 @@ export default{
 
         this.$store.dispatch('LOCALIZATION_FETCH',);
 
-
     },
 
     methods:{
 
-        showAddTopicModal(channel){
-            this.$refs['addTopicModal'].showModal(channel);
-        },
 
     }
 

@@ -45,7 +45,7 @@
                     <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" style="margin-bottom: 20px" />
                 </template>
 
-                <div class="topicComments" v-if="comments.length" @click.native="window.scrollTo(0,0)" >
+                <div class="topicComments" v-if="comments.length" >
                     <comments :comments="comments" :isPreview = "isPreview" />
                 </div>
 

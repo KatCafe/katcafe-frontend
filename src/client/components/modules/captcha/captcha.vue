@@ -43,6 +43,7 @@ export default {
         if (!this.captcha)
             this.$store.dispatch('CAPTCHA_GET', {});
 
+        this.captchaInput = this.$store.state.captcha.captchaUserInput;
     },
 
     methods:{
@@ -54,7 +55,7 @@ export default {
 
         submit(e, resolve){
 
-            this.$emit('submit', e, resolve);
+            this.$emit('submit', resolve, this.captchaData() );
         },
 
         captchaData(){
@@ -65,8 +66,6 @@ export default {
         },
 
         processError(error){
-
-            console.log('#'+error+'#');
 
             if (error.indexOf("Captcha was already used") >= 0) {
                 this.reset();
@@ -82,6 +81,12 @@ export default {
         }
 
     },
+
+    watch: {
+        captchaInput: function (newValue, oldValue) {
+            this.$store.dispatch('CAPTCHA_STORE_USER_INPUT', newValue);
+        },
+    }
 
 }
 </script>

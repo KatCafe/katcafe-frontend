@@ -9,6 +9,7 @@ export default {
         captcha: null,
         captchaLoading: false,
 
+        captchaUserInput: '',
 
     },
     actions,

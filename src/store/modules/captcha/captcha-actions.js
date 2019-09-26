@@ -15,6 +15,8 @@ export default {
             if (out ) {
                 commit('SET_CAPTCHA', out.captcha);
                 commit('SET_CAPTCHA_LOADING', false );
+                commit('SET_CAPTCHA_USER_INPUT', '');
+
                 return;
             }
 
@@ -24,6 +26,13 @@ export default {
 
         commit('SET_CAPTCHA', null );
         commit('SET_CAPTCHA_LOADING', false );
+        commit('SET_CAPTCHA_USER_INPUT', '');
+
+    },
+
+    CAPTCHA_STORE_USER_INPUT: async ({commit, dispatch, state}, input ) => {
+
+        commit('SET_CAPTCHA_USER_INPUT', input);
 
     },
 

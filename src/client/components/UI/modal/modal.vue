@@ -6,7 +6,7 @@
 
         <div class="modal show-modal" ref="refModal">
             <div class="modal-content">
-                <span class="close-button" @click="this.closeModal">&times;</span>
+                <icon icon="times-circle" class="close-button " @click="this.closeModal" />
 
                 <slot class="noOverflow" name="content"/>
             </div>
@@ -18,10 +18,11 @@
 
 
 <script>
+import Icon from "client/components/UI/elements/icons/icon"
 
 export default{
 
-    name: "Modal",
+    components: {Icon},
 
     data: () => {
         return {
@@ -30,16 +31,14 @@ export default{
     },
 
     props:{
-
         title: {default: 'Modal Title'},
-
     },
 
     methods:{
 
         closeModal(e){
 
-            if( e !== undefined) e.stopPropagation();
+            if( e) e.stopPropagation();
 
             this.modalOpened = false;
 
@@ -47,7 +46,7 @@ export default{
 
         showModal(e){
 
-            if (e !== undefined) e.stopPropagation();
+            if (e) e.stopPropagation();
 
             this.modalOpened = true;
         },

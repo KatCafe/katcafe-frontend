@@ -1,7 +1,7 @@
 export default {
 
     plural: {
-        comment: 'niciun comentariu | un comentariu | {n} comentarii'
+        comment: 'niciun comentariu | încă un comentariu | {n} comentarii'
     },
 
     topic: {
@@ -10,26 +10,29 @@ export default {
         threadTitle: "Titlu postare",
         threadComment: "comentariu...",
         previewThread: "Previzualizare postare",
+        submitTopic: 'Postează postare',
         errorTooFewLetters: "Prea putine litere. Minim 4 litere",
     },
 
     comment: {
         anonymous: 'Anonim',
-        yourOpinionMatters: "Opinia ta conteaza",
+        yourOpinionMatters: "Opinia ta contează!",
         writeReply: 'scrie un comentariu...',
         previewComment: "Previzualizare comentariu",
-        errorNoFileOrText: "Trebuie sa scrii 5 litere ori sa incarci o poza/link",
+        submitComment: "Postează comentariu",
+        errorNoFileOrText: "Trebuie sa scri 5 litere ori sa încarci o poza/link",
     },
 
     captcha:{
         captcha: 'cod securitate',
-        post: 'publica',
+        post: 'publică',
+        modalText: 'Următorul cod securitate este necesar pentru combaterea roboţilor',
         errorIncorrect: 'Cod securitate incorect',
         errorAlreadyUsed: 'Cod securitate folosit deja',
     },
 
     header: {
-        addChannel: 'Adaugă canal',
+        addChannel: 'Crează canal',
         login: 'Loghează-te',
         signup: 'Fă-ţi cont',
         logout: 'Ieşire',

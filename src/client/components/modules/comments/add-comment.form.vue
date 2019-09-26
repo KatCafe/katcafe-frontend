@@ -5,22 +5,25 @@
             {{$t('comment.yourOpinionMatters')}}
         </span>
 
-        <div class="replyBox">
+        <div class="replyBox replyCommentBox">
 
             <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
-            <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="commentBody" @change="bodyChanged"/>
 
-            <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-            <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+            <div class="inputFileUploadGroup">
+                <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="commentBody" @change="bodyChanged"/>
+                <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
+                <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+            </div>
+
+            <loading-button v-if="showPreview" @onClick="openCaptcha" text=""  style="margin: 0"/>
 
         </div>
 
-        <div v-if="showPreview">
-            <captcha ref="captcha" @submit="createComment"  />
+        <div v-if="showPreview && isShowPreview">
 
             <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
 
-            <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
+            <span class="errorText">{{error}}</span>
 
             <div v-if="!loading" >
                 <span class='commentPreview hiddenMobile'>{{$t('comment.previewComment')}}</span>
@@ -35,10 +38,10 @@
 <script>
 
 import NetworkHelper from "modules/network/network-helper"
-import Captcha from "client/components/modules/captcha/captcha"
 import StringHelper from "src/utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
 import Comment from "client/components/modules/comments/view/comment"
+import LoadingButton from 'client/components/UI/elements/loading-button'
 
 function initialState (){
     return {
@@ -70,11 +73,12 @@ function initialState (){
 export default {
 
 
-    components: { Icon, Captcha, Comment },
+    components: { Icon, Comment, LoadingButton },
 
     props: {
         topic: {default: null},
         isPage: {default: false},
+        isShowPreview: {default: true},
     },
 
     data(){
@@ -170,45 +174,52 @@ export default {
             reader.readAsDataURL(files[0]);
         },
 
-        async createComment(e, resolve){
+        async openCaptcha(e, resolve){
 
-            const captcha = this.$refs['captcha'];
+            resolve(true);
 
-            try{
+            const captchaModal = document.getElementById('captchaModal').__vue__;
+            captchaModal.showModal( async (resolve2, captchaData)=>{
 
-                this.error = '';
+                try{
 
-                const out = await NetworkHelper.post('/comments/create', {
-                    topic: typeof this.topic === "string" ? this.topic : this.topic.slug,
-                    link: this.link,
-                    file: this.file ? {
+                    this.error = '';
+
+                    const out = await NetworkHelper.post('/comments/create', {
+                        topic: typeof this.topic === "string" ? this.topic : this.topic.slug,
+                        link: this.link,
+                        file: this.file ? {
                             name: this.file.file.name,
                             base64: this.file.preview.img,
                         } : undefined,
-                    body: this.body,
-                    author: this.author,
-                    captcha: captcha.captchaData(),
-                });
+                        body: this.body,
+                        author: this.author,
+                        captcha: captchaData,
+                    });
 
-                if (out ) {
-                    this.$store.commit('ADD_COMMENTS', [out.comment] );
+                    captchaModal.reset();
+                    captchaModal.closeModal();
 
-                    this.reset();
+                    if (out) {
+                        this.$store.commit('ADD_COMMENTS', [out.comment]);
+                        this.reset();
+                    }
 
-                    this.commentBody = '';
+
+                }catch(err){
+
+                    this.error = captchaModal.processError(err.message);
+                    if (this.error) captchaModal.closeModal();
+
+                    this.error = this.error.replace('You need to provide either a link/file or write 5 characters', this.$i18n.t('comment.errorNoFileOrText'));
+
+                    setTimeout( () => this.error = '', 8000 );
 
                 }
 
-                captcha.reset();
+                resolve2(true);
 
-            }catch(err){
-
-                this.error = captcha.processError(err.message);
-                this.error = this.error.replace('You need to provide either a link/file or write 5 characters', this.$i18n.t('comment.errorNoFileOrText'));
-
-                setTimeout( () => this.error = '', 8000 );
-
-            }
+            });
 
             resolve();
 
