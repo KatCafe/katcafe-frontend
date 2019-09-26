@@ -120,7 +120,7 @@ export default {
             const channel = this.getChannel;
 
             if (channel === 'ro') return 'https://www.tetratech.com/en/images/rg18-201-water-solutions-for-asia-2000.jpg?blobheader=image/jpeg';
-            if (channel === 'us') return 'https://wallpaperaccess.com/full/346725.jpg';
+            if (channel === 'us') return 'https://styles.redditmedia.com/t5_2cneq/styles/bannerBackgroundImage_6yzzdjhguh521.jpeg?format=pjpg&s=8c0a444089bdc858bd2764f5376352e7c5d27f5a';
             if (channel === 'md') return 'https://www.nationsonline.org/gallery/Moldova/Lakes-near-Chisinau-Moldova.jpg';
 
             return '';

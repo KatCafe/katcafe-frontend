@@ -1,13 +1,14 @@
 <template>
 
-    <div v-if="this.modalOpened">
+    <div v-if="modalOpened">
+
         <div class="modalBackground" @click="this.closeModal"> </div>
+
         <div class="modal show-modal" ref="refModal">
             <div class="modal-content">
                 <span class="close-button" @click="this.closeModal">&times;</span>
-                <slot class="noOverflow" name="content">
-                </slot>
 
+                <slot class="noOverflow" name="content"/>
             </div>
         </div>
 

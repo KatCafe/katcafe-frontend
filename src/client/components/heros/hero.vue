@@ -19,18 +19,10 @@
 export default {
 
     props: {
-        cover: {
-            default: 'https://styles.redditmedia.com/t5_2cneq/styles/bannerBackgroundImage_6yzzdjhguh521.jpeg?format=pjpg&s=8c0a444089bdc858bd2764f5376352e7c5d27f5a',
-        },
-        title: {
-            default: '',
-        },
-        titleStyle:{
-            default: '',
-        },
-        icon: {
-            default: '',
-        }
+        cover: { default: 'https://styles.redditmedia.com/t5_2cneq/styles/bannerBackgroundImage_6yzzdjhguh521.jpeg?format=pjpg&s=8c0a444089bdc858bd2764f5376352e7c5d27f5a', },
+        title: { default: '', },
+        titleStyle:{ default: '', },
+        icon: { default: '', }
     }
 
 }
