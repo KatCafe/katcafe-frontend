@@ -85,8 +85,11 @@
 }
 
 .topic-reply-id{
-    margin-left: 10px;
+    margin-left: 8px;
     padding: 0;
+    color: #787878;
+    cursor: pointer;
+    font-size: 12px;
 }
 
 
