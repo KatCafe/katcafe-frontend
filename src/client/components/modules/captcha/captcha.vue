@@ -1,9 +1,15 @@
 <template>
 
-    <div class="captchaBox" v-if="captcha">
-        <div v-html="captcha.data"></div>
-        <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" maxlength="4" >
-        <loading-button :text="buttonText || $t('captcha.post')" @onClick="submit" />
+    <div class="captchaBox" >
+
+        <icon icon="loading-spinner" v-if="captchaLoading" class="fa-2x" />
+
+        <template v-if="captcha">
+            <div v-html="captcha.data"></div>
+            <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" maxlength="4" >
+            <loading-button :text="buttonText || $t('captcha.post')" @onClick="submit" />
+        </template>
+
     </div>
 
 </template>
@@ -11,10 +17,11 @@
 <script>
 
 import LoadingButton from 'client/components/UI/elements/loading-button'
+import Icon from "client/components/UI/elements/icons/icon"
 
 export default {
 
-    components: {LoadingButton},
+    components: {LoadingButton, Icon},
 
     props:{
         buttonText: {
@@ -32,6 +39,10 @@ export default {
 
         captcha() {
             return this.$store.state.captcha.captcha;
+        },
+
+        captchaLoading(){
+            return this.$store.state.captcha.captchaLoading;
         },
 
     },

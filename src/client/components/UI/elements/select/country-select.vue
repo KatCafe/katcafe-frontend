@@ -3,7 +3,7 @@
     <div class="country-select" >
 
         <span class="input-group-addon">
-            <img :class="`${ ( (value ? value.css : '') ||'flag').toLowerCase() } flagImg `">
+            <img :class="`${ ( (value ? value.css : '') ||'flag').toLowerCase() } flag-img `">
         </span>
 
         <multiselect @input="onChangeSelect" v-model="value" label="label" track-by="label" :options="optionsFiltered" :option-height="16" :custom-label="customLabel" :show-labels="false" :close-on-select="true" >
