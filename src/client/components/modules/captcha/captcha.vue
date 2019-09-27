@@ -90,3 +90,36 @@ export default {
 
 }
 </script>
+
+<style>
+
+    .captchaBox{
+        display: grid;
+        grid-template-columns: 100px 100px 1fr;
+        grid-column-gap: 10px;
+    }
+
+    .captchaBox svg:first-child{
+        width: auto;
+        height: 35px;
+    }
+
+    .captchaBox button{
+        margin-top: 0;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .captchaBox {
+            grid-template-columns: 90px 1fr 40px;
+            grid-row-gap: 5px;
+        }
+    }
+
+    @media only screen and (max-width: 300px) {
+        .captchaBox {
+            grid-template-columns: 90px 1fr ;
+            grid-row-gap: 5px;
+        }
+    }
+
+</style>

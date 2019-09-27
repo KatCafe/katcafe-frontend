@@ -4,7 +4,7 @@
 
         <header-layout />
 
-        <div class="layoutContent" :style="{minHeight: minHeight+'px'}">
+        <div class="layout-content" :style="{minHeight: minHeight+'px'}">
 
             <slot name="content"/>
 

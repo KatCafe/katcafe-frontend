@@ -16,7 +16,7 @@
 
         <captcha ref="captcha" @submit="signup" buttonText="Signup"/>
 
-        <span class="errorText">{{error}}</span>
+        <span class="error-text">{{error}}</span>
 
         <span>
             You have an account ? <router-link to="/login">Log in now! </router-link>

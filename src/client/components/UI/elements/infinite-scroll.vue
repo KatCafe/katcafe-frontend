@@ -1,6 +1,6 @@
 <template>
 
-    <div ref="refInfinite"  class="infiniteScroll">
+    <div ref="refInfinite"  class="infinite-scroll">
 
         <icon v-if="loading" icon="loading-spinner" class="fa-5x" />
 
@@ -83,3 +83,14 @@ export default{
     }
 }
 </script>
+
+<style>
+
+    .infinite-scroll{
+        text-align: center;
+    }
+
+    .pagination{
+        display: none;
+    }
+</style>

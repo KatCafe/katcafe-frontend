@@ -1,29 +1,29 @@
 <template>
-    <form action="#" class="newPostContainer">
+    <form action="#" class="new-topic-form">
 
-        <div class="newPostTitle">
+        <div class="topic-title">
             {{ $t('topic.startThread' ) }} <strong>{{channel}}</strong>
         </div>
 
-        <div class="newPostContent">
+        <div class="new-topic-content">
 
-            <div class="replyBox">
+            <div class="new-topic-title">
 
-                <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
+                <img class="profile-avatar" src="/public/assets/theme/anonymous.png">
 
-                <div class="inputFileUploadGroup">
+                <div class="input-file-upload-group">
                     <input type="text" :placeholder="$t('topic.threadTitle')" v-model="topicTitle" @change="titleChanged"/>
                     <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-                    <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+                    <img class="input-file-icon" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
                 </div>
 
             </div>
 
-            <div class="messageBox">
+            <div class="new-topic-body">
 
                 <textarea type="text" :placeholder="$t('topic.threadComment')" v-model="topicBody" @change="bodyChanged"/>
 
-                <loading-button @onClick="openCaptcha" text="" style="margin: 5px 0"  />
+                <loading-button @onClick="openCaptcha" text=""  />
 
             </div>
 
@@ -303,3 +303,9 @@ export default {
 
 }
 </script>
+
+<style>
+
+
+
+</style>

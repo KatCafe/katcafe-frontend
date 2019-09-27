@@ -3,63 +3,60 @@
 
     <div class="topic">
 
-        <div class="topicBox" >
+        <vote parentType="topic" :slug="slug" :parent="topic" :myVote="topic.myVote" />
 
-            <vote parentType="topic" :slug="slug" :parent="topic" :myVote="topic.myVote" />
+        <div class="topic-content" >
 
-            <div class="topicContent" ref="topicContent">
+            <div class="author">
 
-                <div class="author">
+                <span class="details bold">{{author}}</span>
 
-                    <span class="details authorName">{{author}}</span>
+                <span class="details">{{date}} </span>
 
-                    <span class="details">{{date}} </span>
+                <router-link :to="'/'+(topic.channel||'')">
+                    <span class="action-button">{{topic.channel||''}}</span>
+                </router-link>
 
-                    <router-link :to="'/'+(topic.channel||'')">
-                        <span class="actionButton">{{topic.channel||''}}</span>
-                    </router-link>
-
+                <div class="topic-buttons">
                     <img v-if="isUserOwner" @click="deleteTopic" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
-
-
                 </div>
-
-                <div class="topicBoxContent" :class="this.topic.preview ? 'topicHasImage' : ''">
-
-                    <preview-image :data="this.topic.preview" :link="link" />
-
-                    <router-link :to="isPage ? '' : to">
-
-                        <div class="topicTextWrap">
-
-                            <h2 v-if="title" class="title" v-html="title"/>
-
-                            <read-more  :text="body" :max-chars="400" pclass="topicBody" />
-
-                        </div>
-                    </router-link>
-
-                </div>
-
-                <template v-if="isPage && comments.length > 8">
-                    <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" style="margin-bottom: 20px" />
-                </template>
-
-                <div class="topicComments" v-if="comments.length" >
-                    <comments :comments="comments" :isPreview = "isPreview" />
-                </div>
-
-                <view-more-comments :topic="topic" :comments="comments" :isPage="isPage" />
-
-                <template v-if="!isSnippetForm && isPreview ">
-                    <add-comment-from :topic="this.topic" />
-                </template>
-
-                <template v-if="isPage">
-                    <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" />
-                </template>
 
             </div>
+
+            <div class="topic-content" :class="this.topic.preview ? 'topic-has-image' : ''">
+
+                <preview-image :data="this.topic.preview" :link="link" />
+
+                <router-link :to="isPage ? '' : to">
+
+                    <div class="topic-text-wrap">
+
+                        <h2 v-if="title" class="title" v-html="title"/>
+
+                        <read-more  :text="body" :max-chars="400" pclass="body" />
+
+                    </div>
+                </router-link>
+
+            </div>
+
+            <template v-if="isPage && comments.length > 8">
+                <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" style="margin-bottom: 20px" />
+            </template>
+
+            <div class="topic-comments" v-if="comments.length" >
+                <comments :comments="comments" :isPreview = "isPreview" />
+            </div>
+
+            <view-more-comments :topic="topic" :comments="comments" :isPage="isPage" />
+
+            <template v-if="!isSnippetForm && isPreview ">
+                <add-comment-from :topic="this.topic" />
+            </template>
+
+            <template v-if="isPage">
+                <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" />
+            </template>
 
         </div>
 
@@ -153,8 +150,6 @@ export default {
 
 <style>
 
-    .author a{
-        padding-right: 0!important;
-    }
+
 
 </style>

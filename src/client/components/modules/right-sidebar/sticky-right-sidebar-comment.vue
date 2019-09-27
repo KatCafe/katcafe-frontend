@@ -1,8 +1,8 @@
 <template>
 
-    <div class="rightSidebar stickySidebar" >
+    <div class="right-sidebar sticky-sidebar" >
 
-        <add-comment-form  ref="addCommentForm" :topic="stickyTopic||topic" :channel="stickyChannel||channel" :isShowPreview="isShowPreview"  />
+        <add-comment-form  ref="addCommentForm" :topic="stickyTopic||topic" :channel="stickyChannel||channel" :isShowPreview="isShowPreview" class="sticky-sidebar-content" />
 
     </div>
 </template>
@@ -78,7 +78,7 @@ export default {
         },
 
         stickyChannel(){
-            return this.$store.state.global.channelStickyRightSidebarComment;
+            return this.$store.state.global.topicStickyRightSidebarComment;
         }
 
     },
@@ -95,3 +95,36 @@ export default {
 }
 
 </script>
+
+<style>
+
+    .sticky-sidebar {
+
+    }
+
+
+    .right-sidebar{
+        width: 100%;
+    }
+
+    .sticky-sidebar-content {
+        background-color: #3c3c3c;
+        border-color: rgb(40, 35, 35);
+        border-style: solid;
+        border-width: 1px;
+        z-index: 10;
+    }
+
+    .sticky-sidebar-content .new-topic-body {
+        padding: 10px;
+    }
+
+    @media only screen and (max-width: 900px) {
+
+        .sticky-sidebar-content .new-topic-body {
+            padding: 5px;
+        }
+
+    }
+
+</style>

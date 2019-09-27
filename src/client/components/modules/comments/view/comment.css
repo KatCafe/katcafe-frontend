@@ -1,0 +1,15 @@
+.comment {
+    padding: 0 0 10px 0;
+    margin-bottom: 0;
+    border-width: 0;
+}
+
+.comment:hover{
+    background-color: #373737;
+    transition: all 0.2s ease;
+}
+
+.comment-content{
+    margin-top: 0;
+    margin-bottom: 0;
+}

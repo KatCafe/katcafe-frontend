@@ -75,3 +75,28 @@ export default {
 
 }
 </script>
+
+<style>
+    .nav-bar {
+        font-size: 12px;
+        background: #222;
+        border-bottom: solid 1px #484848;
+        display: grid;
+        grid-template-columns: 180px 1fr;
+    }
+
+
+    .nav-bar a:hover{
+        background: #2a2a2a!important;
+        color: #fff;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .nav-bar {
+            grid-template-columns: 150px 1fr;
+        }
+
+    }
+
+</style>

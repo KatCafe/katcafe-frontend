@@ -4,19 +4,19 @@
 
         <template slot="content"  >
 
-            <div class="row topicPage">
+            <div class="row topic-page">
 
                 <div class="column left">
 
                     <topic v-if="topic" :topic="topic" :isPage="true" />
 
                     <template v-if="!topic && !layoutLoading">
-                        <span class="actionButton">Topic <strong>{{ this.slug }}</strong> was not found</span>
+                        <span >Topic <strong>{{ this.slug }}</strong> was not found</span>
                     </template>
 
                 </div>
 
-                <div class="column right replyRightBox">
+                <div class="column right comment-right-bar">
                     <sticky-right-sidebar-comment :topic="topic" :channel="channel" />
                 </div>
 
@@ -171,3 +171,30 @@ export default {
 
 }
 </script>
+
+
+<style>
+
+    .topic-page{
+        display: grid;
+        grid-template-columns: 1fr 400px;
+    }
+
+    .comment-right-bar{
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    @media only screen and (max-width: 900px) {
+
+        .topic-page {
+            grid-template-columns: 1fr;
+        }
+
+        .comment-right-bar{
+            padding: 0;
+        }
+
+    }
+
+</style>

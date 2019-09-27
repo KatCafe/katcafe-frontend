@@ -3,7 +3,7 @@
     <div>
 
         <router-link :to="isPage ? '' : to" v-if="!loading && commentsToLoad > 0 && !isPage" @click.native.prevent.capture="viewMoreComments">
-            <span class="actionButton viewMoreComments"> {{$t('topic.viewMoreComments') + ' '+ $tc('plural.comment', commentsToLoad ) }}</span>
+            <span class=" view-more-comments"> {{$t('topic.viewMoreComments') + ' '+ $tc('plural.comment', commentsToLoad ) }}</span>
         </router-link>
 
         <icon icon="loading-spinner" v-if="loading" class="fa-2x" />
@@ -63,3 +63,15 @@ export default {
 
 }
 </script>
+
+<style>
+
+    .topic .view-more-comments{
+        display: inline-block;
+        padding: 0 15px 10px;
+        color: #b8b8b8;
+        font-size: 12px;
+    }
+
+
+</style>

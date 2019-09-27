@@ -8,7 +8,7 @@
                :key="index"
                :topic="topic"
                :isPreview = "true"
-               class="topicSeparator"
+               class="topic-separator"
         />
 
     </div>
@@ -33,3 +33,11 @@ export default {
 
 }
 </script>
+
+<style>
+
+    .topic-separator{
+
+    }
+
+</style>

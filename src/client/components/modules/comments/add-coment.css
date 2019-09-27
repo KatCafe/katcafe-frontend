@@ -1,0 +1,7 @@
+.new-comment-body-empty{
+    grid-template-columns: 40px 1fr !important;
+}
+
+.new-comment-body{
+    grid-template-columns: 40px 1fr 40px !important;
+}

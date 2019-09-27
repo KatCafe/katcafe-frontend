@@ -5,7 +5,7 @@
             <div slot="content"  >
                 <span>{{$t('captcha.modalText')}}</span>
                 <captcha style="margin-top: 10px" @submit="captchaSubmit" ref="refCaptcha" />
-                <span class="errorText">{{error}}</span>
+                <span class="error-text">{{error}}</span>
             </div>
         </modal>
     </div>

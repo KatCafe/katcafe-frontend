@@ -10,7 +10,7 @@
 
         <captcha ref="captcha" @submit="login" buttonText="Login"/>
 
-        <span class="errorText">{{error}}</span>
+        <span class="error-text">{{error}}</span>
 
         <span>
             You don't have an account ? <router-link to="/signup"> Sign up now. </router-link>

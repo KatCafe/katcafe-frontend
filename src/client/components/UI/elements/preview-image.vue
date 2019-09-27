@@ -1,11 +1,11 @@
 <template>
-    <div v-if="preview" class="topicImageWrap">
+    <div v-if="preview" class="preview-image-wrap">
 
-        <img class="topicImage hiddenMobile" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}"  :src="preview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+        <img class="hiddenMobile" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}"  :src="preview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
 
-        <img class="topicImage hiddenDesktop"  :src="preview.img">
+        <img class="hiddenDesktop"  :src="preview.img">
 
-        <a v-if="link" :href="link" target="_blank" class="topicPreviewLink actionButton">
+        <a v-if="link" :href="link" target="_blank">
             {{linkPreview}}
         </a>
     </div>
@@ -107,3 +107,37 @@ export default {
 }
 
 </script>
+
+<style>
+
+    .preview-image-wrap{
+        float: left;
+        padding-bottom: 3px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .preview-image-wrap img{
+        max-width: 150px;
+        max-height: 200px;
+    }
+
+    .preview-image-wrap a{
+        white-space: nowrap;
+        font-size: 11px;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .preview-image-wrap img{
+            width: 100%;
+            max-width: 1000px;
+            max-height: 1000px;
+            min-width: 0;
+            min-height: 0;
+            height: auto;
+        }
+
+    }
+
+</style>

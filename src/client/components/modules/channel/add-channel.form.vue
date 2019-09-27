@@ -21,7 +21,7 @@
 
         <captcha ref="captcha" @submit="createChannel"/>
 
-        <span class="errorText">{{error}}</span>
+        <span class="error-text">{{error}}</span>
 
     </form>
 

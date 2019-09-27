@@ -1,18 +1,18 @@
 <template>
-    <div class="sideReplyBox">
+    <div class="new-topic-content new-comment-content" >
 
         <span v-if="isPage">
             {{$t('comment.yourOpinionMatters')}}
         </span>
 
-        <div class="replyBox replyCommentBox">
+        <div :class="`new-topic-body new-comment-body${showPreview ? '' : '-empty'}`">
 
-            <img class="profileAvatar" src="/public/assets/theme/anonymous.png">
+            <img class="profile-avatar" src="/public/assets/theme/anonymous.png">
 
-            <div class="inputFileUploadGroup">
+            <div class="input-file-upload-group">
                 <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="commentBody" @change="bodyChanged"/>
                 <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-                <img class="uploadPhoto" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+                <img class="input-file-icon" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
             </div>
 
             <loading-button v-if="showPreview" @onClick="openCaptcha" text=""  style="margin: 0"/>
@@ -23,7 +23,7 @@
 
             <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
 
-            <span class="errorText">{{error}}</span>
+            <span class="error-text">{{error}}</span>
 
             <div v-if="!loading" >
                 <span class='commentPreview hiddenMobile'>{{$t('comment.previewComment')}}</span>
@@ -276,3 +276,5 @@ export default {
 
 }
 </script>
+
+

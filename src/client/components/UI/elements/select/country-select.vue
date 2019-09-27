@@ -91,6 +91,10 @@ export default {
 
 <style>
 
+    .country-select{
+        display: inline-block;
+    }
+
     .country-select > .multiselect .multiselect__single {
         top: -6px;
         left: 12px;

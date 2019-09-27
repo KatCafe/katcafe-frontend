@@ -18,6 +18,12 @@ import WebPageTypeMixin from './modules/utils/SEO/WebPageTypeMixin';
 
 import * as UtilitiesFunctions from './modules/utils/global-utilities/utilities-functions';
 
+require('client/components/modules/topics/view/topic.css');
+require('client/components/modules/comments/view/comment.css');
+
+require('client/components/modules/topics/add-topic.css');
+require('client/components/modules/comments/add-coment.css');
+
 Vue.use(VueI18n);
 
 i18n.i18nInit();

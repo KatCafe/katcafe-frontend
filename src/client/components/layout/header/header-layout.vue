@@ -8,12 +8,12 @@
 
             <router-link to="/">
                 <img :src="logo.image" class="logo">
-                <span class="header-heading logoText">{{logo.name}}</span>
+                <span class="header-heading logo-text">{{logo.name}}</span>
             </router-link>
 
-            <div class="headerRight">
+            <div class="header-right">
 
-                <router-link class="menuButton" to="/add-channel">
+                <router-link class="menu-button" to="/add-channel">
                     {{$t('header.addChannel')}}
                 </router-link>
 
@@ -95,3 +95,86 @@ export default {
 }
 
 </script>
+
+
+<style>
+    .sticky{
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header {
+        color: #0d052f;
+        background: #222;
+        padding: 2px 20px 0;
+    }
+
+    .header-heading {
+        margin: 0;
+    }
+
+    .header .logo {
+        height: 40px;
+        display:inline-block;
+        padding-right: 10px;
+    }
+
+    .header .logo-text{
+        display:inline-block;
+        font-size: 28px;
+        position: relative;
+        top: -10px;
+    }
+
+    .header .header-right {
+        display: inline-block;
+        float: right;
+    }
+
+
+    .header-right a{
+        padding-right: 5px;
+    }
+
+    .menu-button{
+        line-height: 44px;
+    }
+
+    .menu-button:hover{
+        color: #fff!important;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+
+        .header, .header-right {
+            height: 35px;
+        }
+
+        .header {
+            padding-left: 5px;
+            padding-right: 1px;
+        }
+
+        .header .logo {
+            max-height: 32px;
+            padding-right: 3px;
+        }
+
+        .header .logo-text {
+            font-size: 20px;
+        }
+
+
+        .header .header-right a {
+            font-size: 12px;
+            padding-right: 5px;
+            position: relative;
+            top: -5px;
+        }
+
+    }
+
+</style>

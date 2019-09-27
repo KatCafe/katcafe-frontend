@@ -31,3 +31,34 @@ export default {
 
 }
 </script>
+
+
+<style>
+
+    .nav {
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .nav li {
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+    }
+
+
+    .nav li a {
+        text-decoration: none;
+        color: #a3a2a2;
+        padding: 8px;
+        display: inline-block;
+        height: 14px;
+    }
+
+    .nav li.selected a {
+        color: white;
+    }
+
+</style>

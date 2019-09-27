@@ -156,12 +156,6 @@ th, td {
 Layout styles
 ------------------------*/
 
-.header {
-    color: #0d052f;
-    background: #222;
-    padding: 2px 20px 0;
-}
-
 /* Create two unequal columns that floats next to each other */
 .column {
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -194,102 +188,6 @@ Layout styles
 .row:after {
 }
 
-.header-heading {
-    margin: 0;
-}
-
-/**
-    logo
- */
-.header .logo {
-    height: 40px;
-    display:inline-block;
-    padding-right: 10px;
-}
-
-.header .logoText{
-    display:inline-block;
-    font-size: 28px;
-    position: relative;
-    top: -10px;
-}
-
-.header .headerRight {
-    display: inline-block;
-    float: right;
-}
-
-
-.headerRight a{
-    padding-right: 5px;
-}
-
-.header .country-select{
-    display: inline-block;
-    min-width: 300px;
-}
-
-.footer {
-    text-align: center;
-    background: #2f2222;
-    padding: 1em 1.25em;
-}
-
-/* -----------------------
-Nav
-------------------------*/
-
-.nav-bar {
-    font-size: 12px;
-    background: #222;
-    border-bottom: solid 1px #484848;
-    display: grid;
-    grid-template-columns: 180px 1fr;
-}
-
-.nav-bar, .nav {
-    height: 30px;
-}
-
-.nav {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.nav li {
-    padding: 0;
-    margin: 0;
-    display: inline-block;
-}
-
-
-.nav li a {
-    text-decoration: none;
-    color: #a3a2a2;
-    padding: 8px;
-    display: inline-block;
-    height: 14px;
-}
-
-.nav li.selected a {
-    color: white;
-}
-
-.nav-bar a:hover{
-    background: #2a2a2a!important;
-    color: #fff;
-}
-
-.sticky{
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.sticky + .layoutContent {
-}
 
 
 /* -----------------------
@@ -298,6 +196,10 @@ Single styles
 
 .img-responsive {
     max-width: 100%;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .btn {
@@ -359,47 +261,6 @@ Single styles
 /* -----------------------
 Wide styles
 ------------------------*/
-
-/**
-    HERO
- */
-
-.hero {
-    display: block;
-    flex-direction: row;
-    height: 192px;
-    min-width: 260px;
-    background: url( https://styles.redditmedia.com/t5_2cneq/styles/bannerBackgroundImage_6yzzdjhguh521.jpeg?format=pjpg&s=8c0a444089bdc858bd2764f5376352e7c5d27f5a) center top / cover no-repeat rgb(0, 112, 193);
-    background-position: center top;
-    margin: 0px auto;
-}
-
-.heroBox{
-    margin-left: 50px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.hero .logo{
-    top: -50%;
-    position: absolute;
-
-    float: left;
-    margin-right: 8px;
-    box-sizing: border-box;
-    height: 56px;
-    width: 56px;
-    background: url( …) center center / 100% no-repeat rgb(32, 84, 147);
-    border-radius: 32px;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-.hero .title{
-    padding-left: 70px;
-    color: white;
-}
 
 
 /** Forms
@@ -465,348 +326,126 @@ form {
     border: solid 1px #323232;
 }
 
-.inputFileUploadGroup{
+.input-file-upload-group{
     position: relative
 }
 
-.inputFileUploadGroup img{
+.input-file-upload-group img{
     position: absolute;
     right: 4px;
     top: 0;
 }
 
-.formLink{
-    display: inline;
-    white-space: nowrap;
-}
-
-.commentSlug{
-    font-size: 12px;
-}
-
-/**
-
-    STICKY BUTTONS
-
- */
-
-.btn-floating-container {
-    right: 50px;
-    bottom: 50px;
-    position: fixed;
-}
-
-.btn-floating {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(245, 245, 245, 0.075);
-    text-align: center;
-    padding: 0px;
-    font-size: 24px;
-    margin-left: 10px;
-}
-
-
-/*
-    MODALS
- */
-
-.modalBackground{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(26, 26, 26, 0.9);
-    z-index: 10;
-}
-
-.modal {
-    position:fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    visibility: hidden;
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-    z-index: 11;
-}
-
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    padding: 10px 10px 0;
-    background-color: #282121;
-    border: solid 1px #532f2f;
-    width: 100%;
-}
-
-.close-button {
-    position: absolute;
-    top: -20px;
-    right: 0;
-    text-align: center;
+.input-file-icon{
+    width: 24px;
+    padding: 5px;
+    margin: 0 auto;
+    box-sizing: content-box;
+    display: block;
     cursor: pointer;
-    color: white;
+}
+
+.input-file-icon:hover{
+    width: 28px;
+    transition: all 0.5s ease;
+}
+
+.profile-avatar{
+    border-radius: 50%;
 }
 
 
-.close-button:hover {
-    background-color: #4c4c4c;
+.form label {
+    color: #9c9b9b;
 }
 
-.show-modal {
-    opacity: 1;
-    visibility: visible;
-    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-    width: 80%;
-    max-width: 600px;
-}
-
-
-/**
-    TOPIC
- */
-
-.topic{
-    border-width: 1px;
-    border-style: solid;
-    width: 100%;
-    background-color: #3c3c3c;
-    margin-bottom: 20px;
-    border-color: rgb(68, 68, 68);
-    padding: 10px 10px 10px 0;
-    box-sizing: border-box;
-}
-
-.topic:hover{
-    /*background-color: #484848;*/
-    /*border-color: rgb(86, 86, 86);*/
-    transition: all 0.2s ease
-}
-
-.comment {
-    /*background-color: #5d5d5d;*/
-    /*border: solid 1px #686868;*/
-    /*border-radius: 10px;*/
-    /*border-bottom: solid 1px #5c5c5c;*/
-    padding: 0 0 10px 0;
-    /*margin-bottom: 10px;*/
-}
-
-.comment:hover{
-    background-color: #373737;
-    /*border: solid 1px #878787;*/
-    transition: all 0.2s ease
-}
-
-.commentPreview{
-    margin-left: 10px;
-}
-
-.comment:nth-last-child(1){
-    margin-bottom: 0;
-    border-bottom: none;
-}
-
-.comment .topicBox .topicContent .author{
-    background: #474747;
-    padding: 0 10px;
-}
-
-
-.topicBox{
-    display: grid;
-    grid-template-columns: 40px 1fr;
-}
-
-
-.commentBox{
-}
-
-.topicComments{
-    /*border-top: solid 1px #5c5c5c;*/
-    /*padding-top: 10px;*/
-}
-
-.actionBox{
-    padding: 10px;
-    border-top: solid 2px;
-    border-bottom: solid 2px;
-    border-color: #494949;
-    background-color: #474747;
-    margin-top: 10px;
+.form input{
     margin-bottom: 10px;
 }
 
-.topic h2{
-    font-size: 20px;
-}
-
-.topicBox .topicContent .author{
-    background: #474747;
-    padding: 0 10px;
-}
-
-.topicBox .topicContent .author a,
-.topicBox .topicContent .author .details {
-    display: inline-block;
-    padding-right: 10px;
-    font-size: 12px;
-}
-
-.topicBox .topicContent .author .details{
-    color: #a8a8a8;
-}
-
-.topicImage{
-    max-width: 150px;
-    max-height: 200px;
-}
-
-.topicImageWrap{
-    float: left;
-    padding-bottom: 3px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.topicPreviewLink{
-    white-space: nowrap;
-    font-size: 11px;
-}
-
-.topicTextWrap{
+.form input:focus{
+    outline: none;
+    background-color: #ffdb85;
 }
 
 
-
-.topicTextWrap .title{
-    color: #fff;
-}
-
-.topicTextWrap .topicBody{
-    color: #fff;
-}
-
-.topicComments .topicBody{
-    padding: 5px 10px;
-}
-
-.topicBody{
-    word-break: break-all;
-    white-space: pre-wrap;
-    margin-bottom: 0;
-    font-size: 14px;
-    color: #ffffff;
-    line-height: 20px;
-    padding-bottom: 10px;
-}
-
-.topicButtons{
-    display: inline-flex;
-    float:right;
-}
-
-.topicButtons span{
-    color: #787878;
-    cursor: pointer;
-    font-size: 12px;
-}
-
-
-/***
-        VOTING
- */
-.votingBox{
-    padding-left: 0px;
-    padding-top: 10px;
+.popup h1{
     text-align: center;
+    margin-top: 20px;
+    color: #bbb;
 }
 
+.popup{
+    display: block;
+}
 
-.upvote {
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 8px solid #9b9b9b;
+.popup form{
+    max-width: 500px;
     margin: 0 auto;
-    margin-bottom: 7px;
-    cursor: pointer;
 }
 
-.upvote:after {
-    width: 4px;
-    height: 6px;
-    background-color: #9b9b9b;
-    content: '';
-    position: absolute;
-    margin-top: 8px;
-    margin-left: -2px;
-    cursor: pointer;
-  }
-
-.votingBox span{
-    padding-left: 0;
-    color: #9b9b9b;
-    font-size: 14px;
+.icon path{
+    fill: #000000;
 }
 
-.downvote {
-    margin: 0 auto;
-    margin-top: 7px;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid #9b9b9b;
-    cursor: pointer;
+.hiddenDesktop{
+    display: none;
 }
 
-.downvote:after {
-    width: 4px;
-    height: 6px;
-    background-color: #9b9b9b;
-    content: '';
-    position: absolute;
-    margin-left: -2px;
-    margin-top: -14px;
-    cursor: pointer;
-}
 
-.voted{
-    border-top-color: red;
-    border-bottom-color: red;
-    cursor: default;
-}
 
-.voted:after{
-    background-color: red;
-    cursor: default;
-}
+@media only screen and (max-width: 900px) {
 
-/**
-    Right Sidebar
- */
-
-.rightSidebar{
-    width: 100%;
-}
-
-.stickySidebar{
+    .hiddenTablet {
+        display: none;
+    }
 
 }
 
-.rightSidebarClose{
-    float: right;
-    cursor: pointer;
+
+@media only screen and (max-width: 600px) {
+
+
+    .hiddenMobile {
+        display: none;
+    }
+
+    .hiddenDesktop {
+        display: initial;
+    }
+
+
+    .multiselect__option {
+        padding: 6px !important;
+        min-height: 29px !important;;
+        line-height: 14px !important;;
+    }
+
+
+    .left {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .right {
+        padding-left: 20px;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
     Alert
@@ -825,7 +464,7 @@ form {
     text-transform:uppercase;
 }
 
-.errorText{
+.error-text{
     color: #f20;
     text-align: center;
     width: 100%;
@@ -850,309 +489,9 @@ form {
 }
 
 
-/**
-    infinite scroll
- */
-.infiniteScroll{
-    text-align: center;
-}
-
-.pagination{
-    display: none;
-}
-
-.topicBoxContent{
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.topicComments .topicBoxContent{
-    margin-top: 0;
-}
-
-.topicHasImage,
-.commentHasImage {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    grid-column-gap: 10px;
-}
-
-.commentHasImage {
-    grid-template-columns: 110px 1fr;
-}
-
-.authorName{
-    font-weight: bold;
-}
-
-.viewMoreComments{
-    display: inline-block;
-    padding: 0 20px 20px 0;
-    color: #b8b8b8;
-    font-size: 12px;
-}
-
-.actionButton{
-    cursor: pointer;
-    display: inline-block;
-    padding-right: 10px;
-    color: #b8b8b8;
-    font-size: 12px;
-}
-
-.author .actionButton{
-    /*padding: 0 10px 0 0;*/
-}
-
-.actionButton:hover{
-    text-decoration: underline!important;
-    color: #fff;
-}
-
-.replayButton{
-    color: #9ed963;
-}
-
-.postId{
-    margin-left: 10px;
-    padding: 0;
-}
-
-.externalLink{
-    display: block;
-    font-size: 12px;
-    text-align: justify;
-    color: #fff;
-}
-
-.replyBox{
-    display: grid;
-    grid-template-columns: 40px 1fr ;
-    grid-column-gap: 8px;
-    padding: 8px;
-}
-
-.replyCommentBox{
-    grid-template-columns: 40px 1fr 40px;
-}
-
-.replyBox .profileAvatar{
-    width: 38px;
-}
-
-.replyBox .uploadPhoto{
-    width: 24px;
-    padding: 5px;
-    margin: 0 auto;
-    box-sizing: content-box;
-    display: block;
-    cursor: pointer;
-}
-
-.replyBox .uploadPhoto:hover{
-    width: 28px;
-    transition: all 0.5s ease;
-}
-
-.profileAvatar{
-    border-radius: 50%;
-}
-
-.replyBox textarea, .replyBox input{
-    display: block;
-    width: 100%;
-    background: #313131;
-    border: solid 1px #585858;
-    color: #dcdcdc;
-    border-radius: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    outline: none;
-    resize: vertical;
-    margin: 0;
-    min-height: 38px;
-    height: 38px;
-    max-height: 200px;
-    font-size: 12px;
-}
-
-textarea:focus, input:focus{
-    border-color: #715e38 !important;
-    background-color: #292929!important;
-}
-
-.messageBox{
-    display: grid;
-    grid-template-columns: 1fr 40px;
-    grid-column-gap: 10px;
-    padding: 10px 0;
-}
-
-.messageBox textarea{
-    display: block;
-    width: 100%;
-    background: #313131;
-    border: solid 1px #585858;
-    color: #dcdcdc;
-    border-radius: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    outline: none;
-    resize: vertical;
-    min-height: 38px;
-    height: 38px;
-    max-height: 200px;
-    font-size: 12px;
-    margin-top: 5px;
-    margin-bottom: 0;
-}
-
-.newPostContainer{
-    box-sizing: border-box;
-    background-color: #505050;
-    border: solid 1px #6d6d6d;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-}
-
-.newPostContainer .newPostTitle{
-    color: #a8a8a8;
-}
-
-.newPostContent .replyBox{
-    padding-bottom: 0;
-}
-
-.newPostContent .messageBox{
-    padding-top: 0;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.postButton{
-    background-color: #fec02c;
-    text-align: center;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.postButton:hover{
-    background-color: #ffd164;
-    transition: all 0.5s ease;
-}
-
-.votingBox span{
-    margin-left: 1px;
-}
-
-.sideReplyBox{
-    background-color: #3c3c3c;
-    color: #fff;
-    width: 100%;
-    left: 0;
-    z-index: 10;
-}
-
-.topicPage{
-    display: grid;
-    grid-template-columns: 1fr 400px;
-}
-
-.replyRightBox{
-    width: 100%;
-    padding: 0 10px;
-}
-
-.menuButton{
-    line-height: 44px;
-}
-
-.menuButton:hover{
-    color: #fff!important;
-}
-
-.form label {
-    color: #9c9b9b;
-}
-
-.form input{
-    margin-bottom: 10px;
-}
-
-.form input:focus{
-    outline: none;
-    background-color: #ffdb85;
-}
 
 
-.captchaBox{
-    display: grid;
-    grid-template-columns: 100px 100px 1fr;
-    grid-column-gap: 10px;
-}
 
-.captchaBox svg:first-child{
-    width: auto;
-    height: 35px;
-}
-
-
-.captchaBox button{
-    margin-top: 0;
-}
-
-
-.popup h1{
-    text-align: center;
-    margin-top: 20px;
-    color: #bbb;
-}
-
-.popup{
-    display: block;
-}
-
-.popup form{
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.multiselect__content-wrapper{
-    background: #919191!important;
-    border: 1px solid #7c7c7c!important;
-}
-
-.multiselect__option--highlight{
-    background: #ffdb85!important;
-    color: #000!important;
-}
-
-.multiselect__tags input{
-    min-height: 35px!important;
-    width: 98%;
-    height: 35px!important;
-    background: #323232!important;
-    margin-top: -7px!important;
-}
-
-.icon path{
-    fill: #000000;
-}
-
-.hiddenDesktop{
-    display: none;
-}
 
 
 
@@ -1186,6 +525,10 @@ textarea:focus, input:focus{
     min-height: 20px !important;
     height: 20px !important;
     font-size: 16px;
+}
+
+.multiselect .multiselect__placeholder{
+    padding-top: 8px;
 }
 
 .multiselect .multiselect__single{
@@ -1248,136 +591,4 @@ textarea:focus, input:focus{
     position: relative;
     verticalAlign: middle;
     padding-top:11px !important;
-}
-
-@media only screen and (max-width: 900px) {
-
-    .topicPage{
-        grid-template-columns: 1fr ;
-    }
-
-    .hiddenTablet {
-        display: none;
-    }
-
-    .replyBox{
-    }
-
-}
-
-
-@media only screen and (max-width: 600px) {
-
-    .nav-bar {
-        grid-template-columns: 150px 1fr;
-    }
-
-    .header, .headerRight {
-        height: 35px;
-    }
-
-    .header {
-        padding-left: 5px;
-        padding-right: 1px;
-    }
-
-    .header .logo {
-        max-height: 32px;
-        padding-right: 3px;
-    }
-
-    .header .logoText {
-        font-size: 20px;
-    }
-
-
-    .header .headerRight a {
-        font-size: 12px;
-        padding-right: 5px;
-        position: relative;
-        top: -5px;
-    }
-
-    .topicBox {
-        grid-template-columns: 20px 1fr;
-    }
-
-    .replyBox {
-        grid-column-gap: 0;
-        grid-template-columns: 40px 1fr ;
-        padding: 5px;
-    }
-
-    .replyCommentBox{
-        grid-template-columns: 40px 1fr 40px;
-    }
-
-    .newPostContainer {
-        padding: 7px 7px;
-    }
-
-    .messageBox {
-        grid-column-gap: 0px;
-    }
-
-    .captchaBox {
-        grid-template-columns: 90px 1fr 40px;
-        grid-row-gap: 5px;
-    }
-
-    .topicHasImage,
-    .commentHasImage {
-        grid-template-columns: 1fr;
-    }
-
-    .topicImage {
-        width: 100%;
-        max-width: 1000px;
-        max-height: 1000px;
-        min-width: 0;
-        min-height: 0;
-        height: auto;
-    }
-
-    .topicButtons {
-        display: none;
-    }
-
-    .hiddenMobile {
-        display: none;
-    }
-
-    .hiddenDesktop {
-        display: initial;
-    }
-
-
-    .multiselect__option {
-        padding: 6px !important;
-        min-height: 29px !important;;
-        line-height: 14px !important;;
-    }
-
-    .left {
-        padding-left: 4px;
-    }
-
-    .right {
-        padding-left: 20px;
-    }
-
-    .topic {
-        padding-right: 5px;
-    }
-
-    .replyRightBox .sideReplyBox{
-        border-style: solid;
-        border-color: #282626;
-        border-width: 1px 0 0 0;
-    }
-
-    .rightSidebar .topicBoxContent{
-        margin-bottom: 0;
-    }
-
 }

@@ -1,35 +1,31 @@
 <template>
 
-    <div class="comment">
+    <div class="topic comment ">
 
-        <div class="topicBox commentBox">
+        <vote parentType="comment" :slug="slug" :parent="comment" :myVote="comment.myVote" />
 
-            <vote  parentType="comment" :slug="slug" :parent="comment" :myVote="comment.myVote" />
+        <div class="topic-content comment-content">
 
-            <div ref="topicContent" class="topicContent">
+            <div class="author">
+                <span class="details bold">{{author}}</span>
+                <span class="details">{{date}} </span>
 
-                <div class="author">
-                    <span class="details authorName">{{author}}</span>
-                    <span class="details">{{date}} </span>
-
-                    <div class="topicButtons">
-                        <img v-if="isUserOwner" @click="deleteComment" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
-                        <span class="postId actionButton" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
-                    </div>
-
+                <div class="topic-buttons comment-buttons">
+                    <img v-if="isUserOwner" @click="deleteComment" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
+                    <span class="topic-reply-id" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
                 </div>
 
-                <div class="topicBoxContent" :class="comment.preview ? 'commentHasImage' : ''">
+            </div>
 
-                    <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
+            <div class="topic-content" :class="comment.preview ? 'topic-has-image comment-has' : ''">
 
-                    <div class="topicTextWrap">
+                <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
 
-                        <h3 v-if="title" class="title" v-html="title"/>
+                <div class="topic-text-wrap">
 
-                        <read-more :text="body" :max-chars="400" pclass="topicBody" class="topicBody" />
+                    <h3 v-if="title" class="title" v-html="title"/>
 
-                    </div>
+                    <read-more :text="body" :max-chars="400" pclass="topicBody" class="topicBody" />
 
                 </div>
 
