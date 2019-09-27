@@ -3,8 +3,8 @@
 
         <p v-html="text.length > maxChars ? ( visible ? text : text.substr(0, maxChars) + '...'  ) : text " :class="`readMore ${pclass}`"></p>
 
-        <a href="javascript:void(0)" v-if="!visible && text.length > maxChars" @click="showMore">show more</a>
-        <a href="javascript:void(0)" v-if="visible && text.length > maxChars" @click="showLess">show less</a>
+        <a href="javascript:void(0)" v-if="!visible && text.length > maxChars" @click="showMore"> show more</a>
+        <a href="javascript:void(0)" v-if="visible && text.length > maxChars" @click="showLess"> show less</a>
 
     </div>
 </template>

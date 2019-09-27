@@ -25,7 +25,7 @@
 
                     <h3 v-if="title" class="title" v-html="title"/>
 
-                    <read-more :text="body" :max-chars="400" pclass="topicBody" class="topicBody" />
+                    <read-more :text="body" :max-chars="400" pclass="body" />
 
                 </div>
 
