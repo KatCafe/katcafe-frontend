@@ -1,7 +1,7 @@
 <template>
 
 
-    <i :class="getIcon"></i>
+    <i :class="getIcon" @click="click" />
 
 </template>
 
@@ -13,7 +13,6 @@ export default {
 
     props: {
         icon: {default: 'loading-spinner'},
-
     },
 
     computed: {
@@ -31,7 +30,17 @@ export default {
             }
         }
 
-    }
+    },
+
+    methods: {
+
+        click(e){
+
+            this.$emit('click', e);
+
+        },
+
+    },
 
 }
 </script>

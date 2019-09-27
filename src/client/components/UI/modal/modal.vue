@@ -6,7 +6,7 @@
 
         <div class="modal show-modal" ref="refModal">
             <div class="modal-content">
-                <icon icon="times-circle" class="close-button " @click="this.closeModal" />
+                <icon icon="times-circle" class="close-button " @click="closeModal" />
 
                 <slot class="noOverflow" name="content"/>
             </div>
