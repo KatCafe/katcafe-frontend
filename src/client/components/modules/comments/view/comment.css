@@ -13,3 +13,7 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.comment-has-image{
+    grid-template-columns: 110px 1fr;
+}

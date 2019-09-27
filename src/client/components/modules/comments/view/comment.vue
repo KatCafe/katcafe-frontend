@@ -17,7 +17,7 @@
 
             </div>
 
-            <div class="topic-content" :class="comment.preview ? 'topic-has-image comment-has' : ''">
+            <div class="topic-content" :class="comment.preview ? 'topic-has-image comment-has-image' : ''">
 
                 <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
 
