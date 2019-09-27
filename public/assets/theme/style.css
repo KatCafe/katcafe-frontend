@@ -330,23 +330,29 @@ form {
     position: relative
 }
 
-.input-file-upload-group img{
+.input-file-upload-group i{
     position: absolute;
-    right: 4px;
-    top: 0;
+    right: 8px;
+    top: 8px;
+
 }
 
-.input-file-icon{
-    width: 24px;
-    padding: 5px;
+.input-file-upload-group i:hover{
+    top: 5px;
+}
+
+.fa{
     margin: 0 auto;
     box-sizing: content-box;
     display: block;
     cursor: pointer;
+    font-size: 22px;
+    position:relative;
+    top: calc(50% - 10px); /* 50% - 3/4 of icon height */
 }
 
 .input-file-icon:hover{
-    width: 28px;
+    font-size: 30px;
     transition: all 0.5s ease;
 }
 

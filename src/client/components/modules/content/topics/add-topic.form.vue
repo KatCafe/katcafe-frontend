@@ -14,7 +14,7 @@
                 <div class="input-file-upload-group">
                     <input type="text" :placeholder="$t('topic.threadTitle')" v-model="topicTitle" @change="titleChanged"/>
                     <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-                    <img class="input-file-icon" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+                    <icon class="input-file-icon" icon="camera" @click="openFileUpload" />
                 </div>
 
             </div>
@@ -43,7 +43,7 @@
 
 <script>
 import NetworkHelper from "modules/network/network-helper"
-import Topic from "client/components/modules/topics/view/topic"
+import Topic from "client/components/modules/content/topics/view/topic"
 import StringHelper from "src/utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
 import LoadingButton from 'client/components/UI/elements/loading-button'

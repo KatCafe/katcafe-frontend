@@ -12,9 +12,7 @@
 
                 <div class="column left">
 
-                    <template v-if="channel" >
-                        <topics :topics="topics"  />
-                    </template>
+                    <topics v-if="channel" :topics="topics"  />
 
                     <template v-if="!channel && !layoutLoading">
                         <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
@@ -40,7 +38,7 @@
 
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
-import Topics from "client/components/modules/topics/view/topics"
+import Topics from "client/components/modules/content/topics/view/topics"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
 

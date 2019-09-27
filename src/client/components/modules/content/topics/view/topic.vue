@@ -68,9 +68,9 @@
 <script>
 import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
-import Comments from "client/components/modules/comments/view/comments"
+import Comments from "client/components/modules/content/comments/view/comments"
 import PreviewImage from "client/components/UI/elements/preview-image"
-import AddCommentFrom from "client/components/modules/comments/add-comment.form"
+import AddCommentFrom from "client/components/modules/content/comments/add-comment.form"
 import ReadMore from "client/components/UI/elements/read-more"
 import ViewMoreComments from "./view-more-comments"
 

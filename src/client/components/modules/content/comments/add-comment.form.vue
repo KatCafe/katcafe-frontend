@@ -12,7 +12,7 @@
             <div class="input-file-upload-group">
                 <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="commentBody" @change="bodyChanged"/>
                 <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
-                <img class="input-file-icon" src="/public/assets/theme/upload-photo.svg" @click="openFileUpload">
+                <icon class="input-file-icon" icon="camera" @click="openFileUpload" />
             </div>
 
             <loading-button v-if="showPreview" @onClick="openCaptcha" text=""  style="margin: 0"/>
@@ -40,7 +40,7 @@
 import NetworkHelper from "modules/network/network-helper"
 import StringHelper from "src/utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
-import Comment from "client/components/modules/comments/view/comment"
+import Comment from "client/components/modules/content/comments/view/comment"
 import LoadingButton from 'client/components/UI/elements/loading-button'
 
 function initialState (){

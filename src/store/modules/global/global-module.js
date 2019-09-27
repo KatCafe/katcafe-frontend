@@ -12,6 +12,8 @@ export default {
 
         layoutLoading: false,
 
+        contentDisplay: 'topics',
+
     },
     actions,
     mutations,

@@ -34,7 +34,7 @@
 
 import Layout from "client/components/layout/layout"
 import Hero from "client/components/heros/hero"
-import Topic from "client/components/modules/topics/view/topic"
+import Topic from "client/components/modules/content/topics/view/topic"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
 import Icon from "client/components/UI/elements/icons/icon"

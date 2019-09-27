@@ -2,8 +2,6 @@
 
     <div>
 
-        <add-topic-form :topicChannel="channel" />
-
         <topic v-for="(topic, index) in topics"
                :key="index"
                :topic="topic"
@@ -18,12 +16,11 @@
 <script>
 
 import Topic from "./topic"
-import Comments from "client/components/modules/comments/view/comments"
-import AddTopicForm from "client/components/modules/topics/add-topic.form"
+import Comments from "client/components/modules/content/comments/view/comments"
 
 export default {
 
-    components: {AddTopicForm, Topic, Comments },
+    components: { Topic, Comments },
 
     props: {
         channel: {default: ''},

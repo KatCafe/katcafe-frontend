@@ -1,6 +1,5 @@
 <template>
 
-
     <i :class="getIcon" @click="click" />
 
 </template>
@@ -25,6 +24,10 @@ export default {
                 case 'send':return 'fa fa-send';
                 case 'times':return 'fa fa-times';
                 case 'times-circle':return 'fa fa-times-circle';
+                case 'camera':return 'fa fa-camera';
+                case 'comments':return 'fa fa-comments';
+                case 'pencil':return 'fa fa-pencil';
+                case 'comment':return 'fa fa-comment';
 
                 default: return'fa fa-send';
             }

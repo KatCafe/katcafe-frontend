@@ -13,6 +13,10 @@ export default {
 
     SET_GLOBAL_LAYOUT_LOADING: (state, value ) => {
         state.layoutLoading = value;
-    }
+    },
+
+    SET_GLOBAL_CONTENT_DISPLAY: (state, value ) => {
+        state.contentDisplay = value;
+    },
 
 }

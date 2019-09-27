@@ -16,5 +16,11 @@ export default {
 
     },
 
+    GLOBAL_CHANGE_CONTENT_DISPLAY: ({commit, dispatch, state}, contentDisplay) =>{
+
+        commit('SET_GLOBAL_CONTENT_DISPLAY', contentDisplay)
+
+    },
+
 
 }
