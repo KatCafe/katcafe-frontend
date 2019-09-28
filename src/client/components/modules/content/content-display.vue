@@ -80,7 +80,7 @@ export default {
         },
 
         comments(){
-            return this.$store.getters.getComments();
+            return this.$store.getters.getComments('date', 1);
         },
 
         visibleStickyRightSidebarComment(){
@@ -89,11 +89,11 @@ export default {
 
 
         hasMore(){
-            return this.$store.state.content[this.contentDisplay+'PageMore'];
+            return this.$store.state.content[this.contentDisplay+'Settings'].pageMore;
         },
 
         pageIndex(){
-            return this.$store.state.content[this.contentDisplay+'PageIndex'];
+            return this.$store.state.content[this.contentDisplay+'Settings'].pageIndex;
         },
 
 

@@ -5,7 +5,7 @@ export default {
     SET_CONTENT_SETTINGS_INIT: (state, { contentDisplay, settings })=>{
 
         contentDisplay = contentDisplay || state.contentDisplay;
-        Vue.set(state,contentDisplay+'SettingsInit', settings || state[contentDisplay+'Settings']  );
+        Vue.set(state,contentDisplay+'SettingsInit', Object.assign({}, settings || state[contentDisplay+'Settings']) );
 
     },
 
@@ -15,7 +15,7 @@ export default {
 
     SET_CONTENT_FROM_INIT: (state, {contentDisplay, settings} ) => {
         contentDisplay = contentDisplay || state.contentDisplay;
-        Vue.set(state,contentDisplay+'Settings', settings || state[contentDisplay+'SettingsInit']  );
+        Vue.set(state,contentDisplay+'Settings', Object.assign({}, settings || state[contentDisplay+'SettingsInit'] ));
     },
 
     SET_CONTENT_PAGE_INFO: (state, {contentDisplay, pageIndex, pageCount, pageMore} ) => {

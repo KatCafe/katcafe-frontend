@@ -30,7 +30,7 @@ export default {
 
         console.log('channel async data', route.path);
 
-        return store.dispatch('CONTENT_INIT', {route, country: store.state.localization.selectedCountryCode});
+        return store.dispatch('CONTENT_INIT', {route, country: store.state.localization.selectedCountryCode, searchQuery: 'channel'});
 
     },
 

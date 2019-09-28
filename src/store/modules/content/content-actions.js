@@ -26,10 +26,10 @@ export default {
         commit('SET_CONTENT_SETTINGS_INIT', {contentDisplay: 'comments', settings: {
 
                 pageIndex: route.params.pageIndex ? route.params.pageIndex -1 : 0,
-                pageCount: route.params.pageCount ? route.params.pageCount : 5,
+                pageCount: route.params.pageCount ? route.params.pageCount : 20,
                 pageMore: true,
                 searchQuery,
-                searchAlgorithm:'hot',
+                searchAlgorithm:'date',
                 search: path,
                 searchRevert: false
 
@@ -60,20 +60,23 @@ export default {
         try{
 
             const contentDisplay = state.contentDisplay;
+            const settings = state[contentDisplay+'Settings'];
+
+            console.log(settings);
 
             commit('SET_GLOBAL_LAYOUT_LOADING', true);
 
-            await dispatch('CHANNEL_GET', {slug: state[contentDisplay+'Search'] });
+            await dispatch('CHANNEL_GET', {slug: settings.search });
 
             const out = await dispatch( contentDisplay === 'topics' ? 'TOPICS_GET' : 'COMMENTS_GET', {
-                searchRevert: state[contentDisplay+'SearchRevert'],
-                searchQuery: state[contentDisplay+'SearchQuery'],
-                search: state[contentDisplay+'Search'],
-                index: state[contentDisplay+'PageIndex'],
-                count: state[contentDisplay+'PageCount']
+                searchRevert: settings.searchRevert,
+                searchQuery: settings.searchQuery,
+                search: settings.search,
+                index: settings.pageIndex,
+                count: settings.pageCount
             });
 
-            commit('SET_CONTENT_PAGE_INFO', { contentDisplay, pageIndex: state[contentDisplay+'PageIndex']+1, pageCount: state[contentDisplay+'PageCount'], pageMore: out && out.length});
+            commit('SET_CONTENT_PAGE_INFO', { contentDisplay, pageIndex: settings.pageIndex+1, pageCount: settings.pageCount, pageMore: out && out.length});
 
 
             commit('SET_GLOBAL_LAYOUT_LOADING', false);
