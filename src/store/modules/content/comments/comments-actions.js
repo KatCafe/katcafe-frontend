@@ -21,7 +21,7 @@ export default {
                 commit('ADD_COMMENTS', out.comments);
                 commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
 
-                return;
+                return out.comments;
             }
 
         }catch(err){
@@ -30,6 +30,7 @@ export default {
 
         commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: false });
 
+        return [];
     },
 
     COMMENT_DELETE: async ({commit, dispatch, state}, slug ) => {

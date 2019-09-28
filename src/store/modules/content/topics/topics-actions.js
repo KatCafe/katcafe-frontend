@@ -5,8 +5,6 @@ export default {
 
     TOPICS_GET: async  ({ commit, dispatch, state }, { searchAlgorithm = 'hot', searchQuery = 'country', searchRevert = false, search, index = 0, count = 20 }) => {
 
-        index++;
-
         try{
 
             const out = await NetworkHelper.post(`/topics/top`, {
@@ -14,7 +12,7 @@ export default {
                 searchRevert,
                 searchQuery,
                 search,
-                index,
+                index: index+1,
                 count,
             });
 
@@ -32,15 +30,15 @@ export default {
 
                 commit('ADD_TOPICS', out.topics);
                 commit('ADD_COMMENTS', out.comments);
-                commit('SET_TOPICS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
-                return out;
+
+                return out.topics;
             }
 
         }catch(err){
+            console.error(err);
         }
 
-        commit('SET_TOPICS_PAGE_LOADING', false);
-
+        return [];
     },
 
     TOPIC_GET: async  ({ commit, dispatch, state }, { slug }) => {

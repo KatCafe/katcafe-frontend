@@ -89,11 +89,11 @@ export default {
 
 
         hasMore(){
-            return this.$store.state.topics.pageMore;
+            return this.$store.state.content[this.contentDisplay+'PageMore'];
         },
 
         pageIndex(){
-            return this.$store.state.topics.pageIndex;
+            return this.$store.state.content[this.contentDisplay+'PageIndex'];
         },
 
 
@@ -114,10 +114,7 @@ export default {
 
         async onScrollLoad(resolver){
 
-            let path = this.$route.path;
-            if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex'));
-
-            await this.$store.dispatch('TOPICS_GET', { searchQuery: this.searchQuery, search: path, index: this.$store.state.topics.pageIndex , count: this.$store.state.topics.pageCount });
+            await this.$store.dispatch('CONTENT_GET', {  })
 
             resolver(true)
 

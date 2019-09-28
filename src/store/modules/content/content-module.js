@@ -8,21 +8,29 @@ export default {
 
         contentDisplay: 'topics',
 
-        topicsPageIndex: 0,
-        topicsPageCount: 20,
-        topicsPageMore: true,
-        topicsSearchRevert: false,
-        topicsSearchQuery: 'country',
-        topicsSearchAlgorithm: 'hot',
-        topicsSearch: '',
+        topicsSettingsInit: {},
+        topicsSettings: {
+            pageIndex: 0,
+            pageCount: 20,
+            pageMore: true,
+            searchRevert: true,
+            searchQuery: 'country',
+            searchAlgorithm: 'hot',
+            search: '',
+        },
 
-        commentsPageIndex: 0,
-        commentsPageCount: 20,
-        commentsMore: true,
-        commentsSearchRevert: false,
-        commentsSearchQuery: 'country',
-        commentsSearchAlgorithm: 'date',
-        commentsSearch: '',
+        commentsSettingsInit: {},
+        commentsSettings: {
+            pageIndex: 0,
+            pageCount: 20,
+            pageMore: true,
+            searchRevert: false,
+            searchQuery: 'country',
+            searchAlgorithm: 'date',
+            search: '',
+        },
+
+
     },
     actions,
     mutations,

@@ -26,15 +26,6 @@ export default {
     },
 
 
-    SET_TOPICS_PAGE_INFO: (state, {pageIndex, pageCount, pageMore} ) => {
-
-        state.pageIndex = pageIndex;
-        state.pageCount = pageCount;
-        state.pageMore = pageMore;
-
-    },
-
-
     SET_TOPICS_DELETE: ( state, ids ) => {
 
         ids.map(it => Vue.delete( state.map, it ));

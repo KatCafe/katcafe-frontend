@@ -10,10 +10,6 @@ export default {
         topic: null,
         map: {},
 
-        pageIndex: 0,
-        pageCount: 20,
-        pageMore: true,
-
     },
     actions,
     mutations,
