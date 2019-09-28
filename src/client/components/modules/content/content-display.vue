@@ -1,25 +1,37 @@
 <template>
 
     <div>
-
         <content-options-bar/>
 
-        <div class="row">
+        <div class="row content-display">
 
             <div class="column left">
 
+                <add-topic-form :topicChannel="channelToWrite" />
+
+                <template v-if="!topics.length && !comments.length && !layoutLoading ">
+                    <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
+                </template>
+
                 <template v-if=" contentDisplay === 'topics' " >
 
-                    <add-topic-form :topicChannel="channelToWrite" />
-
-                    <topics v-if="topics.length" :topics="topics" :channel="slug" />
-
-                    <template v-if="!topics.length && !layoutLoading ">
-                        <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
-                    </template>
+                    <topics v-if="topics.length" :topics="topics" class="content-display-topics"  />
 
                 </template>
 
+                <template v-if=" contentDisplay === 'comments' " >
+
+                    <comments v-if="comments.length" :comments="comments" class="content-display-comments" />
+
+                </template>
+
+            </div>
+
+            <infinite-scroll ref="refInfiniteScroll" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
+
+
+            <div v-if="visibleStickyRightSidebarComment " class="column right">
+                <sticky-right-sidebar-comment :channel="channelToWrite" />
             </div>
 
         </div>
@@ -32,11 +44,14 @@
 
 import ContentOptionsBar from "./content-options/content-options-bar"
 import Topics from "client/components/modules/content/topics/view/topics"
+import Comments from "client/components/modules/content/comments/view/comments"
 import AddTopicForm from "client/components/modules/content/topics/add-topic.form"
+import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
+import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
 
 export default {
 
-    components: {AddTopicForm, ContentOptionsBar, Topics},
+    components: {AddTopicForm, ContentOptionsBar, Topics, Comments, StickyRightSidebarComment, InfiniteScroll},
 
     props:{
         slug: {default: ''},
@@ -50,6 +65,10 @@ export default {
 
     computed:{
 
+        layoutLoading(){
+            return this.$store.state.global.layoutLoading;
+        },
+
         contentDisplay(){
             return this.$store.state.global.contentDisplay;
         },
@@ -57,11 +76,58 @@ export default {
         topics(){
             return this.$store.getters.getTopics();
         },
-    }
+
+        comments(){
+            return this.$store.getters.getComments();
+        },
+
+        visibleStickyRightSidebarComment(){
+            return this.$store.state.global.showStickyRightSidebarComment;
+        },
+
+
+        hasMore(){
+            return this.$store.state.topics.pageMore;
+        },
+
+        pageIndex(){
+            return this.$store.state.topics.pageIndex;
+        },
+
+
+        getPageUri(){
+            return '/'+ this.slug +'/pageIndex/';
+        },
+
+        getPrevUri(){
+            if (this.pageIndex > 1) return this.getPageUri+(this.pageIndex-1);
+        },
+
+        getNextUri(){
+            if (this.hasMore) return this.getPageUri+(this.pageIndex+1);
+        }
+    },
+
+    methods: {
+
+        async onScrollLoad(){
+
+            let path = this.$route.path;
+            if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex'));
+
+            await this.$store.dispatch('TOPICS_GET', { searchQuery: 'channel', search: path, index: this.$store.state.topics.pageIndex , count: this.$store.state.topics.pageCount });
+            this.$refs['refInfiniteScroll'].continueScroll();
+        },
+
+    },
 
 }
 </script>
 
 <style>
+
+    .content-display-comments .comment{
+        margin-bottom: 10px;
+    }
 
 </style>

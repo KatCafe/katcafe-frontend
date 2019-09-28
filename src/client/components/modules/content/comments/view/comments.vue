@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Comment from "./comment"
 
+import Comment from "./comment"
 
 export default {
 

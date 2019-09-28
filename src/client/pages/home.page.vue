@@ -8,7 +8,6 @@
 
             <content-display :slug="getChannel" :channelToWrite="getHomepageChannel" />
 
-            <infinite-scroll ref="refInfiniteScroll" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
 
         </div>
 
@@ -22,7 +21,6 @@ import Layout from "client/components/layout/layout"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 import BrowserHelper from "modules/helpers/browser.helpers"
 import Hero from "client/components/heros/hero"
-import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
 import ContentDisplay from "client/components/modules/content/content-display"
 
 export default {
@@ -62,9 +60,6 @@ export default {
 
     computed: {
 
-        layoutLoading(){
-            return this.$store.state.global.layoutLoading;
-        },
 
         getHomepageChannel(){
             return this.getChannel + '/b';
@@ -98,18 +93,7 @@ export default {
             return '';
         },
 
-
-        hasMore(){
-            return this.$store.state.topics.pageMore;
-        },
-
-        pageIndex(){
-            return this.$store.state.topics.pageIndex;
-        },
-
         stickyButtons(){
-
-
             return [
             ]
         },
@@ -119,30 +103,10 @@ export default {
             return this.$store.state.global.showStickyRightSidebarComment;
         },
 
-        getPageUri(){
-            return '/'+ this.getChannel +'/pageIndex/';
-        },
-
-        getPrevUri(){
-            if (this.pageIndex > 1) return this.getPageUri+(this.pageIndex-1);
-        },
-
-        getNextUri(){
-            if (this.hasMore) return this.getPageUri+(this.pageIndex+1);
-        }
-
-    },
-
-    methods:{
-
-        async onScrollLoad(){
-
-            await this.$store.dispatch('TOPICS_GET', { searchQuery: 'country', search: this.getChannel, index: this.$store.state.topics.pageIndex, count: this.$store.state.topics.pageCount });
-            this.$refs['refInfiniteScroll'].continueScroll();
-        },
 
 
     },
+
 
 
 }

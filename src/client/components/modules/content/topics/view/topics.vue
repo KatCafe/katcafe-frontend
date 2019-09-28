@@ -16,16 +16,13 @@
 <script>
 
 import Topic from "./topic"
-import Comments from "client/components/modules/content/comments/view/comments"
 
 export default {
 
-    components: { Topic, Comments },
+    components: { Topic },
 
     props: {
-        channel: {default: ''},
         topics: {default(){return [];}},
-        comments: {default(){return [];} },
     }
 
 }
