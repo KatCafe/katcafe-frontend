@@ -22,14 +22,14 @@ export default {
 
     computed:{
         contentDisplay(){
-            return this.$store.state.global.contentDisplay;
+            return this.$store.state.content.contentDisplay;
         },
     },
 
     methods:{
 
         changeContentDisplay(contentDisplay){
-            return this.$store.dispatch('GLOBAL_CHANGE_CONTENT_DISPLAY', contentDisplay);
+            return this.$store.dispatch('CONTENT_CHANGE_DISPLAY', contentDisplay);
         }
 
     },

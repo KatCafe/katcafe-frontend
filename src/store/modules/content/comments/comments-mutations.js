@@ -20,12 +20,6 @@ export default {
 
     },
 
-    SET_COMMENTS_PAGE_LOADING: (state, pageLoading ) => {
-
-        state.pageLoading = pageLoading;
-
-    },
-
     SET_COMMENTS_PAGE_INFO: (state, {pageIndex, pageCount, pageMore} ) => {
 
         state.pageIndex = pageIndex;

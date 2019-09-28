@@ -17,6 +17,8 @@
 <script>
 
 import Layout from "client/components/layout/layout"
+import BrowserHelper from "modules/helpers/browser.helpers"
+
 import Hero from "client/components/heros/hero"
 import ContentDisplay from "client/components/modules/content/content-display"
 
@@ -28,28 +30,23 @@ export default {
 
         console.log('channel async data', route.path);
 
-        let path = route.path;
+        let path = BrowserHelper.trimSlash(route.path);
+        if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex'));
 
-        try{
+        path = path !== '' ? path : store.state.localization.selectedCountryCode;
 
-            if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
+        store.commit('SET_CONTENT_DISPLAY', 'topics' );
 
-            if (route.params.slug) {
+        store.commit('SET_CONTENT_PAGE_INFO', { contentDisplay: 'topics', pageIndex: route.params.pageIndex ? route.params.pageIndex -1 : 0, pageCount: route.params.pageCount ? route.params.pageCount : 5, pageMore: true,})
+        store.commit('SET_CONTENT_SEARCH_QUERY', { contentDisplay: 'topics', searchQuery: 'channel', searchAlgorithm:'hot', search: path, searchRevert: false });
 
-                store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+        store.commit('SET_CONTENT_PAGE_INFO', { contentDisplay: 'comments', pageIndex: route.params.pageIndex ? route.params.pageIndex -1 : 0, pageCount: route.params.pageCount ? route.params.pageCount : 5, pageMore: true,})
+        store.commit('SET_CONTENT_SEARCH_QUERY', { contentDisplay: 'comments', searchQuery: 'channel', searchAlgorithm:'date', search: path, searchRevert: true, });
 
-                store.commit('SET_TOPICS', [] );
-                store.commit('SET_COMMENTS', [] );
+        store.commit('SET_TOPICS', [] );
+        store.commit('SET_COMMENTS', [] );
 
-                await store.dispatch('CHANNEL_GET', {slug: path,});
-                await store.dispatch('TOPICS_GET', {searchQuery: 'channel', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0 });
-
-                store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
-            }
-
-        }catch(err){
-            console.error('channel page raised an error', path);
-        }
+        return store.dispatch('CONTENT_GET', {  })
 
     },
 

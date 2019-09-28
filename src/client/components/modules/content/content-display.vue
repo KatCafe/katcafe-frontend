@@ -27,14 +27,15 @@
 
             </div>
 
-            <infinite-scroll ref="refInfiniteScroll" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
-
 
             <div v-if="visibleStickyRightSidebarComment " class="column right">
                 <sticky-right-sidebar-comment :channel="channelToWrite" />
             </div>
 
         </div>
+
+        <infinite-scroll  v-if="!layoutLoading" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
+
 
     </div>
 
@@ -55,6 +56,7 @@ export default {
 
     props:{
         slug: {default: ''},
+        searchQuery: {default: 'channel'},
         channelToWrite: {default: ''},
     },
 
@@ -70,7 +72,7 @@ export default {
         },
 
         contentDisplay(){
-            return this.$store.state.global.contentDisplay;
+            return this.$store.state.content.contentDisplay;
         },
 
         topics(){
@@ -110,13 +112,15 @@ export default {
 
     methods: {
 
-        async onScrollLoad(){
+        async onScrollLoad(resolver){
 
             let path = this.$route.path;
             if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex'));
 
-            await this.$store.dispatch('TOPICS_GET', { searchQuery: 'channel', search: path, index: this.$store.state.topics.pageIndex , count: this.$store.state.topics.pageCount });
-            this.$refs['refInfiniteScroll'].continueScroll();
+            await this.$store.dispatch('TOPICS_GET', { searchQuery: this.searchQuery, search: path, index: this.$store.state.topics.pageIndex , count: this.$store.state.topics.pageCount });
+
+            resolver(true)
+
         },
 
     },

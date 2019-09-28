@@ -1,5 +1,3 @@
-import CookiesService from "../../../services/cookies/cookies.service";
-
 export default {
 
     GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT: ({ commit, dispatch, state }, { show = true, topic, channel } ) => {
@@ -16,11 +14,6 @@ export default {
 
     },
 
-    GLOBAL_CHANGE_CONTENT_DISPLAY: ({commit, dispatch, state}, contentDisplay) =>{
-
-        commit('SET_GLOBAL_CONTENT_DISPLAY', contentDisplay)
-
-    },
 
 
 }

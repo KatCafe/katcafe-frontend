@@ -10,7 +10,6 @@ export default {
         topic: null,
         map: {},
 
-        pageLoading: false,
         pageIndex: 0,
         pageCount: 20,
         pageMore: true,

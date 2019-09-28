@@ -6,7 +6,7 @@
 
             <hero :title="'/'+this.getChannel" :cover="getChannelCover" :titleStyle="getChannelTitleColor" />
 
-            <content-display :slug="getChannel" :channelToWrite="getHomepageChannel" />
+            <content-display searchQuery="country" :slug="getChannel" :channelToWrite="getHomepageChannel" />
 
 
         </div>
@@ -25,37 +25,30 @@ import ContentDisplay from "client/components/modules/content/content-display"
 
 export default {
 
-    components: { Layout, StickyRightSidebarComment, Hero, InfiniteScroll, ContentDisplay },
+    components: { Layout, StickyRightSidebarComment, Hero, ContentDisplay },
 
     async asyncData ({ store,  route }){
 
         console.log('home asyncData', route.path);
 
-        let path = route.path;
+        let path = BrowserHelper.trimSlash(route.path);
+        if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex'));
 
-        try{
+        path = path !== '' ? path : store.state.localization.selectedCountryCode;
 
-            if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
+        store.commit('SET_CONTENT_DISPLAY', 'topics' );
 
-            const country = store.state.localization.selectedCountryCode;
+        store.commit('SET_CONTENT_PAGE_INFO', { contentDisplay: 'topics', pageIndex: route.params.pageIndex ? route.params.pageIndex -1 : 0, pageCount: route.params.pageCount ? route.params.pageCount : 5, pageMore: true,})
+        store.commit('SET_CONTENT_SEARCH_QUERY', { contentDisplay: 'topics', searchQuery: 'country', searchAlgorithm:'hot', search: path, searchRevert: false });
 
-            path = BrowserHelper.trimSlash(path) !== '' ? BrowserHelper.trimSlash(path) : country;
+        store.commit('SET_CONTENT_PAGE_INFO', { contentDisplay: 'comments', pageIndex: route.params.pageIndex ? route.params.pageIndex -1 : 0, pageCount: route.params.pageCount ? route.params.pageCount : 5, pageMore: true,})
+        store.commit('SET_CONTENT_SEARCH_QUERY', { contentDisplay: 'comments', searchQuery: 'country', searchAlgorithm:'date', search: path, searchRevert: true, });
 
-            store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+        store.commit('SET_TOPICS', [] );
+        store.commit('SET_COMMENTS', [] );
 
-            store.commit('SET_TOPICS', [] );
-            store.commit('SET_COMMENTS', [] );
+        return store.dispatch('CONTENT_GET', {  })
 
-            await store.dispatch('CHANNEL_GET', {slug: path });
-
-            await store.dispatch('TOPICS_GET', {searchQuery: 'country', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0, count: 5 });
-
-            store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
-
-
-        }catch(err){
-            console.error('home page raised an error', path);
-        }
     },
 
     computed: {
@@ -102,7 +95,6 @@ export default {
         visibleStickyRightSidebarComment(){
             return this.$store.state.global.showStickyRightSidebarComment;
         },
-
 
 
     },

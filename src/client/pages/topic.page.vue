@@ -22,7 +22,7 @@
 
             </div>
 
-            <infinite-scroll ref="refInfiniteScroll" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
+            <infinite-scroll  @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
 
         </template>
 
@@ -138,13 +138,14 @@ export default {
             this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
         },
 
-        async onScrollLoad(){
+        async onScrollLoad(resolver){
 
             let path = this.$route.path;
             if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
             await this.$store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: this.pageIndex , count: this.$store.state.comments.pageCount });
-            this.$refs['refInfiniteScroll'].continueScroll();
+
+            resolver(true);
         },
 
     },

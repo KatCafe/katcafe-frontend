@@ -15,8 +15,4 @@ export default {
         state.layoutLoading = value;
     },
 
-    SET_GLOBAL_CONTENT_DISPLAY: (state, value ) => {
-        state.contentDisplay = value;
-    },
-
 }

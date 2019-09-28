@@ -4,9 +4,6 @@ export default {
 
     COMMENTS_GET: async  ({ commit, dispatch, state }, { searchRevert = true, searchAlgorithm = 'hot', searchQuery = 'country', search, index = 0, count = 20 }) => {
 
-        if (state.pageLoading) return;
-        commit('SET_COMMENTS_PAGE_LOADING', true);
-
         index++;
 
         try{
@@ -23,7 +20,6 @@ export default {
             if (out ) {
                 commit('ADD_COMMENTS', out.comments);
                 commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
-                commit('SET_COMMENTS_PAGE_LOADING', false );
 
                 return;
             }
@@ -33,7 +29,6 @@ export default {
         }
 
         commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: false });
-        commit('SET_COMMENTS_PAGE_LOADING', false );
 
     },
 

@@ -25,11 +25,6 @@ export default {
 
     },
 
-    SET_TOPICS_PAGE_LOADING: (state, pageLoading ) => {
-
-        state.pageLoading = pageLoading;
-
-    },
 
     SET_TOPICS_PAGE_INFO: (state, {pageIndex, pageCount, pageMore} ) => {
 

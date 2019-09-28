@@ -64,7 +64,9 @@ export default{
 
                     this.loading = true;
 
-                    this.$emit('onScroll', diff);
+                    this.$emit('onScroll', ()=> {
+                        this.continueScroll();
+                    });
 
                 }
 
