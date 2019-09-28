@@ -35,6 +35,17 @@ export default {
 
     },
 
+    watch: {
+        '$route': {
+            deep: true,
+            handler: async function (refreshPage) {
+
+                console.log('home route changed');
+                return this.$store.dispatch('CONTENT_INIT', { route: this.$route, searchQuery: 'country', country: this.$store.state.localization.selectedCountryCode});
+            }
+        }
+    },
+
     computed: {
 
 
