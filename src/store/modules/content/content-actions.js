@@ -62,8 +62,6 @@ export default {
             const contentDisplay = state.contentDisplay;
             const settings = state[contentDisplay+'Settings'];
 
-            console.log(settings);
-
             commit('SET_GLOBAL_LAYOUT_LOADING', true);
 
             await dispatch('CHANNEL_GET', {slug: settings.search });
