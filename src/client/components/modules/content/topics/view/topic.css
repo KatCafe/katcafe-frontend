@@ -45,6 +45,7 @@
 .topic-content{
     display: block;
     margin-top: 10px;
+    padding-right: 10px;
 }
 
 .topic-has-image {
@@ -92,13 +93,29 @@
     font-size: 12px;
 }
 
+.topic-bottom-buttons{
+    padding-top: 10px;
+}
 
+.topic-bottom-buttons div{
+    padding-right: 10px;
+}
+.topic-bottom-buttons i,
+.topic-bottom-buttons span{
+    font-size: 14px;
+    padding-right: 5px;
+    cursor: pointer;
+}
 
 @media only screen and (max-width: 600px) {
 
     .topic {
         grid-template-columns: 20px 1fr;
         padding-right: 5px;
+    }
+
+    .topic-content{
+        padding-right: 0;
     }
 
     .topic-has-image {

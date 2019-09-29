@@ -3,7 +3,8 @@
     <div>
 
         <topic v-for="(topic, index) in topics"
-               :key="index"
+               :key="topic.slug"
+               :name="topic.slug"
                :topic="topic"
                :isPreview = "true"
                class="topic-separator"

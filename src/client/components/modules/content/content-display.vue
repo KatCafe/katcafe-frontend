@@ -21,7 +21,7 @@
 
                 <template v-if=" contentDisplay === 'comments' " >
 
-                    <comments v-if="comments.length" :comments="comments" class="content-display-comments" />
+                    <comments v-if="comments.length" :comments="comments" class="content-display-comments" :isContentDisplay="true" />
 
                 </template>
 

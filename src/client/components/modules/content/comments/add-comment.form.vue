@@ -19,11 +19,11 @@
 
         </div>
 
+        <span class="error-text">{{error}}</span>
+
         <div v-if="showPreview && isShowPreview">
 
             <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
-
-            <span class="error-text">{{error}}</span>
 
             <div v-if="!loading" >
                 <span class='commentPreview hiddenMobile'>{{$t('comment.previewComment')}}</span>
@@ -72,6 +72,7 @@ function initialState (){
 
 export default {
 
+    name: 'add-comment-form',
 
     components: { Icon, Comment, LoadingButton },
 
@@ -205,6 +206,7 @@ export default {
                         this.reset();
                     }
 
+                    this.$emit('onSuccess', out.comment);
 
                 }catch(err){
 

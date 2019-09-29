@@ -9,6 +9,9 @@
             <div class="author">
                 <span class="details bold">{{author}}</span>
                 <span class="details">{{date}} </span>
+                <router-link v-if="isContentDisplay" class="details" :to="comment.topic">
+                    {{comment.topic}}
+                </router-link>
 
                 <div class="topic-buttons comment-buttons">
                     <img v-if="isUserOwner" @click="deleteComment" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
@@ -17,7 +20,7 @@
 
             </div>
 
-            <div class="topic-content" :class="comment.preview ? 'topic-has-image comment-has-image' : ''">
+            <div class="topic-content comment-content" :class="comment.preview ? 'topic-has-image comment-has-image' : ''">
 
                 <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
 
@@ -30,6 +33,22 @@
                 </div>
 
             </div>
+
+            <template v-if="isContentDisplay">
+                <div class="topic-bottom-buttons comment-bottom-buttons">
+
+                    <div @click="showAddReply">
+                        <icon icon="comment" />
+                        <span>Reply</span>
+                    </div>
+
+                </div>
+
+                <template v-if="addReply">
+                    <add-comment-form :topic="comment.topic" :isShowPreview="false" @onSuccess="showAddReply(false)"/>
+                </template>
+
+            </template>
 
         </div>
 
@@ -44,13 +63,18 @@ import Vote from "client/components/modules/vote/vote"
 import PreviewImage from "client/components/UI/elements/preview-image"
 import consts from "consts/consts"
 import ReadMore from "client/components/UI/elements/read-more"
+import Icon from "client/components/UI/elements/icons/icon"
+import AddCommentForm from "./../add-comment.form"
 
 export default {
 
-    components: { Vote, PreviewImage, ReadMore},
+    name: 'comment',
+
+    components: { Vote, PreviewImage, ReadMore, Icon, AddCommentForm},
 
     data(){
         return {
+            addReply: false,
         }
     },
 
@@ -58,6 +82,7 @@ export default {
         isPreview: false,
         isSnippetForm: false,
         comment: null,
+        isContentDisplay: false,
     },
 
     computed: {
@@ -112,8 +137,11 @@ export default {
 
         deleteComment(){
             return this.$store.dispatch('COMMENT_DELETE', this.comment.slug );
-        }
+        },
 
+        showAddReply(value = true){
+            this.addReply = value;
+        }
 
     }
 

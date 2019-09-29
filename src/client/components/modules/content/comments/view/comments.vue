@@ -2,9 +2,11 @@
     <div>
 
         <comment v-for="(comment, index) in comments"
-                 :key="index"
+                 :key="comment.slug"
+                 :name="comment.slug"
                  :comment="comment"
                  :isPreview="isPreview"
+                 :isContentDisplay="isContentDisplay"
         >
 
         </comment>
@@ -23,7 +25,9 @@ export default {
     props: {
 
         isPreview: false,
-        comments:{ default(){ return []; }}
+        comments:{ default(){ return []; }},
+        isContentDisplay: false,
+
     }
 }
 </script>

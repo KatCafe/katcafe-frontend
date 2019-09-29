@@ -222,6 +222,8 @@ export default {
 
                     this.reset();
 
+                    this.$emit('onSuccess', out.comment);
+
                     this.$router.push({path: '/'+out.topic.slug });
 
 

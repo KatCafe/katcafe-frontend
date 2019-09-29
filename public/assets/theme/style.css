@@ -344,7 +344,6 @@ form {
 .fa{
     margin: 0 auto;
     box-sizing: content-box;
-    display: block;
     cursor: pointer;
     font-size: 22px;
     position:relative;
