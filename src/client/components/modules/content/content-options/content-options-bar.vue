@@ -1,7 +1,7 @@
 <template>
 
     <div class="content-options-bar">
-        <div class="left">
+        <div :class="`left ${pclass}` ">
             <span >VIEW</span>
             <icon :class="contentDisplay === 'topics' ? 'selected' : ''" icon="comment" @click="changeContentDisplay('topics')" />
             <icon :class="contentDisplay === 'comments' ? 'selected' : ''" icon="comments" @click="changeContentDisplay('comments')" />
@@ -18,7 +18,9 @@ export default {
 
     components: {Icon},
 
-    props: {},
+    props: {
+        pclass: {default: ''},
+    },
 
     computed:{
         contentDisplay(){
@@ -50,7 +52,7 @@ export default {
 
     .content-options-bar .left{
         text-align: left;
-        display: inherit;
+        display: -webkit-box;
     }
 
     .content-options-bar span{

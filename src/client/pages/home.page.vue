@@ -6,8 +6,7 @@
 
             <hero :title="'/'+this.getChannel" :cover="getChannelCover" :titleStyle="getChannelTitleColor" />
 
-            <content-display searchQuery="country" :slug="getChannel" :channelToWrite="getHomepageChannel" />
-
+            <content-display  :slug="getChannel" :channelToWrite="getHomepageChannel" />
 
         </div>
 

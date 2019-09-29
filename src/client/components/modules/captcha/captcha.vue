@@ -4,8 +4,8 @@
 
         <icon icon="loading-spinner" v-if="captchaLoading" class="fa-2x" />
 
-        <template v-if="captcha">
-            <div v-html="captcha.data"></div>
+        <template v-if="!captchaLoading">
+            <div v-html="captcha.data || 'loading'"></div>
             <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" maxlength="4" >
             <loading-button :text="buttonText || $t('captcha.post')" @onClick="submit" />
         </template>

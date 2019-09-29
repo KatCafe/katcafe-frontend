@@ -74,6 +74,8 @@ export default {
 
             await dispatch('CHANNEL_GET', {slug: settings.search });
 
+            //console.log(contentDisplay, settings );
+
             const out = await dispatch( contentDisplay === 'topics' ? 'TOPICS_GET' : 'COMMENTS_GET', {
                 searchRevert: settings.searchRevert,
                 searchQuery: settings.searchQuery,

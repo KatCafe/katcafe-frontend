@@ -1,15 +1,17 @@
 <template>
 
     <div>
-        <content-options-bar/>
+        <content-options-bar :class="pclass"/>
 
-        <div class="row content-display">
+        <div :class="`row content-display ${pclass}`">
 
             <div class="column left">
 
                 <add-topic-form :topicChannel="channelToWrite" />
 
-                <template v-if="!topics.length && !comments.length && !layoutLoading ">
+                <icon icon="loading-spinner" v-if="!topics.length && !comments.length && layoutLoading" class="fa-5x" />
+
+                <template v-if="!topics.length && !comments.length && !layoutLoading">
                     <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
                 </template>
 
@@ -49,15 +51,16 @@ import Comments from "client/components/modules/content/comments/view/comments"
 import AddTopicForm from "client/components/modules/content/topics/add-topic.form"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
 import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
+import Icon from "client/components/UI/elements/icons/icon"
 
 export default {
 
-    components: {AddTopicForm, ContentOptionsBar, Topics, Comments, StickyRightSidebarComment, InfiniteScroll},
+    components: {AddTopicForm, ContentOptionsBar, Topics, Comments, StickyRightSidebarComment, InfiniteScroll, Icon},
 
     props:{
         slug: {default: ''},
-        searchQuery: {default: 'channel'},
         channelToWrite: {default: ''},
+        pclass: {default: ''},
     },
 
     data(){
