@@ -14,7 +14,7 @@
         <label for="lname">Cover</label>
         <input type="text" id="lname" name="cover" v-model="channelCover">
 
-        <label>Country</label>
+        <label>Country</label> <br/>
         <no-ssr>
             <country-select @onSelect="channelCountrySelected" :defaultCountryCode="defaultCountry" style="padding-bottom: 20px" />
         </no-ssr>

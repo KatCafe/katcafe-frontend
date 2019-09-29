@@ -266,8 +266,7 @@ Wide styles
 /** Forms
  */
 textarea,
-input[type=text],
-input[type=password],
+input,
 select {
     width: 100%;
     display: inline-block;
@@ -289,6 +288,12 @@ select {
     height: 38px;
     max-height: 200px;
     font-size: 12px;
+}
+
+textarea:focus,
+input:focus,
+select:focus{
+    color: black;
 }
 
 button,
@@ -569,6 +574,7 @@ form {
 
 .multiselect__input{
     top: 6px;
+    background-color: transparent !important;
 }
 
 .multiselect__input::placeholder{
