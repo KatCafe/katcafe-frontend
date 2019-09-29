@@ -334,7 +334,7 @@ form {
     position: absolute;
     right: 8px;
     top: 8px;
-
+    font-size: 22px;
 }
 
 .input-file-upload-group i:hover{
@@ -345,7 +345,6 @@ form {
     margin: 0 auto;
     box-sizing: content-box;
     cursor: pointer;
-    font-size: 22px;
     position:relative;
     top: calc(50% - 10px); /* 50% - 3/4 of icon height */
 }

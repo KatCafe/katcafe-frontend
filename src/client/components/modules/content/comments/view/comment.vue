@@ -10,7 +10,7 @@
                 <span class="details bold">{{author}}</span>
                 <span class="details">{{date}} </span>
                 <router-link v-if="isContentDisplay" class="details" :to="comment.topic">
-                    {{comment.topic}}
+                    {{comment.topic.length > 80 ? comment.topic.substr(0, 80)+'...' : comment.topic }}
                 </router-link>
 
                 <div class="topic-buttons comment-buttons">
