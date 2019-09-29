@@ -35,20 +35,9 @@
             </div>
 
             <template v-if="isContentDisplay">
-                <div class="topic-bottom-buttons comment-bottom-buttons">
-
-                    <div @click="showAddReply">
-                        <icon icon="comment" />
-                        <span>Reply</span>
-                    </div>
-
-                </div>
-
-                <template v-if="addReply">
-                    <add-comment-form :topic="comment.topic" :isShowPreview="false" @onSuccess="showAddReply(false)"/>
-                </template>
-
+                <slot name="comment-bottom-buttons"/>
             </template>
+
 
         </div>
 
@@ -64,17 +53,16 @@ import PreviewImage from "client/components/UI/elements/preview-image"
 import consts from "consts/consts"
 import ReadMore from "client/components/UI/elements/read-more"
 import Icon from "client/components/UI/elements/icons/icon"
-import AddCommentForm from "./../add-comment.form"
 
 export default {
 
     name: 'comment',
 
-    components: { Vote, PreviewImage, ReadMore, Icon, AddCommentForm},
+    components: { Vote, PreviewImage, ReadMore, Icon},
 
     data(){
         return {
-            addReply: false,
+
         }
     },
 
@@ -139,9 +127,7 @@ export default {
             return this.$store.dispatch('COMMENT_DELETE', this.comment.slug );
         },
 
-        showAddReply(value = true){
-            this.addReply = value;
-        }
+
 
     }
 
