@@ -290,11 +290,6 @@ select {
     font-size: 12px;
 }
 
-textarea:focus,
-input:focus,
-select:focus{
-    color: black;
-}
 
 button,
 input[type=submit],
@@ -376,6 +371,7 @@ form {
 .form input:focus{
     outline: none;
     background-color: #ffdb85;
+    color: black;
 }
 
 
