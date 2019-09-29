@@ -39,4 +39,15 @@ export default {
 
     },
 
+    SET_CONTENT_LOADING: (state, { contentDisplay, loading, promise })=>{
+
+        contentDisplay = (contentDisplay || state.contentDisplay)+'Settings';
+
+        Vue.set(state[contentDisplay], 'loading', loading);
+
+        if (loading)
+            Vue.set(state[contentDisplay], 'loadingPromise', promise );
+
+    },
+
 }

@@ -62,7 +62,15 @@ export default {
             const contentDisplay = state.contentDisplay;
             const settings = state[contentDisplay+'Settings'];
 
+            if (settings.loading) return state[settings].loadingPromise;
+
+            let resolver;
+            const promise = new Promise( resolve=>{
+                resolver = resolve;
+            });
+
             commit('SET_GLOBAL_LAYOUT_LOADING', true);
+            commit('SET_CONTENT_LOADING', {contentDisplay, loading: true, promise});
 
             await dispatch('CHANNEL_GET', {slug: settings.search });
 
@@ -78,6 +86,7 @@ export default {
 
 
             commit('SET_GLOBAL_LAYOUT_LOADING', false);
+            commit('SET_CONTENT_LOADING', {contentDisplay, loading: false});
 
 
         }catch(err){
