@@ -18,7 +18,7 @@
                 </router-link>
 
                 <div class="topic-buttons">
-                    <img v-if="isUserOwner" @click="deleteTopic" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
+                    <icon v-if="isUserOwner" icon="times" @click="deleteTopic" class="delete" />
                 </div>
 
             </div>
@@ -73,12 +73,13 @@ import PreviewImage from "client/components/UI/elements/preview-image"
 import AddCommentFrom from "client/components/modules/content/comments/add-comment.form"
 import ReadMore from "client/components/UI/elements/read-more"
 import ViewMoreComments from "./view-more-comments"
+import Icon from "client/components/UI/elements/icons/icon"
 
 import consts from "consts/consts"
 
 export default {
 
-    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore, ViewMoreComments },
+    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore, ViewMoreComments, Icon },
 
     props: {
         topic: null,

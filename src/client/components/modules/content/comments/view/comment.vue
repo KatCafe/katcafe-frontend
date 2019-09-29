@@ -14,7 +14,7 @@
                 </router-link>
 
                 <div class="topic-buttons comment-buttons">
-                    <img v-if="isUserOwner" @click="deleteComment" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-edit-delete-icon.png" >
+                    <icon v-if="isUserOwner" icon="times" @click="deleteComment" class="delete" />
                     <span class="topic-reply-id" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
                 </div>
 

@@ -79,6 +79,14 @@
     float:right;
 }
 
+.topic-buttons i{
+    font-size: 14px;
+}
+
+.topic-buttons .delete{
+    color: red;
+}
+
 .topic-buttons .action-button{
     color: #787878;
     cursor: pointer;
@@ -120,10 +128,6 @@
 
     .topic-has-image {
         grid-template-columns: 1fr;
-    }
-
-    .topic-buttons {
-        display: none;
     }
 
 }
