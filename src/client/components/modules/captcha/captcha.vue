@@ -5,9 +5,8 @@
         <icon icon="loading-spinner" v-if="captchaLoading" class="fa-2x" />
 
         <template v-if="!captchaLoading">
-            <div v-if="captcha" v-html="captcha.data "></div>
-            <span v-if="!captcha">...</span>
-            <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" :maxlength="captcha.data.size" >
+            <div v-html="captcha ? captcha.data : '...'"></div>
+            <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" :maxlength="captcha ? captcha.data.size : 1" >
             <loading-button :text="buttonText || $t('captcha.post')" @onClick="submit" />
         </template>
 
