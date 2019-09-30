@@ -76,6 +76,7 @@ export default {
 <style>
 
     .social-media{
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 

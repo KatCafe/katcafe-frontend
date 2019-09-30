@@ -33,7 +33,7 @@
 
                         <h2 v-if="title" class="title" v-html="title"/>
 
-                        <read-more  :text="body" :max-chars="400" pclass="body" />
+                        <read-more  :text="body" :max-chars="400" pclass="body word-wrap" />
 
                     </div>
                 </router-link>
@@ -42,7 +42,7 @@
 
             <social-media v-if="isPage" :topic="title" :description="body" />
 
-            <add-comment-from v-if="isPage && comments.length > 8" :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" style="margin-bottom: 20px" />
+            <add-comment-from v-if="isPage && comments.length > 8" :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" />
 
             <div class="topic-comments" v-if="comments.length" >
                 <comments :comments="comments" :isPreview = "isPreview" />
