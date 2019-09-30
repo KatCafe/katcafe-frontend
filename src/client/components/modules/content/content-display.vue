@@ -36,7 +36,7 @@
 
         </div>
 
-        <infinite-scroll @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
+        <infinite-scroll v-if="!layoutLoading" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
 
 
     </div>
