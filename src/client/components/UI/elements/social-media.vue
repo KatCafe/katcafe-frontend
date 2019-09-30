@@ -9,7 +9,7 @@
         <span>{{$t('socialMedia.text')}}</span>
 
         <no-ssr>
-            <social-sharing :url="getURL()" inline-template>
+            <social-sharing :url="getURL()" :title="title" :description="description" inline-template>
                 <div>
                     <network network="facebook">
                         <i class="fa fa-fw fa-facebook"></i>
@@ -53,6 +53,11 @@ import NoSsr from "vue-no-ssr";
 export default {
 
     components: {NoSsr},
+
+    props: {
+        title: {default: ''},
+        description: {default: ''}
+    },
 
     methods:{
 

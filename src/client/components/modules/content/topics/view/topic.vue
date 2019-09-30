@@ -40,7 +40,7 @@
 
             </div>
 
-            <social-media v-if="isPage" />
+            <social-media v-if="isPage" :topic="title" :description="body" />
 
             <add-comment-from v-if="isPage && comments.length > 8" :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" style="margin-bottom: 20px" />
 
