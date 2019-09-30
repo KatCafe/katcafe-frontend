@@ -57,7 +57,8 @@ export default {
     methods:{
 
         getURL(){
-            return window.location.href;
+            if (typeof window !== "undefined") return window.location.href;
+            return '';
         }
 
 
