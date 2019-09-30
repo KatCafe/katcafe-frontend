@@ -32,145 +32,145 @@
 
 <script>
 
-    import Layout from "client/components/layout/layout"
-    import Hero from "client/components/heros/hero"
-    import Topic from "client/components/modules/content/topics/view/topic"
-    import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
-    import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
-    import Icon from "client/components/UI/elements/icons/icon"
+import Layout from "client/components/layout/layout"
+import Hero from "client/components/heros/hero"
+import Topic from "client/components/modules/content/topics/view/topic"
+import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
+import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
+import Icon from "client/components/UI/elements/icons/icon"
 
-    export default {
+export default {
 
-        components: { Layout,  Hero, Topic, StickyRightSidebarComment, InfiniteScroll, Icon },
+    components: { Layout,  Hero, Topic, StickyRightSidebarComment, InfiniteScroll, Icon,  },
 
-        async asyncData ( { store,  route } ){
+    async asyncData ( { store,  route } ){
 
-            console.log('topic async data', route.path);
+        console.log('topic async data', route.path);
 
-            let path = route.path;
+        let path = route.path;
 
-            try{
+        try{
 
-                if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
+            if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
 
-                if ( path ) {
+            if ( path ) {
 
-                    store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
+                store.commit('SET_GLOBAL_LAYOUT_LOADING', true);
 
-                    await store.dispatch('TOPIC_GET', {slug: path,});
+                await store.dispatch('TOPIC_GET', {slug: path,});
 
-                    if (store.state.topics.topic){
-                        //no need to download the channel
-                        await store.dispatch('CHANNEL_GET', {slug: store.state.topics.topic.channel  });
-                        await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0});
-                    }
-
-                    store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
-
+                if (store.state.topics.topic){
+                    //no need to download the channel
+                    await store.dispatch('CHANNEL_GET', {slug: store.state.topics.topic.channel  });
+                    await store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: route.params.pageIndex ?  route.params.pageIndex - 1 : 0});
                 }
 
-            }catch(err){
-                console.error('topic page raised an error', path);
+                store.commit('SET_GLOBAL_LAYOUT_LOADING', false);
+
             }
 
+        }catch(err){
+            console.error('topic page raised an error', path);
+        }
+
+    },
+
+    data(){
+        return {
+        }
+    },
+
+
+    computed: {
+
+        layoutLoading(){
+            return this.$store.state.global.layoutLoading;
         },
 
-        data(){
-            return {
-            }
+
+        channel(){
+            return this.$store.state.channels.channel;
         },
 
-
-        computed: {
-
-            layoutLoading(){
-                return this.$store.state.global.layoutLoading;
-            },
-
-
-            channel(){
-                return this.$store.state.channels.channel;
-            },
-
-            topic(){
-                return this.$store.state.topics.topic;
-            },
-
-            hasMore(){
-                return this.$store.state.comments.pageMore;
-            },
-
-            pageIndex(){
-                return this.$store.state.comments.pageIndex;
-            },
-
-            stickyButtons(){
-
-                return [
-                ]
-            },
-
-            visibleStickyRightSidebarComment(){
-                return this.$store.state.global.showStickyRightSidebarComment;
-            },
-
-            getPageUri(){
-                return `/${this.topic ? this.topic.slug : ''}/pageIndex/`;
-            },
-
-            getPrevUri(){
-                if (this.pageIndex > 1) return this.getPageUri+(this.pageIndex-1);
-            },
-
-            getNextUri(){
-                if (this.hasMore) return this.getPageUri+(this.pageIndex+1);
-            }
-
+        topic(){
+            return this.$store.state.topics.topic;
         },
 
-        created() {
-            this.slug = this.$route.params.slug;
+        hasMore(){
+            return this.$store.state.comments.pageMore;
         },
 
-        methods:{
-
-            openStickyRightSidebarComment(){
-                this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
-            },
-
-            async onScrollLoad(resolver){
-
-                let path = this.$route.path;
-                if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
-
-                await this.$store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: this.pageIndex , count: this.$store.state.comments.pageCount });
-
-                resolver(true);
-            },
-
+        pageIndex(){
+            return this.$store.state.comments.pageIndex;
         },
 
-        /**
-         * SEO
-         */
+        stickyButtons(){
 
-        title: function (){
-            return this.topic ? this.topic.title : '';
+            return [
+            ]
         },
 
-        description: function (){
-            return this.topic ? this.topic.body : '';
+        visibleStickyRightSidebarComment(){
+            return this.$store.state.global.showStickyRightSidebarComment;
         },
 
-        images: function(){
-            return this.topic && this.topic.preview ?
-                [ {
-                    url: this.$store.getters.getPreviewImage( this.topic.preview, true ).img
-                }]
-                : ''
+        getPageUri(){
+            return `/${this.topic ? this.topic.slug : ''}/pageIndex/`;
         },
 
-    }
+        getPrevUri(){
+            if (this.pageIndex > 1) return this.getPageUri+(this.pageIndex-1);
+        },
+
+        getNextUri(){
+            if (this.hasMore) return this.getPageUri+(this.pageIndex+1);
+        }
+
+    },
+
+    created() {
+        this.slug = this.$route.params.slug;
+    },
+
+    methods:{
+
+        openStickyRightSidebarComment(){
+            this.$store.dispatch('GLOBAL_SHOW_STICKY_RIGHT_SIDEBAR_COMMENT', {value: true, topic: this.topic.slug, channel: this.topic.channel })
+        },
+
+        async onScrollLoad(resolver){
+
+            let path = this.$route.path;
+            if (this.$route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex/'));
+
+            await this.$store.dispatch('COMMENTS_GET', {searchRevert: true, searchAlgorithm: "date", searchQuery: 'topic', search: path, index: this.pageIndex , count: this.$store.state.comments.pageCount });
+
+            resolver(true);
+        },
+
+    },
+
+    /**
+     * SEO
+     */
+
+    title: function (){
+        return this.topic ? this.topic.title : '';
+    },
+
+    description: function (){
+        return this.topic ? this.topic.body : '';
+    },
+
+    images: function(){
+        return this.topic && this.topic.preview ?
+            [ {
+                url: this.$store.getters.getPreviewImage( this.topic.preview, true ).img
+            }]
+            : ''
+    },
+
+}
 </script>
 
 

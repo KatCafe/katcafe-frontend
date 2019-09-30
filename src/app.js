@@ -3,6 +3,7 @@ import VueI18n from 'vue-i18n'
 
 import App from './App.vue'
 import i18n from "modules/i18n/i18n"
+import SocialSharing from 'vue-social-sharing';
 import { createStore } from './store'
 import { createRouter } from './router'
 import { sync } from 'vuex-router-sync'
@@ -25,6 +26,7 @@ require('client/components/modules/content/topics/add-topic.css');
 require('client/components/modules/content/comments/add-coment.css');
 
 Vue.use(VueI18n);
+Vue.use(SocialSharing);
 
 i18n.i18nInit();
 

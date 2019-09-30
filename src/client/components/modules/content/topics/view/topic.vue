@@ -40,9 +40,9 @@
 
             </div>
 
-            <template v-if="isPage && comments.length > 8">
-                <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" style="margin-bottom: 20px" />
-            </template>
+            <social-media v-if="isPage" />
+
+            <add-comment-from v-if="isPage && comments.length > 8" :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" style="margin-bottom: 20px" />
 
             <div class="topic-comments" v-if="comments.length" >
                 <comments :comments="comments" :isPreview = "isPreview" />
@@ -50,13 +50,9 @@
 
             <view-more-comments :topic="topic" :comments="comments" :isPage="isPage" />
 
-            <template v-if="!isSnippetForm && isPreview ">
-                <add-comment-from :topic="this.topic" />
-            </template>
+            <add-comment-from v-if="!isSnippetForm && isPreview " :topic="this.topic" />
 
-            <template v-if="isPage">
-                <add-comment-from :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" />
-            </template>
+            <add-comment-from v-if="isPage" :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" />
 
         </div>
 
@@ -76,10 +72,12 @@ import ViewMoreComments from "./view-more-comments"
 import Icon from "client/components/UI/elements/icons/icon"
 
 import consts from "consts/consts"
+import SocialMedia from "client/components/UI/elements/social-media"
+
 
 export default {
 
-    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore, ViewMoreComments, Icon },
+    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore, ViewMoreComments, Icon, SocialMedia },
 
     props: {
         topic: null,

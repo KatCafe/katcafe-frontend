@@ -39,4 +39,8 @@ export default {
         admin: 'admin',
     },
 
+    socialMedia:{
+        text: 'Share this',
+    }
+
 }
