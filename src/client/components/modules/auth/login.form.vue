@@ -70,6 +70,9 @@ export default {
 
                 this.error = captcha.processError(err.message);
 
+                if (this.error.indexOf("The user doesn't exist") >= 0) captcha.reset();
+                if (this.error.indexOf("Password doesn't match") >= 0) captcha.reset();
+
             }
 
             resolver();

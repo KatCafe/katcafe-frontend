@@ -79,7 +79,11 @@ export default {
                 }
 
             }catch(err){
-                this.error = captcha.processError(err.message);
+                this.error = captcha.processError(err.message)
+
+                if (this.error.indexOf("Username already registered") >= 0) captcha.reset();
+                if (this.error.indexOf("Email already registered") >= 0) captcha.reset();
+
             }
 
             resolver();
