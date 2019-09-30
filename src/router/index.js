@@ -85,6 +85,8 @@ export function createRouter (store){
         routes: [
 
             { path: '/', component: HomePage },
+            { path: '/pageIndex/:pageIndex', component: HomePage },
+
             { path: '/admin', component: AdminPage, beforeEnter: guardAdminAuth },
 
 
