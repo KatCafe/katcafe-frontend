@@ -62,6 +62,7 @@
 }
 
 .topic-text-wrap .body{
+    white-space: pre-wrap;
     margin-bottom: 0;
     font-size: 14px;
     line-height: 20px;
