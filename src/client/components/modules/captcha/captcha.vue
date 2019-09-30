@@ -1,14 +1,18 @@
 <template>
 
-    <div class="captchaBox" >
+    <div class="captcha-box" >
 
-        <icon icon="loading-spinner" v-if="captchaLoading" class="fa-2x" />
 
-        <template v-if="!captchaLoading">
-            <div v-html="captcha ? captcha.data : '...'"></div>
-            <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" :maxlength="captcha ? captcha.data.size : 1" >
-            <loading-button :text="buttonText || $t('captcha.post')" @onClick="submit" />
-        </template>
+        <div class="captcha">
+            <icon icon="loading-spinner" v-if="!captcha || captchaLoading" class="fa-2x" />
+            <template v-if="captcha && !captchaLoading">
+                <div v-html="captcha ? captcha.data : '...'"></div>
+                <icon icon="spinner" class="reload-captcha" @click="reset" />
+            </template>
+        </div>
+
+        <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" :maxlength="captcha ? captcha.size : 1" >
+        <loading-button :text="buttonText || $t('captcha.post')" @onClick="submit" />
 
     </div>
 
@@ -104,30 +108,42 @@ export default {
 
 <style>
 
-    .captchaBox{
+    .captcha-box{
         display: grid;
         grid-template-columns: 100px 100px 1fr;
         grid-column-gap: 10px;
+        margin-bottom: 10px;
     }
 
-    .captchaBox svg:first-child{
+    .captcha-box .captcha{
+        position: relative;
+        right: 0;
+    }
+
+    .captcha-box svg:first-child{
         width: auto;
         height: 35px;
     }
 
-    .captchaBox button{
+    .captcha-box .reload-captcha{
+        position: absolute;
+        left: 13px;
+        top: 38px;
+    }
+
+    .captcha-box button{
         margin-top: 0;
     }
 
     @media only screen and (max-width: 600px) {
-        .captchaBox {
+        .captcha-box {
             grid-template-columns: 90px 1fr 40px;
             grid-row-gap: 5px;
         }
     }
 
     @media only screen and (max-width: 300px) {
-        .captchaBox {
+        .captcha-box {
             grid-template-columns: 90px 1fr ;
             grid-row-gap: 5px;
         }

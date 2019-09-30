@@ -21,6 +21,7 @@ export default {
             switch (this.icon){
 
                 case 'loading-spinner': return 'fa fa-refresh fa-spin fa-fw';
+                case 'spinner': return 'fa fa-refresh';
                 case 'send':return 'fa fa-send';
                 case 'times':return 'fa fa-times';
                 case 'times-circle':return 'fa fa-times-circle';
