@@ -139,7 +139,7 @@ export default {
 
 
         deleteTopic(){
-            return this.$store.dispatch('TOPIC_DELETE', this.topic.slug );
+            return this.$store.dispatch('TOPIC_DELETE', this.topic );
         }
 
     }

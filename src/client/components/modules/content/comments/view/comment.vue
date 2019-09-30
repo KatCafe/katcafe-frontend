@@ -124,7 +124,7 @@ export default {
         },
 
         deleteComment(){
-            return this.$store.dispatch('COMMENT_DELETE', this.comment.slug );
+            return this.$store.dispatch('COMMENT_DELETE', this.comment );
         },
 
 

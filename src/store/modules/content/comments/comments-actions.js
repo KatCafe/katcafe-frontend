@@ -33,12 +33,15 @@ export default {
         return [];
     },
 
-    COMMENT_DELETE: async ({commit, dispatch, state}, slug ) => {
+    COMMENT_DELETE: async ({commit, dispatch, state}, comment ) => {
 
-        const out = await NetworkHelper.post('/comments/delete/', { slug } );
+        if ( !confirm('Are you sure you want to delete comment: '+comment.body) )
+            return;
+
+        const out = await NetworkHelper.post('/comments/delete/', { slug: comment.slug } );
 
         if (out)
-            commit('SET_COMMENTS_DELETE', [slug]);
+            commit('SET_COMMENTS_DELETE', [comment.slug]);
 
     },
 

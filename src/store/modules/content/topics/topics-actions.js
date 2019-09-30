@@ -93,12 +93,15 @@ export default {
 
     },
 
-    TOPIC_DELETE: async ( {commit, dispatch, state}, slug ) => {
+    TOPIC_DELETE: async ( {commit, dispatch, state}, topic ) => {
 
-        const out = await NetworkHelper.post('/topics/delete/', { slug } );
+        if (!confirm('Are you sure you want to delete topic: '+topic.slug))
+            return;
+
+        const out = await NetworkHelper.post('/topics/delete/', { slug: topic.slug } );
 
         if (out)
-            commit('SET_TOPICS_DELETE', [slug]);
+            commit('SET_TOPICS_DELETE', [topic.slug]);
 
     },
 
