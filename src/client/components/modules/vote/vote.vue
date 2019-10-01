@@ -1,8 +1,8 @@
 <template>
     <div class="voting-box">
-        <i :class="`upvote fa fa-caret-up ${myVote === 1 ? 'voted' : ''}`" @click="voteUp"/>
+        <icon  icon="caret-up" :class="`upvote fa ${myVote === 1 ? 'voted' : ''}`" @click="voteUp"/>
         <div> {{votes}} </div>
-        <i :class="`downvote fa fa-caret-down ${myVote === -1 ? 'voted' : ''}`" @click="voteDown"/>
+        <icon icon="caret-down" :class="`downvote fa fa-caret-down ${myVote === -1 ? 'voted' : ''}`" @click="voteDown"/>
     </div>
 </template>
 
@@ -60,11 +60,12 @@
 
             async voteNow(value){
 
-                console.log("Value", value, this.myVote, "myvote", "it will be:",this.myVote ? 0 : value);
-
                 this.loading = true;
 
                 const newVote = Math.max( Math.min( (this.myVote || 0) + value, 1), -1 );
+
+                console.log("Value", value, this.myVote, "myvote", "it will be:", newVote );
+
 
                 Vue.set(this.parent, 'myVote', newVote );
 

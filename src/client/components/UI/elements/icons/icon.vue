@@ -29,6 +29,8 @@ export default {
                 case 'comments':return 'fa fa-comments';
                 case 'pencil':return 'fa fa-pencil';
                 case 'comment':return 'fa fa-comment';
+                case 'caret-up':return 'fa-caret-up ';
+                case 'caret-down':return 'fa-caret-down ';
 
                 default: return'fa fa-send';
             }
