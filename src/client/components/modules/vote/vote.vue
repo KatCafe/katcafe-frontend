@@ -77,24 +77,26 @@
                         parentType: this.parentType,
                     });
 
+                    console.log(out);
+
                     if (out  && out.vote) {
 
                         if ( out.prevVote ){
 
-                            if (out.prevVote === 1) this.parent.votesUp = (this.parent.votesUp || 0) -1; else
-                            if (out.prevVote === -1) this.parent.votesDown = (this.parent.votesDown || 0) - 1;
+                            if (out.prevVote === 1) Vue.set(this.parent, 'votesUp', (this.parent.votesUp || 0) -1); else
+                            if (out.prevVote === -1) Vue.set(this.parent, 'votesDown', (this.parent.votesDown || 0) - 1);
 
                         }
 
-                        if (out.vote.value === 1) this.parent.votesUp = (this.parent.votesUp || 0) +1; else
-                        if (out.vote.value === -1) this.parent.votesDown = (this.parent.votesDown||0) +1;
+                        if (out.vote.value === 1) Vue.set(this.parent, 'votesUp', (this.parent.votesUp || 0) +1); else
+                        if (out.vote.value === -1) Vue.set(this.parent, 'votesDown', (this.parent.votesDown||0) +1);
 
                         Vue.set(this.parent, 'myVote', out.vote.value );
 
                     }
 
                 }catch(err){
-
+                    console.error("Error Voting", err);
                 }
 
                 this.loading = false;
