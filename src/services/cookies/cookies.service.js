@@ -2,14 +2,14 @@
  TUTORIAL BASED on https://stackoverflow.com/questions/34298133/angular-2-cookies
  */
 
-export default class CookiesService {
+class CookiesService {
 
 
-    static deleteCookie(name) {
+    deleteCookie(name) {
       this.setCookie(name, '', -1);
     }
 
-    static setCookie(name , value, days) {
+    setCookie(name , value, days) {
       if (typeof window ==="undefined") return '';
 
       let expires = "";
@@ -23,3 +23,6 @@ export default class CookiesService {
 
 
 }
+
+
+export default new CookiesService();

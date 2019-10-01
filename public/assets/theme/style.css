@@ -131,8 +131,8 @@ blockquote {
 
 hr {
     height: 0;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1.4em;
+    margin-bottom: 1.4em;
     border: 0;
     border-top: 1px solid #ddd;
 }

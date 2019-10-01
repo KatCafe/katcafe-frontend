@@ -34,7 +34,7 @@ export default {
     AUTH_LOGOUT: async ({ commit, dispatch, state },  ) => {
 
         try{
-            
+
             const out = await NetworkHelper.get('/auth/logout',  );
         }catch(err){
 

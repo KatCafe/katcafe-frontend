@@ -12,13 +12,27 @@
 </template>
 
 <script>
-    export default {
+export default {
 
-        data(){
-            return {
-                isAnonymous: false,
-            }
+    data(){
+        return {
+            isAnonymous: false,
         }
+    },
 
+    mounted(){
+
+        if (typeof window === "undefined") return;
+
+        this.isAnonymous = localStorage.getItem('optionIsAnonymous') === "true";
+
+    },
+
+    watch: {
+        isAnonymous: function (newValue, oldValue) {
+            localStorage.setItem('optionIsAnonymous', newValue);
+        },
     }
+
+}
 </script>
