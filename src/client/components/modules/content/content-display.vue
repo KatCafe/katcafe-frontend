@@ -11,10 +11,6 @@
 
                 <icon icon="loading-spinner" v-if="!topics.length && !comments.length && layoutLoading" class="fa-5x" />
 
-                <template v-if="!topics.length && !comments.length && !layoutLoading">
-                    <span>Channel <strong>{{ this.slug }}</strong> was not found</span>
-                </template>
-
                 <template v-if=" contentDisplay === 'topics' " >
 
                     <topics v-if="topics.length" :topics="topics" class="content-display-topics"  />
@@ -36,7 +32,7 @@
 
         </div>
 
-        <infinite-scroll v-if="!layoutLoading" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
+        <infinite-scroll v-if="!isLoading" @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
 
 
     </div>
@@ -69,6 +65,10 @@ export default {
     },
 
     computed:{
+
+        isLoading(){
+            return !this.topics.length && !this.comments.length && this.layoutLoading;
+        },
 
         layoutLoading(){
             return this.$store.state.global.layoutLoading;
