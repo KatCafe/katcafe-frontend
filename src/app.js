@@ -22,8 +22,8 @@ import * as UtilitiesFunctions from './modules/utils/global-utilities/utilities-
 require('client/components/modules/content/topics/view/topic.css');
 require('client/components/modules/content/comments/view/comment.css');
 
-require('client/components/modules/content/topics/add-topic.css');
-require('client/components/modules/content/comments/add-coment.css');
+require('client/components/modules/content/topics/add-topic/add-topic.css');
+require('client/components/modules/content/comments/add-comment/add-coment.css');
 
 Vue.use(VueI18n);
 Vue.use(SocialSharing);

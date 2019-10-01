@@ -42,6 +42,19 @@
 }
 
 
+.topic .author .sys-admin{
+    color: red;
+}
+
+.topic .author .moderator{
+    color: blue;
+}
+
+.topic .author .normal{
+    color: #fed54c;
+}
+
+
 .topic-content{
     display: block;
     margin-top: 10px;

@@ -31,6 +31,7 @@ module.exports = {
       'store': path.resolve(__dirname + '/../src/store'),
       'modules': path.resolve(__dirname + '/../src/modules'),
       'services': path.resolve(__dirname + '/../src/services'),
+      'utils': path.resolve(__dirname + '/../src/utils'),
     }
   },
   module: {

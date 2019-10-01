@@ -28,12 +28,18 @@ export default {
         };
     },
 
+    computed: {
+        captchaInput(){
+            return this.$store.state.captcha.captchaUserInput;
+        }
+    },
+
     methods: {
-        showModal(onSubmit){
+        showModal(onSubmit, captchaForm ){
             this.onSubmit = onSubmit;
             this.error = '';
 
-            this.$refs['modal'].showModal();
+            this.$refs['modal'].showModal(undefined, captchaForm);
         },
 
         closeModal(){
@@ -41,7 +47,7 @@ export default {
         },
 
         captchaSubmit(resolve, captcha ){
-            this.onSubmit( resolve, captcha );
+            this.onSubmit( resolve, captcha, this.$refs['modal'].$refs['refCaptchaForm'] );
         },
 
         reset(){

@@ -44,9 +44,10 @@
 <script>
 import NetworkHelper from "modules/network/network-helper"
 import Topic from "client/components/modules/content/topics/view/topic"
-import StringHelper from "src/utils/string-helper"
+import StringHelper from "utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
 import LoadingButton from 'client/components/UI/elements/loading-button'
+import AddTopicParams from "./add-topic-params"
 
 function initialState (){
     return {
@@ -78,7 +79,7 @@ function initialState (){
 
 export default {
 
-    components: { Topic, Icon, LoadingButton },
+    components: { Topic, Icon, LoadingButton, AddTopicParams },
 
     props: {
         topicChannel: '',
@@ -198,7 +199,7 @@ export default {
             resolve(true);
 
             const captchaModal = document.getElementById('captchaModal').__vue__;
-            captchaModal.showModal( async (resolve2, captchaData)=>{
+            captchaModal.showModal( async (resolve2, captchaData, refAdditionalParams)=>{
 
                 try{
 
@@ -213,8 +214,8 @@ export default {
                             name: this.file.file.name,
                             base64: this.file.preview.img,
                         } : undefined,
-                        author: this.author,
                         captcha: captchaData,
+                        isAnonymous: refAdditionalParams ? refAdditionalParams.isAnonymous : false,
                     });
 
                     captchaModal.reset();
@@ -239,7 +240,7 @@ export default {
 
                 resolve2(true);
 
-            });
+            }, this.$store.state.auth.user ? AddTopicParams : undefined);
 
         },
 

@@ -17,7 +17,7 @@
 
 <script>
 
-import AddCommentForm from "client/components/modules/content/comments/add-comment.form"
+import AddCommentForm from "client/components/modules/content/comments/add-comment/add-comment.form"
 import Icon from "client/components/UI/elements/icons/icon"
 
 export default {

@@ -11,6 +11,7 @@ export default {
         threadComment: "comentariu...",
         previewThread: "Previzualizare postare",
         submitTopic: 'Postează postare',
+        postAnonymously: 'Postează anonim',
         errorTooFewLetters: "Prea putine litere. Minim 4 litere",
     },
 
@@ -41,6 +42,6 @@ export default {
 
     socialMedia:{
         text: 'Shăruieşte',
-    }
+    },
 
 }

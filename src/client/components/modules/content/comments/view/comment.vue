@@ -7,7 +7,7 @@
         <div class="topic-content comment-content">
 
             <div class="author">
-                <span class="details bold">{{author}}</span>
+                <span :class="`details bold ${authorClass}`">{{author}}</span>
                 <span class="details">{{date}} </span>
                 <router-link v-if="isContentDisplay" class="details" :to="comment.topic">
                     {{comment.topic.length > 80 ? comment.topic.substr(0, 80)+'...' : comment.topic }}
@@ -92,7 +92,17 @@ export default {
         },
 
         author(){
-            return this.comment.author || this.$i18n.t('comment.anonymous')
+            const author = (this.comment.owner && !this.comment.isAnonymous ) ? this.comment.owner : '';
+            return author || this.$i18n.t('comment.anonymous');
+        },
+
+        isRealAuthor(){
+            return this.author !== this.$i18n.t('comment.anonymous');
+        },
+
+        authorClass(){
+            if (this.isRealAuthor) return 'normal';
+            return '';
         },
 
         date(){

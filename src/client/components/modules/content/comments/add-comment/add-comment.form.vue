@@ -19,6 +19,8 @@
 
         </div>
 
+
+
         <span class="error-text">{{error}}</span>
 
         <div v-if="showPreview && isShowPreview">
@@ -38,14 +40,16 @@
 <script>
 
 import NetworkHelper from "modules/network/network-helper"
-import StringHelper from "src/utils/string-helper"
+import StringHelper from "utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
 import Comment from "client/components/modules/content/comments/view/comment"
 import LoadingButton from 'client/components/UI/elements/loading-button'
+import AddCommentParams from "./add-comment-params"
 
 function initialState (){
     return {
 
+        commentIsAnonymous: true,
 
         commentBody: '',
         link: '',
@@ -89,7 +93,7 @@ export default {
     computed:{
 
         author(){
-            return '';
+            return this.$store.auth.user ? this.$store.auth.user.username : '';
         },
 
         body(){
@@ -180,7 +184,7 @@ export default {
             resolve(true);
 
             const captchaModal = document.getElementById('captchaModal').__vue__;
-            captchaModal.showModal( async (resolve2, captchaData)=>{
+            captchaModal.showModal( async (resolve2, captchaData, refAdditionalParams)=>{
 
                 try{
 
@@ -194,7 +198,7 @@ export default {
                             base64: this.file.preview.img,
                         } : undefined,
                         body: this.body,
-                        author: this.author,
+                        isAnonymous: refAdditionalParams ? refAdditionalParams.isAnonymous : false,
                         captcha: captchaData,
                     });
 
@@ -221,7 +225,7 @@ export default {
 
                 resolve2(true);
 
-            });
+            }, this.$store.state.auth.user ? AddCommentParams : undefined );
 
             resolve();
 

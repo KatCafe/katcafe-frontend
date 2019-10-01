@@ -11,6 +11,7 @@ export default {
         threadComment: "Your comment...",
         previewThread: "Preview topic",
         submitTopic: 'Publish topic',
+        postAnonymously: 'Post anonymously',
         errorTooFewLetters: "Too few letters. Minimum 4 letters",
     },
 

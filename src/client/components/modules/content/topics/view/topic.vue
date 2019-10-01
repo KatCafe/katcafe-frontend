@@ -9,7 +9,7 @@
 
             <div class="author">
 
-                <span class="details bold">{{author}}</span>
+                <span :class="`details bold ${authorClass}`">{{author}}</span>
 
                 <span class="details">{{date}} </span>
 
@@ -66,7 +66,7 @@ import BrowserHelper from "modules/helpers/browser.helpers"
 import Vote from "client/components/modules/vote/vote"
 import Comments from "client/components/modules/content/comments/view/comments"
 import PreviewImage from "client/components/UI/elements/preview-image"
-import AddCommentFrom from "client/components/modules/content/comments/add-comment.form"
+import AddCommentFrom from "client/components/modules/content/comments/add-comment/add-comment.form"
 import ReadMore from "client/components/UI/elements/read-more"
 import ViewMoreComments from "./view-more-comments"
 import Icon from "client/components/UI/elements/icons/icon"
@@ -101,7 +101,17 @@ export default {
         },
 
         author(){
-            return this.topic.author || this.$i18n.t('comment.anonymous')
+            const author = (this.topic.owner && !this.topic.isAnonymous ) ? this.topic.owner : '';
+            return author || this.$i18n.t('comment.anonymous');
+        },
+
+        isRealAuthor(){
+            return this.author !== this.$i18n.t('comment.anonymous');
+        },
+
+        authorClass(){
+            if (this.isRealAuthor) return 'normal';
+            return '';
         },
 
         date(){

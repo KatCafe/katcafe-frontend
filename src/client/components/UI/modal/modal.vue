@@ -8,6 +8,11 @@
             <div class="modal-content">
                 <icon icon="times-circle" class="close-button " @click="closeModal" />
 
+                <template v-if="captchaForm" >
+                    <component  :is="captchaForm" ref="refCaptchaForm" />
+                    <hr />
+                </template>
+
                 <slot class="noOverflow" name="content"/>
             </div>
         </div>
@@ -27,6 +32,7 @@ export default{
     data: () => {
         return {
             modalOpened: false,
+            captchaForm: null,
         }
     },
 
@@ -39,15 +45,17 @@ export default{
         closeModal(e){
 
             if( e) e.stopPropagation();
+            this.captchaForm = null;
 
             this.modalOpened = false;
 
         },
 
-        showModal(e){
+        showModal(e, captchaForm){
 
             if (e) e.stopPropagation();
 
+            this.captchaForm = captchaForm;
             this.modalOpened = true;
         },
 
@@ -113,4 +121,9 @@ export default{
         width: 80%;
         max-width: 600px;
     }
+
+    .modal hr{
+        border-top-color: #4b3f3f;
+    }
+
 </style>

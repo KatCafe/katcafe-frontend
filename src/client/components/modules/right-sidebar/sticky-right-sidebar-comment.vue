@@ -9,7 +9,7 @@
 
 <script>
 
-import AddCommentForm from "client/components/modules/content/comments/add-comment.form"
+import AddCommentForm from "client/components/modules/content/comments/add-comment/add-comment.form"
 import BrowserHelpers from "modules/helpers/browser.helpers";
 
 
