@@ -14,12 +14,6 @@ export default {
 
     components: {AddTopicParams},
 
-    data(){
-        return {
-            isAnonymous: false,
-        }
-    },
-
     computed:{
         isAnonymous(){
             return this.$refs['refAddTopicParams'].isAnonymous;
