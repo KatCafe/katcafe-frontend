@@ -10,7 +10,7 @@ export default {
         threadTitle: "Titlu postare",
         threadComment: "comentariu...",
         previewThread: "Previzualizare postare",
-        submitTopic: 'Postează postare',
+        submitTopic: 'Postează',
         postAnonymously: 'Postează anonim',
         errorTooFewLetters: "Prea putine litere. Minim 4 litere",
     },
@@ -20,7 +20,7 @@ export default {
         yourOpinionMatters: "Opinia ta contează!",
         writeReply: 'scrie un comentariu...',
         previewComment: "Previzualizare comentariu",
-        submitComment: "Postează comentariu",
+        submitComment: "Publică",
         errorNoFileOrText: "Trebuie sa scri 5 litere ori sa încarci o poza/link",
     },
 

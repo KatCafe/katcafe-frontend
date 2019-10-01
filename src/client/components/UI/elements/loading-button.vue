@@ -4,8 +4,8 @@
         <icon v-if="loading" style='margin-right:10px' icon="loading-spinner" />
 
         <template v-else>
-            <icon  icon="send" />
-            <span class="hiddenMobile">{{text}}</span>
+            <icon :class="`${text ? 'hiddenDesktop' : ''}`" icon="icon" />
+            <span :class="`hiddenMobile`">{{text}}</span>
         </template>
 
 
@@ -30,6 +30,7 @@ export default{
         canDisable: {default: true},
         className: {default: function (){}},
         text: {default: 'Submit'},
+        icon : {default: 'send'},
     },
 
     methods: {

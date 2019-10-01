@@ -15,7 +15,7 @@
                 <icon class="input-file-icon" icon="camera" @click="openFileUpload" />
             </div>
 
-            <loading-button v-if="showPreview" @onClick="openCaptcha" text=""  style="margin: 0"/>
+            <loading-button v-if="showPreview" @onClick="openCaptcha" :text="$t('comment.submitComment')"  />
 
         </div>
 

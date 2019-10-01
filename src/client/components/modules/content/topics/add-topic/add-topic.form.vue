@@ -23,7 +23,7 @@
 
                 <textarea type="text" :placeholder="$t('topic.threadComment')" v-model="topicBody" @change="bodyChanged"/>
 
-                <loading-button @onClick="openCaptcha" text=""  />
+                <loading-button @onClick="openCaptcha" :text="$t('topic.submitTopic')" />
 
             </div>
 

@@ -268,6 +268,20 @@ Single styles
     padding-left: 5px;
 }
 
+
+.fa{
+    margin: 0 auto;
+    box-sizing: content-box;
+    cursor: pointer;
+    position:relative;
+    top: calc(50% - 10px); /* 50% - 3/4 of icon height */
+}
+
+.fa:hover{
+    color: white;
+}
+
+
 /* -----------------------
 Wide styles
 ------------------------*/
@@ -280,15 +294,12 @@ input,
 select {
     width: 100%;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
     background: #313131;
     border: solid 1px #585858;
     color: #dcdcdc;
     border-radius: 10px;
     padding: 10px;
-    box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     outline: none;
@@ -305,7 +316,7 @@ button,
 inout[type=checkbox],
 input[type=submit],
 input[type=button] {
-    background-color: #fed54c;
+    background-color: #f9de84;
     text-align: center;
     font-size: 16px;
     padding: 10px;
@@ -319,13 +330,18 @@ input[type=button] {
     border:none;
 }
 
-button,
-input[type=checkbox]:hover,
-input[type=submit]:hover,
-input[type=button]:hover {
+button:hover{
     background-color: #fed54c;
 }
 
+button i,
+button span{
+    color: black;
+}
+
+button i:hover{
+    color: black !important;
+}
 
 label:has( input ) {
     display: inline-block;
@@ -343,9 +359,6 @@ label input[type=checkbox]{
     top: 3px;
 }
 
-button:hover{
-    background-color: #0e83cd;
-}
 
 form {
     border-radius: 5px;
@@ -367,18 +380,6 @@ form {
 
 .input-file-upload-group i:hover{
     top: 5px;
-}
-
-.fa{
-    margin: 0 auto;
-    box-sizing: content-box;
-    cursor: pointer;
-    position:relative;
-    top: calc(50% - 10px); /* 50% - 3/4 of icon height */
-}
-
-.fa:hover{
-    color: white;
 }
 
 .input-file-icon:hover{

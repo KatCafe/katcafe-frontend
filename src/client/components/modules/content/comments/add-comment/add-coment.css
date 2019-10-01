@@ -3,5 +3,14 @@
 }
 
 .new-comment-body{
-    grid-template-columns: 40px 1fr 40px !important;
+    grid-template-columns: 40px 1fr 90px !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .new-comment-body{
+        grid-template-columns: 40px 1fr 40px !important;
+    }
+
 }

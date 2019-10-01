@@ -29,7 +29,7 @@
     margin-bottom: 0;
     padding-bottom: 0;
     display: grid;
-    grid-template-columns: 1fr 40px;
+    grid-template-columns: 1fr 120px;
     grid-column-gap: 8px;
 
 }
@@ -47,6 +47,7 @@
 
     .new-topic-content .new-topic-body{
         grid-column-gap: 2px;
+        grid-template-columns: 1fr 40px;
     }
 
 }

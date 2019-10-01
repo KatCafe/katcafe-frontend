@@ -10,7 +10,7 @@ export default {
         threadTitle: "New post title",
         threadComment: "Your comment...",
         previewThread: "Preview topic",
-        submitTopic: 'Publish topic',
+        submitTopic: 'Publish',
         postAnonymously: 'Post anonymously',
         errorTooFewLetters: "Too few letters. Minimum 4 letters",
     },
@@ -20,7 +20,7 @@ export default {
         yourOpinionMatters: "Your opinion matters",
         writeReply: 'write a reply...',
         previewComment: "Preview comment",
-        submitComment: "Publish comment",
+        submitComment: "Publish",
         errorNoFileOrText: "You need to provide either a link/file or write 5 characters",
     },
 
