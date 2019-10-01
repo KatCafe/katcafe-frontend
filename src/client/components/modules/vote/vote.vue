@@ -1,89 +1,107 @@
 <template>
     <div class="voting-box">
-        <div class="upvote" :class="myVote === 1 ? 'voted' : ''" @click="voteUp" ></div>
-        <span>{{votes}} </span>
-        <div class="downvote" :class="myVote === -1 ? 'voted' : ''" @click="voteDown"></div>
+        <i :class="`upvote fa fa-caret-up ${myVote === 1 ? 'voted' : ''}`" @click="voteUp"/>
+        <div> {{votes}} </div>
+        <i :class="`downvote fa fa-caret-down ${myVote === -1 ? 'voted' : ''}`" @click="voteDown"/>
     </div>
 </template>
 
 <script>
 
-import NetworkHelper from "modules/network/network-helper"
-import Vue from 'vue'
+    import NetworkHelper from "modules/network/network-helper"
+    import Vue from 'vue'
+    import Icon from "client/components/UI/elements/icons/icon"
 
-export default {
+    export default {
 
-    props: {
-        parent: null,
+        components: {Icon},
 
-        myVote: 0,
+        props: {
+            parent: null,
 
-        slug: '',
-        parentType: '',
-    },
+            myVote: 0,
 
-    computed:{
-
-        votesUp(){
-            return this.parent.votesUp || 0;
+            slug: '',
+            parentType: '',
         },
 
-        votesDown(){
-            return this.parent.votesDown || 0;
+        data(){
+            return {
+                loading: false,
+            }
         },
 
-        votes(){
-            return this.votesUp - this.votesDown;
-        }
+        computed:{
 
+            votesUp(){
+                return this.parent.votesUp || 0;
+            },
 
-    },
+            votesDown(){
+                return this.parent.votesDown || 0;
+            },
 
-    methods:{
+            votes(){
+                return this.votesUp - this.votesDown;
+            }
 
-        voteUp(){
-
-            this.voteNow(+1);
-
-        },
-
-        voteDown(){
-
-            this.voteNow(-1);
 
         },
 
-        async voteNow(value){
+        methods:{
 
-            console.log("Value", value, this.myVote, "myvote", "it will be:",this.myVote ? 0 : value);
+            voteUp(){
+                this.voteNow(+1);
+            },
 
-            const out = await NetworkHelper.post('/votes/vote',{
-                slug: this.slug,
-                value: this.myVote ? 0 : value,
-                parentType: this.parentType,
-            });
+            voteDown(){
+                this.voteNow(-1);
+            },
 
-            if (out  && out.vote) {
+            async voteNow(value){
 
-                if ( out.prevVote ){
+                console.log("Value", value, this.myVote, "myvote", "it will be:",this.myVote ? 0 : value);
 
-                    if (out.prevVote === 1) this.parent.votesUp = (this.parent.votesUp || 0) -1; else
-                    if (out.prevVote === -1) this.parent.votesDown = (this.parent.votesDown || 0) - 1;
+                this.loading = true;
+
+                const newVote = Math.max( Math.min( (this.myVote || 0) + value, 1), -1 );
+
+                Vue.set(this.parent, 'myVote', newVote );
+
+                try{
+
+                    const out = await NetworkHelper.post('/votes/vote',{
+                        slug: this.slug,
+                        value: newVote,
+                        parentType: this.parentType,
+                    });
+
+                    if (out  && out.vote) {
+
+                        if ( out.prevVote ){
+
+                            if (out.prevVote === 1) this.parent.votesUp = (this.parent.votesUp || 0) -1; else
+                            if (out.prevVote === -1) this.parent.votesDown = (this.parent.votesDown || 0) - 1;
+
+                        }
+
+                        if (out.vote.value === 1) this.parent.votesUp = (this.parent.votesUp || 0) +1; else
+                        if (out.vote.value === -1) this.parent.votesDown = (this.parent.votesDown||0) +1;
+
+                        Vue.set(this.parent, 'myVote', out.vote.value );
+
+                    }
+
+                }catch(err){
 
                 }
 
-                if (out.vote.value === 1) this.parent.votesUp = (this.parent.votesUp || 0) +1; else
-                if (out.vote.value === -1) this.parent.votesDown = (this.parent.votesDown||0) +1;
-
-                Vue.set(this.parent, 'myVote', out.vote.value );
-
-            }
+                this.loading = false;
+            },
 
         },
 
-    },
-
-}
+    }
 </script>
 
 <style>
@@ -100,64 +118,29 @@ export default {
     }
 
     .upvote {
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-bottom: 8px solid #9b9b9b;
-        margin: 0 auto;
-        margin-bottom: 7px;
-        cursor: pointer;
+        top: 0;
+        display: block;
     }
 
-    .upvote:after {
-        width: 4px;
-        height: 6px;
-        background-color: #9b9b9b;
-        content: '';
-        position: absolute;
-        margin-top: 8px;
-        margin-left: -2px;
-        cursor: pointer;
-    }
-
-    .voting-box span{
-        padding-left: 0;
+    .voting-box div{
+        display: block;
         color: #9b9b9b;
         font-size: 14px;
     }
 
     .downvote {
-        margin: 0 auto;
-        margin-top: 7px;
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 8px solid #9b9b9b;
-        cursor: pointer;
-    }
-
-    .downvote:after {
-        width: 4px;
-        height: 6px;
-        background-color: #9b9b9b;
-        content: '';
-        position: absolute;
-        margin-left: -2px;
-        margin-top: -14px;
-        cursor: pointer;
+        top: 0;
+        display: block;
     }
 
     .voted{
-        border-top-color: red;
-        border-bottom-color: red;
+        color: red;
         cursor: default;
     }
 
-    .voted:after{
-        background-color: red;
-        cursor: default;
+    .voted:hover{
+        color: red;
     }
+
 
 </style>
