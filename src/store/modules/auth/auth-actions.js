@@ -33,12 +33,15 @@ export default {
 
     AUTH_LOGOUT: async ({ commit, dispatch, state },  ) => {
 
-        const out = await NetworkHelper.get('/auth/logout',  );
+        try{
+            
+            const out = await NetworkHelper.get('/auth/logout',  );
+        }catch(err){
 
-        if ( out ) {
-            commit('SET_AUTH_USER', null );
-            commit('SET_AUTH_SESSION', '' );
         }
+
+        commit('SET_AUTH_USER', null );
+        commit('SET_AUTH_SESSION', '' );
 
     },
 
