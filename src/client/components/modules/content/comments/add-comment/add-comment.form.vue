@@ -93,7 +93,7 @@ export default {
     computed:{
 
         author(){
-            return this.$store.auth.user ? this.$store.auth.user.username : '';
+            return this.$store.state.auth.user ? this.$store.state.auth.user.username : '';
         },
 
         body(){

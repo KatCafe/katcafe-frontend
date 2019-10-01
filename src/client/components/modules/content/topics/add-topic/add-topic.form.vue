@@ -98,7 +98,7 @@ export default {
         },
 
         author(){
-            return '';
+            return this.$store.state.auth.user ? this.$store.state.auth.user.username : '';
         },
 
         title(){
