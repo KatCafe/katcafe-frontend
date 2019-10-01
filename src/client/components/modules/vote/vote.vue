@@ -1,7 +1,8 @@
 <template>
     <div class="voting-box">
         <icon  icon="caret-up" :class="`upvote fa ${myVote === 1 ? 'voted' : ''}`" @click="voteUp"/>
-        <div> {{votes}} </div>
+        <icon icon="loading-spinner" v-if="loading" />
+        <div v-if="!loading"> {{votes}} </div>
         <icon icon="caret-down" :class="`downvote fa fa-caret-down ${myVote === -1 ? 'voted' : ''}`" @click="voteDown"/>
     </div>
 </template>
@@ -76,8 +77,6 @@
                         value: newVote,
                         parentType: this.parentType,
                     });
-
-                    console.log(out);
 
                     if (out  && out.vote) {
 
