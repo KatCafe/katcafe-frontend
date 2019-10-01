@@ -27,6 +27,10 @@
     padding: 0 10px;
 }
 
+.topic .unread{
+    background: #524b31;
+}
+
 .topic .author a{
     padding-right: 0!important;
 }

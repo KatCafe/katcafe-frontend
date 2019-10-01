@@ -9,6 +9,7 @@ import { createRouter } from './router'
 import { sync } from 'vuex-router-sync'
 
 
+
 //USED for SEO SSR and Client
 import TitleMixin from './modules/utils/SEO/TitleMixin';
 import DescriptionMixin from './modules/utils/SEO/DescriptionMixin';
@@ -26,7 +27,7 @@ require('client/components/modules/content/topics/add-topic/add-topic.css');
 require('client/components/modules/content/comments/add-comment/add-coment.css');
 
 Vue.use(VueI18n);
-Vue.use(SocialSharing);
+Vue.use(SocialSharing)
 
 i18n.i18nInit();
 

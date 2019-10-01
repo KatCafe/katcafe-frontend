@@ -7,9 +7,11 @@
 
         <div class="topic-content" >
 
-            <div class="author">
+            <div v-waypoint="{ active: true, callback: wasShown }" />
 
-                <span :class="`details bold ${authorClass}`">{{author}}</span>
+            <div :class="`author ${ seen ? '' : 'unread'}`">
+
+                <span :class="`details bold ${authorClass}  `">{{author}}</span>
 
                 <span class="details">{{date}} </span>
 
@@ -86,6 +88,24 @@ export default {
         isSnippetForm: false,
     },
 
+    data(){
+        return {
+            mountedDate: 0,
+            seen: false,
+        }
+    },
+
+    mounted(){
+
+        if (typeof window === "undefined") return;
+
+        const seen = localStorage.getItem('seenTopic:'+this.topic.slug);
+        if (seen ) this.seen = true;
+
+        this.mountedDate = new Date().getTime();
+
+    },
+
     computed: {
 
         channel(){
@@ -150,7 +170,15 @@ export default {
 
         deleteTopic(){
             return this.$store.dispatch('TOPIC_DELETE', this.topic );
-        }
+        },
+
+        wasShown(){
+            if (typeof window === "undefined") return;
+
+            if (new Date().getTime() - this.mountedDate < 2000) return false;
+
+            localStorage.setItem('seenTopic:'+this.topic.slug, new Date().getTime() );
+        },
 
     }
 

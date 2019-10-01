@@ -71,7 +71,7 @@ export default{
                 }
 
             }catch(err){
-                console.error("Error loading more data", err);
+                //console.error("Error loading more data", err);
             }
 
         },

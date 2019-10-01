@@ -6,7 +6,9 @@
 
         <div class="topic-content comment-content">
 
-            <div class="author">
+            <div v-waypoint="{ active: true, callback: wasShown }" />
+
+            <div :class="`author ${ seen ? '' : 'unread'}`">
                 <span :class="`details bold ${authorClass}`">{{author}}</span>
                 <span class="details">{{date}} </span>
                 <router-link v-if="isContentDisplay" class="details" :to="comment.topic">
@@ -34,10 +36,7 @@
 
             </div>
 
-            <template v-if="isContentDisplay">
-                <slot name="comment-bottom-buttons"/>
-            </template>
-
+            <slot v-if="isContentDisplay" name="comment-bottom-buttons"/>
 
         </div>
 
@@ -62,7 +61,8 @@ export default {
 
     data(){
         return {
-
+            mountedDate: 0,
+            seen: false,
         }
     },
 
@@ -72,6 +72,20 @@ export default {
         comment: null,
         isContentDisplay: false,
     },
+
+    mounted(){
+
+        if (typeof window === "undefined") return;
+
+        const seen = localStorage.getItem('seenComment:'+this.comment.slug);
+        if (seen ) this.seen = true;
+
+        console.log("Seen", this.comment.slug, seen);
+
+        this.mountedDate = new Date().getTime();
+
+    },
+
 
     computed: {
 
@@ -137,6 +151,14 @@ export default {
             return this.$store.dispatch('COMMENT_DELETE', this.comment );
         },
 
+        wasShown(){
+            if (typeof window === "undefined") return;
+
+            if (new Date().getTime() - this.mountedDate < 2000) return false;
+
+            localStorage.setItem('seenComment:'+this.comment.slug, new Date().getTime() );
+            console.log('seenComment:'+this.comment.slug)
+        },
 
 
     }

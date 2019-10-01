@@ -1,7 +1,12 @@
 import Vue from 'vue'
+import VueWaypoint from 'vue-waypoint'
+
 import { createApp } from './app'
 
 import NetworkHelper from "modules/network/network-helper"
+
+Vue.use(VueWaypoint)
+
 
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
