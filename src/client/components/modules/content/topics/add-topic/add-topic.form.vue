@@ -148,7 +148,7 @@ export default {
 
                 this._prevLink = this.link;
 
-                const out = await this.vm.networkHelper.post('/scraper/get',{
+                const out = await this.$root.networkHelper.post('/scraper/get',{
                     uri: this.link,
                 });
 
@@ -205,7 +205,7 @@ export default {
 
                     this.error = '';
 
-                    const out = await this.vm.networkHelper.post('/topics/create', {
+                    const out = await this.$root.networkHelper.post('/topics/create', {
                         channel: this.channel,
                         title: this.title,
                         body: this.body,

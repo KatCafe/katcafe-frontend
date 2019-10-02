@@ -71,7 +71,7 @@ export default {
 
             try{
 
-                const out = await this.vm.networkHelper.post('/votes/vote',{
+                const out = await this.$root.networkHelper.post('/votes/vote',{
                     slug: this.slug,
                     value: newVote,
                     parentType: this.parentType,
