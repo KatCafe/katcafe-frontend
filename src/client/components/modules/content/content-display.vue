@@ -46,7 +46,7 @@ import Topics from "client/components/modules/content/topics/view/topics"
 import Comments from "client/components/modules/content/comments/view/comments"
 import AddTopicForm from "client/components/modules/content/topics/add-topic/add-topic.form"
 import StickyRightSidebarComment from "client/components/modules/right-sidebar/sticky-right-sidebar-comment"
-import InfiniteScroll from "client/components/UI/elements/infinite-scroll"
+import InfiniteScroll from "client/components/UI/elements/waypoint/infinite-scroll"
 import Icon from "client/components/UI/elements/icons/icon"
 
 export default {

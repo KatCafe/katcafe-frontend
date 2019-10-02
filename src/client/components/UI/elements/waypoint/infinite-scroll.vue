@@ -1,6 +1,8 @@
 <template>
 
-    <div ref="refInfinite"  class="infinite-scroll">
+    <div  class="infinite-scroll">
+
+        <way-point @shown="scrollFired" :distance="distance "/>
 
         <icon v-if="loading" icon="loading-spinner" class="fa-5x" />
 
@@ -19,17 +21,12 @@
 <script>
 
 import Icon from "client/components/UI/elements/icons/icon"
+import WayPoint from "./way-point"
 
 export default{
 
-    components: { Icon },
+    components: { Icon, WayPoint },
 
-    mounted(){
-
-        if (typeof window === "undefined") return;
-        window.onscroll  = this.scrollEvent;
-
-    },
     props:{
 
         hasMore: {default: true},
@@ -47,28 +44,19 @@ export default{
     //@onScroll
     methods:{
 
-        scrollEvent(){
+        scrollFired(){
 
             try{
 
                 if (!this.hasMore) return;
                 if (this.loading) return;
 
-                const divTop = this.$refs['refInfinite'].offsetTop;
+                this.loading = true;
 
-                const windowHeight = window.outerHeight||document.body.offsetHeight;
+                this.$emit('onScroll', ()=> {
+                    this.continueScroll();
+                });
 
-                const diff = divTop - window.scrollY  - windowHeight ;
-
-                if (diff <= this.distance ){
-
-                    this.loading = true;
-
-                    this.$emit('onScroll', ()=> {
-                        this.continueScroll();
-                    });
-
-                }
 
             }catch(err){
                 //console.error("Error loading more data", err);

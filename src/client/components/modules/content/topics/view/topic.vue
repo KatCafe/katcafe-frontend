@@ -7,8 +7,6 @@
 
         <div class="topic-content" >
 
-            <div v-waypoint="{ active: true, callback: wasShown }" />
-
             <div :class="`author ${ seen ? '' : 'unread'}`">
 
                 <span :class="`details bold ${authorClass}  `">{{author}}</span>
@@ -41,6 +39,8 @@
                 </router-link>
 
             </div>
+
+            <way-point @shown="wasShown" :distance="0" :checkVisible="true" />
 
             <social-media v-if="isPage" :topic="title" :description="body" />
 
@@ -75,11 +75,11 @@ import Icon from "client/components/UI/elements/icons/icon"
 
 import consts from "consts/consts"
 import SocialMedia from "client/components/UI/elements/social-media"
-
+import WayPoint from "client/components/UI/elements/waypoint/way-point"
 
 export default {
 
-    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore, ViewMoreComments, Icon, SocialMedia },
+    components: { Vote, Comments, PreviewImage, AddCommentFrom, ReadMore, ViewMoreComments, Icon, SocialMedia, WayPoint },
 
     props: {
         topic: null,
@@ -90,7 +90,6 @@ export default {
 
     data(){
         return {
-            mountedDate: 0,
             seen: false,
         }
     },
@@ -101,8 +100,6 @@ export default {
 
         const seen = localStorage.getItem('seenTopic:'+this.topic.slug);
         if (seen ) this.seen = true;
-
-        this.mountedDate = new Date().getTime();
 
     },
 
@@ -173,10 +170,6 @@ export default {
         },
 
         wasShown(){
-            if (typeof window === "undefined") return;
-
-            if (new Date().getTime() - this.mountedDate < 2000) return false;
-
             localStorage.setItem('seenTopic:'+this.topic.slug, new Date().getTime() );
         },
 
