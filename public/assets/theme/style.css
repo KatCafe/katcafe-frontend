@@ -426,8 +426,10 @@ form {
     fill: #000000;
 }
 
+.hidden,
 .hiddenDesktop{
     display: none;
+}
 }
 
 

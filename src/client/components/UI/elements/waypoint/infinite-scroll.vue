@@ -8,7 +8,7 @@
 
         <br/>
 
-        <div class="pagination">
+        <div class="hidden">
             <router-link v-if="infinitePrevUri" :to="infinitePrevUri" class="previous">&laquo;</router-link>
             <router-link v-if="infiniteNextUri" :to="infiniteNextUri" class="next">&raquo;</router-link>
         </div>
@@ -80,7 +80,5 @@ export default{
         text-align: center;
     }
 
-    .pagination{
-        display: none;
-    }
+
 </style>

@@ -4,6 +4,14 @@
 
         <country-select :defaultCountryCode="defaultCountry" :countryAllowed="countriesAllowed" @onSelect="countryChanged" />
 
+        <div class="hidden">
+            <a v-for="country in this.countriesAllowed"
+               :key="country"
+               :href="`/${country}`">
+            </a>
+        </div>
+
+
         <header-channels-list class=" hiddenMobile" :channels="channels" :channel="getChannelSlug" />
 
         <div class="hiddenDesktop">

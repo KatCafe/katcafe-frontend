@@ -62,7 +62,7 @@ export default {
             const contentDisplay = state.contentDisplay;
             const settings = state[contentDisplay+'Settings'];
 
-            if (settings.loading) return state[settings].loadingPromise;
+            if (settings.loading) return settings.loadingPromise;
 
             let resolver;
             const promise = new Promise( resolve=>{
@@ -84,7 +84,7 @@ export default {
                 count: settings.pageCount
             });
 
-            commit('SET_CONTENT_PAGE_INFO', { contentDisplay, pageIndex: settings.pageIndex+1, pageCount: settings.pageCount, pageMore: out && out.length});
+            commit('SET_CONTENT_PAGE_INFO', { contentDisplay, pageIndex: settings.pageIndex+1, pageCount: settings.pageCount, pageMore: out && out.length === settings.pageCount });
 
 
             commit('SET_GLOBAL_LAYOUT_LOADING', false);
