@@ -22,7 +22,8 @@ export default {
 
     props:{
         distance : {default: 100},
-        checkVisible: {default: false}
+        checkVisible: {default: false},
+        enabled: {default: true},
     },
 
     //@onScroll
@@ -30,9 +31,9 @@ export default {
 
         scrollEvent() {
 
-            try {
+            if (!this.$refs['ref'] || !this.enabled) return;
 
-                if (!this.$refs['ref']) return;
+            try {
 
                 const divTop = this.$refs['ref'].offsetTop;
 
@@ -55,6 +56,14 @@ export default {
             }
 
         },
+
+    },
+
+    watch:{
+
+        enabled: function(newVal, oldVal){
+            if (newVal) this.scrollEvent();
+        }
 
     }
 

@@ -40,7 +40,7 @@
 
             </div>
 
-            <way-point @shown="wasShown" :distance="0" :checkVisible="true" />
+            <way-point @shown="wasShown" :distance="0" :checkVisible="true" :enabled="waypointEnabled" />
 
             <social-media v-if="isPage" :topic="title" :description="body" />
 
@@ -91,6 +91,7 @@ export default {
     data(){
         return {
             seen: false,
+            waypointEnabled: false,
         }
     },
 
@@ -98,8 +99,10 @@ export default {
 
         if (typeof window === "undefined") return;
 
-        const seen = localStorage.getItem('seenTopic:'+this.topic.slug);
-        if (seen ) this.seen = true;
+        const seen = localStorage.getItem('seenTopic6:'+this.topic.slug);
+        if ( seen  ) this.seen = true;
+
+        this.waypointEnabled = true;
 
     },
 
@@ -170,7 +173,7 @@ export default {
         },
 
         wasShown(){
-            localStorage.setItem('seenTopic:'+this.topic.slug, new Date().getTime() );
+            localStorage.setItem('seenTopic6:'+this.topic.slug, new Date().getTime() );
         },
 
     }

@@ -34,7 +34,7 @@
 
             </div>
 
-            <way-point @shown="wasShown" :distance="0" :checkVisible="true" />
+            <way-point @shown="wasShown" :distance="0" :checkVisible="true" :enabled="waypointEnabled" />
 
             <slot v-if="isContentDisplay" name="comment-bottom-buttons"/>
 
@@ -63,6 +63,7 @@ export default {
     data(){
         return {
             seen: false,
+            waypointEnabled: false,
         }
     },
 
@@ -80,6 +81,7 @@ export default {
         const seen = localStorage.getItem('seenComment:'+this.comment.slug);
         if (seen ) this.seen = true;
 
+        this.waypointEnabled = true;
     },
 
 
