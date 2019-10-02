@@ -26,7 +26,6 @@ export default context => {
         try{
             await store.dispatch('AUTH_LOGIN_SESSION', session);
         }catch(err){
-
         }
 
     } else {

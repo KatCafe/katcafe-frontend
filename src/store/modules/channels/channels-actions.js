@@ -38,7 +38,7 @@ export default {
                 return commit('SET_CHANNEL', out.channel);
 
         }catch(err){
-            console.error(err);
+            //console.error(err);
         }
 
         return commit('SET_CHANNEL', null);

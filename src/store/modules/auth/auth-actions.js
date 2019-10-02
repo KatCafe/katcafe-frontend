@@ -43,7 +43,7 @@ export default {
 
     },
 
-    AUTH_LOGIN_SESSION: async function ( context, session = {} ) {
+    AUTH_LOGIN_SESSION: async function ( {commit, dispatch, state}, session = {} ) {
 
         const out = await this.$app.networkHelper.post('/auth/signin-session', {key: session.key || state.session.key} );
 
