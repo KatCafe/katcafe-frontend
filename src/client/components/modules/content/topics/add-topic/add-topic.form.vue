@@ -194,7 +194,7 @@ export default {
 
         },
 
-        async openCaptcha(e, resolve){
+        async openCaptcha(resolve){
 
             resolve(true);
 

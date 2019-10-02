@@ -68,7 +68,7 @@ export default {
             this.captchaInput = '';
         },
 
-        submit(e, resolve){
+        submit(resolve){
 
             this.$emit('submit', resolve, this.captchaData() );
         },

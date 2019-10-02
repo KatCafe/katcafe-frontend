@@ -178,7 +178,7 @@ export default {
             reader.readAsDataURL(files[0]);
         },
 
-        async openCaptcha(e, resolve){
+        async openCaptcha(resolve){
 
             resolve(true);
 

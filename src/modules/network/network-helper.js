@@ -7,7 +7,7 @@ class NetworkHelper {
         this._store = store;
     }
 
-    async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' }, includeSession ){
+    async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' }, includeSession = true ){
 
         if (includeSession && this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
 
