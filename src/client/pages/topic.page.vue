@@ -22,7 +22,7 @@
 
             </div>
 
-            <infinite-scroll  @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
+            <infinite-scroll v-if="topic"  @onScroll="onScrollLoad" :hasMore="hasMore" :infinitePrevUri="getPrevUri" :infiniteNextUri="getNextUri" />
 
         </template>
 
