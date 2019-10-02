@@ -47,7 +47,7 @@ export default {
         },
 
         captchaSubmit(resolve, captcha ){
-            this.onSubmit( resolve, captcha, this.$refs['modal'].$refs['refCaptchaForm'] );
+            this.onSubmit( resolve, captcha, this.$refs['modal'].$refs['refForm'] );
         },
 
         reset(){

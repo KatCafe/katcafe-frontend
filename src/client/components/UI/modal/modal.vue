@@ -8,8 +8,8 @@
             <div class="modal-content">
                 <icon icon="times-circle" class="close-button " @click="closeModal" />
 
-                <template v-if="captchaForm" >
-                    <component  :is="captchaForm" ref="refCaptchaForm" />
+                <template v-if="form" >
+                    <component  :is="form" ref="refForm" />
                     <hr />
                 </template>
 
@@ -32,7 +32,7 @@ export default{
     data: () => {
         return {
             modalOpened: false,
-            captchaForm: null,
+            form: null,
         }
     },
 
@@ -45,17 +45,17 @@ export default{
         closeModal(e){
 
             if( e) e.stopPropagation();
-            this.captchaForm = null;
+            this.form = null;
 
             this.modalOpened = false;
 
         },
 
-        showModal(e, captchaForm){
+        showModal(e, form){
 
             if (e) e.stopPropagation();
 
-            this.captchaForm = captchaForm;
+            this.form = form;
             this.modalOpened = true;
         },
 
