@@ -30,7 +30,7 @@ export default{
     props:{
 
         hasMore: {default: true},
-        distance : {default: 100},
+        distance : {default: 200},
 
         infinitePrevUri: {default: ''},
         infiniteNextUri: {default: ''},

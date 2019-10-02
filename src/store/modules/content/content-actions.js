@@ -14,7 +14,7 @@ export default {
         commit('SET_CONTENT_SETTINGS_INIT', {contentDisplay: 'topics', settings: {
 
             pageIndex: route.params.pageIndex ? route.params.pageIndex -1 : 0,
-            pageCount: route.params.pageCount ? route.params.pageCount : 5,
+            pageCount: route.params.pageCount ? route.params.pageCount : 10,
             pageMore: true,
             searchQuery,
             searchAlgorithm:'hot',
@@ -26,7 +26,7 @@ export default {
         commit('SET_CONTENT_SETTINGS_INIT', {contentDisplay: 'comments', settings: {
 
                 pageIndex: route.params.pageIndex ? route.params.pageIndex -1 : 0,
-                pageCount: route.params.pageCount ? route.params.pageCount : 20,
+                pageCount: route.params.pageCount ? route.params.pageCount : 30,
                 pageMore: true,
                 searchQuery,
                 searchAlgorithm:'date',
