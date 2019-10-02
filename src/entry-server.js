@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 export default context => {
   return new Promise(async (resolve, reject) => {
     const s = isDev && Date.now()
-    const { app, router, store } = createApp();
+    const { app, router, store } = createApp('server');
 
     await store.dispatch('LOCALIZATION_NEW_IP', context.ip ); //Dispatching the Context IP
 
@@ -54,7 +54,9 @@ export default context => {
     // set router's location
     router.push(url)
 
-    // wait until router has resolved possible async hooks
+
+
+      // wait until router has resolved possible async hooks
     router.onReady(() => {
         const matchedComponents = router.getMatchedComponents()
         // no matched routes
@@ -79,6 +81,9 @@ export default context => {
             // inline the state in the HTML response. This allows the client-side
             // store to pick-up the server-side state without having to duplicate
             // the initial data fetching on the client.
+
+            //console.log("router.path router.path router.path router.path router.path ", router.currentRoute.path );
+
             context.state = store.state
             resolve(app)
         }).catch(reject)

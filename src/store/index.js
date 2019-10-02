@@ -1,34 +1,35 @@
 /*
         I USE VUEX SAGA for ASYNC actions
  */
-
+import * as cloneDeep from 'lodash/cloneDeep';
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import GlobalModule from './modules/global/global-module'
-import ChannelsModule from './modules/channels/channels-module'
-import TopicsModule from './modules/content/topics/topics-module'
-import CommentsModule from './modules/content/comments/comments-module'
-import LocalizationModule from './modules/localization/localization-module'
-import CaptchaModule from "./modules/captcha/captcha-module"
-import AuthModule from "./modules/auth/auth-module"
-import ContentModule from "./modules/content/content-module"
+import global from './modules/global/global-module'
+import channels from './modules/channels/channels-module'
+import topics from './modules/content/topics/topics-module'
+import comments from './modules/content/comments/comments-module'
+import localization from './modules/localization/localization-module'
+import captcha from "./modules/captcha/captcha-module"
+import auth from "./modules/auth/auth-module"
+import content from "./modules/content/content-module"
 
 Vue.use(Vuex);
 
 export function createStore () {
-    return new Vuex.Store({
+    return new Vuex.Store(cloneDeep({
         modules: {
 
-            global: GlobalModule,
-            channels: ChannelsModule,
-            topics: TopicsModule,
-            comments: CommentsModule,
-            localization: LocalizationModule,
-            captcha: CaptchaModule,
-            auth: AuthModule,
-            content: ContentModule,
+            global,
+            channels,
+            topics,
+            comments,
+            localization,
+            captcha,
+            auth,
+            content,
         }
-    });
+        })
+    );
 }
 

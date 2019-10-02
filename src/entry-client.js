@@ -38,7 +38,7 @@ Vue.directive('popover', function(el, binding){
 });
 
 
-const { app, router, store } = createApp();
+const { app, router, store } = createApp('client');
 
 //send the store and dispatch to the FetchService (SocketClient needs store.socketStatus
 
