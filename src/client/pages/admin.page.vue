@@ -29,7 +29,6 @@
 <script>
 
 import Layout from "client/components/layout/layout"
-import NetworkHelper from "modules/network/network-helper"
 
 export default {
 
@@ -50,10 +49,12 @@ export default {
 
         async updatesFromAllChannels(command){
 
+            console.log(this);
+
             this.error, this.success = '';
 
             try {
-                const out = await NetworkHelper.post('/admin/'+command, {channels: []});
+                const out = await this.$root.networkHelper.post('/admin/'+command, {channels: []});
                 this.success = 'Scores had been updated' + JSON.stringify(out);
             }catch(err){
                 this.error = err.message;

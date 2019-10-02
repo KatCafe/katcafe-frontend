@@ -12,6 +12,8 @@ export default {
 
         layoutLoading: false,
 
+        vueApp: null,
+
     },
     actions,
     mutations,

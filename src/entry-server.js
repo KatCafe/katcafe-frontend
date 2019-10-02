@@ -1,5 +1,4 @@
 import { createApp } from './app'
-import NetworkHelper from "modules/network/network-helper"
 
 const isDev = process.env.NODE_ENV !== 'production'
 
@@ -12,8 +11,6 @@ export default context => {
   return new Promise(async (resolve, reject) => {
     const s = isDev && Date.now()
     const { app, router, store } = createApp();
-
-    NetworkHelper.setStore(store);
 
     await store.dispatch('LOCALIZATION_NEW_IP', context.ip ); //Dispatching the Context IP
 
@@ -71,6 +68,7 @@ export default context => {
         // updated.
 
         Promise.all(matchedComponents.map( it  => it.asyncData && it.asyncData({
+            app,
             component: it,
             store,
             route: router.currentRoute

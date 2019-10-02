@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import NetworkHelper from "modules/network/network-helper"
+
 import Topic from "client/components/modules/content/topics/view/topic"
 import StringHelper from "utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
@@ -148,7 +148,7 @@ export default {
 
                 this._prevLink = this.link;
 
-                const out = await NetworkHelper.post('/scraper/get',{
+                const out = await this.vm.networkHelper.post('/scraper/get',{
                     uri: this.link,
                 });
 
@@ -205,7 +205,7 @@ export default {
 
                     this.error = '';
 
-                    const out = await NetworkHelper.post('/topics/create', {
+                    const out = await this.vm.networkHelper.post('/topics/create', {
                         channel: this.channel,
                         title: this.title,
                         body: this.body,

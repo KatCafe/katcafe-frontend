@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { createApp } from './app'
 
-import NetworkHelper from "modules/network/network-helper"
 
 
 // a global mixin that calls `asyncData` when a route component's params change
@@ -40,8 +39,6 @@ Vue.directive('popover', function(el, binding){
 
 
 const { app, router, store } = createApp();
-
-NetworkHelper.setStore(store);
 
 //send the store and dispatch to the FetchService (SocketClient needs store.socketStatus
 

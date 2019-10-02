@@ -1,11 +1,9 @@
-import NetworkHelper from "modules/network/network-helper"
-
 export default {
     // ensure data for rendering given list type
 
-    AUTH_LOGIN: async ({ commit, dispatch, state }, { userEmail, password, country, captcha } ) => {
+    AUTH_LOGIN: async function ({ commit, dispatch, state }, { userEmail, password, country, captcha } ) {
 
-        const out = await NetworkHelper.post('/auth/signin', {userEmail, password, country, captcha} );
+        const out = await this.$app.networkHelper.post('/auth/signin', {userEmail, password, country, captcha} );
 
         if (out && out.user) {
             commit('SET_AUTH_USER', out.user);
@@ -17,9 +15,9 @@ export default {
         return out;
     },
 
-    AUTH_SIGN_UP: async ({ commit, dispatch, state }, { username, email, password, confirmPassword, country, captcha } ) => {
+    AUTH_SIGN_UP: async function ({ commit, dispatch, state }, { username, email, password, confirmPassword, country, captcha } ) {
 
-        const out = await NetworkHelper.post('/auth/signup', {username, email, password, confirmPassword, country, captcha} );
+        const out = await this.$app.networkHelper.post('/auth/signup', {username, email, password, confirmPassword, country, captcha} );
 
         if (out ){
             commit('SET_AUTH_USER', out.user);
@@ -31,11 +29,11 @@ export default {
         return out;
     },
 
-    AUTH_LOGOUT: async ({ commit, dispatch, state },  ) => {
+    AUTH_LOGOUT: async function  ({ commit, dispatch, state },  ) {
 
         try{
 
-            const out = await NetworkHelper.get('/auth/logout',  );
+            const out = await this.$app.networkHelper.get('/auth/logout',  );
         }catch(err){
 
         }
@@ -45,9 +43,9 @@ export default {
 
     },
 
-    AUTH_LOGIN_SESSION: async ({ commit, dispatch, state }, session = {} ) => {
+    AUTH_LOGIN_SESSION: async function ( context, session = {} ) {
 
-        const out = await NetworkHelper.post('/auth/signin-session', {key: session.key || state.session.key} );
+        const out = await this.$app.networkHelper.post('/auth/signin-session', {key: session.key || state.session.key} );
 
         if (out){
             commit('SET_AUTH_USER', out.user);

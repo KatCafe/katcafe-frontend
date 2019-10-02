@@ -3,13 +3,13 @@ const consts = require('consts/consts');
 
 class NetworkHelper {
 
-    setStore(store){
+    constructor(store){
         this._store = store;
     }
 
-    async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' } ){
+    async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' }, includeSession ){
 
-        if (this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
+        if (includeSession && this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
 
         return rp({
             uri: prefix + address,
@@ -22,9 +22,9 @@ class NetworkHelper {
 
     }
 
-    async get(address, body, prefix = consts.serverApi, json = true, timeout , headers = { 'User-Agent': 'Request-Promise' } ){
+    async get(address, body, prefix = consts.serverApi, json = true, timeout , headers = { 'User-Agent': 'Request-Promise' }, includeSession = true ){
 
-        if (this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
+        if (includeSession && this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
 
         return rp({
             uri: prefix + address,
@@ -38,4 +38,4 @@ class NetworkHelper {
 
 }
 
-export default new NetworkHelper();
+export default NetworkHelper;

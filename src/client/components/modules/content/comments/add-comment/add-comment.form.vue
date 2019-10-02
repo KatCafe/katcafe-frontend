@@ -39,7 +39,6 @@
 
 <script>
 
-import NetworkHelper from "modules/network/network-helper"
 import StringHelper from "utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
 import Comment from "client/components/modules/content/comments/view/comment"
@@ -135,7 +134,7 @@ export default {
 
                 this._prevLink = this.link;
 
-                const out = await NetworkHelper.post('/scraper/get',{
+                const out = await this.vm.networkHelper.post('/scraper/get',{
                     uri: this.link,
                 });
 
@@ -190,7 +189,7 @@ export default {
 
                     this.error = '';
 
-                    const out = await NetworkHelper.post('/comments/create', {
+                    const out = await this.vm.networkHelper.post('/comments/create', {
                         topic: typeof this.topic === "string" ? this.topic : this.topic.slug,
                         link: this.link,
                         file: this.file ? {

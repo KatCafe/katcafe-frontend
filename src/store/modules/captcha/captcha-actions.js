@@ -1,8 +1,6 @@
-import NetworkHelper from "modules/network/network-helper";
-
 export default {
 
-    CAPTCHA_GET: async  ({ commit, dispatch, state } ) => {
+    CAPTCHA_GET: async  function ({ commit, dispatch, state } ) {
 
         if (state.captchaLoading) return;
 
@@ -10,7 +8,7 @@ export default {
 
         try{
 
-            const out = await NetworkHelper.get(`/captcha/get`, { });
+            const out = await this.$app.networkHelper.get(`/captcha/get`, { });
 
             if (out ) {
                 commit('SET_CAPTCHA', out.captcha);
@@ -30,7 +28,7 @@ export default {
 
     },
 
-    CAPTCHA_STORE_USER_INPUT: async ({commit, dispatch, state}, input ) => {
+    CAPTCHA_STORE_USER_INPUT: async function ({commit, dispatch, state}, input ) {
 
         commit('SET_CAPTCHA_USER_INPUT', input);
 

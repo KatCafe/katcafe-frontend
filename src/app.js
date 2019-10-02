@@ -19,6 +19,7 @@ import WebPageTypeMixin from './modules/utils/SEO/WebPageTypeMixin';
 
 
 import * as UtilitiesFunctions from './modules/utils/global-utilities/utilities-functions';
+import NetworkHelper from "modules/network/network-helper"
 
 require('client/components/modules/content/topics/view/topic.css');
 require('client/components/modules/content/comments/view/comment.css');
@@ -51,18 +52,16 @@ export function createApp () {
   const store = createStore()
   const router = createRouter(store)
 
-  if (typeof window !== "undefined"){
-    // prime the store with server-initialized state.
-    // the state is determined during SSR and inlined in the page markup.
-    if (window.__INITIAL_STATE__)
-      store.replaceState(window.__INITIAL_STATE__)
-      i18n.i18n.locale = store.state.localization.selectedCountryCode;
+  // prime the store with server-initialized state.
+  // the state is determined during SSR and inlined in the page markup.
+  if (typeof window !== "undefined" && window.__INITIAL_STATE__) {
+    store.replaceState(window.__INITIAL_STATE__)
+    i18n.i18n.locale = store.state.localization.selectedCountryCode;
   }
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
   sync(store, router)
-
 
 
   // create the app instance.
@@ -75,7 +74,9 @@ export function createApp () {
     render: h => h(App)
   })
 
+  app.networkHelper = new NetworkHelper(store);
 
+  store.$app = app; //Dispatching the Context IP
 
   // expose the app, the router and the store.
   // note we are not mounting the app here, since bootstrapping will be

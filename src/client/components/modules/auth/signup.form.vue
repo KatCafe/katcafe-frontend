@@ -28,7 +28,6 @@
 
 <script>
 
-import NetworkHelper from "modules/network/network-helper"
 import Captcha from "client/components/modules/captcha/captcha"
 
 export default {

@@ -31,7 +31,6 @@
 
 import CountrySelect from "client/components/UI/elements/select/country-select"
 import NoSsr from "vue-no-ssr";
-import NetworkHelper from "modules/network/network-helper"
 import Captcha from "client/components/modules/captcha/captcha"
 
 export default {
@@ -72,7 +71,7 @@ export default {
 
                 this.error = '';
 
-                const out = await NetworkHelper.post('/channels/create', {
+                const out = await this.$root.networkHelper.post('/channels/create', {
                     name: this.channelName,
                     title: this.channelTitle,
                     icon: this.channelIcon,

@@ -1,25 +1,26 @@
-import NetworkHelper from "modules/network/network-helper"
 import CookiesService from "src/services/cookies/cookies.service"
 
 export default {
     // ensure data for rendering given list type
 
-    LOCALIZATION_STORE_SELECTED: ({ commit, dispatch, state }, {selectedCountry, selectedCountryCode} ) => {
+    LOCALIZATION_STORE_SELECTED: async function  ({ commit, dispatch, state }, {selectedCountry, selectedCountryCode} ) {
 
         commit('SET_LOCALIZATION_SELECTED_COUNTRY', {selectedCountry, selectedCountryCode});
 
-        CookiesService.setCookie('selectedCountry', selectedCountry);
-        CookiesService.setCookie('selectedCountryCode', selectedCountryCode);
+        if (typeof window !==  "undefined") {
+            CookiesService.setCookie('selectedCountry', selectedCountry);
+            CookiesService.setCookie('selectedCountryCode', selectedCountryCode);
+        }
 
     },
 
-    LOCALIZATION_NEW_IP: ({ commit, dispatch, state }, ip ) => {
+    LOCALIZATION_NEW_IP: async function ({ commit, dispatch, state }, ip ) {
 
         return commit("SET_LOCALIZATION_IP", ip);
 
     },
 
-    LOCALIZATION_FETCH: async ({ commit, dispatch, state }, ip ) => {
+    LOCALIZATION_FETCH: async function ({ commit, dispatch, state }, ip ) {
 
 
         if ( state.request.done && !state.request.error )
@@ -32,7 +33,7 @@ export default {
 
         try {
 
-            let res = await NetworkHelper.get("https://geoip-db.com/json/" + ip, undefined, '');
+            let res = await this.$app.networkHelper.get("https://geoip-db.com/json/" + ip, undefined, '', undefined, undefined,undefined, false);
 
             const payload = {
                 country: res.country_name || '',
