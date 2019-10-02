@@ -28,7 +28,7 @@ export default {
 
     },
 
-    CHANNEL_GET: async  ({ commit, dispatch, state }, { slug }) => {
+    CHANNEL_GET: async  function ({ commit, dispatch, state }, { slug }) {
 
         try{
 
@@ -38,7 +38,7 @@ export default {
                 return commit('SET_CHANNEL', out.channel);
 
         }catch(err){
-            //console.error(err);
+            console.error(err);
         }
 
         return commit('SET_CHANNEL', null);

@@ -2,7 +2,7 @@ import BrowserHelper from "modules/helpers/browser.helpers"
 
 export default {
 
-    CONTENT_INIT: async  ({ commit, dispatch, state }, { route, country, searchQuery = 'channel' }) => {
+    CONTENT_INIT: async  function ({ commit, dispatch, state }, { route, country, searchQuery = 'channel' }) {
 
         let path = BrowserHelper.trimSlash(route.path);
         if (route.params.pageIndex) path = path.substr(0, path.indexOf('/pageIndex'));
@@ -42,7 +42,7 @@ export default {
         return dispatch('CONTENT_RESET', {});
     },
 
-    CONTENT_RESET: async  ({ commit, dispatch, state }, {  }) => {
+    CONTENT_RESET: async function ({ commit, dispatch, state }, {  }) {
 
         const contentDisplay = state.contentDisplay;
 
@@ -55,7 +55,7 @@ export default {
 
     },
 
-    CONTENT_GET: async  ({ commit, dispatch, state }, {  }) => {
+    CONTENT_GET: async function ({ commit, dispatch, state }, {  }) {
 
         try{
 
@@ -69,10 +69,14 @@ export default {
                 resolver = resolve;
             });
 
+
             commit('SET_GLOBAL_LAYOUT_LOADING', true);
             commit('SET_CONTENT_LOADING', {contentDisplay, loading: true, promise});
 
             await dispatch('CHANNEL_GET', {slug: settings.search });
+
+            console.log("settings.search", settings.search, settings.loading);
+
 
             //console.log(contentDisplay, settings );
 
@@ -97,7 +101,7 @@ export default {
 
     },
 
-    CONTENT_CHANGE_DISPLAY: async ({commit, dispatch, state}, contentDisplay) =>{
+    CONTENT_CHANGE_DISPLAY: async function ({commit, dispatch, state}, contentDisplay) {
 
         commit('SET_CONTENT_DISPLAY', contentDisplay)
 

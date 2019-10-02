@@ -117,7 +117,8 @@ export default {
         },
 
         title(){
-            return this.topic.title.length > 200 ? this.topic.title.substr(0, 200)+'...' : this.topic.title;
+            const title = (this.topic ? this.topic.title : '')||'';
+            return title.length > 200 ? title.substr(0, 200)+'...' : title;
         },
 
         author(){
