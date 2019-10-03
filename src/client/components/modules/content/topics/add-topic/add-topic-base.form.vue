@@ -86,15 +86,16 @@ export default {
 
             if (!links.length ) return;
 
-            links = links.map( it => StringHelper.fixURL( it ) );
+            const originalLink = links[0];
 
+            links = links.map( it => StringHelper.fixURL( it ) );
             this.link = links[0];
 
             const out = await this.linkChanged();
 
             if (out) {
-                if (this.useTitle)  this.titleEdit = this.titleEdit.replace(this.link, '');
-                this.bodyEdit = this.bodyEdit.replace(this.link, '');
+                if (this.useTitle)  this.titleEdit = this.titleEdit.replace(originalLink, '');
+                this.bodyEdit = this.bodyEdit.replace(originalLink, '');
             }
 
         },
