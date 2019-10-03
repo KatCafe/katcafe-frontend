@@ -31,7 +31,7 @@
 
                     <div class="topic-text-wrap">
 
-                        <h2 v-if="title" class="title" v-html="title"/>
+                        <h2 v-if="title" class="title word-wrap" v-html="title"/>
 
                         <read-more  :text="body" :max-chars="400" pclass="body word-wrap" />
 
