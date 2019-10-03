@@ -7,7 +7,7 @@
 
             <div class="column left">
 
-                <add-topic-form :topicChannel="channelToWrite" />
+                <add-topic-form :parentSlug="channelToWrite" />
 
                 <icon icon="loading-spinner" v-if="!topics.length && !comments.length && layoutLoading" class="fa-5x" />
 

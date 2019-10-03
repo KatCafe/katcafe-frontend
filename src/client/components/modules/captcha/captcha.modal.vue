@@ -35,6 +35,7 @@ export default {
     },
 
     methods: {
+
         showModal(onSubmit, captchaForm ){
             this.onSubmit = onSubmit;
             this.error = '';

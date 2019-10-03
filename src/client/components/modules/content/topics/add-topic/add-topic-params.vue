@@ -6,7 +6,6 @@
         </label>
 
         <slot/>
-
     </div>
 
 </template>
@@ -23,7 +22,6 @@ export default {
     mounted(){
 
         if (typeof window === "undefined") return;
-
         this.isAnonymous = localStorage.getItem('optionIsAnonymous') === "true";
 
     },
@@ -32,7 +30,7 @@ export default {
         isAnonymous: function (newValue, oldValue) {
             localStorage.setItem('optionIsAnonymous', newValue);
         },
-    }
+    },
 
 }
 </script>

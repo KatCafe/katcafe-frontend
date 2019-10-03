@@ -10,12 +10,12 @@
             <img class="profile-avatar" src="/public/assets/theme/anonymous.png">
 
             <div class="input-file-upload-group">
-                <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="commentBody" @change="bodyChanged"/>
+                <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="bodyEdit" @change="bodyChanged"/>
                 <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
                 <icon class="input-file-icon" icon="camera" @click="openFileUpload" />
             </div>
 
-            <loading-button v-if="showPreview" @onClick="openCaptcha" :text="$t('comment.submitComment')"  />
+            <loading-button v-if="showPreview" @submit="openCaptcha" :text="$t('comment.submitComment')"  />
 
         </div>
 
@@ -29,7 +29,7 @@
 
             <div v-if="!loading" >
                 <span class='commentPreview hiddenMobile'>{{$t('comment.previewComment')}}</span>
-                <comment :comment="previewComment" :isSnippetForm="true" />
+                <comment :comment="previewContent" :isSnippetForm="true" />
             </div>
 
         </div>
@@ -39,247 +39,74 @@
 
 <script>
 
-import StringHelper from "utils/string-helper"
 import Icon from "client/components/UI/elements/icons/icon"
 import Comment from "client/components/modules/content/comments/view/comment"
 import LoadingButton from 'client/components/UI/elements/loading-button'
 import AddCommentParams from "./add-comment-params"
-
-function initialState (){
-    return {
-
-        commentIsAnonymous: true,
-
-        commentBody: '',
-        link: '',
-        _prevLink: '',
-
-        file: null,
-
-        scraped: null,
-
-        error : '',
-        loading: false,
-
-        previewComment: {
-            body: '',
-            slug: '',
-            date: new Date().getTime(),
-
-            link: '',
-            preview: null,
-        },
-
-    }
-}
+import AddTopicBase from "./../../topics/add-topic/add-topic-base.form"
 
 export default {
 
+    extends: AddTopicBase,
+
     name: 'add-comment-form',
 
-    components: { Icon, Comment, LoadingButton },
-
-    props: {
+    props:{
         topic: {default: null},
         isPage: {default: false},
         isShowPreview: {default: true},
+        useTitle: {default: false},
     },
 
-    data(){
-        return initialState();
-    },
+    components: { Icon, Comment, LoadingButton, AddTopicBase },
 
     computed:{
 
-        author(){
-            return this.$store.state.auth.user ? this.$store.state.auth.user.username : '';
+        additionalParamsForm(){
+            return AddCommentParams;
         },
 
-        body(){
-            return this.commentBody || ( this.scraped ? this.scraped.title || this.scraped.description : ''  ) || '';
+        slug(){
+            if (this.parentSlug ) return this.parentSlug;
+            if (this.topic) return this.topic.slug;
+            return '';
         },
-
-        showPreview(){
-            return this.body.length || this.previewComment.preview;
-        }
 
     },
 
     methods: {
 
-        async extractLink(){
+        postSubmit(captchaData, refAdditionalParams){
 
-            let links = StringHelper.findLinks(this.commentBody);
-
-            if (!links.length ) return;
-
-            links = links.map( it => StringHelper.fixURL( it ) );
-
-            this.link = links[0];
-
-            const out = await this.linkChanged();
-
-            if (out)
-                this.commentBody = this.commentBody.replace(this.link, '');
+            return this.$root.networkHelper.post('/comments/create', {
+                topic: this.slug,
+                link: this.link,
+                file: this.file ? {
+                    name: this.file.file.name,
+                    base64: this.file.preview.img,
+                } : undefined,
+                body: this.body,
+                isAnonymous: refAdditionalParams ? refAdditionalParams.isAnonymous : false,
+                captcha: captchaData,
+            });
 
         },
 
-        async linkChanged(e){
-
-            this.loading = true;
-
-            try{
-
-                if (!this.link || this.link === this._prevLink){
-                    this.loading = false;
-                    return false;
-                }
-
-                this._prevLink = this.link;
-
-                const out = await this.$root.networkHelper.post('/scraper/get',{ uri: this.link, });
-
-                console.log(out);
-
-                if (out  && (out.scrape.image || out.scrape.title || out.scrape.description ) ) {
-
-                    if (out.scrape.uri) {
-                        this._prevLink = out.scrape.uri;
-                        this.link = out.scrape.uri;
-                    }
-
-                    this.scraped = out.scrape;
-                    this.$emit('scraped', out.scrape)
-                }
-
-            }catch(err){
-                console.error(err);
-                this.scraped = null;
+        postSubmitSuccessful(out){
+            if (out) {
+                this.$store.commit('ADD_COMMENTS', [out.comment]);
+                this.reset();
             }
 
-            this.loading = false;
-            if (this.scraped) return true;
-
+            this.$emit('onSuccess', out.comment);
         },
 
-        async fileChanged(e){
-            const files = e.target.files || e.dataTransfer.files;
-            if ( !files.length ) return;
-
-            const reader = new FileReader();
-            reader.onloadend = async (e) => {
-
-                this.file = {
-                    file: files[0],
-                    preview: {
-                        img: reader.result
-                    }
-                };
-            };
-
-            reader.readAsDataURL(files[0]);
+        updatePreviewAdditional(){
+            this.previewContent.topic = this.topic;
         },
 
-        async openCaptcha(resolve){
-
-            resolve(true);
-
-            const captchaModal = document.getElementById('captchaModal').__vue__;
-            captchaModal.showModal( async (resolve2, captchaData, refAdditionalParams)=>{
-
-                try{
-
-                    this.error = '';
-
-                    const out = await this.$root.networkHelper.post('/comments/create', {
-                        topic: typeof this.topic === "string" ? this.topic : this.topic.slug,
-                        link: this.link,
-                        file: this.file ? {
-                            name: this.file.file.name,
-                            base64: this.file.preview.img,
-                        } : undefined,
-                        body: this.body,
-                        isAnonymous: refAdditionalParams ? refAdditionalParams.isAnonymous : false,
-                        captcha: captchaData,
-                    });
-
-                    captchaModal.reset();
-                    captchaModal.closeModal();
-
-                    if (out) {
-                        this.$store.commit('ADD_COMMENTS', [out.comment]);
-                        this.reset();
-                    }
-
-                    this.$emit('onSuccess', out.comment);
-
-                }catch(err){
-
-                    this.error = captchaModal.processError(err.message);
-                    if (this.error) captchaModal.closeModal();
-
-                    this.error = this.error.replace('You need to provide either a link/file or write 5 characters', this.$i18n.t('comment.errorNoFileOrText'));
-
-                    setTimeout( () => this.error = '', 8000 );
-
-                }
-
-                resolve2(true);
-
-            }, this.$store.state.auth.user ? AddCommentParams : undefined );
-
-            resolve();
-
-        },
-
-        bodyChanged(){
-            this.extractLink();
-        },
-
-        openFileUpload(){
-            this.$refs['refFileInput'].click();
-        },
-
-        reset(){
-            Object.assign(this.$data, initialState());
-        },
-
-        updatePreviewComment(){
-
-            this.previewComment.body = this.body;
-            this.previewComment.link = this.link;
-            this.previewComment.topic = this.topic;
-
-            this.previewComment.preview = undefined;
-
-            if (this.scraped && this.scraped.image)
-                this.previewComment.preview = Object.assign( {
-                    link: this.link
-                }, this.scraped.image);
-
-            if (this.file)
-                this.previewComment.preview = {
-                    base64: this.file.preview,
-                    link: this.file.file.name,
-                };
-
-            this.previewComment.author = this.author;
-
-        }
 
     },
-
-    watch:{
-        commentBody: function (newValue, oldValue) {
-            this.updatePreviewComment();
-        },
-        scraped: function (newValue, oldValue) {
-            this.updatePreviewComment();
-        },
-        file: function (newValue, oldValue) {
-            this.updatePreviewComment();
-        },
-    }
 
 }
 </script>

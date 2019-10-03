@@ -2,7 +2,7 @@
 
     <modal ref="modal">
         <div slot="content"  >
-            <add-topic-form ref="addTopicForm"  :topicChannel="topicChannel" />
+            <add-topic-form ref="addTopicForm"  :parentSlug="parentSlug" />
         </div>
     </modal>
 
@@ -19,15 +19,15 @@ export default {
 
     data(){
         return {
-            topicChannel: '',
+            parentSlug: '',
         }
     },
 
     methods: {
 
-        showModal(channel){
+        showModal(parentSlug){
 
-            this.topicChannel = channel;
+            this.parentSlug = parentSlug;
 
             this.$refs['modal'].showModal();
 

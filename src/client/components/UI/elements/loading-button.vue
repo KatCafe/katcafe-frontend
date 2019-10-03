@@ -56,7 +56,7 @@ export default{
 
 
             e.stopPropagation();
-            this.$emit('onClick', resolver );
+            this.$emit('submit', resolver );
 
         },
 
