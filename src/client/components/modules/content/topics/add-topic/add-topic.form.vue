@@ -30,7 +30,7 @@
         </div>
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
-        <icon icon="loading-spinner" v-if="loading" />
+        <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
 
         <div v-if="showPreview && !loading" >
 
@@ -130,10 +130,12 @@ export default {
 
             this.link = links[0];
 
-            await this.linkChanged();
+            const out = await this.linkChanged();
 
-            this.topicTitle = this.topicTitle.replace(this.link, '');
-            this.topicBody = this.topicBody.replace(this.link, '');
+            if (out) {
+                this.topicTitle = this.topicTitle.replace(this.link, '');
+                this.topicBody = this.topicBody.replace(this.link, '');
+            }
 
         },
 
@@ -143,14 +145,14 @@ export default {
 
             try{
 
-                if (!this.link) return;
-                if (this.link === this._prevLink) return;
+                if (!this.link || this.link === this._prevLink){
+                    this.loading = false;
+                    return false;
+                }
 
                 this._prevLink = this.link;
 
-                const out = await this.$root.networkHelper.post('/scraper/get',{
-                    uri: this.link,
-                });
+                const out = await this.$root.networkHelper.post('/scraper/get',{ uri: this.link, });
 
                 console.log(out);
 
@@ -171,7 +173,7 @@ export default {
             }
 
             this.loading = false;
-
+            if (this.scraped) return true;
         },
 
         async fileChanged(e){

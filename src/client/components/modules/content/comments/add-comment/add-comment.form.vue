@@ -117,9 +117,10 @@ export default {
 
             this.link = links[0];
 
-            await this.linkChanged();
+            const out = await this.linkChanged();
 
-            this.commentBody = this.commentBody.replace(this.link, '');
+            if (out)
+                this.commentBody = this.commentBody.replace(this.link, '');
 
         },
 
@@ -129,14 +130,14 @@ export default {
 
             try{
 
-                if (!this.link) return;
-                if (this.link === this._prevLink) return;
+                if (!this.link || this.link === this._prevLink){
+                    this.loading = false;
+                    return false;
+                }
 
                 this._prevLink = this.link;
 
-                const out = await this.$root.networkHelper.post('/scraper/get',{
-                    uri: this.link,
-                });
+                const out = await this.$root.networkHelper.post('/scraper/get',{ uri: this.link, });
 
                 console.log(out);
 
@@ -157,6 +158,7 @@ export default {
             }
 
             this.loading = false;
+            if (this.scraped) return true;
 
         },
 
