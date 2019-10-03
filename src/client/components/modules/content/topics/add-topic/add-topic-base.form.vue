@@ -220,7 +220,8 @@ export default {
 
             this.updatePreviewAdditional();
 
-            this.previewContent.title = this.title;
+            if (this.useTitle) this.previewContent.title = this.title;
+
             this.previewContent.body = this.body;
             this.previewContent.link = this.link;
 

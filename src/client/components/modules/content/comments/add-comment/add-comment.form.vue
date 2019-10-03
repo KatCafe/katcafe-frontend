@@ -68,7 +68,12 @@ export default {
 
         slug(){
             if (this.parentSlug ) return this.parentSlug;
-            if (this.topic) return this.topic.slug;
+
+            if (this.topic){
+                if (typeof this.topic === 'string') return this.topic;
+                return this.topic.slug;
+            }
+            
             return '';
         },
 
