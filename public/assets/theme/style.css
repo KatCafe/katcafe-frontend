@@ -633,3 +633,9 @@ form {
     verticalAlign: middle;
     padding-top:11px !important;
 }
+
+.header .logo {
+    height: 40px;
+    display:inline-block;
+    padding-right: 10px;
+}

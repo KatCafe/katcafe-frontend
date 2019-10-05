@@ -73,7 +73,7 @@ export default {
                 if (typeof this.topic === 'string') return this.topic;
                 return this.topic.slug;
             }
-            
+
             return '';
         },
 

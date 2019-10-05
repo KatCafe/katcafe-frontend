@@ -126,4 +126,13 @@ export default{
         border-top-color: #4b3f3f;
     }
 
+
+    @media only screen and (max-width: 600px) {
+
+        .modal-content {
+            padding: 5px 5px 0;
+        }
+
+    }
+
 </style>

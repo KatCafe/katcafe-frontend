@@ -35,7 +35,7 @@ export default {
         display: block;
         flex-direction: row;
         height: 192px;
-        min-width: 260px;
+        min-width: 100px;
         background: url( https://styles.redditmedia.com/t5_2cneq/styles/bannerBackgroundImage_6yzzdjhguh521.jpeg?format=pjpg&s=8c0a444089bdc858bd2764f5376352e7c5d27f5a) center top / cover no-repeat rgb(0, 112, 193);
         background-position: center top;
         margin: 0px auto;

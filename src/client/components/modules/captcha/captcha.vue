@@ -11,7 +11,7 @@
             </template>
         </div>
 
-        <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" :maxlength="captcha ? captcha.size : 1" v-on:keyup.enter="submit" >
+        <input  type="text" id="lcaptcha" name="captcha" :placeholder="$t('captcha.captcha')" v-model="captchaInput" :maxlength="captcha ? captcha.size : 1" v-on:keyup.enter="submit" autocomplete="off" >
         <loading-button :text="buttonText || $t('captcha.post')" @submit="submit" />
 
     </div>
