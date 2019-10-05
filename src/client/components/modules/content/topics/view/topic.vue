@@ -5,7 +5,7 @@
 
         <vote parentType="topic" :slug="slug" :parent="topic" :myVote="topic.myVote" />
 
-        <div class="topic-content" >
+        <div >
 
             <div :class="`author ${ seen ? '' : 'unread'}`">
 
@@ -27,7 +27,7 @@
 
                 <preview-image :data="this.topic.preview" :link="link" />
 
-                <router-link :to="isPage ? '' : to">
+                <router-link :to="to" tag="div" :disabled="isPage">
 
                     <div class="topic-text-wrap">
 
@@ -90,7 +90,7 @@ export default {
 
     data(){
         return {
-            seen: false,
+            seen: true,
             waypointEnabled: false,
         }
     },
@@ -100,7 +100,7 @@ export default {
         if (typeof window === "undefined") return;
 
         const seen = localStorage.getItem('seenTopic:'+this.topic.slug);
-        if ( seen  ) this.seen = true;
+        if ( !seen  ) this.seen = false;
 
         this.waypointEnabled = true;
 

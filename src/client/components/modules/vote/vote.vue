@@ -109,7 +109,6 @@ export default {
 
     .voting-box{
         padding-left: 0;
-        padding-top: 10px;
         text-align: center;
     }
 

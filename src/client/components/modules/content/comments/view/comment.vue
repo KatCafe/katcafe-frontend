@@ -4,11 +4,13 @@
 
         <vote parentType="comment" :slug="slug" :parent="comment" :myVote="comment.myVote" />
 
-        <div class="topic-content comment-content">
+        <div>
 
             <div :class="`author ${ seen ? '' : 'unread'}`">
+
                 <span :class="`details bold ${authorClass}`">{{author}}</span>
                 <span class="details">{{date}} </span>
+
                 <router-link v-if="isContentDisplay" class="details" :to="comment.topic">
                     {{comment.topic.length > 80 ? comment.topic.substr(0, 80)+'...' : comment.topic }}
                 </router-link>
@@ -62,7 +64,7 @@ export default {
 
     data(){
         return {
-            seen: false,
+            seen: true,
             waypointEnabled: false,
         }
     },
@@ -79,7 +81,7 @@ export default {
         if (typeof window === "undefined") return;
 
         const seen = localStorage.getItem('seenComment:'+this.comment.slug);
-        if (seen ) this.seen = true;
+        if ( !seen ) this.seen = false;
 
         this.waypointEnabled = true;
     },
