@@ -13,9 +13,7 @@
     grid-template-columns: 40px 1fr;
 }
 
-.topic:hover{
-    transition: all 0.2s ease
-}
+
 
 .topic h2{
     font-size: 20px;
@@ -64,6 +62,12 @@
     margin-top: 10px;
     padding-right: 10px;
 }
+
+.topic-body:hover{
+    background-color: #373737;
+    transition: all 0.2s ease
+}
+
 
 .topic-has-image {
     display: grid;

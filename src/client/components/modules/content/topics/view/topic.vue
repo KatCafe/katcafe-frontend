@@ -7,37 +7,39 @@
 
         <div >
 
-            <div :class="`author ${ seen ? '' : 'unread'}`">
+            <div class="topic-body">
+                <div :class="`author ${ seen ? '' : 'unread'}`">
 
-                <span :class="`details bold ${authorClass}  `">{{author}}</span>
+                    <span :class="`details bold ${authorClass}  `">{{author}}</span>
 
-                <span class="details">{{date}} </span>
+                    <span class="details">{{date}} </span>
 
-                <router-link :to="'/'+(topic.channel||'')">
-                    <span class="action-button">{{topic.channel||''}}</span>
-                </router-link>
+                    <router-link :to="'/'+(topic.channel||'')">
+                        <span class="action-button">{{topic.channel||''}}</span>
+                    </router-link>
 
-                <div class="topic-buttons">
-                    <icon v-if="isUserOwner" icon="times" @click="deleteTopic" class="delete" />
+                    <div class="topic-buttons">
+                        <icon v-if="isUserOwner" icon="times" @click="deleteTopic" class="delete" />
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="topic-content" :class="this.topic.preview ? 'topic-has-image' : ''">
 
-            <div class="topic-content" :class="this.topic.preview ? 'topic-has-image' : ''">
+                    <preview-image :data="this.topic.preview" :link="link" />
 
-                <preview-image :data="this.topic.preview" :link="link" />
+                    <router-link :to="to" :tag="isPage ? 'div' : 'a'" :disabled="isPage">
 
-                <router-link :to="to" tag="div" :disabled="isPage">
+                        <div class="topic-text-wrap">
 
-                    <div class="topic-text-wrap">
+                            <h2 v-if="title" class="title word-wrap" v-html="title"/>
 
-                        <h2 v-if="title" class="title word-wrap" v-html="title"/>
+                            <read-more  :text="body" :max-chars="400" pclass="body word-wrap" />
 
-                        <read-more  :text="body" :max-chars="400" pclass="body word-wrap" />
+                        </div>
+                    </router-link>
 
-                    </div>
-                </router-link>
-
+                </div>
             </div>
 
             <way-point @shown="wasShown" :distance="0" :checkVisible="true" :enabled="waypointEnabled" />
