@@ -11,6 +11,7 @@ consts/consts-secret.js
 
 public/hidden
 package-lock\.json
+yarn.lock
 
 certificates/ca_bundle.crt
 certificates/certificate.crt

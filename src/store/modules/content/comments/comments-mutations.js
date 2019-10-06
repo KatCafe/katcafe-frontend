@@ -5,10 +5,12 @@ export default {
 
     SET_COMMENTS:  (state, comments ) => {
 
-        state.map = {};
+        const map = {};
 
         for (const comment of comments)
-            Vue.set( state.map, comment.slug, comment );
+            map[comment.slug] = comment ;
+
+        state.map = map;
 
 
     },
@@ -17,6 +19,8 @@ export default {
 
         for (const comment of comments)
             Vue.set( state.map, comment.slug, comment );
+
+        state.map = Object.assign({}, state.map );
 
     },
 

@@ -16,6 +16,7 @@ export default {
             });
 
             if (out ) {
+
                 commit('ADD_COMMENTS', out.comments);
                 commit('SET_COMMENTS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.comments.length >= count });
 

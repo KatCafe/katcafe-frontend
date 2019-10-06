@@ -10,11 +10,12 @@ export default {
 
     SET_TOPICS:  (state, topics ) => {
 
-        state.map = {};
+        const map = {};
 
         for (const topic of topics)
-            Vue.set( state.map, topic.slug, topic);
+            map[topic.slug] = topic;
 
+        state.map = map;
     },
 
     ADD_TOPICS: (state, topics)=>{
@@ -23,6 +24,7 @@ export default {
             if ( !state.map[topic.slug] )
                 Vue.set( state.map, topic.slug, topic);
 
+        state.map = Object.assign({}, state.map );
     },
 
 
