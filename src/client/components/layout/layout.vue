@@ -58,6 +58,10 @@ export default{
 
         this.$store.dispatch('LOCALIZATION_FETCH',);
 
+        setTimeout( ()=> {
+            this.$store.dispatch('CAPTCHA_GET');
+        }, 1000)
+
     },
 
     methods:{
