@@ -3,7 +3,7 @@
 
 
         <div class="container">
-            No Copyright. Made with <3 for you.
+            Made with <i class="fa fa-heart" style="color: red"/>
         </div>
     </div>
 </template>
