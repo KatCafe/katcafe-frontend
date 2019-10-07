@@ -52,13 +52,22 @@ export default {
     .nav li a {
         text-decoration: none;
         color: #a3a2a2;
-        padding: 8px;
+        padding: 8px 4px 8px 4px;
         display: inline-block;
         height: 14px;
     }
 
     .nav li.selected a {
         color: white;
+    }
+
+    @media only screen and (max-width: 1200px) {
+
+        .nav li a {
+            padding-top: 0px;
+            height: 6px;
+        }
+
     }
 
 </style>

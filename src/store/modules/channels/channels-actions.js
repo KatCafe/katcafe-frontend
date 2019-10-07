@@ -14,7 +14,7 @@ export default {
 
     },
 
-    CHANNEL_LIST_GET: async function ({ commit, dispatch, state }, { algorithm ='hot', country, index = 1, count = 20 }) {
+    CHANNEL_LIST_GET: async function ({ commit, dispatch, state }, { algorithm ='hot', country, index = 1, count = 40 }) {
 
         try{
 
