@@ -18,6 +18,11 @@ module.exports = {
     publicPath: '/dist/',
     filename: '[name].[chunkhash].js'
   },
+
+  externals: {
+    'socket.io-client': 'io',
+  },
+
   resolve: {
     extensions: ['.js', '.vue'],
 
@@ -32,10 +37,15 @@ module.exports = {
       'modules': path.resolve(__dirname + '/../src/modules'),
       'services': path.resolve(__dirname + '/../src/services'),
       'utils': path.resolve(__dirname + '/../src/utils'),
+
+      'socket.io-client': path.resolve( __dirname+'/../node_modules/socket.io-client/dist/socket.io.js' )
     }
   },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
+    noParse: [
+        /es6-promise\.js$/, // avoid webpack shimming process
+        /socket.io-client/,
+    ],
     rules: [
       {
         test: /\.vue$/,
@@ -85,6 +95,7 @@ module.exports = {
         }),
 
         new VueLoaderPlugin(),
+
         new webpack.optimize.UglifyJsPlugin({
           compress: { warnings: false }
         }),
