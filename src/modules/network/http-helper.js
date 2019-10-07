@@ -1,30 +1,35 @@
-const rp = require('request-promise');
+const fetch = require('node-fetch');
 const consts = require('consts/consts');
 
 class HttpHelper {
 
-    async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' } ){
+    async fetchPromise(address, options, json = true){
 
-        return rp({
-            uri: prefix + address,
+        const out = await fetch(address, options);
+
+        return json ? out.json() : out;
+    }
+
+    async post(address, body, prefix = consts.serverApi, json , timeout = 10000, headers = { 'User-Agent': 'Request-Promise' } ){
+
+        return this.fetchPromise(prefix + address, {
             headers,
             json,
             timeout,
             method: "POST",
-            body,
-        });
+            body: body ? JSON.stringify(body) : undefined,
+        }, json);
 
     }
 
-    async get(address, body, prefix = consts.serverApi, json = true, timeout , headers = { 'User-Agent': 'Request-Promise' } ){
+    async get(address, body, prefix = consts.serverApi, json , timeout= 10000 , headers = { 'User-Agent': 'Request-Promise' } ){
 
-        return rp({
-            uri: prefix + address,
+        return this.fetchPromise(prefix + address, {
             headers,
             json,
             timeout,
-            body,
-        });
+            body: body ? JSON.stringify(body) : undefined,
+        }, json);
 
     }
 

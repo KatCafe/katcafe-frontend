@@ -38,7 +38,7 @@ module.exports = {
       'services': path.resolve(__dirname + '/../src/services'),
       'utils': path.resolve(__dirname + '/../src/utils'),
 
-      'socket.io-client': path.resolve( __dirname+'/../node_modules/socket.io-client/dist/socket.io.js' )
+      'socket.io-client': path.resolve( __dirname+'/../node_modules/socket.io-client/dist/socket.io.js' ),
     }
   },
   module: {

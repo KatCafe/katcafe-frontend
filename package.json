@@ -15,7 +15,7 @@
     "npm": ">=4.0"
   },
   "dependencies": {
-    "request-promise": "^4.2.4",
+    "node-fetch": "^2.6.0",
     "route-cache": "0.4.3",
     "sanitize-html": "^1.14.1",
     "socket.io-client": "^2.3.0",

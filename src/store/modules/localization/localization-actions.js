@@ -1,5 +1,4 @@
 import CookiesService from "src/services/cookies/cookies.service"
-import HttpHelper from "modules/network/http-helper"
 
 export default {
     // ensure data for rendering given list type
@@ -34,7 +33,7 @@ export default {
 
         try {
 
-            let res = await HttpHelper.get("https://geoip-db.com/json/" + ip, undefined,  '', undefined,false);
+            let res = await this.$app.httpHelper.get("https://geoip-db.com/json/" + ip, undefined,  '', undefined,false);
 
             const payload = {
                 country: res.country_name || '',
@@ -57,9 +56,9 @@ export default {
                 commit('SET_LOCALIZATION_SELECTED_COUNTRY', { selectedCountryCode: payload.countryCode, selectedCountry:payload.country } );
 
         }
-        catch(Exception){
+        catch(ex){
 
-            console.log("Geo IP rejected ",Exception.toString());
+            console.error("Geo IP rejected ",ex.toString());
 
             commit('SET_LOCALIZATION_REQUEST_ERROR',{});
 

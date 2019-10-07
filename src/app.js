@@ -20,6 +20,7 @@ import WebPageTypeMixin from './modules/utils/SEO/WebPageTypeMixin';
 
 import * as UtilitiesFunctions from './modules/utils/global-utilities/utilities-functions';
 import NetworkHelper from "modules/network/network-helper"
+import HttpHelper from "modules/network/http-helper"
 
 require('client/components/modules/content/topics/view/topic.css');
 require('client/components/modules/content/comments/view/comment.css');
@@ -75,6 +76,7 @@ export function createApp (type) {
   })
 
   app.networkHelper = new NetworkHelper(store);
+  app.httpHelper = new HttpHelper(store);
 
   store.$app = app; //Dispatching the Context IP
 
