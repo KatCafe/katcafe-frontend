@@ -65,7 +65,7 @@ export default {
         },
 
         body(){
-            return this.bodyEdit   || '';
+            return this.bodyEdit  || ( this.useTitle ? '' : this.scraped ? this.scraped.title || this.scraped.description : '' ) || '';
         },
 
         showPreview(){
