@@ -61,11 +61,11 @@ export default {
         },
 
         title(){
-            return this.titleEdit || ( this.scraped ? this.scraped.title : ''  ) || '';
+            return this.titleEdit || ( this.scraped ? this.scraped.title || this.scraped.description : ''  ) || '';
         },
 
         body(){
-            return this.bodyEdit   || ( this.scraped ? this.scraped.description : ''  ) || '';
+            return this.bodyEdit   || '';
         },
 
         showPreview(){
