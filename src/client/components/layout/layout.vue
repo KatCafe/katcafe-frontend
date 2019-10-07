@@ -56,11 +56,16 @@ export default{
 
         this.minHeight =  window.innerHeight;
 
-        this.$store.dispatch('LOCALIZATION_FETCH',);
+        if (!this.$store.state.global.initialized){
 
-        setTimeout( ()=> {
-            this.$store.dispatch('CAPTCHA_GET');
-        }, 1000)
+            this.$store.dispatch('GLOBAL_SET_INITIALIZED');
+
+            this.$store.dispatch('LOCALIZATION_FETCH',);
+
+            setTimeout( ()=> {
+                this.$store.dispatch('CAPTCHA_GET');
+            }, 1000)
+        }
 
     },
 

@@ -18,7 +18,7 @@ export default {
 
         try{
 
-            const out = await this.$app.networkHelper.get(`/channels/${algorithm}/${country}/${index}/${count}`);
+            const out = await this.$app.networkHelper.post(`/channels/top`, { algorithm, country, index, count} );
 
             if (out)
                 return out.channels;
@@ -32,7 +32,7 @@ export default {
 
         try{
 
-            const out = await this.$app.networkHelper.get(`/channels/get/${slug}`);
+            const out = await this.$app.networkHelper.post(`/channels/get`, {slug});
 
             if (out )
                 return commit('SET_CHANNEL', out.channel);

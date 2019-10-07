@@ -1,4 +1,5 @@
 import CookiesService from "src/services/cookies/cookies.service"
+import HttpHelper from "modules/network/http-helper"
 
 export default {
     // ensure data for rendering given list type
@@ -33,7 +34,7 @@ export default {
 
         try {
 
-            let res = await this.$app.networkHelper.get("https://geoip-db.com/json/" + ip, undefined, '', undefined, undefined,undefined, false);
+            let res = await HttpHelper.get("https://geoip-db.com/json/" + ip, undefined,  '', undefined,false);
 
             const payload = {
                 country: res.country_name || '',

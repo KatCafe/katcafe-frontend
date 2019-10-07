@@ -1,38 +1,55 @@
-const rp = require('request-promise');
-const consts = require('consts/consts');
+import socket from "./client-socket"
+import consts  from'consts/consts';
+import StringHelper from "src/utils/string-helper"
 
 class NetworkHelper {
 
     constructor(store){
         this._store = store;
+
+        this.post = this.request;
+        this.get = this.request;
     }
 
-    async post(address, body, prefix = consts.serverApi, json = true, timeout, headers = { 'User-Agent': 'Request-Promise' }, includeSession = true ){
+    request(address, body, json = true, timeout = 10000, includeSession = true ){
 
+        const headers = {};
         if (includeSession && this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
 
-        return rp({
-            uri: prefix + address,
-            headers,
-            json,
-            timeout,
-            method: "POST",
-            body,
+        let timeoutId;
+
+        const timeoutPromise = new Promise( (resolve, reject) =>{
+
+            timeoutId = setTimeout( ()=> {
+                //console.error("Error", address, body);
+                reject(new Error("Timeout"));
+            }, timeout);
+
         });
 
-    }
+        const promise = new Promise( (resolve, reject) => {
 
-    async get(address, body, prefix = consts.serverApi, json = true, timeout , headers = { 'User-Agent': 'Request-Promise' }, includeSession = true ){
+            socket.emit(address,{
+                body,
+                headers,
+            }, data => {
 
-        if (includeSession && this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
+                clearTimeout(timeoutId);
 
-        return rp({
-            uri: prefix + address,
-            headers,
-            json,
-            timeout,
-            body,
+                if (typeof data === "object" && data.error )reject(new Error( data.error ) );
+
+                resolve(data)
+
+            });
+
         });
+
+        return Promise.race([
+
+            promise,
+            timeoutPromise,
+
+        ])
 
     }
 

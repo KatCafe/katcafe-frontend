@@ -49,7 +49,7 @@ export default {
             let topic = state.map[slug];
 
             if (!topic) {
-                const out = await this.$app.networkHelper.get(`/topics/get/${slug}`);
+                const out = await this.$app.networkHelper.post(`/topics/get`, {slug});
 
                 if (out)
                     topic = out.topic;

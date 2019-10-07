@@ -12,7 +12,7 @@ export default {
 
         layoutLoading: false,
 
-        vueApp: null,
+        initialized: false,
 
     },
     actions,
