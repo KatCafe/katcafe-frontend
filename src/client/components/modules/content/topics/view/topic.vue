@@ -34,7 +34,7 @@
 
                             <h2 v-if="title" class="title word-wrap" v-html="title"/>
 
-                            <read-more  :text="body" :max-chars="400" pclass="body word-wrap" />
+                            <read-more :text="body" :max-chars="400" pclass="body word-wrap" class="body-parent"   />
 
                         </div>
                     </router-link>

@@ -30,7 +30,7 @@
 
                     <h3 v-if="title" class="title" v-html="title"/>
 
-                    <read-more :text="body" :max-chars="400" pclass="body word-wrap" />
+                    <read-more :text="body" :max-height="100" pclass="body word-wrap" class="body-parent" />
 
                 </div>
 

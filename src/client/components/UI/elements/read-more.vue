@@ -1,10 +1,14 @@
 <template>
     <div>
 
-        <p v-html="text.length > maxChars ? ( visible ? text : text.substr(0, maxChars) + '...'  ) : text " :class="`readMore ${pclass}`"></p>
+        <div :class="visible ? 'show-content' : 'hide-content'" ref="ref-div-content" :style="`${ visible ? '' : 'maxHeight: '+maxHeight+'px' }`">
+            <p v-html="text" :class="`readMore ${pclass}`"></p>
+        </div>
 
-        <a href="javascript:void(0)" v-if="!visible && text.length > maxChars" @click="showMore"> show more</a>
-        <a href="javascript:void(0)" v-if="visible && text.length > maxChars" @click="showLess"> show less</a>
+        <template v-if="isMore">
+            <a href="javascript:void(0)" v-if="!visible " @click="showMore"> show more</a>
+            <a href="javascript:void(0)" v-if="visible" @click="showLess"> show less</a>
+        </template>
 
     </div>
 </template>
@@ -14,13 +18,14 @@ export default {
 
     props: {
         text: {default: ''},
-        maxChars: {default: 400},
+        maxHeight: {default: 150},
         pclass: {default: ''},
     },
 
     data(){
         return {
-            visible: false
+            visible: false,
+            isMore: false,
         };
     },
 
@@ -36,6 +41,16 @@ export default {
 
     },
 
+    mounted(){
+
+        if (typeof window === "undefined") return;
+
+        console.log("this.$refs['ref-div-content'].height", this.$refs['ref-div-content'].clientHeight);
+        if (this.$refs['ref-div-content'].clientHeight >= this.maxHeight)
+            this.isMore = true;
+
+    }
+
 }
 </script>
 
@@ -44,4 +59,21 @@ export default {
         display: inline;
         padding-left: 0 !important;
     }
+
+    .hide-content {
+        overflow: hidden;
+    }
+
+    .show-content{
+
+    }
+
+    .showContent {
+        line-height: 1em;
+        height: auto;
+    }
+    .showContent{
+        height: auto;
+    }
+
 </style>
