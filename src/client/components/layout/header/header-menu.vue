@@ -18,6 +18,8 @@
             <header-channels-select :channels="channels" :channel="getChannelSlug" />
         </div>
 
+        <toggle-theme />
+
     </div>
 
 </template>
@@ -28,10 +30,11 @@ import CountrySelect from "../../UI/elements/select/country-select";
 import HeaderChannelsList from "./header-channels/header-channels-list"
 import HeaderChannelsSelect from "./header-channels/header-channels-select"
 import BrowserHelper from "modules/helpers/browser.helpers"
+import ToggleTheme from "./toggle-theme"
 
 export default {
 
-    components: { CountrySelect,  HeaderChannelsList, HeaderChannelsSelect },
+    components: { CountrySelect,  HeaderChannelsList, HeaderChannelsSelect, ToggleTheme },
 
     mounted(){
 
@@ -90,7 +93,7 @@ export default {
         background: #222;
         border-bottom: solid 1px #484848;
         display: grid;
-        grid-template-columns: 180px 1fr;
+        grid-template-columns: 180px 1fr 50px;
     }
 
 
@@ -102,7 +105,7 @@ export default {
     @media only screen and (max-width: 600px) {
 
         .nav-bar {
-            grid-template-columns: 150px 1fr;
+            grid-template-columns: 150px 1fr 50px;
         }
 
     }

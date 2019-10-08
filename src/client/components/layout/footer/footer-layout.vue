@@ -22,8 +22,9 @@ export default{
 <style>
 
     .footer {
+        background: var(--header-bg-color);
+
         text-align: center;
-        background: #2f2222;
         padding: 1em 1.25em;
     }
 

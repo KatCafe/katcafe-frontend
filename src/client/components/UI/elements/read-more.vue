@@ -31,11 +31,13 @@ export default {
 
     methods: {
 
-        showMore(){
+        showMore(e){
+            if (e) e.preventDefault();
             this.visible = true;
         },
 
-        showLess(){
+        showLess(e){
+            if (e) e.preventDefault();
             this.visible = false;
         }
 
@@ -68,11 +70,7 @@ export default {
 
     }
 
-    .showContent {
-        line-height: 1em;
-        height: auto;
-    }
-    .showContent{
+    .show-content {
         height: auto;
     }
 

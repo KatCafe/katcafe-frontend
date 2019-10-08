@@ -69,7 +69,7 @@ export default {
     .topic .view-more-comments{
         display: inline-block;
         padding: 0 15px 10px;
-        color: #b8b8b8;
+        color: var(--primary-color);
         font-size: 12px;
     }
 

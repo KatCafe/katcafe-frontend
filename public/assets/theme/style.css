@@ -40,13 +40,48 @@ Base styles
     color: #9b9b9b;
 }
 
+:root {
+    --bg-color: #292929;
+
+    --primary-color: #b8b8b8;
+    --secondary-color: #9c9b9b;
+    --font-color: white;
+
+    --header-bg-color: #24292e;
+
+    --a-link-color:#d0d0d0;
+    --a-link-visited: #c0c0c0;
+    --a-link-focus: #3a3a2a2;
+    --a-link-active: #f0f0f0;
+    --a-link-hover: white;
+
+    --edit-background: #313131;
+    --edit-border-color: #585858;
+    --edit-color: #dcdcdc;
+
+    --button-background-color: #f9de84;
+    --button-hover-background-color: #fed54c;
+    --button-content-color: black;
+
+    --new-topic-form-bg-color: #505050;
+    --new-topic-form-border-color: #6d6d6d;
+}
+
+[data-theme="dark"] {
+    --bg-color: white;
+
+    --button-content-color: #28a745;
+
+    --new-topic-form-bg-color: #fafbfc;
+    --new-topic-form-border-color: #e1e4e8;
+}
 
 body {
     margin: 0;
     padding: 0;
-    color: #b8b8b8;
     font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
-    background: #292929;
+    color: var(--primary-color);
+    background: var(--bg-color);
 }
 
 a{
@@ -55,23 +90,23 @@ a{
 }
 
 a:link {
-    color:#d0d0d0;
+    color:var(--a-link-color);
 }
 
 a:visited {
-    color: #c0c0c0;
+    color: var(--a-link-visited);
 }
 
 a:focus {
-    color: #a3a2a2;
+    color: var(--a-link-focus);
 }
 
 a:hover {
-    color:#ffffff;
+    color: var(--a-link-hover);
 }
 
 a:active {
-    color:#f0f0f0;
+    color: var(--a-link-active);
 }
 
 
@@ -120,7 +155,7 @@ p {
 
 i,
 span {
-    color: #9c9b9b;
+    color: var(--secondary-color);
 }
 
 blockquote {
@@ -215,7 +250,6 @@ Single styles
 .btn {
     color: #fff !important;
     background-color: royalblue;
-    border-color: #222;
     display: inline-block;
     padding: .5em 1em;
     margin-bottom: 0;
@@ -278,7 +312,7 @@ Single styles
 }
 
 .fa:hover{
-    color: white;
+    color: var(--font-color);
 }
 
 
@@ -295,9 +329,9 @@ select {
     width: 100%;
     display: inline-block;
     box-sizing: border-box;
-    background: #313131;
-    border: solid 1px #585858;
-    color: #dcdcdc;
+    background: var(--edit-background);
+    border: solid 1px var(--edit-border-color);
+    color: var(--edit-color);
     border-radius: 10px;
     padding: 10px;
     -webkit-box-sizing: border-box;
@@ -316,7 +350,7 @@ button,
 inout[type=checkbox],
 input[type=submit],
 input[type=button] {
-    background-color: #f9de84;
+    background-color: var(--button-background-color);
     text-align: center;
     font-size: 16px;
     padding: 10px;
@@ -331,16 +365,16 @@ input[type=button] {
 }
 
 button:hover{
-    background-color: #fed54c;
+    background-color: var(--button-hover-background-color);
 }
 
 button i,
 button span{
-    color: black;
+    color: var(--button-content-color);
 }
 
 button i:hover{
-    color: black !important;
+    color: var(--button-content-color) !important;
 }
 
 label:has( input ) {
@@ -402,7 +436,7 @@ form {
 
 
 .form label {
-    color: #9c9b9b;
+    color: var(--secondary-color);
 }
 
 .form input{
@@ -586,7 +620,7 @@ form {
     z-index: 3 !important;
     background-color: transparent;
 
-    color: #9f9e9e;
+    color: var(--secondary-color);
     width: 100%;
     font-size: 14px;
 
@@ -617,7 +651,7 @@ form {
 }
 
 .multiselect__input::placeholder{
-    color: #9f9e9e;
+    color: var(--secondary-color);
     opacity: 1; /* Firefox */
     font-size: 14px;
 }

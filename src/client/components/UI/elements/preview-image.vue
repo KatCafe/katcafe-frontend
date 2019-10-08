@@ -96,7 +96,7 @@ export default {
 
         toggleImage(e){
 
-            e.preventDefault();
+            if(e) e.preventDefault();
 
             this.toggledImage = !this.toggledImage;
 

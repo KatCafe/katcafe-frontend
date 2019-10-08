@@ -42,8 +42,9 @@ export default {
 <style>
 
     .content-options-bar {
+        background-color: var(--header-bg-color);
+
         display: block;
-        background-color: #272626;
         border-color: #251f1f;
         border-style: solid;
         border-width: 1px 0 1px 0;

@@ -1,8 +1,8 @@
 
 .new-topic-form{
     box-sizing: border-box;
-    background-color: #505050;
-    border: solid 1px #6d6d6d;
+    background-color: var(--new-topic-form-bg-color);
+    border: solid 1px var(--new-topic-form-border-color);
     padding: 10px 15px;
     margin-bottom: 20px;
 }

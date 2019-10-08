@@ -98,6 +98,11 @@ export default {
 
 
 <style>
+
+    .header{
+        background: var(--header-bg-color);
+    }
+
     .sticky{
         position: -webkit-sticky; /* Safari */
         position: sticky;
