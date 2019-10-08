@@ -37,7 +37,7 @@ export default {
         if ( !confirm('Are you sure you want to delete comment: '+comment.body) )
             return;
 
-        const out = await this.$app.networkHelper.post('/comments/delete/', { slug: comment.slug } );
+        const out = await this.$app.networkHelper.post('/comments/delete', { slug: comment.slug } );
 
         if (out)
             commit('SET_COMMENTS_DELETE', [comment.slug]);

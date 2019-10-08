@@ -97,7 +97,7 @@ export default {
         if (!confirm('Are you sure you want to delete topic: '+topic.slug))
             return;
 
-        const out = await this.$app.networkHelper.post('/topics/delete/', { slug: topic.slug } );
+        const out = await this.$app.networkHelper.post('/topics/delete', { slug: topic.slug } );
 
         if (out)
             commit('SET_TOPICS_DELETE', [topic.slug]);
