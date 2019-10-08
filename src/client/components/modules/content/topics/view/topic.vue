@@ -56,7 +56,8 @@
 
             <add-comment-from v-if="!isSnippetForm && isPreview " :topic="this.topic" />
 
-            <add-comment-from v-if="isPage" :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage" />
+            <add-comment-from v-if="isPage" :topic="this.topic" class="hiddenTablet hiddenMobile" :isPage="isPage"  />
+
         </div>
 
     </div>

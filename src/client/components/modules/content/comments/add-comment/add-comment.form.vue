@@ -10,7 +10,7 @@
             <img class="profile-avatar" src="/public/assets/theme/anonymous.png">
 
             <div class="input-file-upload-group">
-                <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="bodyEdit" @change="bodyChanged"/>
+                <textarea type="text" :placeholder="$t('comment.writeReply')" v-model="bodyEdit" @change="bodyChanged" ref="ref-text-area" :style="{maxHeight: textAreaMaxHeight+'px'}" />
                 <input type="file" style="display: none; " value="or Select File" v-on:change="fileChanged" accept="image/*" ref="refFileInput" >
                 <icon class="input-file-icon" icon="camera" @click="openFileUpload" />
             </div>
@@ -44,6 +44,7 @@ import Comment from "client/components/modules/content/comments/view/comment"
 import LoadingButton from 'client/components/UI/elements/loading-button'
 import AddCommentParams from "./add-comment-params"
 import AddTopicBase from "./../../topics/add-topic/add-topic-base.form"
+import Autosize from "autosize"
 
 export default {
 
@@ -56,6 +57,7 @@ export default {
         isPage: {default: false},
         isShowPreview: {default: true},
         useTitle: {default: false},
+        textAreaMaxHeight: {default: 150},
     },
 
     components: { Icon, Comment, LoadingButton, AddTopicBase },
@@ -112,6 +114,13 @@ export default {
 
 
     },
+
+    mounted(){
+
+        if (typeof window === "undefined") return;
+        Autosize(this.$refs['ref-text-area']);
+
+    }
 
 }
 </script>

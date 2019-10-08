@@ -15,6 +15,7 @@
     "npm": ">=4.0"
   },
   "dependencies": {
+    "autosize": "^4.0.2",
     "node-fetch": "^2.6.0",
     "route-cache": "0.4.3",
     "sanitize-html": "^1.14.1",

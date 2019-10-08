@@ -2,7 +2,7 @@
 
     <div class="right-sidebar sticky-sidebar" >
 
-        <add-comment-form  ref="addCommentForm" :topic="stickyTopic||topic" :channel="stickyChannel||channel" :isShowPreview="isShowPreview" class="sticky-sidebar-content" />
+        <add-comment-form  ref="addCommentForm" :topic="stickyTopic||topic" :channel="stickyChannel||channel" :isShowPreview="isShowPreview" class="sticky-sidebar-content" :textAreaMaxHeight="textAreaMaxHeight" />
 
     </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     data(){
         return {
             isShowPreview: true,
+            textAreaMaxHeight: 0,
         }
     },
 
@@ -47,7 +48,10 @@ export default {
                 addCommentForm.style.bottom = "0";
                 addCommentForm.style.top = "inherit";
                 addCommentForm.style.width = '100%';
+
                 this.isShowPreview = false;
+                this.textAreaMaxHeight = 100;
+
             }
             else {
                 addCommentForm.style.position = "relative";
@@ -60,6 +64,7 @@ export default {
                 addCommentForm.style.width = '100%';
 
                 this.isShowPreview = true;
+                this.textAreaMaxHeight = 300;
             }
 
         };

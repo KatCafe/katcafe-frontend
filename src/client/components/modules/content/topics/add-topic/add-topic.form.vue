@@ -21,7 +21,7 @@
 
             <div class="new-topic-body">
 
-                <textarea type="text" :placeholder="$t('topic.threadComment')" v-model="bodyEdit" @change="bodyChanged"/>
+                <textarea type="text" :placeholder="$t('topic.threadComment')" v-model="bodyEdit" @change="bodyChanged" ref="ref-text-area"/>
 
                 <loading-button @submit="openCaptcha" :text="$t('topic.submitTopic')" />
 
@@ -48,6 +48,7 @@ import Topic from "client/components/modules/content/topics/view/topic"
 import Icon from "client/components/UI/elements/icons/icon"
 import LoadingButton from 'client/components/UI/elements/loading-button'
 import AddTopicParams from "./add-topic-params"
+import Autosize from "autosize"
 
 
 export default {
@@ -103,6 +104,13 @@ export default {
         }
 
     },
+
+    mounted(){
+
+        if (typeof window === "undefined") return;
+        Autosize(this.$refs['ref-text-area']);
+
+    }
 
 
 }
