@@ -3,9 +3,9 @@
     border-width: 1px;
     border-style: solid;
     width: 100%;
-    background-color: #3c3c3c;
+    background-color: var(--topic-bg-color);
+    border-color: var(--topic-border-color);
     margin-bottom: 20px;
-    border-color: rgb(68, 68, 68);
     padding: 10px 10px 10px 0;
     box-sizing: border-box;
 
@@ -21,12 +21,12 @@
 
 
 .topic .author{
-    background: #474747;
+    background: var(--topic-author);
     padding: 0 10px;
 }
 
 .topic .unread{
-    background: #524b31;
+    background: var(--topic-author-unread);
 }
 
 .topic .author a{
@@ -64,7 +64,7 @@
 }
 
 .topic-body:hover{
-    background-color: #373737;
+    background-color: var(--topic-body--hover);
     transition: all 0.2s ease
 }
 
@@ -76,7 +76,6 @@
 }
 
 .topic-text-wrap{
-    color: #fff;
 }
 
 .topic-text-wrap .title{
@@ -92,6 +91,7 @@
     font-size: 14px;
     line-height: 20px;
     padding-bottom: 10px;
+    color: var(--font-color)
 }
 
 .topic-comments{

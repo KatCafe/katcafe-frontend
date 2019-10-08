@@ -113,8 +113,8 @@ export default {
     }
 
     .sticky-sidebar-content {
-        background-color: #3c3c3c;
-        border-color: rgb(40, 35, 35);
+        background-color: var(--topic-bg-color);
+        border-color: var(--topic-border-color);
         border-style: solid;
         border-width: 1px;
         z-index: 10;

@@ -55,25 +55,61 @@ Base styles
     --a-link-active: #f0f0f0;
     --a-link-hover: white;
 
-    --edit-background: #313131;
+    --edit-bg: #313131;
     --edit-border-color: #585858;
     --edit-color: #dcdcdc;
 
-    --button-background-color: #f9de84;
-    --button-hover-background-color: #fed54c;
+    --button-bg-color: #f9de84;
+    --button-hover-bg-color: #fed54c;
     --button-content-color: black;
+
+    --form-bg-color: #222222;
+    --form-border-color: #323232;
 
     --new-topic-form-bg-color: #505050;
     --new-topic-form-border-color: #6d6d6d;
+
+    --topic-bg-color: #3c3c3c;
+    --topic-border-color: #444444;
+    --topic-author: #474747;
+    --topic-author-unread: #524b31;
+    --topic-body--hover: #373737;
+
+    --comment-body--hover: #373737;
 }
 
 [data-theme="dark"] {
     --bg-color: white;
 
+    --primary-color: #586069;
+
+    --font-color: #586069;
+
+    --a-link-color:#586069;
+    --a-link-visited: #586069;
+    --a-link-focus: #586069;
+    --a-link-active: #586069;
+    --a-link-hover: #586069;
+
+    --edit-bg: #FFF;
+    --edit-border-color: #d1d5da;
+    --edit-color: #586069;
+
+    --form-bg-color: #fafbfc;
+    --form-border-color: #e1e4e8;
+
     --button-content-color: #28a745;
 
     --new-topic-form-bg-color: #fafbfc;
     --new-topic-form-border-color: #e1e4e8;
+
+    --topic-bg-color: #fafbfc;
+    --topic-border-color: #e1e4e8;
+    --topic-author: #e6e6e6;
+    --topic-author-unread: #ffeba0;
+    --topic-body--hover: #f3f3f3;
+
+    --comment-body--hover: #f3f3f3;
 }
 
 body {
@@ -329,7 +365,7 @@ select {
     width: 100%;
     display: inline-block;
     box-sizing: border-box;
-    background: var(--edit-background);
+    background: var(--edit-bg);
     border: solid 1px var(--edit-border-color);
     color: var(--edit-color);
     border-radius: 10px;
@@ -350,7 +386,7 @@ button,
 inout[type=checkbox],
 input[type=submit],
 input[type=button] {
-    background-color: var(--button-background-color);
+    background-color: var(--button-bg-color);
     text-align: center;
     font-size: 16px;
     padding: 10px;
@@ -365,7 +401,7 @@ input[type=button] {
 }
 
 button:hover{
-    background-color: var(--button-hover-background-color);
+    background-color: var(--button-hover-bg-color);
 }
 
 button i,
@@ -396,9 +432,9 @@ label input[type=checkbox]{
 
 form {
     border-radius: 5px;
-    background-color: #222222;
+    background-color: var(--form-bg-color);
+    border: solid 1px var(--form-border-color);
     padding: 10px;
-    border: solid 1px #323232;
 }
 
 .input-file-upload-group{
@@ -453,7 +489,6 @@ form {
 .popup h1{
     text-align: center;
     margin-top: 20px;
-    color: #bbb;
 }
 
 .popup{

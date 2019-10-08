@@ -2,10 +2,10 @@
 
     <div class="toggle-theme">
         <button>
-            <i class="fa fa-sun-o" @click="setTheme('light')"></i>
+            <i class="fa fa-sun-o" @click="setTheme('dark')"></i>
         </button>
         <button>
-            <i class="fa fa-moon-o" @click="setTheme('dark')"></i>
+            <i class="fa fa-moon-o" @click="setTheme('light')"></i>
         </button>
     </div>
 

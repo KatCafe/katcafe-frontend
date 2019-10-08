@@ -5,7 +5,7 @@
 }
 
 .comment:hover{
-    background-color: #373737;
+    background-color: var(--comment-body--hover);
     transition: all 0.2s ease;
 }
 
