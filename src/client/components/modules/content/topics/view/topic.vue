@@ -5,7 +5,7 @@
 
         <vote parentType="topic" :slug="slug" :parent="topic" :myVote="topic.myVote" />
 
-        <div >
+        <div class="topic-line" >
 
             <div class="topic-body">
                 <div :class="`author ${ seen ? '' : 'unread'}`">

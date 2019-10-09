@@ -66,7 +66,6 @@ Base styles
 
     --form-bg-color: #222222;
     --form-border-color: #323232;
-
     --new-topic-form-bg-color: #505050;
     --new-topic-form-border-color: #6d6d6d;
 
@@ -75,6 +74,7 @@ Base styles
     --topic-author: transparent;
     --topic-author-unread: #524b31;
     --topic-body--hover: #373737;
+    --topic-line-border-color: dotted #4d4d4d;
 
     --comment-body--hover: #373737;
 }
@@ -83,8 +83,8 @@ Base styles
     --bg-color: #dae0e6;
 
     --primary-color: #586069;
-    --secondary-color: #586069;
-    --font-color: #586069;
+    --secondary-color: #828282;
+    --font-color: #505050;
 
     --header-bg-color: #f3f3f3;
     --header-border-color: #d9d9d9;
@@ -92,7 +92,7 @@ Base styles
     --a-link-color:#586069;
     --a-link-visited: #586069;
     --a-link-focus: #586069;
-    --a-link-active: #586069;
+    --a-link-active: black;
     --a-link-hover: #586069;
 
     --edit-bg: #FFF;
@@ -112,6 +112,7 @@ Base styles
     --topic-author: transparent;
     --topic-author-unread: #ffeba0;
     --topic-body--hover: #f3f3f3;
+    --topic-line-border-color: dotted #e7e7e7;
 
     --comment-body--hover: #f3f3f3;
 }
@@ -193,8 +194,7 @@ p {
     line-height: 1.5;
 }
 
-i,
-span {
+i, span {
     color: var(--secondary-color);
 }
 
@@ -236,9 +236,10 @@ Layout styles
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
-    float: left;
-    margin: 0 auto;
+    margin: auto;
+    margin-top: 0;
     width: 100%;
+    max-width: 1200px;
 }
 
 .left {
@@ -246,10 +247,17 @@ Layout styles
     width: 100%;
     max-width: 800px;
     padding-right: 10px;
-    margin: 0 auto;
+    margin-left:auto;
+    margin-right:0;
 }
 
 .right {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.center {
+    margin: auto;
 }
 
 .row{
@@ -677,7 +685,7 @@ form {
 .multiselect__tags {
     border-radius: 0;
     border: none;
-    background-color: #323232;
+    background-color: var(--header-bg-color);
     padding: 0 40px 0 10px;
 
     min-height: 30px;

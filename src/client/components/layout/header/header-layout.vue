@@ -13,7 +13,7 @@
 
             <div class="header-right">
 
-                <router-link class="menu-button" to="/add-channel">
+                <router-link to="/add-channel">
                     {{$t('header.addChannel')}}
                 </router-link>
 
@@ -142,10 +142,6 @@ export default {
 
     .menu-button{
         line-height: 44px;
-    }
-
-    .menu-button:hover{
-        color: #fff!important;
     }
 
 

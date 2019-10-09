@@ -178,18 +178,19 @@ export default {
 <style>
 
     .topic-page{
-        display: grid;
-        grid-template-columns: 1fr 400px;
+        max-width: 1300px;
+
     }
 
     .comment-right-bar{
-        width: 100%;
-        padding: 0 10px;
+        max-width: 380px;
+        padding: 0 10px 0 0;
     }
 
     @media only screen and (max-width: 900px) {
 
         .topic-page {
+            display: grid;
             grid-template-columns: 1fr;
         }
 

@@ -1,7 +1,7 @@
 <template>
 
     <div class="content-options-bar">
-        <div :class="`left ${pclass}` ">
+        <div :class="`left ${pclass} center` ">
             <span >VIEW</span>
             <icon :class="contentDisplay === 'topics' ? 'selected' : ''" icon="comment" @click="changeContentDisplay('topics')" />
             <icon :class="contentDisplay === 'comments' ? 'selected' : ''" icon="comments" @click="changeContentDisplay('comments')" />
@@ -46,7 +46,7 @@ export default {
         border-bottom: solid 1px var(--header-border-color);
 
         display: block;
-
+        padding-left: 10px;
     }
 
     .content-options-bar .left{
@@ -66,7 +66,7 @@ export default {
     }
 
     .content-options-bar  .selected{
-        color: white;
+        color: var(--a-link-visited);
     }
 
 </style>

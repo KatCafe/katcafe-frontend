@@ -5,7 +5,7 @@
 
         <div :class="`row content-display ${pclass}`">
 
-            <div class="column left">
+            <div class="column left center">
 
                 <add-topic-form :parentSlug="channelToWrite" />
 

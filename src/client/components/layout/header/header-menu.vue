@@ -98,11 +98,6 @@ export default {
     }
 
 
-    .nav-bar a:hover{
-        background: #2a2a2a!important;
-        color: #fff;
-    }
-
     @media only screen and (max-width: 600px) {
 
         .nav-bar {

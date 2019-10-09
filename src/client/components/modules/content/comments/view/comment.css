@@ -4,6 +4,18 @@
     border-width: 0;
 }
 
+.comment:after{
+    content: '';
+    width: 0;
+    position: absolute;
+    border: 0.5px var(--topic-line-border-color);
+    top: 48px;
+    bottom: 2px;
+    left: 19.5px;
+
+    z-index: 0;
+}
+
 .comment:hover{
     background-color: var(--comment-body--hover);
     transition: all 0.2s ease;
@@ -14,4 +26,12 @@
 
 .comment-has-image{
     grid-template-columns: 110px 1fr;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .comment:after{
+        left: 10px;
+    }
+
 }

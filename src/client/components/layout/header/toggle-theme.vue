@@ -1,10 +1,10 @@
 <template>
 
     <div class="toggle-theme">
-        <button>
+        <button :class="`${theme === 'light' ? 'activated' : ''}`">
             <i class="fa fa-sun-o" @click="setTheme('light')"></i>
         </button>
-        <button>
+        <button :class="`${theme === 'dark' ? 'activated' : ''}`">
             <i class="fa fa-moon-o" @click="setTheme('dark')"></i>
         </button>
     </div>
@@ -14,30 +14,40 @@
 <script>
 export default {
 
+    data(){
+        return {
+            theme: 'dark',
+        }
+    },
+
     mounted(){
 
         if (typeof window === "undefined") return;
 
         const value = localStorage.getItem('theme');
         if (value)
-            this.setTheme(value, false);
+            this.theme = value;
 
     },
 
     methods:{
 
-        setTheme(name, save = true){
+        setTheme(name){
 
-            document.documentElement.setAttribute('data-theme', name);
-
-            if (save)
-                localStorage.setItem('theme', name); //add this
+            this.theme = name;
 
         }
 
+    },
+
+    watch: {
+        theme: function (newValue, oldValue) {
+
+            document.documentElement.setAttribute('data-theme', newValue);
+            localStorage.setItem('theme', newValue); //add this
+
+        },
     }
-
-
 
 }
 </script>
@@ -45,6 +55,7 @@ export default {
 <style>
 
     .toggle-theme{
+        padding: 5px 0;
         display: inline-block;
     }
 
@@ -55,6 +66,10 @@ export default {
         margin: 0;
         border-radius: 0;
         display: inline-block;
+    }
+
+    .toggle-theme .activated{
+        background-color: #8dc647 !important;
     }
 
     .toggle-theme button:nth-child(1){

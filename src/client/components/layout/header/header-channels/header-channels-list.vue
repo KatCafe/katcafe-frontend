@@ -51,14 +51,14 @@ export default {
 
     .nav li a {
         text-decoration: none;
-        color: #a3a2a2;
         padding: 8px 4px 8px 4px;
         display: inline-block;
         height: 14px;
     }
 
     .nav li.selected a {
-        color: white;
+        color: var(--a-link-active);
+        font-weight: bold;
     }
 
     @media only screen and (max-width: 1200px) {

@@ -11,9 +11,21 @@
 
     display: grid;
     grid-template-columns: 40px 1fr;
+
+    position: relative;
 }
 
+.topic-line:after{
+    content: '';
+    width: 0;
+    position: absolute;
+    border: 0.5px var(--topic-line-border-color);
+    top: 60px;
+    bottom: 15px;
+    left: +19px;
 
+    z-index: 0;
+}
 
 .topic h2{
     font-size: 20px;
@@ -145,6 +157,10 @@
     .topic {
         grid-template-columns: 20px 1fr;
         padding-right: 5px;
+    }
+
+    .topic-line:after{
+        left: 10px;
     }
 
     .topic-content{
