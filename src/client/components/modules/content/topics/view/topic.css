@@ -94,6 +94,7 @@
     padding-right: 10px;
 }
 
+
 .topic-body:hover{
     background-color: var(--topic-body--hover);
     transition: all 0.2s ease
@@ -107,6 +108,7 @@
 }
 
 .topic-text-wrap{
+    color: var(--font-color)
 }
 
 .topic-text-wrap .title{
