@@ -66,7 +66,7 @@ export default {
     }
 
     .content-options-bar  .selected{
-        color: var(--a-link-visited);
+        color: var(--a-link-hover);
     }
 
 </style>

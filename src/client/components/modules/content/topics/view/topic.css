@@ -9,21 +9,20 @@
 
 [data-theme="light"] {
     --topic-bg-color: #fff;
-    --topic-border-color: #eeeeee;
+    --topic-border-color: #a7a7a7;
     --topic-author: transparent;
     --topic-author-unread: #ffeba0;
     --topic-body--hover: #f3f3f3;
-    --topic-line-border-color: dotted #e7e7e7;
+    --topic-line-border-color: dotted #b7b7b7;
 
 }
 
 
 .topic{
-    border-width: 1px;
-    border-style: solid;
     width: 100%;
     background-color: var(--topic-bg-color);
-    border-color: var(--topic-border-color);
+    border: 1px solid var(--topic-border-color);
+    border-radius: 4px;
     margin-bottom: 20px;
     padding: 10px 10px 10px 0;
     box-sizing: border-box;

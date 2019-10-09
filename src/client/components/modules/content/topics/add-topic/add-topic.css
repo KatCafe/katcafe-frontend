@@ -5,14 +5,15 @@
 
 [data-theme="light"] {
     --new-topic-form-bg-color: #fafbfc;
-    --new-topic-form-border-color: #e1e4e8;
+    --new-topic-form-border-color: #a7a7a7;
 
 }
 
 .new-topic-form{
     box-sizing: border-box;
     background-color: var(--new-topic-form-bg-color);
-    border: solid 1px var(--new-topic-form-border-color);
+    border: 1px solid var(--new-topic-form-border-color);
+    border-radius: 4px;
     padding: 10px 15px;
     margin-bottom: 20px;
 }
