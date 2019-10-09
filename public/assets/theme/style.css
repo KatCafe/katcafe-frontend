@@ -47,8 +47,8 @@ Base styles
     --secondary-color: #9c9b9b;
     --font-color: white;
 
-    --header-bg-color: #24292e;
-    --header-bg-color: #24292e;
+    --header-bg-color: #222;
+    --header-border-color: #251f1f;
 
     --a-link-color:#d0d0d0;
     --a-link-visited: #c0c0c0;
@@ -66,24 +66,15 @@ Base styles
 
     --form-bg-color: #222222;
     --form-border-color: #323232;
-    --new-topic-form-bg-color: #505050;
-    --new-topic-form-border-color: #6d6d6d;
 
-    --topic-bg-color: #3c3c3c;
-    --topic-border-color: #444444;
-    --topic-author: transparent;
-    --topic-author-unread: #524b31;
-    --topic-body--hover: #373737;
-    --topic-line-border-color: dotted #4d4d4d;
-
-    --comment-body--hover: #373737;
+    --multiselect-bg-color: #323232;
 }
 
 [data-theme="light"] {
     --bg-color: #dae0e6;
 
-    --primary-color: #586069;
-    --secondary-color: #828282;
+    --primary-color: #828282;
+    --secondary-color: #586069;
     --font-color: #505050;
 
     --header-bg-color: #f3f3f3;
@@ -104,17 +95,7 @@ Base styles
 
     --button-content-color: #28a745;
 
-    --new-topic-form-bg-color: #fafbfc;
-    --new-topic-form-border-color: #e1e4e8;
-
-    --topic-bg-color: #fff;
-    --topic-border-color: #eeeeee;
-    --topic-author: transparent;
-    --topic-author-unread: #ffeba0;
-    --topic-body--hover: #f3f3f3;
-    --topic-line-border-color: dotted #e7e7e7;
-
-    --comment-body--hover: #f3f3f3;
+    --multiselect-bg-color: #e3e3e3;
 }
 
 body {
@@ -685,7 +666,7 @@ form {
 .multiselect__tags {
     border-radius: 0;
     border: none;
-    background-color: var(--header-bg-color);
+    background-color: var(--multiselect-bg-color);
     padding: 0 40px 0 10px;
 
     min-height: 30px;

@@ -1,3 +1,22 @@
+:root {
+    --topic-bg-color: #3c3c3c;
+    --topic-border-color: #444444;
+    --topic-author: transparent;
+    --topic-author-unread: #524b31;
+    --topic-body--hover: #373737;
+    --topic-line-border-color: dotted #4d4d4d;
+}
+
+[data-theme="light"] {
+    --topic-bg-color: #fff;
+    --topic-border-color: #eeeeee;
+    --topic-author: transparent;
+    --topic-author-unread: #ffeba0;
+    --topic-body--hover: #f3f3f3;
+    --topic-line-border-color: dotted #e7e7e7;
+
+}
+
 
 .topic{
     border-width: 1px;

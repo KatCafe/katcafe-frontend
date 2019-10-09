@@ -138,6 +138,7 @@ export default {
 
     .header-right a{
         padding-right: 5px;
+        line-height: 44px;
     }
 
     .menu-button{

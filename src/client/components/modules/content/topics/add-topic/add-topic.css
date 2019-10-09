@@ -1,3 +1,13 @@
+:root {
+    --new-topic-form-bg-color: #505050;
+    --new-topic-form-border-color: #6d6d6d;
+}
+
+[data-theme="light"] {
+    --new-topic-form-bg-color: #fafbfc;
+    --new-topic-form-border-color: #e1e4e8;
+
+}
 
 .new-topic-form{
     box-sizing: border-box;

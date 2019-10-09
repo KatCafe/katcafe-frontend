@@ -1,3 +1,11 @@
+:root {
+    --comment-body--hover: #373737;
+}
+
+[data-theme="light"] {
+    --comment-body--hover: #f3f3f3;
+}
+
 .comment {
     padding: 0 0 10px 0;
     margin-bottom: 0;
