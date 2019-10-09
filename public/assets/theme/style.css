@@ -47,8 +47,11 @@ Base styles
     --secondary-color: #9c9b9b;
     --font-color: white;
 
+    --header-first-bg-color: #222;
+    --header-first-border-color: #303030;
+
     --header-bg-color: #222;
-    --header-border-color: #251f1f;
+    --header-border-color: #303030;
 
     --a-link-color:#d0d0d0;
     --a-link-visited: #c0c0c0;
@@ -77,7 +80,10 @@ Base styles
     --secondary-color: #586069;
     --font-color: #505050;
 
-    --header-bg-color: #f3f3f3;
+    --header-first-bg-color: #f3f3f3;
+    --header-first-border-color: #d9d9d9;
+
+    --header-bg-color: white;
     --header-border-color: #d9d9d9;
 
     --a-link-color:#586069;
@@ -86,7 +92,7 @@ Base styles
     --a-link-active: #586069;
     --a-link-hover: black;
 
-    --edit-bg: #FFF;
+    --edit-bg: #fcfcfc;
     --edit-border-color: #d1d5da;
     --edit-color: #586069;
 

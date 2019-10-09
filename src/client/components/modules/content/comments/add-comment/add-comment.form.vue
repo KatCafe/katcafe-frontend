@@ -28,7 +28,7 @@
             <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
 
             <div v-if="!loading" >
-                <span class='commentPreview hiddenMobile'>{{$t('comment.previewComment')}}</span>
+                <span class='new-topic-preview new-comment-preview hiddenMobile'>{{$t('comment.previewComment')}}</span>
                 <comment :comment="previewContent" :isSnippetForm="true" />
             </div>
 

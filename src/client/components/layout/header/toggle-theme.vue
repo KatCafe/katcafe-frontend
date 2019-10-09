@@ -27,6 +27,8 @@ export default {
         const value = localStorage.getItem('theme');
         if (value)
             this.theme = value;
+        else
+            this.theme = "light";
 
     },
 

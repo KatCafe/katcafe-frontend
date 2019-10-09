@@ -89,8 +89,8 @@ export default {
 
 <style>
     .nav-bar {
-        background: var(--header-bg-color);
-        border-bottom: solid 1px var(--header-border-color);
+        background: var(--header-first-bg-color);
+        border-bottom: solid 1px var(--header-first-border-color);
 
         font-size: 12px;
         display: grid;

@@ -34,7 +34,7 @@
 
         <div v-if="showPreview && !loading" >
 
-            <span>{{$t('topic.previewThread')}}</span>
+            <span class="new-topic-preview">{{$t('topic.previewThread')}}</span>
             <topic :topic="previewContent" :isSnippetForm="true" />
         </div>
 

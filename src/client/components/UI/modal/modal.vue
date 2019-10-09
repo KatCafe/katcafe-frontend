@@ -95,8 +95,8 @@ export default{
         transform: translate(-50%, -50%);
         border-radius: 10px;
         padding: 10px 10px 0;
-        background-color: #282121;
-        border: solid 1px #532f2f;
+        background-color: var(--form-bg-color);
+        border: solid 1px var(--form-border-color);
         width: 100%;
     }
 
