@@ -55,7 +55,7 @@ export default {
 <style>
 
     .toggle-theme{
-        padding: 5px 0;
+        padding: 5px 0 0 5px;
         display: inline-block;
     }
 

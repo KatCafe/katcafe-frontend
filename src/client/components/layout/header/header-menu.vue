@@ -94,14 +94,14 @@ export default {
 
         font-size: 12px;
         display: grid;
-        grid-template-columns: 180px 1fr 50px;
+        grid-template-columns: 180px 1fr 55px;
     }
 
 
     @media only screen and (max-width: 600px) {
 
         .nav-bar {
-            grid-template-columns: 150px 1fr 50px;
+            grid-template-columns: 150px 1fr 55px;
         }
 
     }

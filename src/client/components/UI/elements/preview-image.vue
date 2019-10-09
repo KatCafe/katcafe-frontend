@@ -1,14 +1,16 @@
 <template>
-    <div v-if="preview" class="preview-image-wrap">
+        <div v-if="preview" class="preview-image-wrap">
 
-        <img class="hiddenMobile" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}"  :src="preview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
+            <img class="hiddenMobile" :style="{maxHeight: maxHeight+'px',   maxWidth: maxWidth+'px'}"  :src="preview.img" @mouseenter="showThumbnail" @mouseleave="hideThumbnail" @click="toggleImage" @load="imageLoaded">
 
-        <img class="hiddenDesktop"  :src="preview.img">
+            <img class="hiddenDesktop"  :src="preview.img">
 
-        <a v-if="link" :href="link" target="_blank">
-            {{linkPreview}}
-        </a>
-    </div>
+            <a v-if="link" :href="link" target="_blank">
+                {{linkPreview}}
+            </a>
+
+        </div>
+
 </template>
 
 <script>
@@ -111,10 +113,12 @@ export default {
 <style>
 
     .preview-image-wrap{
+        display: inherit;
         float: left;
         padding-bottom: 3px;
         cursor: pointer;
         z-index: 10;
+        padding-right: 10px;
     }
 
     .preview-image-wrap img{
@@ -125,6 +129,8 @@ export default {
     .preview-image-wrap a{
         white-space: nowrap;
         font-size: 11px;
+        margin-top: 3px;
+        margin-bottom: 10px;
     }
 
     @media only screen and (max-width: 600px) {
