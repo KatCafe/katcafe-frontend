@@ -119,6 +119,7 @@ export default {
         cursor: pointer;
         z-index: 10;
         padding-right: 10px;
+        margin-bottom: 10px;
     }
 
     .preview-image-wrap img{
@@ -130,7 +131,6 @@ export default {
         white-space: nowrap;
         font-size: 11px;
         margin-top: 3px;
-        margin-bottom: 10px;
     }
 
     @media only screen and (max-width: 600px) {
