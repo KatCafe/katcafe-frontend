@@ -47,7 +47,6 @@ export default {
 
         if (typeof window === "undefined") return;
 
-        console.log("this.$refs['ref-div-content'].height", this.$refs['ref-div-content'].clientHeight);
         if (this.$refs['ref-div-content'].clientHeight >= this.maxHeight)
             this.isMore = true;
 

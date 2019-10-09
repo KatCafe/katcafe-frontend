@@ -1,11 +1,11 @@
 <template>
 
-    <div class="toggle-theme">
-        <button :class="`${theme === 'light' ? 'activated' : ''}`">
-            <i class="fa fa-sun-o" @click="setTheme('light')"></i>
+    <div class="toggle-theme" >
+        <button :class="`${theme === 'light' ? 'activated' : ''}`" @click="setTheme('light')">
+            <i class="fa fa-sun-o"></i>
         </button>
-        <button :class="`${theme === 'dark' ? 'activated' : ''}`">
-            <i class="fa fa-moon-o" @click="setTheme('dark')"></i>
+        <button :class="`${theme === 'dark' ? 'activated' : ''}`" @click="setTheme('dark')">
+            <i class="fa fa-moon-o"></i>
         </button>
     </div>
 

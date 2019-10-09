@@ -92,8 +92,8 @@ Base styles
     --a-link-color:#586069;
     --a-link-visited: #586069;
     --a-link-focus: #586069;
-    --a-link-active: black;
-    --a-link-hover: #586069;
+    --a-link-active: #586069;
+    --a-link-hover: black;
 
     --edit-bg: #FFF;
     --edit-border-color: #d1d5da;
