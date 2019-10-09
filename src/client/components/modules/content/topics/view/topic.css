@@ -22,7 +22,7 @@
 
 .topic .author{
     background: var(--topic-author);
-    padding: 0 10px;
+    padding: 0 10px 0 0;
 }
 
 .topic .unread{
@@ -53,7 +53,8 @@
 }
 
 .topic .author .normal{
-    color: #fed54c;
+    color: #439cde;
+    font-weight: normal;
 }
 
 

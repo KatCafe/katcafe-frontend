@@ -99,10 +99,6 @@ export default {
 
 <style>
 
-    .header{
-        background: var(--header-bg-color);
-    }
-
     .sticky{
         position: -webkit-sticky; /* Safari */
         position: sticky;
@@ -111,8 +107,9 @@ export default {
     }
 
     .header {
-        color: #0d052f;
-        background: #222;
+        background: var(--header-bg-color);
+        border-bottom: solid 1px var(--header-border-color);
+
         padding: 2px 20px 0;
     }
 

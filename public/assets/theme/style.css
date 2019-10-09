@@ -48,6 +48,7 @@ Base styles
     --font-color: white;
 
     --header-bg-color: #24292e;
+    --header-bg-color: #24292e;
 
     --a-link-color:#d0d0d0;
     --a-link-visited: #c0c0c0;
@@ -71,19 +72,22 @@ Base styles
 
     --topic-bg-color: #3c3c3c;
     --topic-border-color: #444444;
-    --topic-author: #474747;
+    --topic-author: transparent;
     --topic-author-unread: #524b31;
     --topic-body--hover: #373737;
 
     --comment-body--hover: #373737;
 }
 
-[data-theme="dark"] {
-    --bg-color: white;
+[data-theme="light"] {
+    --bg-color: #dae0e6;
 
     --primary-color: #586069;
-
+    --secondary-color: #586069;
     --font-color: #586069;
+
+    --header-bg-color: #f3f3f3;
+    --header-border-color: #d9d9d9;
 
     --a-link-color:#586069;
     --a-link-visited: #586069;
@@ -103,9 +107,9 @@ Base styles
     --new-topic-form-bg-color: #fafbfc;
     --new-topic-form-border-color: #e1e4e8;
 
-    --topic-bg-color: #fafbfc;
-    --topic-border-color: #e1e4e8;
-    --topic-author: #e6e6e6;
+    --topic-bg-color: #fff;
+    --topic-border-color: #eeeeee;
+    --topic-author: transparent;
     --topic-author-unread: #ffeba0;
     --topic-body--hover: #f3f3f3;
 

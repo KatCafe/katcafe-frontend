@@ -89,9 +89,10 @@ export default {
 
 <style>
     .nav-bar {
+        background: var(--header-bg-color);
+        border-bottom: solid 1px var(--header-border-color);
+
         font-size: 12px;
-        background: #222;
-        border-bottom: solid 1px #484848;
         display: grid;
         grid-template-columns: 180px 1fr 50px;
     }
