@@ -28,16 +28,16 @@ Base styles
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #9b9b9b;
+    color: #8f8f8f;
     opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #9b9b9b;
+    color: #8f8f8f;
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #9b9b9b;
+    color: #8f8f8f;
 }
 
 :root {
@@ -74,7 +74,7 @@ Base styles
 }
 
 [data-theme="light"] {
-    --bg-color: #dae0e6;
+    --bg-color: #e7ebf0;
 
     --primary-color: #828282;
     --secondary-color: #586069;
@@ -92,14 +92,17 @@ Base styles
     --a-link-active: #586069;
     --a-link-hover: black;
 
-    --edit-bg: #fcfcfc;
+    --edit-bg: #f2f2f2;
+    --edit-bg-focus: #fff;
     --edit-border-color: #d1d5da;
-    --edit-color: #586069;
+    --edit-color: #7f7f7;
 
-    --form-bg-color: #fafbfc;
+    --form-bg-color: #f2f2f2;
     --form-border-color: #e1e4e8;
 
-    --button-content-color: #28a745;
+    --button-bg-color:  #4f5d72;
+    --button-hover-bg-color: #697b94;
+    --button-content-color: #f2f2f2;
 
     --multiselect-bg-color: #e3e3e3;
 }
@@ -367,7 +370,7 @@ select {
     background: var(--edit-bg);
     border: solid 1px var(--edit-border-color);
     color: var(--edit-color);
-    border-radius: 10px;
+    border-radius: 2px;
     padding: 10px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -380,6 +383,11 @@ select {
     font-size: 12px;
 }
 
+textarea:focus,
+input:focus,
+select:focus {
+    background: var(--edit-bg-focus);
+}
 
 button,
 inout[type=checkbox],
@@ -507,9 +515,6 @@ form {
 .hiddenDesktop{
     display: none;
 }
-}
-
-
 
 @media only screen and (max-width: 900px) {
 
@@ -715,4 +720,8 @@ form {
     height: 40px;
     display:inline-block;
     padding-right: 10px;
+}
+
+.commentHeader{
+    padding-left: 5px;
 }

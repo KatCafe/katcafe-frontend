@@ -4,9 +4,9 @@
 
         <vote parentType="comment" :slug="slug" :parent="comment" :myVote="comment.myVote" />
 
-        <div>
+        <div :class="`author ${ seen ? '' : 'unread'}`">
 
-            <div :class="`author ${ seen ? '' : 'unread'}`">
+            <div class="commentHeader">
 
                 <span :class="`details bold ${authorClass}`">{{author}}</span>
                 <span class="details">{{date}} </span>
