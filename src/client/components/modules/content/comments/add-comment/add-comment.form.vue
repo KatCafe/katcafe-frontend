@@ -104,6 +104,7 @@ export default {
                 body: this.body,
                 isAnonymous: refAddCommentParams ? refAddCommentParams.isAnonymous : false,
                 captcha: captchaData,
+                publicKey: user ? undefined : this.$store.state.digitalSignature.state.publicKey,
             });
 
         },

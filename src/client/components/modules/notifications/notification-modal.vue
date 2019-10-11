@@ -45,9 +45,9 @@ function urlBase64ToUint8Array(base64String) {
     const rawData = window.atob(base64);
     const outputArray = new Uint8Array(rawData.length);
 
-    for (let i = 0; i < rawData.length; ++i) {
+    for (let i = 0; i < rawData.length; ++i)
         outputArray[i] = rawData.charCodeAt(i);
-    }
+
     return outputArray;
 }
 
@@ -56,6 +56,10 @@ export default {
     components: { Modal },
 
     computed:{
+
+        user(){
+            return this.$store.state.auth.user;
+        },
 
         logo(){
             return {
@@ -97,6 +101,28 @@ export default {
 
         },
 
+        async subscribe( subscription ){
+
+            if (!subscription){
+                subscription = localStorage.getItem('pushNotificationSubscription');
+                if (subscription) subscription = JSON.parse(subscription);
+
+            }
+
+            if (!subscription) return false;
+
+            subscription.user = this.user ? this.user.username : '';
+
+            const signature = await this.$store.dispatch('DIGITAL_SIGNATURE_SIGN', Buffer.from( JSON.stringify(subscription), "ascii") );
+
+            await this.$root.networkHelper.post('/notifications/subscribe', {
+                subscription: subscription,
+                publicKey: this.$store.state.digitalSignature.publicKey,
+                signature: signature.toString("hex"),
+            });
+
+        },
+
         async notificationRequest(value){
 
             try{
@@ -106,16 +132,21 @@ export default {
                     console.log("permission", data);
 
 
-                    const subscription = await this.register.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array(constsSecret.vapid.publicKey),
-                    });
+                    let subscription = await this.register.pushManager.getSubscription();
+
+                    console.log("subscription1", subscription);
+
+                    if (!subscription)
+                        subscription = await this.register.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: urlBase64ToUint8Array(constsSecret.vapid.publicKey),
+                        });
 
                     console.log("subscription", subscription);
 
-                    const subscriptionData = subscription.toJSON();
+                    if (subscription)
+                        await this.subscribe( subscription.toJSON() );
 
-                    await this.$root.networkHelper.post('/notifications/subscribe', {subscription: subscriptionData});
 
                     localStorage.setItem('pushNotificationSubscription', JSON.stringify(subscription))
                 }
@@ -139,7 +170,7 @@ export default {
         const registrations = await navigator.serviceWorker.getRegistrations();
 
         for(let registration of registrations)
-            await registration.unregister();
+            await registration.update();
 
         let register = await navigator.serviceWorker.register('/sw.js', {
             scope: '/',
@@ -159,7 +190,9 @@ export default {
         let data = localStorage.getItem('pushNotificationSubscription');
         if (data) data = JSON.parse(data);
 
-        if ( permission && data ) return;
+        if ( permission && data ){
+            return this.subscribe();
+        }
 
         this.showModal();
 
@@ -172,9 +205,10 @@ export default {
 
 .notification-modal-class{
     top: 65px;
-    transform: translate(-50%, 0);
+    transform: translate(+77px, 0);
+    left: 0;
     z-index: 10000;
-    max-width: 450px;
+    max-width: 350px;
 }
 
 .notification-modal{
@@ -183,7 +217,7 @@ export default {
 
 .notification-modal .logo{
 
-    height: 80px;
+    height: 60px;
     float: left;
     padding-right: 20px;
 }

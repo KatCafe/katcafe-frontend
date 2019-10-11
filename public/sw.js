@@ -9,7 +9,7 @@ self.addEventListener('push', event => {
         body: data.body,
         image: data.image,
         timestamp: data.timestamp,
-        icon: 'https://katcafe.org/public/assets/katcafe-logo.png',
-        badge: 'https://katcafe.org/public/assets/katcafe-logo.png',
+        icon: data.icon || 'https://katcafe.org/public/assets/katcafe-logo.png',
+        badge: data.badge || 'https://katcafe.org/public/assets/katcafe-logo.png',
     });
 });

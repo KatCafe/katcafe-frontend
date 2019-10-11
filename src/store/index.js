@@ -13,6 +13,7 @@ import localization from './modules/localization/localization-module'
 import captcha from "./modules/captcha/captcha-module"
 import auth from "./modules/auth/auth-module"
 import content from "./modules/content/content-module"
+import digitalSignature from "./modules/digital-signature/digital-signature-module"
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ export function createStore () {
             captcha,
             auth,
             content,
+            digitalSignature,
         }
         })
     );

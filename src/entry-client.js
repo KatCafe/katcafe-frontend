@@ -2,7 +2,6 @@ import Vue from 'vue'
 import { createApp } from './app'
 
 
-
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
   beforeRouteUpdate (to, from, next) {
@@ -39,6 +38,9 @@ Vue.directive('popover', function(el, binding){
 
 
 const { app, router, store } = createApp('client');
+
+if (typeof window !== "undefined")
+  store.dispatch('DIGITAL_SIGNATURE_INIT');
 
 //send the store and dispatch to the FetchService (SocketClient needs store.socketStatus
 
