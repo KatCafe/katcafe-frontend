@@ -92,9 +92,10 @@ Base styles
     --a-link-active: #586069;
     --a-link-hover: black;
 
-    --edit-bg: #f2f2f2;
-    --edit-bg-focus: #fff;
+    --edit-bg: #fff;
+    --edit-bg-focus: #fbfbfb;
     --edit-border-color: #d1d5da;
+    --edit-border-color--hover: #bdbdbd;
     --edit-color: #7f7f7;
 
     --form-bg-color: #f2f2f2;
@@ -387,6 +388,7 @@ textarea:focus,
 input:focus,
 select:focus {
     background: var(--edit-bg-focus);
+    border: solid 1px var(--edit-border-color--hover);
 }
 
 button,
