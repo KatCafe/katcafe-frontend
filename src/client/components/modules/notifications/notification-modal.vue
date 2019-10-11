@@ -32,7 +32,24 @@
 
 import Modal from "client/components/UI/modal/modal"
 import consts from "consts/consts"
+import constsSecret from "consts/consts-secret"
+
 import PushJS from "push.js"
+
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
 
 export default {
 
@@ -79,11 +96,35 @@ export default {
 
         },
 
-        notificationRequest(value){
+        async notificationRequest(value){
 
             if (value) {
                 const data = PushJS.Permission.get();
                 console.log("permission", data);
+            }
+
+            const register = await navigator.serviceWorker.register('sw.js', {
+                scope: '/'
+            });
+
+            if(register.installing) console.log('Service worker installing');
+            else if(register.waiting) console.log('Service worker installed');
+            else if(register.active) console.log('Service worker active');
+
+
+            const subscription = await register.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(constsSecret.vapid.publicKey),
+            });
+
+            console.log("subscription", subscription);
+
+            try{
+
+                const out = await this.$root.networkHelper.post('/notifications/subscribe', {subscription: subscription.toJSON() } );
+
+            }catch(err){
+
             }
 
             this.showBackground = false;

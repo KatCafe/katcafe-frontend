@@ -80,6 +80,7 @@ app.use('/dist', serve('./dist', true))
 app.use('/public', serve('./public', true))
 app.use('/manifest.json', serve('./manifest.json', true))
 app.use('/robots.txt', serve('./public/robots.txt', true))
+app.use('/sw.js', serve('./public/sw.js', true))
 app.use('/.well-known/acme-challenge', serve('./certificates/well-known/acme-challenge', true) );
 app.use('/service-worker.js', serve('./dist/service-worker.js'))
 

@@ -17,6 +17,7 @@
   "dependencies": {
     "autosize": "^4.0.2",
     "node-fetch": "^2.6.0",
+    "push.js": "^1.0.12",
     "route-cache": "0.4.3",
     "sanitize-html": "^1.14.1",
     "socket.io-client": "^2.3.0",
