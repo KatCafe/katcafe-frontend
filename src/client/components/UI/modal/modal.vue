@@ -2,11 +2,11 @@
 
     <div v-if="modalOpened">
 
-        <div class="modal-background" @click="this.closeModal"> </div>
+        <div v-if="showBackground" class="modal-background" @click="this.closeModal" />
 
-        <div class="modal show-modal" ref="refModal">
+        <div v-if="showContent" :class="` ${modalClass} modal show-modal`" ref="refModal">
             <div class="modal-content">
-                <icon icon="times-circle" class="close-button " @click="closeModal" />
+                <icon v-if="showCloseButton" icon="times-circle" class="close-button " @click="closeModal" />
 
                 <template v-if="form" >
                     <component  :is="form" ref="refForm" />
@@ -38,6 +38,10 @@ export default{
 
     props:{
         title: {default: 'Modal Title'},
+        showBackground: {default: true},
+        showCloseButton: {default: true},
+        showContent: {default: true},
+        modalClass: {default: ''},
     },
 
     methods:{
@@ -73,8 +77,8 @@ export default{
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(26, 26, 26, 0.9);
-        z-index: 10;
+        background-color: rgba(26, 26, 26, 0.8);
+        z-index: 1000;
     }
 
     .modal {
@@ -94,10 +98,11 @@ export default{
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 10px;
-        padding: 10px 10px 0;
         background-color: var(--form-bg-color);
         border: solid 1px var(--form-border-color);
-        width: 100%;
+        width: 95%;
+        -webkit-box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.25);
     }
 
     .close-button {
@@ -118,7 +123,7 @@ export default{
         opacity: 1;
         visibility: visible;
         transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-        width: 80%;
+        width: 100%;
         max-width: 600px;
     }
 
@@ -130,7 +135,6 @@ export default{
     @media only screen and (max-width: 600px) {
 
         .modal-content {
-            padding: 5px 5px 0;
         }
 
     }

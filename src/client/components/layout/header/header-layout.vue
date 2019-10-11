@@ -7,7 +7,7 @@
         <div class="header">
 
             <router-link to="/">
-                <img :src="logo.image" class="logo">
+                <img :src="logo.image" :alt="logo.name" class="logo">
                 <span class="header-heading logo-text">{{logo.name}}</span>
             </router-link>
 

@@ -1,7 +1,7 @@
 <template>
 
     <modal ref="modal">
-        <div slot="content"  >
+        <div slot="content" >
             <add-topic-form ref="addTopicForm"  :parentSlug="parentSlug" />
         </div>
     </modal>
@@ -28,7 +28,6 @@ export default {
         showModal(parentSlug){
 
             this.parentSlug = parentSlug;
-
             this.$refs['modal'].showModal();
 
         },

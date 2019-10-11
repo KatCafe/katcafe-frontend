@@ -12,6 +12,8 @@
 
         <captcha-modal id="captchaModal" />
 
+        <notification-modal id="notificationModal" />
+
         <sticky-buttons :stickyButtons="stickyButtons" />
 
         <footer-layout/>
@@ -28,12 +30,13 @@ import FooterLayout from "./footer/footer-layout"
 import StickyButtons from "./footer/sticky/sticky-buttons"
 import AddTopicModal from "client/components/modules/content/topics/add-topic/add-topic.modal"
 import CaptchaModal from "client/components/modules/captcha/captcha.modal"
+import NotificationModal from "client/components/modules/notifications/notification-modal"
 
 import Icon from "client/components/UI/elements/icons/icon"
 
 export default{
 
-    components:{ HeaderLayout, FooterLayout,  StickyButtons, AddTopicModal, Icon, CaptchaModal },
+    components:{ HeaderLayout, FooterLayout,  StickyButtons, AddTopicModal, Icon, CaptchaModal, NotificationModal },
 
     props: {
         stickyButtons: { default(){ return [] },},
