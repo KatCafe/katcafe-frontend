@@ -43,6 +43,7 @@ export default {
     props: {
         parentSlug: {default: ''},
         useTitle: {default: true},
+        blockCategory: {default: 'spam:tpc'},
     },
 
     data(){
@@ -161,8 +162,9 @@ export default {
 
             resolve(true);
 
-            const captchaModal = document.getElementById('captchaModal').__vue__;
-            captchaModal.showModal( async (resolve2, captchaData, refAdditionalParams)=>{
+            let captchaModal;
+
+            const processWork = async (resolve2, captchaData, refAdditionalParams)=>{
 
                 try{
 
@@ -170,18 +172,22 @@ export default {
 
                     const out = await this.postSubmit(captchaData, refAdditionalParams);
 
-                    captchaModal.reset();
-                    captchaModal.closeModal();
+                    if (captchaModal) {
+                        captchaModal.reset();
+                        captchaModal.closeModal();
+                    }
 
                     this.reset();
-
 
                     this.postSubmitSuccessful(out);
 
                 }catch(err){
 
-                    this.error = captchaModal.processError(err.message);
-                    if (this.error) captchaModal.closeModal();
+                    this.error = err.message;
+                    if (captchaModal){
+                        this.error = captchaModal.processError(err.message);
+                        if (this.error) captchaModal.closeModal();
+                    }
 
                     this.error = this.error.replace('Too few letters. Minimum 4 letters', this.$i18n.t('topic.errorTooFewLetters'));
                     this.error = this.error.replace('You need to provide either a link/file or write 5 characters', this.$i18n.t('comment.errorNoFileOrText'));
@@ -192,7 +198,15 @@ export default {
 
                 if (resolve2) resolve2(true);
 
-            }, this.$store.state.auth.user ? this.additionalParamsForm : undefined);
+            };
+
+            const isBlocked = await this.$root.networkHelper.post('/trials/is-blocked', {category: this.blockCategory });
+            if (isBlocked && !isBlocked.out){
+                await processWork();
+            }else {
+                captchaModal = document.getElementById('captchaModal').__vue__;
+                captchaModal.showModal( processWork.bind(this), this.$store.state.auth.user ? this.additionalParamsForm : undefined);
+            }
 
         },
 
