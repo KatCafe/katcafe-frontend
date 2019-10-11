@@ -27,6 +27,10 @@
 
             </div>
 
+            <div class="new-topic-options" v-if="user && showPreview">
+                <add-topic-params ref="ref-add-topic-params" />
+            </div>
+
         </div>
 
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
@@ -59,8 +63,12 @@ export default {
 
     computed:{
 
+        user(){
+            return this.$store.state.auth.user;
+        },
+
         additionalParamsForm(){
-            return AddTopicParams;
+            return null;
         },
 
 
@@ -76,6 +84,8 @@ export default {
 
         postSubmit(captchaData, refAdditionalParams){
 
+            const refAddTopicParams = this.$refs['ref-add-topic-params'];
+
             return this.$root.networkHelper.post( '/topics/create', {
                 channel: this.channel,
                 title: this.title,
@@ -86,7 +96,7 @@ export default {
                     base64: this.file.preview.img,
                 } : undefined,
                 captcha: captchaData,
-                isAnonymous: refAdditionalParams ? refAdditionalParams.isAnonymous : false,
+                isAnonymous: refAddTopicParams ? refAddTopicParams.isAnonymous : false,
             });
 
         },

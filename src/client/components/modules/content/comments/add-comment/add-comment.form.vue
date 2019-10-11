@@ -19,7 +19,9 @@
 
         </div>
 
-
+        <div class="new-topic-options" v-if="user && showPreview">
+            <add-comment-params ref="ref-add-comment-params" />
+        </div>
 
         <span class="error-text">{{error}}</span>
 
@@ -58,14 +60,19 @@ export default {
         isShowPreview: {default: true},
         useTitle: {default: false},
         textAreaMaxHeight: {default: 150},
+        blockCategory: {default: 'spam:cmt'},
     },
 
-    components: { Icon, Comment, LoadingButton, AddTopicBase },
+    components: { Icon, Comment, LoadingButton, AddTopicBase, AddCommentParams },
 
     computed:{
 
+        user(){
+            return this.$store.state.auth.user;
+        },
+
         additionalParamsForm(){
-            return AddCommentParams;
+            return null;
         },
 
         slug(){
@@ -85,6 +92,8 @@ export default {
 
         postSubmit(captchaData, refAdditionalParams){
 
+            const refAddCommentParams = this.$refs['ref-add-comment-params'];
+
             return this.$root.networkHelper.post('/comments/create', {
                 topic: this.slug,
                 link: this.link,
@@ -93,7 +102,7 @@ export default {
                     base64: this.file.preview.img,
                 } : undefined,
                 body: this.body,
-                isAnonymous: refAdditionalParams ? refAdditionalParams.isAnonymous : false,
+                isAnonymous: refAddCommentParams ? refAddCommentParams.isAnonymous : false,
                 captcha: captchaData,
             });
 
