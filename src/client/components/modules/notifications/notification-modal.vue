@@ -70,6 +70,7 @@ export default {
         return {
             showNotificationModal: true,
             showBackground: false,
+            register: null,
         }
     },
 
@@ -98,32 +99,30 @@ export default {
 
         async notificationRequest(value){
 
-            if (value) {
-                const data = PushJS.Permission.get();
-                console.log("permission", data);
-            }
-
-            const register = await navigator.serviceWorker.register('sw.js', {
-                scope: '/'
-            });
-
-            if(register.installing) console.log('Service worker installing');
-            else if(register.waiting) console.log('Service worker installed');
-            else if(register.active) console.log('Service worker active');
-
-
-            const subscription = await register.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array(constsSecret.vapid.publicKey),
-            });
-
-            console.log("subscription", subscription);
-
             try{
 
-                const out = await this.$root.networkHelper.post('/notifications/subscribe', {subscription: subscription.toJSON() } );
+                if (value) {
+                    const data = PushJS.Permission.get();
+                    console.log("permission", data);
+
+
+                    const subscription = await this.register.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(constsSecret.vapid.publicKey),
+                    });
+
+                    console.log("subscription", subscription);
+
+                    const subscriptionData = subscription.toJSON();
+
+                    await this.$root.networkHelper.post('/notifications/subscribe', {subscription: subscriptionData});
+
+                    localStorage.setItem('pushNotificationSubscription', JSON.stringify(subscription))
+                }
 
             }catch(err){
+
+                console.error(err);
 
             }
 
@@ -133,12 +132,34 @@ export default {
 
     },
 
-    mounted(){
+    async mounted(){
 
         if (typeof window === "undefined") return;
 
+        const registrations = await navigator.serviceWorker.getRegistrations();
+
+        for(let registration of registrations)
+            await registration.unregister();
+
+        let register = await navigator.serviceWorker.register('/sw.js', {
+            scope: '/',
+            updateViaCache: 'none',
+            // Optionally, set 'scope' here, if needed.
+        });
+
+        if(register.installing) console.log('Service worker installing');
+        else if(register.waiting) console.log('Service worker installed');
+        else if(register.active) console.log('Service worker active');
+
+        console.log(register);
+
+        this.register = register;
+
         const permission = PushJS.Permission.has();
-        if ( permission ) return;
+        let data = localStorage.getItem('pushNotificationSubscription');
+        if (data) data = JSON.parse(data);
+
+        if ( permission && data ) return;
 
         this.showModal();
 

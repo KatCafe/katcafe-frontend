@@ -1,5 +1,9 @@
+self.version = '1.0';
+
 self.addEventListener('push', event => {
     const data = event.data.json();
+
+    console.log(data);
 
     self.registration.showNotification(data.title, {
         body: data.body,
