@@ -23,7 +23,9 @@ class SECP256K1{
     }
 
     sign(message, privateKey){
-        if (message.length !== 32) message = CryptoHelper.sha256(message);
+
+        if (message.length !== 32) message = CryptoHelper.sha256(message, null);
+        if (typeof privateKey === "string") privateKey = Buffer.from(privateKey, "hex");
 
         const sigObj = secp256k1.sign(message, privateKey );
         return Buffer.from( sigObj.signature );
@@ -31,7 +33,9 @@ class SECP256K1{
 
     verify(message, signature, publicKey ){
 
-        if (message.length !== 32) message= CryptoHelper.sha256(message);
+        if (message.length !== 32) message= CryptoHelper.sha256(message, null);
+        if (typeof publicKey === "string") publicKey = Buffer.from(publicKey, "hex");
+        if (typeof signature === "string") signature = Buffer.from(signature, "hex")
 
         return secp256k1.verify(message, signature, publicKey );
 

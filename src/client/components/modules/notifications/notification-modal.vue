@@ -104,22 +104,25 @@ export default {
         async subscribe( subscription ){
 
             if (!subscription){
-                subscription = localStorage.getItem('pushNotificationSubscription');
+
+                subscription = localStorage.getItem('notificationSubscription');
                 if (subscription) subscription = JSON.parse(subscription);
 
             }
 
             if (!subscription) return false;
 
-            subscription.user = this.user ? this.user.username : '';
+            if (this.user) subscription.user = this.user.username;
 
             const signature = await this.$store.dispatch('DIGITAL_SIGNATURE_SIGN', Buffer.from( JSON.stringify(subscription), "ascii") );
 
-            await this.$root.networkHelper.post('/notifications/subscribe', {
+            await this.$root.networkHelper.post('/notifications-subscriptions/subscribe', {
                 subscription: subscription,
                 publicKey: this.$store.state.digitalSignature.publicKey,
                 signature: signature.toString("hex"),
             });
+
+            localStorage.setItem('notificationSubscriptionSubscribed', 'true' )
 
         },
 
@@ -134,21 +137,20 @@ export default {
 
                     let subscription = await this.register.pushManager.getSubscription();
 
-                    console.log("subscription1", subscription);
-
                     if (!subscription)
                         subscription = await this.register.pushManager.subscribe({
                             userVisibleOnly: true,
                             applicationServerKey: urlBase64ToUint8Array(constsSecret.vapid.publicKey),
                         });
 
-                    console.log("subscription", subscription);
+                    if (subscription) {
 
-                    if (subscription)
-                        await this.subscribe( subscription.toJSON() );
+                        localStorage.setItem('notificationSubscription', JSON.stringify(subscription))
+
+                        await this.subscribe(subscription.toJSON());
+                    }
 
 
-                    localStorage.setItem('pushNotificationSubscription', JSON.stringify(subscription))
                 }
 
             }catch(err){
@@ -172,7 +174,7 @@ export default {
         for(let registration of registrations)
             await registration.update();
 
-        let register = await navigator.serviceWorker.register('/sw.js', {
+        const register = await navigator.serviceWorker.register('/sw.js', {
             scope: '/',
             updateViaCache: 'none',
             // Optionally, set 'scope' here, if needed.
@@ -186,12 +188,17 @@ export default {
 
         this.register = register;
 
-        const permission = PushJS.Permission.has();
-        let data = localStorage.getItem('pushNotificationSubscription');
-        if (data) data = JSON.parse(data);
+        const hasPermission = PushJS.Permission.has();
+        const permission = PushJS.Permission.get();
 
-        if ( permission && data ){
-            return this.subscribe();
+        if (permission === PushJS.Permission.DENIED) return;
+
+        if ( hasPermission ){
+
+            let subscribed = localStorage.getItem('notificationSubscriptionSubscribed');
+            if (subscribed === 'true') return;
+            else return this.subscribe();
+
         }
 
         this.showModal();
