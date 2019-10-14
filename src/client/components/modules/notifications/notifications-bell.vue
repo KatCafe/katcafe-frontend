@@ -9,7 +9,7 @@
             </span>
         </div>
 
-        <notifications-dropdown v-if="menuOpen" @closeMenu="closeMenu" :enable-close-menu="enableCloseMenu" />
+        <notifications-dropdown v-if="menuOpen" @closeMenu="closeMenu" :enable-close-menu="enableCloseMenu" ref="ref-notifications-dropdown" />
 
     </div>
 
@@ -42,10 +42,13 @@ export default {
 
             const newValue = !this.menuOpen;
             if (newValue){
+
+                this.$store.dispatch('NOTIFICATIONS_CLEAR');
                 this.enableCloseMenu = false;
                 setTimeout(()=>this.enableCloseMenu = true, 100);
             }
             this.menuOpen = newValue;
+
         },
 
         closeMenu(){
@@ -63,8 +66,9 @@ export default {
 
     watch: {
         menuOpen: function (newValue, oldValue) {
+
             if (oldValue && !newValue )
-                this.$store.dispatch('NOTIFICATIONS_CLEAR_COUNT',)
+                this.$store.dispatch('NOTIFICATIONS_CLEAR_UNREAD_COUNT',)
         },
     }
 

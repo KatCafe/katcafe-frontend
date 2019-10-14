@@ -1,8 +1,18 @@
 <template>
 
     <div class="notifications-dropdown" v-click-outside="closeMenu">
+
         <h3>Notifications</h3>
-        <div style="height:300px;"></div>
+        <div class="notifications-box">
+
+            <notification v-for=" (notification, index) in notifications"
+                          :key="index">
+
+            </notification>
+
+            <infinite-scroll @onScroll="onScrollLoad" :hasMore="hasMore"/>
+
+        </div>
         <div class="see-all">
             <router-link to="/notifications">
                 See All
@@ -13,11 +23,26 @@
 </template>
 
 <script>
+
+import InfiniteScroll from "client/components/UI/elements/waypoint/infinite-scroll"
+import Notification from "./notification"
+
 export default {
 
-    props:{
+    components: {InfiniteScroll, Notification},
 
+    props:{
         enableCloseMenu: {default: false},
+    },
+
+    computed:{
+        hasMore(){
+            return this.$store.state.comments.pageMore;
+        },
+
+        notifications(){
+            return this.$store.getters.getNotifications();
+        },
 
     },
 
@@ -27,8 +52,18 @@ export default {
 
             if (this.enableCloseMenu)
                 this.$emit('closeMenu');
-        }
+        },
 
+        async onScrollLoad(resolver){
+
+            await this.$store.dispatch('NOTIFICATIONS_GET', {searchRevert: true, index: this.$store.state.notifications.pageIndex, count: this.$store.state.notifications.pageCount });
+            resolver(true);
+        },
+
+    },
+
+    mounted(){
+        this.$store.dispatch('NOTIFICATIONS_CLEAR');
     }
 
 }
@@ -86,5 +121,8 @@ export default {
         padding: 8px;
     }
 
+    .notifications-box{
+        max-height: 300px;
+    }
 
 </style>
