@@ -4,14 +4,12 @@
     <div class="notifications-bell">
 
         <div class="bell-cover" @click="toggleMenu">
-            <span class="fa-stack has-badge" :data-count="notificationsUnread">
+            <span :class="` ${notificationsUnread ? 'fa-stack has-badge' : ''}`" :data-count="notificationsUnread ? notificationsUnread : ''">
               <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
             </span>
         </div>
 
-        <template v-if="menuOpen">
-            <notifications-dropdown  @closeMenu="closeMenu" :enable-close-menu="enableCloseMenu" />
-        </template>
+        <notifications-dropdown v-if="menuOpen" @closeMenu="closeMenu" :enable-close-menu="enableCloseMenu" />
 
     </div>
 
@@ -53,6 +51,13 @@ export default {
         closeMenu(){
             this.menuOpen = false;
         }
+
+
+    },
+
+    mounted(){
+
+        if (typeof window === "undefined") return;
 
 
     },
