@@ -25,7 +25,7 @@ export default {
 
     computed:{
         notificationsUnread(){
-            return 0;
+            return this.$store.state.notifications.unreadCount;
         }
     },
 
@@ -57,10 +57,16 @@ export default {
 
     mounted(){
 
-        if (typeof window === "undefined") return;
-
+        this.$store.dispatch('NOTIFICATIONS_INITIALIZE', { enableInterval: typeof window === "undefined" });
 
     },
+
+    watch: {
+        menuOpen: function (newValue, oldValue) {
+            if (oldValue && !newValue )
+                this.$store.dispatch('NOTIFICATIONS_CLEAR_COUNT',)
+        },
+    }
 
 }
 </script>

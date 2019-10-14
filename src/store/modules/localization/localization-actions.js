@@ -33,7 +33,7 @@ export default {
 
         try {
 
-            let res = await this.$app.httpHelper.get("https://geoip-db.com/json/" + ip, undefined,  '', undefined,false);
+            const res = await this.$app.httpHelper.get("https://geoip-db.com/json/" + ip, undefined,  '', undefined,false);
 
             const payload = {
                 country: res.country_name || '',

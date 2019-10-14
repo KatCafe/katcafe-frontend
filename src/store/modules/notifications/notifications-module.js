@@ -8,6 +8,9 @@ export default {
 
         map: {},
 
+        initialized: false,
+        unreadCount: 0,
+
     },
     actions,
     mutations,
