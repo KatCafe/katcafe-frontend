@@ -77,7 +77,6 @@ export default {
         padding:8px;
         font-size:12px;
         font-weight:bold !important;
-        border-top:solid 1px rgba(100, 100, 100, .30);
         text-align:center;
     }
     .see-all a {
@@ -115,11 +114,8 @@ export default {
 
     .notifications-dropdown h3{
         color: #333;
-        font: 13px helvetica;
         font-weight: 700;
         font-size: 13px;
-        font-style: normal;
-        border-bottom: solid 1px rgba(100,100,100,.3);
         padding: 8px;
         margin-bottom: 0;
     }

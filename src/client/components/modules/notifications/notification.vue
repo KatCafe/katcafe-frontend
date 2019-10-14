@@ -1,14 +1,16 @@
 <template>
 
-    <div class="notification">
+    <div class="notification" @click="markNotificationRead">
 
-        <router-link :to="notification.payload.url" @click="markNotificationRead">
+        <router-link :to="notification.payload.url" >
 
             <div :class="`notification-box ${notification.payload.icon ? 'has-icon' : ''} ${notification.unread ? 'unread' : ''} `">
 
                 <img v-if="notification.payload.icon" :src="notification.payload.icon">
 
-                {{notification.payload.title}} "{{notification.payload.body}}"
+                <span>
+                    {{notification.payload.title}} "{{notification.payload.body}}"
+                </span>
 
             </div>
 
@@ -29,6 +31,7 @@ export default {
 
         markNotificationRead(){
 
+            return this.$store.dispatch('NOTIFICATIONS_MARK_NOTIFICATION_READ', {notificationId: this.notification.uuid, value: true });
         }
 
     }
@@ -39,9 +42,12 @@ export default {
 <style>
 
 .notification{
+
+    border-top: solid 1px rgba(100, 100, 100, .20);
+    border-bottom: solid 1px rgba(100, 100, 100, .20);
+
     display: grid;
     grid-template-columns: 1fr;
-    margin-bottom: 5px;
 }
 
 .notification-box{
@@ -52,7 +58,7 @@ export default {
     grid-template-columns: 64px 1fr;
 }
 
-.notification > .unread{
+.notification .unread{
     background-color: #eae5ff;
 }
 

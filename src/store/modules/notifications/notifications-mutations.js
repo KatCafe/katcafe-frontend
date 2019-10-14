@@ -37,5 +37,14 @@ export default {
 
     },
 
+    SET_NOTIFICATIONS_MARK_NOTIFICATION_READ: (state, {notificationId, value}) =>{
+
+        const notification = state.map[notificationId];
+        notification.unread = !value;
+
+        Vue.set(state.map, notificationId, Object.assign({}, notification ));
+
+    },
+
 
 }

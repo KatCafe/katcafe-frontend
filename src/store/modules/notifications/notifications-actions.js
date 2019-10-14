@@ -87,4 +87,21 @@ export default {
 
     },
 
+    NOTIFICATIONS_MARK_NOTIFICATION_READ: async function ({commit, dispatch, state}, {notificationId, value = true}){
+
+        const notification = state.map[notificationId];
+        if (!notification || notification.unread === !value) return;
+
+        try{
+
+            const out = await this.$app.networkHelper.post(`/notifications/mark-notification-read`, { id: notificationId, value  });
+
+            commit('SET_NOTIFICATIONS_MARK_NOTIFICATION_READ', {notificationId, value})
+
+        }catch(err){
+            console.error(err);
+        }
+
+    },
+
 }
