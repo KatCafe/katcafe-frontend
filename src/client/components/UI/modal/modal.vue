@@ -78,7 +78,7 @@ export default{
         width: 100%;
         height: 100%;
         background-color: rgba(26, 26, 26, 0.8);
-        z-index: 1000;
+        z-index: 10;
     }
 
     .modal {

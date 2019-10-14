@@ -14,7 +14,13 @@ class NetworkHelper {
     request(address, body, json = true, timeout = 10000, includeSession = true ){
 
         const headers = {};
-        if (includeSession && this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
+
+        if (includeSession ) {
+
+            if (this._store.state.auth.session) headers.session = this._store.state.auth.session.key;
+            if (this._store.state.digitalSignature.publicKey) headers.publicKey = this._store.state.digitalSignature.publicKey;
+
+        }
 
         let timeoutId;
 

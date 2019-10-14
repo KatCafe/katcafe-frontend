@@ -42,6 +42,12 @@
 
                 </template>
 
+                <div class="bell-cover">
+                    <span class="fa-stack has-badge" data-count="5">
+                      <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+
             </div>
 
         </div>
@@ -175,5 +181,40 @@ export default {
         }
 
     }
+
+    .bell-cover {
+        display: inline-block;
+    }
+
+    .bell-cover i{
+        color: var(--primary-color-color);
+        font-size: 20px;
+        top: 0;
+    }
+
+    .bell-cover i:hover{
+        color: var(--font-color)
+    }
+
+    .bell-cover .fa-stack{
+        vertical-align: inherit;
+    }
+
+    .bell-cover .fa-stack[data-count]:after{
+        position:absolute;
+        right:-3px;
+        top:0;
+        content: attr(data-count);
+        font-size: 10px;
+        padding:5px;
+        border-radius:999px;
+        line-height:5px;
+        color: white;
+        background:rgba(255,0,0,.85);
+        text-align:center;
+        font-weight:bold;
+    }
+
+
 
 </style>

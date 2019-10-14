@@ -116,9 +116,8 @@ export default {
 
             const signature = await this.$store.dispatch('DIGITAL_SIGNATURE_SIGN', Buffer.from( JSON.stringify(subscription), "ascii") );
 
-            await this.$root.networkHelper.post('/notifications-subscriptions/subscribe', {
+            await this.$root.networkHelper.post('/notifications-subscriptions/register-subscription', {
                 subscription: subscription,
-                publicKey: this.$store.state.digitalSignature.publicKey,
                 signature: signature.toString("hex"),
             });
 

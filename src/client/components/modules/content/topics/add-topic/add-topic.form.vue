@@ -97,7 +97,6 @@ export default {
                 } : undefined,
                 captcha: captchaData,
                 isAnonymous: refAddTopicParams ? refAddTopicParams.isAnonymous : false,
-                publicKey: user ? undefined : this.$store.state.digitalSignature.state.publicKey,
             });
 
         },
