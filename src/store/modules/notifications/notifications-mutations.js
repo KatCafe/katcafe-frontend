@@ -5,7 +5,7 @@ export default {
     ADD_NOTIFICATIONS: (state, list )=>{
 
         for (const it of list)
-            Vue.set( state.map, list.uuid, list );
+            Vue.set( state.map, it.uuid, it );
 
         state.map = Object.assign({}, state.map );
 

@@ -17,7 +17,6 @@ export default {
             });
 
             if (out ) {
-
                 console.log(out.notifications);
 
                 commit('ADD_NOTIFICATIONS', out.notifications);

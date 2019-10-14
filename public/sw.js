@@ -11,5 +11,6 @@ self.addEventListener('push', event => {
         timestamp: data.timestamp,
         icon: data.icon || 'https://katcafe.org/public/assets/katcafe-logo.png',
         badge: data.badge || 'https://katcafe.org/public/assets/katcafe-logo.png',
+
     });
 });

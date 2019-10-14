@@ -6,8 +6,6 @@
 
         <icon v-if="loading" icon="loading-spinner" class="fa-5x" />
 
-        <br/>
-
         <div class="hidden">
             <router-link v-if="infinitePrevUri" :to="infinitePrevUri" class="previous">&laquo;</router-link>
             <router-link v-if="infiniteNextUri" :to="infiniteNextUri" class="next">&raquo;</router-link>

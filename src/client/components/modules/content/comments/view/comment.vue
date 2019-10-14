@@ -1,48 +1,52 @@
 <template>
 
-    <div class="topic comment ">
+    <div>
 
-        <vote parentType="comment" :slug="slug" :parent="comment" :myVote="comment.myVote" />
+        <a :id="id"></a>
 
-        <div :class="`author ${ seen ? '' : 'unread'}`">
+        <div class="topic comment ">
 
-            <div class="commentHeader">
+            <vote parentType="comment" :slug="slug" :parent="comment" :myVote="comment.myVote" />
 
-                <span :class="`details bold ${authorClass}`">{{author}}</span>
-                <span class="details">{{date}} </span>
+            <div :class="`author ${ seen ? '' : 'unread'}`">
 
-                <router-link v-if="isContentDisplay" class="details" :to="comment.topic">
-                    {{comment.topic.length > 80 ? comment.topic.substr(0, 80)+'...' : comment.topic }}
-                </router-link>
+                <div class="commentHeader">
 
-                <div class="topic-buttons comment-buttons">
-                    <icon v-if="isUserOwner" icon="times" @click="deleteComment" class="delete" />
-                    <span class="topic-reply-id" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
-                </div>
+                    <span :class="`details bold ${authorClass}`">{{author}}</span>
+                    <span class="details">{{date}} </span>
 
-            </div>
+                    <router-link v-if="isContentDisplay" class="details" :to="comment.topic">
+                        {{comment.topic.length > 80 ? comment.topic.substr(0, 80)+'...' : comment.topic }}
+                    </router-link>
 
-            <div class="topic-content comment-content" :class="comment.preview ? 'topic-has-image comment-has-image' : ''">
-
-                <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
-
-                <div class="topic-text-wrap">
-
-                    <h3 v-if="title" class="title" v-html="title"/>
-
-                    <read-more :text="body" :max-height="100" pclass="body word-wrap" class="body-parent" />
+                    <div class="topic-buttons comment-buttons">
+                        <icon v-if="isUserOwner" icon="times" @click="deleteComment" class="delete" />
+                        <span class="topic-reply-id" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
+                    </div>
 
                 </div>
 
+                <div class="topic-content comment-content" :class="comment.preview ? 'topic-has-image comment-has-image' : ''">
+
+                    <preview-image :data="comment.preview" :smaller="true" :link="link" :linkChars="'15'" />
+
+                    <div class="topic-text-wrap">
+
+                        <h3 v-if="title" class="title" v-html="title"/>
+
+                        <read-more :text="body" :max-height="100" pclass="body word-wrap" class="body-parent" />
+
+                    </div>
+
+                </div>
+
+                <way-point @shown="wasShown" :distance="0" :checkVisible="true" :enabled="waypointEnabled" />
+
+                <slot v-if="isContentDisplay" name="comment-bottom-buttons"/>
+
             </div>
-
-            <way-point @shown="wasShown" :distance="0" :checkVisible="true" :enabled="waypointEnabled" />
-
-            <slot v-if="isContentDisplay" name="comment-bottom-buttons"/>
 
         </div>
-
-
     </div>
 
 </template>
@@ -132,7 +136,12 @@ export default {
         },
 
         to(){
-            return '/'+this.comment.slug;
+            const url = this.comment.slug;
+            return '/' + url.substr(0, url.lastIndexOf('/') ) + '#' + url.substr(url.lastIndexOf('/')+1 );
+        },
+
+        id(){
+            return this.comment.slug.substr( this.comment.slug.lastIndexOf('/')+1 )
         },
 
         isUserOwner(){

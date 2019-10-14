@@ -5,8 +5,10 @@
         <h3>Notifications</h3>
         <div class="notifications-box">
 
+
             <notification v-for=" (notification, index) in notifications"
-                          :key="index">
+                          :key="index"
+                          :notification="notification">
 
             </notification>
 
@@ -37,7 +39,7 @@ export default {
 
     computed:{
         hasMore(){
-            return this.$store.state.comments.pageMore;
+            return this.$store.state.notifications.pageMore;
         },
 
         notifications(){
@@ -119,10 +121,12 @@ export default {
         font-style: normal;
         border-bottom: solid 1px rgba(100,100,100,.3);
         padding: 8px;
+        margin-bottom: 0;
     }
 
     .notifications-box{
         max-height: 300px;
     }
+
 
 </style>
