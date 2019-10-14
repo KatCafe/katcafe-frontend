@@ -14,6 +14,7 @@ import captcha from "./modules/captcha/captcha-module"
 import auth from "./modules/auth/auth-module"
 import content from "./modules/content/content-module"
 import digitalSignature from "./modules/digital-signature/digital-signature-module"
+import notifications from "./modules/notifications/notifications-module"
 
 Vue.use(Vuex);
 
@@ -30,6 +31,7 @@ export function createStore () {
             auth,
             content,
             digitalSignature,
+            notifications,
         }
         })
     );
