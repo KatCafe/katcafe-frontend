@@ -1,6 +1,6 @@
 <template>
 
-    <modal ref="modal" :show-background="showBackground" :show-close-button="false"  modal-class="notification-modal-class sticky" :show-content="showNotificationModal">
+    <modal ref="modal" :show-background="showBackground" :show-close-button="false"  modal-class="notification-modal-class sticky" :show-content="showNotificationModal" modal-content-class="notification-modal-content-class">
         <div slot="content" >
 
             <div class="notification-modal" >
@@ -186,15 +186,19 @@ export default {
 <style>
 
 .notification-modal-class{
-    top: 65px;
+    top: 62px;
     transform: translate(+77px, 0);
     left: 0;
     z-index: 10000;
-    max-width: 350px;
+    max-width: 320px;
+}
+
+.notification-modal-content-class{
+    padding-top: 0;
+    padding-bottom: 20px;
 }
 
 .notification-modal{
-    padding: 15px;
 }
 
 .notification-modal .logo{
@@ -202,6 +206,7 @@ export default {
     height: 60px;
     float: left;
     padding-right: 20px;
+    padding-top: 10px;
 }
 
 .notification-modal div{
@@ -215,11 +220,15 @@ export default {
 .notification-modal .notification-modal-button span:first-child{
     padding-right: 30px;
     margin-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .notification-modal .notification-modal-button span:nth-child(2){
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border: 1px solid #D0D0D0;
 }
 
@@ -227,7 +236,10 @@ export default {
 
     .notification-modal-class{
         margin-top: -70px;
-        top:100%
+        top:100%;
+        margin-left: auto;
+        transform: translate(-50%, -50%);
+        left: 50%;
     }
 
 }

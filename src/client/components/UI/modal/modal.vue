@@ -5,7 +5,7 @@
         <div v-if="showBackground" class="modal-background" @click="this.closeModal" />
 
         <div v-if="showContent" :class="` ${modalClass} modal show-modal`" ref="refModal">
-            <div class="modal-content">
+            <div :class="` ${modalContentClass} modal-content`">
                 <icon v-if="showCloseButton" icon="times-circle" class="close-button " @click="closeModal" />
 
                 <template v-if="form" >
@@ -42,6 +42,7 @@ export default{
         showCloseButton: {default: true},
         showContent: {default: true},
         modalClass: {default: ''},
+        modalContentClass: {default: ''},
     },
 
     methods:{
@@ -103,6 +104,7 @@ export default{
         width: 95%;
         -webkit-box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.25);
         box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.25);
+        padding: 9px;
     }
 
     .close-button {
