@@ -4,7 +4,7 @@
 
         <way-point @shown="scrollFired" :distance="distance "/>
 
-        <icon v-if="loading" icon="loading-spinner" class="fa-5x" />
+        <icon v-if="loading && !closing" icon="loading-spinner" class="fa-5x" />
 
         <div class="hidden">
             <router-link v-if="infinitePrevUri" :to="infinitePrevUri" class="previous">&laquo;</router-link>
@@ -37,6 +37,7 @@ export default{
     data(){
         return {
             loading: false,
+            closing: false,
         }
     },
     //@onScroll
@@ -64,8 +65,13 @@ export default{
 
         continueScroll(){
 
+            this.closing = true;
+
             //make sure the elements were loaded
-            setTimeout( () => this.loading = false, 1000);
+            setTimeout( () => {
+                this.loading = false
+                this.closing = false;
+            }, 1000);
         }
 
     }

@@ -17,7 +17,6 @@ export default {
             });
 
             if (out ) {
-                console.log(out.notifications);
 
                 commit('ADD_NOTIFICATIONS', out.notifications);
                 commit('SET_NOTIFICATIONS_PAGE_INFO', {pageIndex: index, pageCount: count, pageMore: out.notifications.length >= count });
@@ -35,6 +34,7 @@ export default {
     },
 
     NOTIFICATIONS_INITIALIZE: function  ({ commit, dispatch, state }, { enableInterval } ) {
+
 
         if (state.initialized) return;
 
@@ -60,7 +60,7 @@ export default {
 
 
         if (enableInterval)
-            setTimeout( () => dispatch('NOTIFICATIONS_GET_COUNT', {enableInterval: false }), 10000 );
+            setTimeout( () => dispatch('NOTIFICATIONS_GET_COUNT', {enableInterval: true }), 10000 );
 
 
     },

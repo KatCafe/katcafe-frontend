@@ -8,8 +8,7 @@
 
                 <img v-if="notification.payload.icon" :src="notification.payload.icon">
 
-                <span>
-                    {{notification.payload.title}} "{{notification.payload.body}}"
+                <span v-html="getBody">
                 </span>
 
             </div>
@@ -25,6 +24,14 @@ export default {
 
     props: {
         notification: {default:  undefined},
+    },
+
+    computed:{
+
+        getBody(){
+            return `${this.notification.payload.title} "${this.notification.payload.body}"`;
+        }
+
     },
 
     methods:{
@@ -51,7 +58,7 @@ export default {
 }
 
 .notification-box{
-    padding: 8px;
+    padding: 4px 8px 4px 8px;
 }
 
 .notification .has-icon{
@@ -62,5 +69,8 @@ export default {
     background-color: #eae5ff;
 }
 
+.notification-box span{
+    font-size: 13px;
+}
 
 </style>

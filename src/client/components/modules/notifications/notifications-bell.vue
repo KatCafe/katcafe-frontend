@@ -60,7 +60,7 @@ export default {
 
     mounted(){
 
-        this.$store.dispatch('NOTIFICATIONS_INITIALIZE', { enableInterval: typeof window === "undefined" });
+        this.$store.dispatch('NOTIFICATIONS_INITIALIZE', { enableInterval: typeof window !== "undefined" });
 
     },
 

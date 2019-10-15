@@ -127,6 +127,8 @@ export default {
 
         async notificationRequest(value){
 
+            this.showBackground = false;
+
             try{
 
                 if (value) {
@@ -158,7 +160,6 @@ export default {
 
             }
 
-            this.showBackground = false;
             this.closeModal();
         }
 
@@ -182,8 +183,6 @@ export default {
         if(register.installing) console.log('Service worker installing');
         else if(register.waiting) console.log('Service worker installed');
         else if(register.active) console.log('Service worker active');
-
-        console.log(register);
 
         this.register = register;
 
