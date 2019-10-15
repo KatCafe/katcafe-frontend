@@ -19,7 +19,7 @@ self.addEventListener('push', function (event ) {
 
 self.addEventListener('notificationclick', function(event) {
 
-    const url = event.notification.data.click_action;
+    const url = event.notification.data.url;
 
     event.notification.close(); // Android needs explicit close.
     event.waitUntil(
