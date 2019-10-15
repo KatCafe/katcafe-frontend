@@ -1,6 +1,6 @@
 <template>
 
-    <modal ref="modal" :show-background="showBackground" :show-close-button="false"  modal-class="notification-modal-class sticky" :show-content="showNotificationModal" modal-content-class="notification-modal-content-class">
+    <modal ref="modal" :show-background="showBackground" :show-close-button="false"  modal-class="notification-modal-class sticky" :show-content="showNotificationModal" modal-content-class="notification-modal-content-class" :cover-top-bar="true">
         <div slot="content" >
 
             <div class="notification-modal" >

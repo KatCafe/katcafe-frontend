@@ -2,7 +2,7 @@
 
     <div v-if="modalOpened">
 
-        <div v-if="showBackground" class="modal-background" @click="this.closeModal" />
+        <div v-if="showBackground" class="modal-background" @click="this.closeModal" :style="` ${coverTopBar ? 'z-index: 1000' : '' } `" />
 
         <div v-if="showContent" :class="` ${modalClass} modal show-modal`" ref="refModal">
             <div :class="` ${modalContentClass} modal-content`">
@@ -39,6 +39,8 @@ export default{
     props:{
         title: {default: 'Modal Title'},
         showBackground: {default: true},
+        coverTopBar: {default: false},
+
         showCloseButton: {default: true},
         showContent: {default: true},
         modalClass: {default: ''},
