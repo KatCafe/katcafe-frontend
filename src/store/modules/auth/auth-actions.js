@@ -8,6 +8,8 @@ export default {
         if (out && out.user) {
             commit('SET_AUTH_USER', out.user);
             commit('SET_AUTH_SESSION', out.session);
+
+            await dispatch('NOTIFICATIONS_SUBSCRIBE', {});
         }
 
         dispatch('CAPTCHA_GET', );
@@ -33,9 +35,12 @@ export default {
 
         try{
 
-            const out = await this.$app.networkHelper.get('/auth/logout',  );
-        }catch(err){
+            await dispatch('NOTIFICATIONS_UNSUBSCRIBE', undefined);
 
+            const out = await this.$app.networkHelper.get('/auth/logout',  );
+
+        }catch(err){
+            console.error(err);
         }
 
         commit('SET_AUTH_USER', null );

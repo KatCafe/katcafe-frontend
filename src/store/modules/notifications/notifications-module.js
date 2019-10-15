@@ -10,7 +10,7 @@ export default {
         map: {},
 
         initialized: false,
-        unreadCount: 0,
+        unreadCount: null,
 
         pageLoading: false,
         pageIndex: 0,

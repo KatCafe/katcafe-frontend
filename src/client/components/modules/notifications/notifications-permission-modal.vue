@@ -101,30 +101,6 @@ export default {
 
         },
 
-        async subscribe( subscription ){
-
-            if (!subscription){
-
-                subscription = localStorage.getItem('notificationSubscription');
-                if (subscription) subscription = JSON.parse(subscription);
-
-            }
-
-            if (!subscription) return false;
-
-            if (this.user) subscription.user = this.user.username;
-
-            const signature = await this.$store.dispatch('DIGITAL_SIGNATURE_SIGN', Buffer.from( JSON.stringify(subscription), "ascii") );
-
-            await this.$root.networkHelper.post('/notifications-subscriptions/register-subscription', {
-                subscription: subscription,
-                signature: signature.toString("hex"),
-            });
-
-            localStorage.setItem('notificationSubscriptionSubscribed', 'true' )
-
-        },
-
         async notificationRequest(value){
 
             this.showBackground = false;
@@ -148,7 +124,7 @@ export default {
 
                         localStorage.setItem('notificationSubscription', JSON.stringify(subscription))
 
-                        await this.subscribe(subscription.toJSON());
+                        await this.$store.dispatch('NOTIFICATIONS_SUBSCRIBE', {subscription: subscription.toJSON()} );
                     }
 
 
@@ -195,7 +171,8 @@ export default {
 
             let subscribed = localStorage.getItem('notificationSubscriptionSubscribed');
             if (subscribed === 'true') return;
-            else return this.subscribe();
+            else await this.$store.dispatch('NOTIFICATIONS_SUBSCRIBE', {} );
+
 
         }
 

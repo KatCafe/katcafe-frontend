@@ -1,6 +1,45 @@
 
 export default {
 
+    NOTIFICATIONS_SUBSCRIBE: async function ({ commit, dispatch, state }, { subscription }) {
+
+        if (!subscription){
+            subscription = localStorage.getItem('notificationSubscription');
+            if (subscription) subscription = JSON.parse(subscription);
+        }
+        if (!subscription) return;
+
+        if (this.state.auth.user) subscription.user = this.state.auth.user.username;
+
+        const signature = await dispatch('DIGITAL_SIGNATURE_SIGN', Buffer.from( JSON.stringify(subscription), "ascii") );
+
+        await this.$app.networkHelper.post('/notifications-subscriptions/register-subscription', {
+            subscription: subscription,
+            signature: signature.toString("hex"),
+        });
+
+        localStorage.setItem('notificationSubscriptionSubscribed', 'true' )
+
+    },
+
+    NOTIFICATIONS_UNSUBSCRIBE: async function({commit, dispatch, state},  subscription){
+
+        if (!subscription){
+            subscription = localStorage.getItem('notificationSubscription');
+            if (subscription) subscription = JSON.parse(subscription);
+        }
+
+        console.log("subscription", subscription);
+
+        if (!subscription) return;
+
+        await this.$app.networkHelper.post('/notifications-subscriptions/unsubscribe', {
+            subscription: subscription,
+        });
+
+    },
+
+
     NOTIFICATIONS_GET: async function ({ commit, dispatch, state }, { searchRevert = true, searchAlgorithm = '', searchQuery = '', search, index = 0, count = 20 }) {
 
         index++;

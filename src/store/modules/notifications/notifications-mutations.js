@@ -19,7 +19,14 @@ export default {
 
     SET_NOTIFICATIONS_UNREAD_COUNT: (state, unreadCount ) => {
 
+        const oldValue = state.unreadCount;
+
         state.unreadCount = unreadCount;
+
+        if (unreadCount > 0 && oldValue !== unreadCount && oldValue !== null){
+            const audio = new Audio('/public/assets/sounds/notification.mp3');
+            audio.play();
+        }
 
     },
 
