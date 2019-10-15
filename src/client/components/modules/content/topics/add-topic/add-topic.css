@@ -50,10 +50,10 @@
     max-height: 38px;
 }
 
-.new-topic-preview{
-    font-size: 14px;
-}
 
+.new-topic-preview{
+    padding-top: 10px;
+}
 
 @media only screen and (max-width: 600px) {
 

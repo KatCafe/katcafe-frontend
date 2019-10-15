@@ -60,7 +60,9 @@ Base styles
     --a-link-hover: white;
 
     --edit-bg: #313131;
+    --edit-bg-focus: #313131;
     --edit-border-color: #585858;
+    --edit-border-color--hover: #585858;
     --edit-color: #dcdcdc;
 
     --button-bg-color: #f9de84;

@@ -36,9 +36,7 @@
         <div v-if="error" class="alert-box error"><span>error <br/><br/> </span> {{error}}</div>
         <icon icon="loading-spinner" v-if="loading" class="fa-3x" />
 
-        <div v-if="showPreview && !loading" >
-
-            <span class="new-topic-preview">{{$t('topic.previewThread')}}</span>
+        <div class="new-topic-preview" v-if="showPreview && !loading" >
             <topic :topic="previewContent" :isSnippetForm="true" />
         </div>
 
