@@ -235,8 +235,7 @@ export default {
 @media only screen and (max-width: 600px) {
 
     .notification-modal-class{
-        margin-top: -70px;
-        top:100%;
+        top: 100px;
         margin-left: auto;
         transform: translate(-50%, -50%);
         left: 50%;
