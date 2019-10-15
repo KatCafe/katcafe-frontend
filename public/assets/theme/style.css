@@ -282,6 +282,14 @@ Single styles
     max-width: 100%;
 }
 
+.img-circle{
+    height: 56px;
+    width: 56px;
+    border-radius: 32px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -493,6 +501,7 @@ form {
     background-color: #ffdb85;
     color: black;
 }
+
 
 
 .popup h1{

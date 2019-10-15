@@ -4,7 +4,7 @@
 
         <div class="hero-box">
             <template v-if="icon">
-                <img class="logo" :src="icon">
+                <img class="logo img-circle" :src="icon">
             </template>
             <template>
                 <h1 v-if="title" class="title" :style="titleStyle" v-html="title" />
@@ -55,11 +55,7 @@ export default {
         float: left;
         margin-right: 8px;
         box-sizing: border-box;
-        height: 56px;
-        width: 56px;
-        border-radius: 32px;
-        background-position: center center;
-        background-repeat: no-repeat;
+
     }
 
     .hero .title{

@@ -6,7 +6,7 @@
 
             <div :class="`notification-box ${notification.payload.icon ? 'has-icon' : ''} ${notification.unread ? 'unread' : ''} `">
 
-                <img v-if="notification.payload.icon" :src="notification.payload.icon">
+                <img class="img-circle" v-if="notification.payload.icon" :src="notification.payload.icon">
 
                 <span v-html="getBody">
                 </span>
@@ -52,17 +52,21 @@ export default {
 
     border-top: solid 1px rgba(100, 100, 100, .20);
     border-bottom: solid 1px rgba(100, 100, 100, .20);
-
-    display: grid;
-    grid-template-columns: 1fr;
 }
 
 .notification-box{
     padding: 4px 8px 4px 8px;
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
 .notification .has-icon{
-    grid-template-columns: 64px 1fr;
+    grid-template-columns: 55px 1fr;
+}
+
+.notification img{
+    width: 48px;
+    height: 48px;
 }
 
 .notification .unread{
