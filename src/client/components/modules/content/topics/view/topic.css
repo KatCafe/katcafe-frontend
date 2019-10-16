@@ -32,7 +32,7 @@
     border: 1px solid var(--topic-border-color);
     border-radius: 4px;
     margin-bottom: 10px;
-    padding: 10px 10px 10px 0;
+    padding: 5px 10px 5px 0;
     box-sizing: border-box;
 
     display: grid;

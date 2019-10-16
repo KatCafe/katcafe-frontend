@@ -155,7 +155,7 @@ export default {
 
         .header {
             padding-left: 5px;
-            padding-right: 1px;
+            padding-right: 5px;
         }
 
         .header .logo {

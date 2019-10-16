@@ -19,7 +19,7 @@
                     </router-link>
 
                     <div class="topic-buttons">
-                        <icon v-if="isUserOwner" icon="times" @click="deleteTopic" class="delete" />
+                        <icon v-if="!isSnippetForm && isUserOwner" icon="times" @click="deleteTopic" class="delete" />
                         <span v-if="isSnippetForm" class="topic-reply-id">{{$t('topic.previewThread')}}</span>
                     </div>
 

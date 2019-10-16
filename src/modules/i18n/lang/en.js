@@ -42,6 +42,10 @@ export default {
 
     socialMedia:{
         text: 'Share this',
-    }
+    },
+
+    notifications:{
+        askPermission: "Would you like to receive notifications when people reply to your posts?"
+    },
 
 }

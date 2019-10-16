@@ -44,4 +44,8 @@ export default {
         text: 'Shăruieşte',
     },
 
+    notifications:{
+        askPermission: "Doreşti să primeşti notificări când cineva îţi va răspunde la intrebari tale?"
+    },
+
 }

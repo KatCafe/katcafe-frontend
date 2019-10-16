@@ -10,7 +10,7 @@
                 <div >
                     <span>
                         <i class="fa fa-bell"></i>
-                        Would you like to receive notifications when people reply to your posts?
+                        {{$t('notifications.askPermission')}}
                     </span>
                     <br/>
 
