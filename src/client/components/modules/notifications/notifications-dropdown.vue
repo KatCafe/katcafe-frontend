@@ -8,7 +8,8 @@
 
             <notification v-for=" (notification, index) in notifications"
                           :key="index"
-                          :notification="notification">
+                          :notification="notification"
+                          @closeMenu="closeMenu">
 
             </notification>
 

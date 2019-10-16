@@ -118,8 +118,6 @@ export default {
         padding-bottom: 3px;
         cursor: pointer;
         z-index: 10;
-        padding-right: 10px;
-        margin-bottom: 10px;
     }
 
     .preview-image-wrap img{

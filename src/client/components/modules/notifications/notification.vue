@@ -2,7 +2,7 @@
 
     <div class="notification" @click="markNotificationRead">
 
-        <router-link :to="notification.payload.url" >
+        <router-link :to="notification.payload.url"  >
 
             <div :class="`notification-box ${notification.payload.icon ? 'has-icon' : ''} ${notification.unread ? 'unread' : ''} `">
 
@@ -37,7 +37,7 @@ export default {
     methods:{
 
         markNotificationRead(){
-
+            this.$emit('closeMenu');
             return this.$store.dispatch('NOTIFICATIONS_MARK_NOTIFICATION_READ', {notificationId: this.notification.uuid, value: true });
         }
 

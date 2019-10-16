@@ -168,7 +168,7 @@ export default {
         }
 
 
-        .header .header-right a {
+        .header .header-right > a {
             font-size: 12px;
             padding-right: 5px;
             position: relative;
