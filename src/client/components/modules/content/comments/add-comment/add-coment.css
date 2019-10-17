@@ -6,7 +6,10 @@
     grid-template-columns: 40px 1fr 90px !important;
 }
 
-
+.new-comment-content .new-comment-options{
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
 
 @media only screen and (max-width: 600px) {
 

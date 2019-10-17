@@ -19,7 +19,7 @@
 
         </div>
 
-        <div class="new-topic-options" v-if="user && showPreview">
+        <div class="new-topic-options new-comment-options" v-if="user && showPreview">
             <add-comment-params ref="ref-add-comment-params" />
         </div>
 
