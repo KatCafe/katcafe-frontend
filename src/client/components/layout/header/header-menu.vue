@@ -60,7 +60,7 @@ export default {
         },
 
         getChannelSlug(){
-            return this.$store.state.channels.channel ? this.$store.state.channels.channel.slug : '';
+            return this.$store.state.channels.channel ? this.$store.state.channels.channel.slug : this.defaultCountry;
         },
 
         defaultCountry(){

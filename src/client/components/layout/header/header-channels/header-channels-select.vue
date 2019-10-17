@@ -61,5 +61,11 @@ export default {
 
     },
 
+    watch: {
+        channel: function (newValue, oldValue) {
+            this.value = newValue;
+        },
+    }
+
 }
 </script>
