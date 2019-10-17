@@ -40,8 +40,6 @@ export default {
 
                 const diff = divTop - window.scrollY - windowHeight;
 
-                console.log(diff, this.checkVisible, this.fired);
-
                 if (diff <= this.distance && ( !this.checkVisible || diff > -windowHeight )) {
 
                     this.$emit('shown');
