@@ -20,7 +20,7 @@
                     </router-link>
 
                     <div class="topic-buttons comment-buttons">
-                        <icon v-if="isUserOwner" icon="times" @click="deleteComment" class="delete" />
+                        <icon v-if="!isSnippetForm && isUserOwner" icon="times" @click="deleteComment" class="delete" />
                         <span v-if="!isSnippetForm" class="topic-reply-id" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
                         <span v-if="isSnippetForm" class='topic-reply-id hiddenMobile'>{{$t('comment.previewComment')}}</span>
                     </div>
