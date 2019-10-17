@@ -16,7 +16,6 @@ export default {
 
     data(){
         return{
-            fired: false,
         }
     },
 
@@ -41,15 +40,13 @@ export default {
 
                 const diff = divTop - window.scrollY - windowHeight;
 
+                console.log(diff, this.checkVisible, this.fired);
+
                 if (diff <= this.distance && ( !this.checkVisible || diff > -windowHeight )) {
 
-                    if (!this.fired ) {
-                        this.fired = true;
-                        this.$emit('shown');
-                    }
+                    this.$emit('shown');
 
-                } else
-                    this.fired = false;
+                }
 
             } catch (err) {
                 //console.error("Error loading more data", err);

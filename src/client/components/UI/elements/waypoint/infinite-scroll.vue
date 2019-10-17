@@ -47,6 +47,8 @@ export default{
 
             try{
 
+                console.log(this.hasMore, this.loading)
+
                 if (!this.hasMore) return;
                 if (this.loading) return;
 

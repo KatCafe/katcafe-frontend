@@ -16,6 +16,7 @@ const TypographyPage = () => import('client/pages/typography.page');
 const LoginPage = () => import('client/pages/auth/login.page');
 const SignupPage = () => import('client/pages/auth/signup.page');
 const LogoutPage = () => import('client/pages/auth/logout.page');
+const NotificationsPage = () => import('client/pages/notifications.page.vue')
 
 import Flags from 'client/components/UI/elements/select/flags/flags';
 import UserRole from "client/components/modules/auth/user-role"
@@ -109,6 +110,8 @@ export function createRouter (store){
             { path: '/register', component: SignupPage, beforeEnter: guardHomeAuth, },
 
             { path: '/logout', component: LogoutPage, beforeEnter: guardHomeAuth, },
+            { path: '/notifications', component: NotificationsPage },
+
 
             { path: '/:slug', component: ChannelPage, },
             { path: '/:slug/pageIndex/:pageIndex', component: ChannelPage, },
