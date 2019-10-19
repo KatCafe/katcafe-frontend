@@ -1,12 +1,12 @@
 :root {
-    --new-topic-form-bg-color: #505050;
-    --new-topic-form-border-color: #6d6d6d;
-}
-
-[data-theme="light"] {
     --new-topic-form-bg-color: #ffffff;
     --new-topic-form-border-color: #dfe5ec;
 
+}
+
+[data-theme="dark"] {
+    --new-topic-form-bg-color: #505050;
+    --new-topic-form-border-color: #6d6d6d;
 }
 
 .new-topic-form{

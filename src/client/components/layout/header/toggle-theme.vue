@@ -16,7 +16,7 @@ export default {
 
     data(){
         return {
-            theme: 'dark',
+            theme: '',
         }
     },
 
@@ -24,11 +24,9 @@ export default {
 
         if (typeof window === "undefined") return;
 
-        const value = localStorage.getItem('theme');
-        if (value)
-            this.theme = value;
-        else
-            this.theme = "light";
+        const value = localStorage.getItem('theme') || 'light';
+
+        this.theme = value;
 
     },
 
@@ -44,6 +42,8 @@ export default {
 
     watch: {
         theme: function (newValue, oldValue) {
+
+            console.log(newValue);
 
             document.documentElement.setAttribute('data-theme', newValue);
             localStorage.setItem('theme', newValue); //add this
