@@ -29,6 +29,8 @@ export default {
     watch: {
         isAnonymous: function (newValue, oldValue) {
             localStorage.setItem('optionIsAnonymous', newValue);
+
+            this.$emit('changed');
         },
     },
 

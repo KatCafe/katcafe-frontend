@@ -37,6 +37,7 @@ function initialState (){
 }
 
 import StringHelper from "utils/string-helper"
+import Vue from 'vue'
 
 export default {
 
@@ -234,25 +235,25 @@ export default {
 
             this.updatePreviewAdditional();
 
-            if (this.useTitle) this.previewContent.title = this.title;
+            if (this.useTitle) Vue.set(this.previewContent, 'title', this.title);
 
-            this.previewContent.body = this.body;
-            this.previewContent.link = this.link;
+            Vue.set(this.previewContent, 'body', this.body);
+            Vue.set(this.previewContent, 'link', this.link);
 
-            this.previewContent.preview = undefined;
+            Vue.set(this.previewContent, 'preview', undefined);
 
             if (this.scraped && this.scraped.image)
-                this.previewContent.preview = Object.assign( {
+                Vue.set(this.previewContent, 'preview', Object.assign( {
                     link: this.link
-                }, this.scraped.image);
+                }, this.scraped.image));
 
             if (this.file)
-                this.previewContent.preview = {
+                Vue.set(this.previewContent, 'preview', {
                     base64: this.file.preview,
                     link: this.file.file.name,
-                };
+                });
 
-            this.previewContent.author = this.author;
+            Vue.set(this.previewContent, 'owner', this.author);
 
         }
 

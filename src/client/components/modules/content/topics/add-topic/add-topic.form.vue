@@ -28,7 +28,7 @@
             </div>
 
             <div class="new-topic-options" v-if="user && showPreview">
-                <add-topic-params ref="ref-add-topic-params" />
+                <add-topic-params ref="ref-add-topic-params" @changed="updatePreview" />
             </div>
 
         </div>
@@ -51,7 +51,7 @@ import Icon from "client/components/UI/elements/icons/icon"
 import LoadingButton from 'client/components/UI/elements/loading-button'
 import AddTopicParams from "./add-topic-params"
 import Autosize from "autosize"
-
+import Vue from 'vue'
 
 export default {
 
@@ -108,7 +108,11 @@ export default {
         },
 
         updatePreviewAdditional(){
-            this.previewContent.channel = this.channel;
+            const refAddCommentParams = this.$refs['ref-add-topic-params'];
+
+            Vue.set(this.previewContent, 'isAnonymous', refAddCommentParams ? refAddCommentParams.isAnonymous : false );
+
+            Vue.set(this.previewContent, 'channel', this.channel);
         }
 
     },

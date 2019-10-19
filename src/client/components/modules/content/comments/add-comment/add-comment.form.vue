@@ -20,7 +20,7 @@
         </div>
 
         <div class="new-topic-options new-comment-options" v-if="user && showPreview">
-            <add-comment-params ref="ref-add-comment-params" />
+            <add-comment-params ref="ref-add-comment-params" @changed="updatePreview" />
         </div>
 
         <span class="error-text">{{error}}</span>
@@ -46,6 +46,7 @@ import LoadingButton from 'client/components/UI/elements/loading-button'
 import AddCommentParams from "./add-comment-params"
 import AddTopicBase from "./../../topics/add-topic/add-topic-base.form"
 import Autosize from "autosize"
+import Vue from 'vue'
 
 export default {
 
@@ -117,7 +118,11 @@ export default {
         },
 
         updatePreviewAdditional(){
-            this.previewContent.topic = this.topic;
+            const refAddCommentParams = this.$refs['ref-add-comment-params'];
+
+            Vue.set(this.previewContent, 'isAnonymous', refAddCommentParams ? refAddCommentParams.isAnonymous : false );
+            Vue.set(this.previewContent, 'topic', this.topic );
+
         },
 
 
