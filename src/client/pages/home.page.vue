@@ -75,8 +75,6 @@ export default {
 
             const channel = this.getChannel;
 
-            if (channel === 'us') return 'color: black;';
-
             return '';
         },
 

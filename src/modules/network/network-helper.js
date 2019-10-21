@@ -11,7 +11,7 @@ class NetworkHelper {
         this.get = this.request;
     }
 
-    request(address, body, json = true, timeout = 10000, includeSession = true ){
+    request(address, body, json = true, timeout = 20000, includeSession = true ){
 
         const headers = {};
 

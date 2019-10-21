@@ -4,7 +4,7 @@
 
         <template slot="content" >
 
-            <hero v-if="channel" :title="channel.slug" :icon="channel.icon" :cover="channel.cover" />
+            <hero v-if="channel" :title="'/'+channel.slug" :icon="channel.icon" :cover="channel.cover" />
 
             <template v-if="!channel">
                 <span>Channel <strong>{{ this.$route.path }}</strong> was not found</span>
