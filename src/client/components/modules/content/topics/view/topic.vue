@@ -19,6 +19,7 @@
                     </router-link>
 
                     <div class="topic-buttons">
+                        <icon v-if="!isSnippetForm && isUserOwner" icon="ban" @click="banTopicOwner" class="delete" />
                         <icon v-if="!isSnippetForm && isUserOwner" icon="times" @click="deleteTopic" class="delete" />
                         <span v-if="isSnippetForm" class="topic-reply-id">{{$t('topic.previewThread')}}</span>
                     </div>
@@ -174,6 +175,10 @@ export default {
 
         deleteTopic(){
             return this.$store.dispatch('TOPIC_DELETE', this.topic );
+        },
+
+        banTopicOwner(){
+
         },
 
         wasShown(){

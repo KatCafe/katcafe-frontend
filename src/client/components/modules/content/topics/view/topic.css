@@ -149,12 +149,16 @@
 }
 
 .topic-buttons{
-    display: inline-flex;
     float:right;
 }
 
 .topic-buttons i{
     font-size: 14px;
+    margin-right: 10px;
+}
+
+.topic-buttons i:last-child{
+    margin-right: 0;
 }
 
 .topic-buttons .delete{

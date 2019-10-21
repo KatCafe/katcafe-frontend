@@ -31,6 +31,7 @@ export default {
                 case 'comment':return 'fa fa-comment';
                 case 'caret-up':return 'fa-caret-up ';
                 case 'caret-down':return 'fa-caret-down ';
+                case 'ban':return 'fa fa-ban';
 
                 default: return'fa fa-send';
             }
