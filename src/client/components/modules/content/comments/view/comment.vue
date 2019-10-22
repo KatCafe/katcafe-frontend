@@ -20,6 +20,7 @@
                     </router-link>
 
                     <div class="topic-buttons comment-buttons">
+                        <icon v-if="!isSnippetForm && isAdmin" icon="ban" @click="banTopicOwner" class="delete" />
                         <icon v-if="!isSnippetForm && isUserOwner" icon="times" @click="deleteComment" class="delete" />
                         <span v-if="!isSnippetForm" class="topic-reply-id" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
                         <span v-if="isSnippetForm" class='topic-reply-id hiddenMobile'>{{$t('comment.previewComment')}}</span>
@@ -115,6 +116,10 @@ export default {
             return author || this.$i18n.t('comment.anonymous');
         },
 
+        isAdmin(){
+            return this.$store.getters.isUserAdmin();
+        },
+
         isRealAuthor(){
             return this.author !== this.$i18n.t('comment.anonymous');
         },
@@ -159,6 +164,10 @@ export default {
 
         deleteComment(){
             return this.$store.dispatch('COMMENT_DELETE', this.comment );
+        },
+
+        banTopicOwner(){
+            return this.$store.dispatch('ADMIN_BAN', {username: this.comment.owner, ipAddress: this.comment.ip });
         },
 
         wasShown(){
