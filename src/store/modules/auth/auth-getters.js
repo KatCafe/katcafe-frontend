@@ -21,6 +21,7 @@ export default {
     isUserAdmin: (state => user => {
 
         if (!user) user = state.user;
+        if (!user) return;
 
         if (user.role === UserRole.SYS_ADMIN) return true;
 
