@@ -178,7 +178,7 @@ export default {
         },
 
         banTopicOwner(){
-
+            return this.$store.dispatch('ADMIN_BAN', {username: this.topic.owner, ipAddress: this.topic.ip });
         },
 
         wasShown(){

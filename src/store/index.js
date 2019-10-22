@@ -15,6 +15,7 @@ import auth from "./modules/auth/auth-module"
 import content from "./modules/content/content-module"
 import digitalSignature from "./modules/digital-signature/digital-signature-module"
 import notifications from "./modules/notifications/notifications-module"
+import admin from "./modules/admin/admin-module"
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export function createStore () {
     return new Vuex.Store(cloneDeep({
         modules: {
 
+            admin,
             global,
             channels,
             topics,
