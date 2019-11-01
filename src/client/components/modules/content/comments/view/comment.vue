@@ -24,6 +24,7 @@
                         <icon v-if="!isSnippetForm && isUserOwner" icon="times" @click="deleteComment" class="delete" />
                         <span v-if="!isSnippetForm" class="topic-reply-id" @click="openStickyRightSidebarComment"> #{{comment.uuid}}</span>
                         <span v-if="isSnippetForm" class='topic-reply-id hiddenMobile'>{{$t('comment.previewComment')}}</span>
+                        <span v-if="!isSnippetForm && isAdmin" class="topic-reply-id hiddenMobile">{{comment.ip}}</span>
                     </div>
 
                 </div>

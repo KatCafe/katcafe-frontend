@@ -22,6 +22,7 @@
                         <icon v-if="!isSnippetForm && isAdmin" icon="ban" @click="banTopicOwner" class="delete" />
                         <icon v-if="!isSnippetForm && isUserOwner" icon="times" @click="deleteTopic" class="delete" />
                         <span v-if="isSnippetForm" class="topic-reply-id">{{$t('topic.previewThread')}}</span>
+                        <span v-if="!isSnippetForm && isAdmin" class="topic-reply-id hiddenMobile">{{topic.ip}}</span>
                     </div>
 
                 </div>
