@@ -3,4 +3,4 @@ User-agent: *
 Disallow:
 
 # Sitemap files
-Sitemap: https://katcafe.org:2096/public/sitemap.xml
+Sitemap: https://backend.katcafe.org/public/sitemap.xml
