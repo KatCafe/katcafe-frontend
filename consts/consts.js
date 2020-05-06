@@ -1,8 +1,7 @@
 module.exports = {
 
-    port: 8080,
-    // serverApi: "http://registratura.ddns.net:8085",
-    serverApi: "https://katcafe.org:2096",
+    port: 8080,  
+    serverApi: "https://backend.katcafe.org",
 
     name: "katcafé",
     copyright: "katcafé",
